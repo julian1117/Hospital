@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Pacientes")
-public class Paciente implements Serializable {
+public class Paciente extends Persona implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name="Eps")
