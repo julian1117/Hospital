@@ -20,6 +20,7 @@ public class Cama implements Serializable{
 	@Column(name="Disponibilidad")
 	private boolean disponibilidad;
 	
+	@Id
 	@ManyToOne
 	@JoinColumn(name="Hospitalizacion")
 	private Hospitalizacion hospitalizacion;
