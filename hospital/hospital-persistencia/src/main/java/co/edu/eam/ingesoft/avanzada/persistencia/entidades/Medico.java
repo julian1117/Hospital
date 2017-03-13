@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Medicos")
-public class Medicos implements Serializable{
+public class Medico implements Serializable{
 
 	@Id
 	@Column(name="Id_Medico")
@@ -21,17 +21,17 @@ public class Medicos implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="Especializaciones")
-	private Especializaciones especializaciones;
+	private Especializacione especializaciones;
 	
 	@OneToOne
 	@JoinColumn(name="Id_Persona")
-	private Personas idPersona;
+	private Persona idPersona;
 
-	public Medicos() {
+	public Medico() {
 		super();
 	}
 
-	public Medicos(int idMedico, Especializaciones especializaciones, Personas idPersona) {
+	public Medico(int idMedico, Especializacione especializaciones, Persona idPersona) {
 		super();
 		this.idMedico = idMedico;
 		this.especializaciones = especializaciones;
@@ -46,19 +46,19 @@ public class Medicos implements Serializable{
 		this.idMedico = idMedico;
 	}
 
-	public Especializaciones getEspecializaciones() {
+	public Especializacione getEspecializaciones() {
 		return especializaciones;
 	}
 
-	public void setEspecializaciones(Especializaciones especializaciones) {
+	public void setEspecializaciones(Especializacione especializaciones) {
 		this.especializaciones = especializaciones;
 	}
 
-	public Personas getIdPersona() {
+	public Persona getIdPersona() {
 		return idPersona;
 	}
 
-	public void setIdPersona(Personas idPersona) {
+	public void setIdPersona(Persona idPersona) {
 		this.idPersona = idPersona;
 	}
 	

@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Especializaciones")
-public class Especializaciones implements Serializable{
+public class Especializacione implements Serializable{
 
 	@Id
 	@Column(name="Id_Especializacion")
@@ -18,11 +18,11 @@ public class Especializaciones implements Serializable{
 	@Column(name="Nombre")
 	private String nombre;
 
-	public Especializaciones() {
+	public Especializacione() {
 		super();
 	}
 
-	public Especializaciones(int idEspecializacion, String nombre) {
+	public Especializacione(int idEspecializacion, String nombre) {
 		super();
 		this.idEspecializacion = idEspecializacion;
 		this.nombre = nombre;

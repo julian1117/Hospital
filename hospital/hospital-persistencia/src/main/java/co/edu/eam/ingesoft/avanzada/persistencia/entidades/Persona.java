@@ -14,7 +14,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="Personas")
-public class Personas implements Serializable {
+public class Persona implements Serializable {
 	
 	@Id
 	@Column(name="Id_Persona")
@@ -52,11 +52,11 @@ public class Personas implements Serializable {
 	@JoinColumn(name="Ciudad")
 	private Ciudad ciudad;
 
-	public Personas() {
+	public Persona() {
 		super();
 	}
 
-	public Personas(int idPersona, String nombre, String apellido, Date fechaNacimiento, String telefono,
+	public Persona(int idPersona, String nombre, String apellido, Date fechaNacimiento, String telefono,
 			String direccion, String tipoUsuario, String email, boolean sexo, String contrasenia, Ciudad ciudad) {
 		super();
 		this.idPersona = idPersona;
