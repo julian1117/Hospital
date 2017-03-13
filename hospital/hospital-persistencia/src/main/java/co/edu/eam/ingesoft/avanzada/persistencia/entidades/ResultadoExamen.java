@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -19,7 +20,7 @@ import javax.persistence.TemporalType;
 @IdClass(OrdenProcedimientoPK.class)
 public class ResultadoExamen implements Serializable{
 
-	
+	@Id
 	@Column(name="Id_Resultado")
 	private int idResultado;
 	
@@ -32,67 +33,67 @@ public class ResultadoExamen implements Serializable{
 	
 	@Id
 	@ManyToOne
-	@JoinColumn(name="Procedimiento")
-	private Procedimiento procedimiento;
+	@JoinColumns({
+		@JoinColumn(name="IdOrden_Procedimiento", referencedColumnName = "IdOrden_Procedimiento"),
+		@JoinColumn(name="Id_Procedimiento", referencedColumnName = "Id_Procedimiento")
+	})
+	private OrdenProcedimiento ordenProce;
 	
-	@Id
-	@ManyToOne
-	@JoinColumn(name="Orden_Medicina")
-	private OrdenMedica ordenMedicina;
 
 	public ResultadoExamen() {
 		super();
 	}
 
-	public ResultadoExamen(int idResultado, String detalle, Date fecha, Procedimiento procedimiento,
-			OrdenMedica ordenMedicina) {
+
+	public ResultadoExamen(int idResultado, String detalle, Date fecha, OrdenProcedimiento ordenProce) {
 		super();
 		this.idResultado = idResultado;
 		this.detalle = detalle;
 		this.fecha = fecha;
-		this.procedimiento = procedimiento;
-		this.ordenMedicina = ordenMedicina;
+		this.ordenProce = ordenProce;
 	}
+
 
 	public int getIdResultado() {
 		return idResultado;
 	}
 
+
 	public void setIdResultado(int idResultado) {
 		this.idResultado = idResultado;
 	}
+
 
 	public String getDetalle() {
 		return detalle;
 	}
 
+
 	public void setDetalle(String detalle) {
 		this.detalle = detalle;
 	}
+
 
 	public Date getFecha() {
 		return fecha;
 	}
 
+
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
 
-	public Procedimiento getProcedimiento() {
-		return procedimiento;
+
+	public OrdenProcedimiento getOrdenProce() {
+		return ordenProce;
 	}
 
-	public void setProcedimiento(Procedimiento procedimiento) {
-		this.procedimiento = procedimiento;
+
+	public void setOrdenProce(OrdenProcedimiento ordenProce) {
+		this.ordenProce = ordenProce;
 	}
 
-	public OrdenMedica getOrdenMedicina() {
-		return ordenMedicina;
-	}
-
-	public void setOrdenMedicina(OrdenMedica ordenMedicina) {
-		this.ordenMedicina = ordenMedicina;
-	}
+	
 	
 	
 	
