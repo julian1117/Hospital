@@ -17,47 +17,18 @@ public class Eps implements Serializable{
 	@Column(name="Id_Eps")
 	private int idEps;
 	
-	@Column(name="Nombre")
+	@Column(name="Nombre",unique = true)
 	private String nombre;
 	
-	@ManyToOne
-	@JoinColumn(name="Tipo_eps")
-	private TipoEps tipoEps;
+	@Column(name="Prepagada")
+	private boolean prepagada;
+
 
 	public Eps() {
 		super();
 	}
 
-	public Eps(int idEps, String nombre, TipoEps tipoEps) {
-		super();
-		this.idEps = idEps;
-		this.nombre = nombre;
-		this.tipoEps = tipoEps;
-	}
-
-	public int getIdEps() {
-		return idEps;
-	}
-
-	public void setIdEps(int idEps) {
-		this.idEps = idEps;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public TipoEps getTipoEps() {
-		return tipoEps;
-	}
-
-	public void setTipoEps(TipoEps tipoEps) {
-		this.tipoEps = tipoEps;
-	}
+	
 	
 	
 }

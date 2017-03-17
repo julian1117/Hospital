@@ -15,41 +15,24 @@ import javax.persistence.Table;
 @Table(name="Medicos")
 public class Medico extends Persona implements Serializable{
 
+	@Id
+	@Column(name="Id")
+	private int id;
 	
 	@ManyToOne
 	@JoinColumn(name="Especializaciones")
 	private Especializacione especializaciones;
 	
+	@Id
 	@OneToOne
-	@JoinColumn(name="Id_Persona")
+	@JoinColumn(name="Id_Persona",unique= true)
 	private Persona idPersona;
 
 	public Medico() {
 		super();
 	}
 
-	public Medico(Especializacione especializaciones, Persona idPersona) {
-		super();
-		this.especializaciones = especializaciones;
-		this.idPersona = idPersona;
-	}
-
-	public Especializacione getEspecializaciones() {
-		return especializaciones;
-	}
-
-	public void setEspecializaciones(Especializacione especializaciones) {
-		this.especializaciones = especializaciones;
-	}
-
-//	public Persona getIdPersona() {
-//		return idPersona;
-//	}
-
-	public void setIdPersona(Persona idPersona) {
-		this.idPersona = idPersona;
-	}
-
+	
 	
 	
 	

@@ -20,6 +20,7 @@ public class OrdenMedica implements Serializable{
 	@Column(name="Id_Orden")
 	private int idOrden;
 	
+	
 	@ManyToOne
 	@JoinColumn(name="Cita")
 	private Cita cita;

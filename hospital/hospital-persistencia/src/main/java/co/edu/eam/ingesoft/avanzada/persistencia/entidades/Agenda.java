@@ -19,12 +19,12 @@ public class Agenda implements Serializable{
 	@Column(name="Id_Agenda")
 	private int id;
 	
-	@Id
+	
 	@ManyToOne
 	@JoinColumn(name="Horarios")
 	private Horario horarios;
 	
-	@Id
+	
 	@ManyToOne
 	@JoinColumn(name="Medicos")
 	private Medico medicos;
