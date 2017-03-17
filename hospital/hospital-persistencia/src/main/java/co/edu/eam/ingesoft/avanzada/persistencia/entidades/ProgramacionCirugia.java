@@ -24,7 +24,7 @@ public class ProgramacionCirugia implements Serializable{
 	@JoinColumn(name="Id_Quirofano")
 	private Quirofano idQuirofano;
 	
-	@Id
+	
 	@ManyToOne
 	@JoinColumns({
 		@JoinColumn(name="IdOrden_Procedimiento", referencedColumnName = "IdOrden_Procedimiento"),

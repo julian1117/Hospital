@@ -10,27 +10,20 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Patologias")
-public class Patologia implements Serializable{
-	 
-	@Id
-	@Column(name="Id_Patologia")
-	private int idPatologia;
+@Table(name="Causas")
+public class Causa implements Serializable {
 	
-	@Column(name="Descripcion")
-	private String descripcion;
+	@Id
+	@Column(name="Id_Causa_Patologia")
+	private int idCausasPa;
 	
 	@Column(name="Nombre")
 	private String nombre;
-	
-	
 
-	public Patologia() {
+	public Causa() {
 		super();
 	}
+	
+	
 
-
-	
-	
-	
 }

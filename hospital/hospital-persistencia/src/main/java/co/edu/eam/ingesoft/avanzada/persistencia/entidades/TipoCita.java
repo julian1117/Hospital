@@ -15,7 +15,7 @@ public class TipoCita implements Serializable {
 	@Column(name="Id_TipoCita")
 	private int idTipoCita;
 	
-	@Column(name="Nombre")
+	@Column(name="Nombre",unique= true)
 	private String nombre;
 
 	public TipoCita() {
