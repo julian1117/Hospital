@@ -12,7 +12,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Agendas")
-@IdClass(AgendaPK.class)
 public class Agenda implements Serializable{
 	
 	@Id
@@ -27,17 +26,18 @@ public class Agenda implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="Medicos")
-	private Medico medicos;
-
+	private Persona idPersona;
+	//SE CAMBIO EL ATRIBUTO private Medico medico; ya que el medico es una herencia de persona
+	
 	public Agenda() {
 		super();
 	}
 
-	public Agenda(int id, Horario horarios, Medico medicos) {
+	public Agenda(int id, Horario horarios, Persona idPersona) {
 		super();
 		this.id = id;
 		this.horarios = horarios;
-		this.medicos = medicos;
+		this.idPersona = idPersona;
 	}
 
 	public int getId() {
@@ -56,13 +56,12 @@ public class Agenda implements Serializable{
 		this.horarios = horarios;
 	}
 
-	public Medico getMedicos() {
-		return medicos;
+	public Persona getIdPersona() {
+		return idPersona;
 	}
 
-	public void setMedicos(Medico medicos) {
-		this.medicos = medicos;
+	public void setIdPersona(Persona idPersona) {
+		this.idPersona = idPersona;
 	}
-	
-	
+
 }

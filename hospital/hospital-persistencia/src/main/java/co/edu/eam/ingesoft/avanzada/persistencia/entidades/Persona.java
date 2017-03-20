@@ -5,12 +5,16 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Generated;
 
 @Entity
 @Table(name="Personas")
@@ -20,36 +24,36 @@ public class Persona implements Serializable {
 	@Column(name="Id_Persona")
 	private int idPersona;
 	
-	@Column(name="Nombre")
+	@Column(name="Nombre",nullable=false,length=25)
 	private String nombre;
 	
-	@Column(name="Apellido")
+	@Column(name="Apellido",nullable=false,length=25)
 	private String apellido;
 	
-	@Column(name="Fecha_Nacimiento")
+	@Column(name="Fecha_Nacimiento",nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date fechaNacimiento;
 	
-	@Column(name="Telefono")
+	@Column(name="Telefono",nullable=false,length=10)
 	private String telefono;
 	
-	@Column(name="Direccion")
+	@Column(name="Direccion",nullable=false,length=40)
 	private String direccion;
 	
-	@Column(name="Tipo_Usuario")
+	@Column(name="Tipo_Usuario",nullable=false,length=30)
 	private String tipoUsuario;
 	
-	@Column(name="Email", unique=true)
+	@Column(name="Email", unique=true,nullable=false,length=50)
 	private String email;
 	
-	@Column(name="Sexo")
+	@Column(name="Sexo",nullable=false,length=1)
 	private boolean sexo;
 	
-	@Column(name="Contrasenia")
+	@Column(name="Contrasenia",nullable=false,length=20)
 	private String contrasenia;
 	
 	@ManyToOne
-	@JoinColumn(name="Ciudad")
+	@JoinColumn(name="Ciudad",nullable=false)
 	private Ciudad ciudad;
 
 	public Persona() {

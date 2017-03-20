@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,14 +16,15 @@ import javax.persistence.Table;
 public class Departamento implements Serializable{
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_departamento")
 	private int IdDepartamento;
 	
-	@Column(name="Nombre")
+	@Column(name="Nombre",nullable=false,length=25)
 	private String nombre;
 	
 	@ManyToOne
-	@JoinColumn(name="Id_Pais")
+	@JoinColumn(name="Id_Pais",nullable=false)
 	private Pais IdPais;
 
 	public Departamento() {

@@ -14,36 +14,36 @@ import javax.persistence.Table;
 public class Cita implements Serializable{
 
 	@Id
-	@Column(name="id_Cita")
+	@Column(name="id_Cita",nullable=true)
 	private int idCita;
 	
 	@ManyToOne
-	@JoinColumn(name="Agenda")
+	@JoinColumn(name="Agenda",nullable=true)
 	private Agenda agenda;
 	
 	@ManyToOne
-	@JoinColumn(name="Tipo_Cita")
+	@JoinColumn(name="Tipo_Cita",nullable=true)
 	private TipoCita tipoCita;
 	
 	@ManyToOne
-	@JoinColumn(name="cita")
+	@JoinColumn(name="cita",nullable=false)
 	private Cita cita;
 	
 	@ManyToOne
-	@JoinColumn(name="Paciente")
-	private Paciente paciente;
+	@JoinColumn(name="Paciente",nullable=true)
+	private Persona persona;
 
 	public Cita() {
 		super();
 	}
 
-	public Cita(int idCita, Agenda agenda, TipoCita tipoCita, Cita cita, Paciente paciente) {
+	public Cita(int idCita, Agenda agenda, TipoCita tipoCita, Cita cita, Persona persona) {
 		super();
 		this.idCita = idCita;
 		this.agenda = agenda;
 		this.tipoCita = tipoCita;
 		this.cita = cita;
-		this.paciente = paciente;
+		this.persona = persona;
 	}
 
 	public int getIdCita() {
@@ -78,13 +78,15 @@ public class Cita implements Serializable{
 		this.cita = cita;
 	}
 
-	public Paciente getPaciente() {
-		return paciente;
+	public Persona getPersona() {
+		return persona;
 	}
 
-	public void setPaciente(Paciente paciente) {
-		this.paciente = paciente;
+	public void setPersona(Persona persona) {
+		this.persona = persona;
 	}
+
+	
 	
 	
 }

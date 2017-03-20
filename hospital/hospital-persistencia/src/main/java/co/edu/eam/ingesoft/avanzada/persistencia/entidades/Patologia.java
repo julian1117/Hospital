@@ -14,13 +14,13 @@ import javax.persistence.Table;
 public class Patologia implements Serializable{
 	 
 	@Id
-	@Column(name="Id_Patologia")
+	@Column(name="Id_Patologia",nullable=true)
 	private int idPatologia;
 	
-	@Column(name="Descripcion")
+	@Column(name="Descripcion",nullable=true)
 	private String descripcion;
 	
-	@Column(name="Nombre")
+	@Column(name="Nombre",nullable=true)
 	private String nombre;
 	
 	

@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class PatologiaTratamientoPK implements Serializable{
 	
-	private int idPatologia;
+	private int patologiaa;
 	
-	private int idTratamiento;
+	private int tratamient;
 
 	public PatologiaTratamientoPK() {
 		super();
@@ -14,32 +14,32 @@ public class PatologiaTratamientoPK implements Serializable{
 
 	public PatologiaTratamientoPK(int idPatologia, int idTratamiento) {
 		super();
-		this.idPatologia = idPatologia;
-		this.idTratamiento = idTratamiento;
+		this.patologiaa = idPatologia;
+		this.tratamient = idTratamiento;
 	}
 
 	public int getIdPatologia() {
-		return idPatologia;
+		return patologiaa;
 	}
 
 	public void setIdPatologia(int idPatologia) {
-		this.idPatologia = idPatologia;
+		this.patologiaa = idPatologia;
 	}
 
 	public int getIdTratamiento() {
-		return idTratamiento;
+		return tratamient;
 	}
 
 	public void setIdTratamiento(int idTratamiento) {
-		this.idTratamiento = idTratamiento;
+		this.tratamient = idTratamiento;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + idPatologia;
-		result = prime * result + idTratamiento;
+		result = prime * result + patologiaa;
+		result = prime * result + tratamient;
 		return result;
 	}
 
@@ -52,9 +52,9 @@ public class PatologiaTratamientoPK implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		PatologiaTratamientoPK other = (PatologiaTratamientoPK) obj;
-		if (idPatologia != other.idPatologia)
+		if (patologiaa != other.patologiaa)
 			return false;
-		if (idTratamiento != other.idTratamiento)
+		if (tratamient != other.tratamient)
 			return false;
 		return true;
 	} 

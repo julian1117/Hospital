@@ -12,11 +12,11 @@ import javax.persistence.Table;
 public class TipoMedicamento implements Serializable{
 	
 	@Id
-	@Column(name="Id_Medicamento")
+	@Column(name="Id_Medicamento",nullable=true)
 	private int idTipoMedicamento;
 	
-	@Column(name="Tipo_Medicamento")
-	private int tipoMedicamento;
+	@Column(name="Tipo_Medicamento",nullable=true)
+	private String tipoMedicamento;
 	
 	
 
@@ -26,7 +26,7 @@ public class TipoMedicamento implements Serializable{
 
 
 
-	public TipoMedicamento(int idTipoMedicamento, int tipoMedicamento) {
+	public TipoMedicamento(int idTipoMedicamento, String tipoMedicamento) {
 		super();
 		this.idTipoMedicamento = idTipoMedicamento;
 		this.tipoMedicamento = tipoMedicamento;
@@ -46,13 +46,13 @@ public class TipoMedicamento implements Serializable{
 
 
 
-	public int getTipoMedicamento() {
+	public String getTipoMedicamento() {
 		return tipoMedicamento;
 	}
 
 
 
-	public void setTipoMedicamento(int tipoMedicamento) {
+	public void setTipoMedicamento(String tipoMedicamento) {
 		this.tipoMedicamento = tipoMedicamento;
 	}
 	

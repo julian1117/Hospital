@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,11 +13,12 @@ import javax.persistence.Table;
 @Table(name="Paises")
 public class Pais implements Serializable{
 
-	@Column(name="id_Pais")
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_Pais")
 	private int idPais;
 	
-	@Column(name="nombre")
+	@Column(name="nombre_pais",nullable=false,length=25)
 	private String nombre;
 	
 	

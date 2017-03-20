@@ -9,20 +9,22 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+
+
 @Entity
 @Table(name="Patologias_Trartamientos")
-@IdClass(PatologiaSintomaPK.class)
+@IdClass(PatologiaTratamientoPK.class)
 public class PatologiaTratamiento implements Serializable{
 	
 	@Id
 	@ManyToOne
 	@JoinColumn(name="patologia_tratamiento")
-	private Patologia patologia;
+	private Patologia patologiaa;
 	
 	@Id
 	@ManyToOne
 	@JoinColumn(name="Tratamiento")
-	private Tratamiento tratamiento;
+	private Tratamiento tratamient;
 
 	public PatologiaTratamiento() {
 		super();
@@ -30,25 +32,27 @@ public class PatologiaTratamiento implements Serializable{
 
 	public PatologiaTratamiento(Patologia patologia, Tratamiento tratamiento) {
 		super();
-		this.patologia = patologia;
-		this.tratamiento = tratamiento;
+		this.patologiaa = patologia;
+		this.tratamient = tratamiento;
 	}
 
 	public Patologia getPatologia() {
-		return patologia;
+		return patologiaa;
 	}
 
 	public void setPatologia(Patologia patologia) {
-		this.patologia = patologia;
+		this.patologiaa = patologia;
 	}
 
 	public Tratamiento getTratamiento() {
-		return tratamiento;
+		return tratamient;
 	}
 
 	public void setTratamiento(Tratamiento tratamiento) {
-		this.tratamiento = tratamiento;
+		this.tratamient = tratamiento;
 	}
+
+	
 	
 	
 

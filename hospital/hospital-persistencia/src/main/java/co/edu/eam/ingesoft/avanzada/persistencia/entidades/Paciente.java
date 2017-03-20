@@ -10,16 +10,16 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Pacientes")
-public class Paciente extends Persona implements Serializable {
+@Table(name = "Pacientes")
+public class Paciente  implements Serializable {
 
 	@ManyToOne
-	@JoinColumn(name="Eps")
+	@JoinColumn(name = "Eps", nullable = false)
 	private Eps eps;
-	
+
 	@Id
 	@OneToOne
-	@JoinColumn(name="Persona")
+	@JoinColumn(name = "id_persona", unique = true, nullable = false)
 	private Persona persona;
 
 	public Paciente() {
@@ -47,6 +47,5 @@ public class Paciente extends Persona implements Serializable {
 	public void setPersona(Persona persona) {
 		this.persona = persona;
 	}
-	
-	
+
 }
