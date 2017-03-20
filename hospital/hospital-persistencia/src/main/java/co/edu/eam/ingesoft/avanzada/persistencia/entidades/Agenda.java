@@ -15,17 +15,17 @@ import javax.persistence.Table;
 public class Agenda implements Serializable{
 	
 	@Id
-	@Column(name="Id_Agenda")
+	@Column(name="Id_Agenda",nullable=false)
 	private int id;
 	
 	
 	@ManyToOne
-	@JoinColumn(name="Horarios")
+	@JoinColumn(name="Horarios",nullable=false)
 	private Horario horarios;
 	
 	
 	@ManyToOne
-	@JoinColumn(name="Medicos")
+	@JoinColumn(name="Medicos",nullable=false)
 	private Persona idPersona;
 	//SE CAMBIO EL ATRIBUTO private Medico medico; ya que el medico es una herencia de persona
 	

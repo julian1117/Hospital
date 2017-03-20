@@ -5,35 +5,37 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Especializaciones")
-public class Especializacione implements Serializable{
-
+@Table(name="Causas")
+public class Causa implements Serializable {
+	
 	@Id
-	@Column(name="Id_Especializacion",nullable=false)
-	private int idEspecializacion;
+	@Column(name="Id_Causa_Patologia",nullable=false)
+	private int idCausasPa;
 	
 	@Column(name="Nombre",nullable=false)
 	private String nombre;
 
-	public Especializacione() {
+	public Causa() {
 		super();
 	}
 
-	public Especializacione(int idEspecializacion, String nombre) {
+	public Causa(int idCausasPa, String nombre) {
 		super();
-		this.idEspecializacion = idEspecializacion;
+		this.idCausasPa = idCausasPa;
 		this.nombre = nombre;
 	}
 
-	public int getIdEspecializacion() {
-		return idEspecializacion;
+	public int getIdCausasPa() {
+		return idCausasPa;
 	}
 
-	public void setIdEspecializacion(int idEspecializacion) {
-		this.idEspecializacion = idEspecializacion;
+	public void setIdCausasPa(int idCausasPa) {
+		this.idCausasPa = idCausasPa;
 	}
 
 	public String getNombre() {
@@ -45,5 +47,5 @@ public class Especializacione implements Serializable{
 	}
 	
 	
-	
+
 }

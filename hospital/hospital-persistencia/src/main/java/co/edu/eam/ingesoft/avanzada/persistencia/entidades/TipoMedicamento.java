@@ -12,10 +12,10 @@ import javax.persistence.Table;
 public class TipoMedicamento implements Serializable{
 	
 	@Id
-	@Column(name="Id_Medicamento",nullable=true)
+	@Column(name="Id_Medicamento",nullable=false)
 	private int idTipoMedicamento;
 	
-	@Column(name="Tipo_Medicamento",nullable=true)
+	@Column(name="Tipo_Medicamento",nullable=false)
 	private String tipoMedicamento;
 	
 	

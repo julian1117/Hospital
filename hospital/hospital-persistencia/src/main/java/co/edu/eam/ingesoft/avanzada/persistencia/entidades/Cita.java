@@ -14,23 +14,23 @@ import javax.persistence.Table;
 public class Cita implements Serializable{
 
 	@Id
-	@Column(name="id_Cita",nullable=true)
+	@Column(name="id_Cita",nullable=false)
 	private int idCita;
 	
 	@ManyToOne
-	@JoinColumn(name="Agenda",nullable=true)
+	@JoinColumn(name="Agenda",nullable=false)
 	private Agenda agenda;
 	
 	@ManyToOne
-	@JoinColumn(name="Tipo_Cita",nullable=true)
+	@JoinColumn(name="Tipo_Cita",nullable=false)
 	private TipoCita tipoCita;
 	
 	@ManyToOne
-	@JoinColumn(name="cita",nullable=false)
+	@JoinColumn(name="cita",nullable=true)
 	private Cita cita;
 	
 	@ManyToOne
-	@JoinColumn(name="Paciente",nullable=true)
+	@JoinColumn(name="Paciente",nullable=false)
 	private Persona persona;
 
 	public Cita() {

@@ -17,15 +17,15 @@ import javax.persistence.TemporalType;
 public class OrdenMedica implements Serializable{
 
 	@Id
-	@Column(name="Id_Orden")
+	@Column(name="Id_Orden",nullable=false)
 	private int idOrden;
 	
 	
 	@ManyToOne
-	@JoinColumn(name="Cita")
+	@JoinColumn(name="Cita",nullable=false)
 	private Cita cita;
 	
-	@Column(name="Fecha")
+	@Column(name="Fecha",nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
 

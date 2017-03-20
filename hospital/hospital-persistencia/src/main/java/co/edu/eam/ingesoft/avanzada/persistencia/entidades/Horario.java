@@ -18,14 +18,14 @@ public class Horario implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="Id_Horarios")
+	@Column(name="Id_Horarios",nullable=false)
 	private int idHorarios;
 	
-	@Column(name="Hora_Inicio")
+	@Column(name="Hora_Inicio",nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date horaInicio;
 	
-	@Column(name="Hora_Final")
+	@Column(name="Hora_Final",nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date horaFinal;
 

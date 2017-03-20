@@ -16,12 +16,12 @@ public class ItemMedicamento implements Serializable{
 
 	@Id
 	@ManyToOne
-	@JoinColumn(name="Orden_Medicina",nullable=true)
+	@JoinColumn(name="Orden_Medicina",nullable=false)
 	private OrdenMedica ordenMedicina;
 	
 	
 	@ManyToOne
-	@JoinColumn(name="Inventario",nullable=true)
+	@JoinColumn(name="Inventario",nullable=false)
 	private Inventario inventario;
 
 	public ItemMedicamento() {

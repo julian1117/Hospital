@@ -18,12 +18,12 @@ public class PatologiaTratamiento implements Serializable{
 	
 	@Id
 	@ManyToOne
-	@JoinColumn(name="patologia_tratamiento")
+	@JoinColumn(name="patologia_tratamiento",nullable=false)
 	private Patologia patologiaa;
 	
 	@Id
 	@ManyToOne
-	@JoinColumn(name="Tratamiento")
+	@JoinColumn(name="Tratamiento",nullable=false)
 	private Tratamiento tratamient;
 
 	public PatologiaTratamiento() {

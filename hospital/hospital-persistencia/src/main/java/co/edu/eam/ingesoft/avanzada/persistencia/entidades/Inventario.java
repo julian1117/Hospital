@@ -12,16 +12,16 @@ import javax.persistence.Table;
 public class Inventario implements Serializable {
 
 	@Id
-	@Column(name="Id_Inventario",nullable=true)
+	@Column(name="Id_Inventario",nullable=false)
 	private int idInventario;
 	
-	@Column(name="Cantidad_Disponible",nullable=true)
+	@Column(name="Cantidad_Disponible",nullable=false)
 	private int cantidadDisponible;
 	
-	@Column(name="Nombre_Medicamento",nullable=true)
+	@Column(name="Nombre_Medicamento",nullable=false)
 	private String nombreMedicamento;
 	
-	@Column(name="Tipo_Medicamento",nullable=true)
+	@Column(name="Tipo_Medicamento",nullable=false)
 	private TipoMedicamento tipoMedicamento;
 
 	public Inventario() {

@@ -12,10 +12,10 @@ import javax.persistence.Table;
 public class TipoCita implements Serializable {
 
 	@Id
-	@Column(name="Id_TipoCita",nullable=true)
+	@Column(name="Id_TipoCita",nullable=false)
 	private int idTipoCita;
 	
-	@Column(name="Nombre",unique= true,nullable=true)
+	@Column(name="Nombre",unique= false,nullable=false)
 	private String nombre;
 
 	public TipoCita() {

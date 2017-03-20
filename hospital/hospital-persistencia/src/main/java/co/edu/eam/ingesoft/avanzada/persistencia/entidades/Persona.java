@@ -21,7 +21,7 @@ import org.hibernate.annotations.Generated;
 public class Persona implements Serializable {
 	
 	@Id
-	@Column(name="Id_Persona")
+	@Column(name="Id_Persona",nullable=false)
 	private int idPersona;
 	
 	@Column(name="Nombre",nullable=false,length=25)
