@@ -24,17 +24,21 @@ public class Inventario implements Serializable {
 	@Column(name="Tipo_Medicamento",nullable=false)
 	private TipoMedicamento tipoMedicamento;
 
-	public Inventario() {
-		super();
-	}
-
+	@Column(name="Precio_medicamento")
+	private double precioMedicamento;
+	
 	public Inventario(int idInventario, int cantidadDisponible, String nombreMedicamento,
-			TipoMedicamento tipoMedicamento) {
+			TipoMedicamento tipoMedicamento, double precioMedicamento) {
 		super();
 		this.idInventario = idInventario;
 		this.cantidadDisponible = cantidadDisponible;
 		this.nombreMedicamento = nombreMedicamento;
 		this.tipoMedicamento = tipoMedicamento;
+		this.precioMedicamento = precioMedicamento;
+	}
+
+	public Inventario() {
+		super();
 	}
 
 	public int getIdInventario() {
@@ -68,6 +72,15 @@ public class Inventario implements Serializable {
 	public void setTipoMedicamento(TipoMedicamento tipoMedicamento) {
 		this.tipoMedicamento = tipoMedicamento;
 	}
+
+	public double getPrecioMedicamento() {
+		return precioMedicamento;
+	}
+
+	public void setPrecioMedicamento(double precioMedicamento) {
+		this.precioMedicamento = precioMedicamento;
+	}
+
 	
 	
 }
