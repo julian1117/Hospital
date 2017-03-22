@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class Hospitalizacion implements Serializable{
 	
 	@Id
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="Procedimiento")
 	private Procedimiento procedimiento;
 	

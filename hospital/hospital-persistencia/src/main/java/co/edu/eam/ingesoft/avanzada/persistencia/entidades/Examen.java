@@ -22,7 +22,7 @@ public class Examen  implements Serializable{
 	private TipoExamen tipoExamen;
 	
 	@Id
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="Id_procedimiento",nullable=true)
 	private Procedimiento procedimiento;
 	

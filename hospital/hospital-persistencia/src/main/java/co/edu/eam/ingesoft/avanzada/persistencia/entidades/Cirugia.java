@@ -19,7 +19,7 @@ public class Cirugia  implements Serializable {
 	private String tiempoProcedimiento;
 	
 	@Id
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="Procedimiento",nullable=false)
 	private Procedimiento procedimiento;
 	

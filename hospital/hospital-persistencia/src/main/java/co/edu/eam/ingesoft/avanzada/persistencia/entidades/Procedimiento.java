@@ -17,7 +17,7 @@ public class Procedimiento implements Serializable{
 	
 	
 	@Column(name="Tipo",nullable=false)
-	private String tipo;
+	private TipoProcedimiento tipo;
 	
 	
 	@Column(name="Tiempo",nullable=false)
@@ -29,7 +29,7 @@ public class Procedimiento implements Serializable{
 	}
 
 
-	public Procedimiento(int idProcedimiento, String tipo, String tiempo) {
+	public Procedimiento(int idProcedimiento, TipoProcedimiento tipo, String tiempo) {
 		super();
 		this.idProcedimiento = idProcedimiento;
 		this.tipo = tipo;
@@ -47,12 +47,12 @@ public class Procedimiento implements Serializable{
 	}
 
 
-	public String getTipo() {
+	public TipoProcedimiento getTipo() {
 		return tipo;
 	}
 
 
-	public void setTipo(String tipo) {
+	public void setTipo(TipoProcedimiento tipo) {
 		this.tipo = tipo;
 	}
 
@@ -65,6 +65,8 @@ public class Procedimiento implements Serializable{
 	public void setTiempo(String tiempo) {
 		this.tiempo = tiempo;
 	}
+
+
 	
 	
 
