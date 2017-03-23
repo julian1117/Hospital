@@ -15,7 +15,7 @@ public class Tratamiento implements Serializable{
 	@Column(name="Id_Tratamiento",nullable=false)
 	private int idTratamiento; 
 	
-	@Column(name="Nombre_Patologia",nullable=false)
+	@Column(name="Nombre_Patologia",nullable=false,length=40)
 	private String nombrePatologia;
 
 	public Tratamiento() {

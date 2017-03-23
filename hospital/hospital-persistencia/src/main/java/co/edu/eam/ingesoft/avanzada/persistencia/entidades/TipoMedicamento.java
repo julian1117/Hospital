@@ -15,7 +15,7 @@ public class TipoMedicamento implements Serializable{
 	@Column(name="Id_Medicamento",nullable=false)
 	private int idTipoMedicamento;
 	
-	@Column(name="Tipo_Medicamento",nullable=false)
+	@Column(name="Tipo_Medicamento",nullable=false,length=30)
 	private String tipoMedicamento;
 	
 	

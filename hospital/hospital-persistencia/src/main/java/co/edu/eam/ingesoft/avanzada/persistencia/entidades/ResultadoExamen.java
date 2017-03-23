@@ -23,7 +23,7 @@ public class ResultadoExamen implements Serializable{
 	@Column(name="Id_Resultado",nullable=false)
 	private int idResultado;
 	
-	@Column(name="Detalle",nullable=false)
+	@Column(name="Detalle",nullable=false,length=2000)
 	private String detalle;
 	
 	@Column(name="Fecha",nullable=false)

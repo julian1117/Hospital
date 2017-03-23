@@ -18,16 +18,16 @@ public class Quirofano implements Serializable{
 	@Column(name="Id",nullable=false)
 	private int id;
 	
-	@Column(name="Detalle_Impemento",nullable=false)
+	@Column(name="Detalle_Impemento",nullable=false,length=2000)
 	private String detalleImplementos;
 	
-	@Column(name="Nombre_Quirofano",nullable=false)
+	@Column(name="Nombre_Quirofano",nullable=false,length=30)
 	private String nombreQuirofano;
 	
 	@Column(name="Ocupado",nullable=false)
 	private boolean ocupado;
 	
-	@Column(name="Detalle_Ocupacion",nullable=false)
+	@Column(name="Detalle_Ocupacion",nullable=false,length=2000)
 	private String detalleOcupacion;
 	
 	@Column(name="Fecha_Ocupado",nullable=false)

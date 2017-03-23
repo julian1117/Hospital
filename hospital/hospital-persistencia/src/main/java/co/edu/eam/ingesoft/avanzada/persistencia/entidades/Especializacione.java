@@ -15,7 +15,7 @@ public class Especializacione implements Serializable{
 	@Column(name="Id_Especializacion",nullable=false)
 	private int idEspecializacion;
 	
-	@Column(name="Nombre",nullable=false)
+	@Column(name="Nombre",nullable=false,length=40)
 	private String nombre;
 
 	public Especializacione() {

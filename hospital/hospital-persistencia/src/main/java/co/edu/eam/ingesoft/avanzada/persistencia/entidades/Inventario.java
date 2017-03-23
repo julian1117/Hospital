@@ -18,7 +18,7 @@ public class Inventario implements Serializable {
 	@Column(name="Cantidad_Disponible",nullable=false)
 	private int cantidadDisponible;
 	
-	@Column(name="Nombre_Medicamento",nullable=false)
+	@Column(name="Nombre_Medicamento",nullable=false,length=40)
 	private String nombreMedicamento;
 	
 	@Column(name="Tipo_Medicamento",nullable=false)

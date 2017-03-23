@@ -16,45 +16,40 @@ public class TipoCirugia implements Serializable{
 	private int idTipoCirugia;
 	
 	@Column(name="Detalle")
-	private String detallesHospitalizacion;
+	private String tipoCirugia;
 	
-	@Column(name="Motivo")
-	private String motivo;
-
+	
 	public TipoCirugia() {
 		super();
 	}
 
-	public TipoCirugia(int idTipoCirugia, String detallesHospitalizacion, String motivo) {
+
+	public TipoCirugia(int idTipoCirugia, String tipoCirugia) {
 		super();
 		this.idTipoCirugia = idTipoCirugia;
-		this.detallesHospitalizacion = detallesHospitalizacion;
-		this.motivo = motivo;
+		this.tipoCirugia = tipoCirugia;
 	}
+
 
 	public int getIdTipoCirugia() {
 		return idTipoCirugia;
 	}
 
+
 	public void setIdTipoCirugia(int idTipoCirugia) {
 		this.idTipoCirugia = idTipoCirugia;
 	}
 
-	public String getDetallesHospitalizacion() {
-		return detallesHospitalizacion;
+
+	public String getTipoCirugia() {
+		return tipoCirugia;
 	}
 
-	public void setDetallesHospitalizacion(String detallesHospitalizacion) {
-		this.detallesHospitalizacion = detallesHospitalizacion;
+
+	public void setTipoCirugia(String tipoCirugia) {
+		this.tipoCirugia = tipoCirugia;
 	}
 
-	public String getMotivo() {
-		return motivo;
-	}
-
-	public void setMotivo(String motivo) {
-		this.motivo = motivo;
-	}
 	
 	
 

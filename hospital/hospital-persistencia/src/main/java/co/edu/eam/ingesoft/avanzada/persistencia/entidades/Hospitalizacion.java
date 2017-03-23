@@ -19,10 +19,10 @@ public class Hospitalizacion implements Serializable{
 	@JoinColumn(name="Procedimiento")
 	private Procedimiento procedimiento;
 	
-	@Column(name="Detalle_Procedimiento")
+	@Column(name="Detalle_Procedimiento",length=2000)
 	private String detalleProce;
 	
-	@Column(name="Motivo")
+	@Column(name="Motivo",length=50)
 	private String motivo;
 
 	public Hospitalizacion() {

@@ -17,16 +17,61 @@ public class Patologia implements Serializable{
 	@Column(name="Id_Patologia",nullable=false)
 	private int idPatologia;
 	
-	@Column(name="Descripcion",nullable=false)
+	@Column(name="Descripcion",nullable=false,length=2000)
 	private String descripcion;
 	
-	@Column(name="Nombre",nullable=false)
+	@Column(name="Nombre",nullable=false,length=40)
 	private String nombre;
 	
 	
 
 	public Patologia() {
 		super();
+	}
+
+
+
+	public Patologia(int idPatologia, String descripcion, String nombre) {
+		super();
+		this.idPatologia = idPatologia;
+		this.descripcion = descripcion;
+		this.nombre = nombre;
+	}
+
+
+
+	public int getIdPatologia() {
+		return idPatologia;
+	}
+
+
+
+	public void setIdPatologia(int idPatologia) {
+		this.idPatologia = idPatologia;
+	}
+
+
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+
+
+	public String getNombre() {
+		return nombre;
+	}
+
+
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 

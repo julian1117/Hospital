@@ -27,10 +27,10 @@ public class Cirugia  implements Serializable {
 	@JoinColumn(name="Tipo_Cirugia",nullable=false)
 	private TipoCirugia tipoCirugia;
 	
-	@Column(name="Descripcion_PacienteIni",nullable=false)
+	@Column(name="Descripcion_PacienteIni",nullable=false,length=2000)
 	private String descripcionPacienteInicio;
 	
-	@Column(name="Descripcion_PacienteFinal",nullable=false)
+	@Column(name="Descripcion_PacienteFinal",nullable=false,length=2000)
 	private String descripcionPacienteFinal;
 
 	public Cirugia() {

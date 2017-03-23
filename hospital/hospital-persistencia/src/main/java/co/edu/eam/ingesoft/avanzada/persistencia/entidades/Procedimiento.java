@@ -20,7 +20,7 @@ public class Procedimiento implements Serializable{
 	private TipoProcedimiento tipo;
 	
 	
-	@Column(name="Tiempo",nullable=false)
+	@Column(name="Tiempo",nullable=false,length=30)
 	private String tiempo;
 
 
