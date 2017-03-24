@@ -16,7 +16,7 @@ public class Agenda implements Serializable{
 	
 	@Id
 	@Column(name="Id_Agenda",nullable=false)
-	private int id;
+	private Integer id;
 	
 	
 	@ManyToOne
@@ -32,36 +32,31 @@ public class Agenda implements Serializable{
 	public Agenda() {
 		super();
 	}
-
-	public Agenda(int id, Horario horarios, Persona idPersona) {
+	public Agenda(Integer id, Horario horarios, Persona idPersona) {
 		super();
 		this.id = id;
 		this.horarios = horarios;
 		this.idPersona = idPersona;
 	}
-
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
-
 	public Horario getHorarios() {
 		return horarios;
 	}
-
 	public void setHorarios(Horario horarios) {
 		this.horarios = horarios;
 	}
-
 	public Persona getIdPersona() {
 		return idPersona;
 	}
-
 	public void setIdPersona(Persona idPersona) {
 		this.idPersona = idPersona;
 	}
+
+	
 
 }

@@ -16,7 +16,7 @@ public class Quirofano implements Serializable{
 
 	@Id
 	@Column(name="Id",nullable=false)
-	private int id;
+	private Integer id;
 	
 	@Column(name="Detalle_Impemento",nullable=false,length=2000)
 	private String detalleImplementos;

@@ -18,7 +18,7 @@ public class Eps implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "Id_Eps")
-	private int idEps;
+	private Integer idEps;
 
 	@Column(name = "Nombre", unique = true, nullable = false, length = 40)
 	private String nombre;

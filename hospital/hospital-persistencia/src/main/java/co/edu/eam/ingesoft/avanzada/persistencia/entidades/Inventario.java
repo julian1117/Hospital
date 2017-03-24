@@ -13,10 +13,10 @@ public class Inventario implements Serializable {
 
 	@Id
 	@Column(name="Id_Inventario",nullable=false)
-	private int idInventario;
+	private Integer idInventario;
 	
 	@Column(name="Cantidad_Disponible",nullable=false)
-	private int cantidadDisponible;
+	private Integer cantidadDisponible;
 	
 	@Column(name="Nombre_Medicamento",nullable=false,length=40)
 	private String nombreMedicamento;
@@ -25,7 +25,7 @@ public class Inventario implements Serializable {
 	private TipoMedicamento tipoMedicamento;
 
 	@Column(name="Precio_medicamento")
-	private double precioMedicamento;
+	private Double precioMedicamento;
 	
 	public Inventario(int idInventario, int cantidadDisponible, String nombreMedicamento,
 			TipoMedicamento tipoMedicamento, double precioMedicamento) {

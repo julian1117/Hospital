@@ -13,7 +13,7 @@ public class Procedimiento implements Serializable{
 	
 	@Id
 	@Column(name="Id-Procedimiento",nullable=false)
-	private int idProcedimiento;
+	private Integer idProcedimiento;
 	
 	
 	@Column(name="Tipo",nullable=false)

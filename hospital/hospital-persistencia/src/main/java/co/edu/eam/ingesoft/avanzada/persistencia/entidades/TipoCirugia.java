@@ -13,7 +13,7 @@ public class TipoCirugia implements Serializable{
 	
 	@Id
 	@Column(name="Id_Tipo_Cirugia")
-	private int idTipoCirugia;
+	private Integer idTipoCirugia;
 	
 	@Column(name="Detalle")
 	private String tipoCirugia;

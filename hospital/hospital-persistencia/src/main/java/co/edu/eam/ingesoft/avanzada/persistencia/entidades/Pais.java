@@ -16,7 +16,7 @@ public class Pais implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_Pais")
-	private int idPais;
+	private Integer idPais;
 	
 	@Column(name="nombre_pais",nullable=false,length=25)
 	private String nombre;

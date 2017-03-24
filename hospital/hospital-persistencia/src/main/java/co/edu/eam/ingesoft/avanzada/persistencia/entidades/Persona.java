@@ -22,7 +22,7 @@ public class Persona implements Serializable {
 	
 	@Id
 	@Column(name="Id_Persona",nullable=false)
-	private int idPersona;
+	private Integer idPersona;
 	
 	@Column(name="Nombre",nullable=false,length=25)
 	private String nombre;

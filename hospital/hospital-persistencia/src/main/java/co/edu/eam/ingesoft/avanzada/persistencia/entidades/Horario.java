@@ -19,7 +19,7 @@ public class Horario implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="Id_Horarios",nullable=false)
-	private int idHorarios;
+	private Integer idHorarios;
 	
 	@Column(name="Hora_Inicio",nullable=false)
 	@Temporal(TemporalType.DATE)

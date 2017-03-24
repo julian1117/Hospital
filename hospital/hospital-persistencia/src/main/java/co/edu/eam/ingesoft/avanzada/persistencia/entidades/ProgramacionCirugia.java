@@ -20,7 +20,7 @@ public class ProgramacionCirugia implements Serializable{
 	@Id
 	@Column(name="Id_Programacion_Cirugia",nullable=false)
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idProgramacionCi;
+	private Integer idProgramacionCi;
 	
 	@ManyToOne
 	@JoinColumn(name="Id_Quirofano",nullable=false)

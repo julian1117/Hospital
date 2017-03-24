@@ -13,7 +13,7 @@ public class TipoCita implements Serializable {
 
 	@Id
 	@Column(name="Id_TipoCita",nullable=false)
-	private int idTipoCita;
+	private Integer idTipoCita;
 	
 	@Column(name="Nombre",unique= false,nullable=false,length=40)
 	private String nombre;

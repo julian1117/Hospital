@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class PatologiaTratamientoPK implements Serializable{
 	
-	private int patologiaa;
+	private Integer patologiaa;
 	
-	private int tratamient;
+	private Integer tratamient;
 
 	public PatologiaTratamientoPK() {
 		super();

@@ -13,7 +13,7 @@ public class Especializacione implements Serializable{
 
 	@Id
 	@Column(name="Id_Especializacion",nullable=false)
-	private int idEspecializacion;
+	private Integer idEspecializacion;
 	
 	@Column(name="Nombre",nullable=false,length=40)
 	private String nombre;

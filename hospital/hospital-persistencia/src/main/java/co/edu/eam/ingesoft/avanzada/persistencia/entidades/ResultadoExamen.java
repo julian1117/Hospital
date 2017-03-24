@@ -21,7 +21,7 @@ public class ResultadoExamen implements Serializable{
 
 	@Id
 	@Column(name="Id_Resultado",nullable=false)
-	private int idResultado;
+	private Integer idResultado;
 	
 	@Column(name="Detalle",nullable=false,length=2000)
 	private String detalle;

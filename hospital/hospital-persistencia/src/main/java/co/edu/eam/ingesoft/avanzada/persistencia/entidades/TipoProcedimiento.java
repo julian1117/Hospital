@@ -13,7 +13,7 @@ public class TipoProcedimiento implements Serializable{
 	
 	@Id
 	@Column(name="Id")
-	private int id;
+	private Integer id;
 	
 	@Column(name="Nombre",nullable=true,length=40)
 	private String nombre;

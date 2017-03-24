@@ -16,7 +16,7 @@ public class Cama implements Serializable{
 
 	@Id
 	@Column(name="Id_Cama",nullable=false)
-	private int idCama;
+	private Integer idCama;
 	
 	@Column(name="Disponibilidad",nullable=false)
 	private boolean disponibilidad;

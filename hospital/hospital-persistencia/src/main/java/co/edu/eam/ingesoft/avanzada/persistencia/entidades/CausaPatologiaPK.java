@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class CausaPatologiaPK implements Serializable{
 
-	private int causaPatologia;
+	private Integer causaPatologia;
 	
 	private int patologia;
 

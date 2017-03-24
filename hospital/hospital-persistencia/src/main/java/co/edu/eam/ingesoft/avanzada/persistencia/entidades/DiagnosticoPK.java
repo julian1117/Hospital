@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class DiagnosticoPK implements Serializable{
 	
-	private int idCita;
+	private Integer idCita;
 	
-	private int patologiaId;
+	private Integer patologiaId;
 
 	public DiagnosticoPK() {
 		super();

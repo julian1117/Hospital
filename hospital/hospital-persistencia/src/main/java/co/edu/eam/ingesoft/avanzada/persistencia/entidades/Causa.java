@@ -15,7 +15,7 @@ public class Causa implements Serializable {
 	
 	@Id
 	@Column(name="Id_Causa_Patologia",nullable=false)
-	private int idCausasPa;
+	private Integer idCausasPa;
 	
 	@Column(name="Nombre",nullable=false,length=40)
 	private String nombre;

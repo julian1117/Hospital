@@ -18,7 +18,7 @@ public class OrdenMedica implements Serializable{
 
 	@Id
 	@Column(name="Id_Orden",nullable=false)
-	private int idOrden;
+	private Integer idOrden;
 	
 	
 	@ManyToOne

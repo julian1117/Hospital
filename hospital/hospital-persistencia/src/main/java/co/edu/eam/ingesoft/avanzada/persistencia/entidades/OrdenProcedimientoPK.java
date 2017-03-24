@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class OrdenProcedimientoPK implements Serializable {
 
-	private int idOrdenMedica;
+	private Integer idOrdenMedica;
 	
-	private int idProcedimiento;
+	private Integer idProcedimiento;
 
 	public OrdenProcedimientoPK() {
 		super();

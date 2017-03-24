@@ -15,7 +15,7 @@ public class Cita implements Serializable{
 
 	@Id
 	@Column(name="id_Cita",nullable=false)
-	private int idCita;
+	private Integer idCita;
 	
 	@ManyToOne
 	@JoinColumn(name="Agenda",nullable=false)
