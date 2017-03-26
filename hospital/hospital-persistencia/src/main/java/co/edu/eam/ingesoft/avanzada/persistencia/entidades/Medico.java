@@ -2,6 +2,7 @@ package co.edu.eam.ingesoft.avanzada.persistencia.entidades;
 
 import java.io.Serializable;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,18 +17,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Medicos")
-public class Medico  implements Serializable{
-
-	
+@AttributeOverride(name="idPersona",column=@Column(name="PERSONA_Id"))
+public class Medico  extends Persona implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="Especializaciones",nullable=true)
 	private Especializacione especializaciones;
 	
-	@Id
-	@OneToOne
-	@JoinColumn(name="id_persona",unique = true, nullable=false)
-	private Persona idPersona;
 
 	public Medico() {
 		super();
@@ -40,14 +36,5 @@ public class Medico  implements Serializable{
 	public void setEspecializaciones(Especializacione especializaciones) {
 		this.especializaciones = especializaciones;
 	}
-
-	public Persona getIdPersona() {
-		return idPersona;
-	}
-
-	public void setIdPersona(Persona idPersona) {
-		this.idPersona = idPersona;
-	}
-
 	
 }

@@ -12,12 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Hospitalizaciones")
-public class Hospitalizacion implements Serializable{
-	
-	@Id
-	@OneToOne
-	@JoinColumn(name="Procedimiento")
-	private Procedimiento procedimiento;
+public class Hospitalizacion extends Procedimiento implements Serializable{
 	
 	@Column(name="Detalle_Procedimiento",length=2000)
 	private String detalleProce;
@@ -31,18 +26,11 @@ public class Hospitalizacion implements Serializable{
 
 	public Hospitalizacion(Procedimiento procedimiento, String detalleProce, String motivo) {
 		super();
-		this.procedimiento = procedimiento;
+		;
 		this.detalleProce = detalleProce;
 		this.motivo = motivo;
 	}
 
-	public Procedimiento getProcedimiento() {
-		return procedimiento;
-	}
-
-	public void setProcedimiento(Procedimiento procedimiento) {
-		this.procedimiento = procedimiento;
-	}
 
 	public String getDetalleProce() {
 		return detalleProce;

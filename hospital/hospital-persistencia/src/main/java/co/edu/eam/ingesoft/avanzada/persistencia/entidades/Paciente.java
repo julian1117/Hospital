@@ -2,6 +2,8 @@ package co.edu.eam.ingesoft.avanzada.persistencia.entidades;
 
 import java.io.Serializable;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -11,25 +13,27 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Pacientes")
-public class Paciente  implements Serializable {
+@AttributeOverride(name="idPersona",column=@Column(name="PERSONA_Id"))
+public class Paciente extends Persona  implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "Eps", nullable = false)
 	private Eps eps;
 
-	@Id
-	@OneToOne
-	@JoinColumn(name = "id_persona", unique = true, nullable = false)
-	private Persona persona;
+	
 
 	public Paciente() {
 		super();
 	}
 
+	/**
+	 * constructor
+	 * @param eps
+	 * @param persona
+	 */
 	public Paciente(Eps eps, Persona persona) {
 		super();
 		this.eps = eps;
-		this.persona = persona;
 	}
 
 	public Eps getEps() {
@@ -40,12 +44,5 @@ public class Paciente  implements Serializable {
 		this.eps = eps;
 	}
 
-	public Persona getPersona() {
-		return persona;
-	}
-
-	public void setPersona(Persona persona) {
-		this.persona = persona;
-	}
-
+	
 }
