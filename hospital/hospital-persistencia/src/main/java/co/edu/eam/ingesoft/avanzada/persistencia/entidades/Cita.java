@@ -32,25 +32,29 @@ public class Cita implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="Paciente",nullable=false)
 	private Persona persona;
+	
+	@Column(name="Estado")
+	private boolean estado;
 
 	public Cita() {
 		super();
 	}
 
-	public Cita(int idCita, Agenda agenda, TipoCita tipoCita, Cita cita, Persona persona) {
+	public Cita(Integer idCita, Agenda agenda, TipoCita tipoCita, Cita cita, Persona persona, boolean estado) {
 		super();
 		this.idCita = idCita;
 		this.agenda = agenda;
 		this.tipoCita = tipoCita;
 		this.cita = cita;
 		this.persona = persona;
+		this.estado = estado;
 	}
 
-	public int getIdCita() {
+	public Integer getIdCita() {
 		return idCita;
 	}
 
-	public void setIdCita(int idCita) {
+	public void setIdCita(Integer idCita) {
 		this.idCita = idCita;
 	}
 
@@ -84,6 +88,14 @@ public class Cita implements Serializable{
 
 	public void setPersona(Persona persona) {
 		this.persona = persona;
+	}
+
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
 	}
 
 	
