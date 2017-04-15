@@ -13,18 +13,11 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Examenes")
-@IdClass(ExamenPK.class)
-public class Examen  implements Serializable{
+public class Examen extends Procedimiento implements Serializable{
 	
-	@Id
 	@ManyToOne
 	@JoinColumn(name="Tipo_Examne",nullable=true)
 	private TipoExamen tipoExamen;
-	
-	@Id
-	@OneToOne
-	@JoinColumn(name="Id_procedimiento",nullable=true)
-	private Procedimiento procedimiento;
 	
 	@Column(name="Descripcion",nullable=false, length=1000)
 	private String descripcion;
@@ -33,10 +26,9 @@ public class Examen  implements Serializable{
 		super();
 	}
 
-	public Examen(TipoExamen tipoExamen, Procedimiento procedimiento, String descripcion) {
+	public Examen(TipoExamen tipoExamen, String descripcion) {
 		super();
 		this.tipoExamen = tipoExamen;
-		this.procedimiento = procedimiento;
 		this.descripcion = descripcion;
 	}
 
@@ -46,14 +38,6 @@ public class Examen  implements Serializable{
 
 	public void setTipoExamen(TipoExamen tipoExamen) {
 		this.tipoExamen = tipoExamen;
-	}
-
-	public Procedimiento getProcedimiento() {
-		return procedimiento;
-	}
-
-	public void setProcedimiento(Procedimiento procedimiento) {
-		this.procedimiento = procedimiento;
 	}
 
 	public String getDescripcion() {

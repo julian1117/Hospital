@@ -1,6 +1,7 @@
 package co.edu.eam.ingesoft.avanzada.persistencia.entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,8 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="Agendas")
@@ -18,44 +21,67 @@ public class Agenda implements Serializable{
 	@Column(name="Id_Agenda",nullable=false)
 	private Integer id;
 	
+	@Column(name="Hora_Inicio",nullable=false)
+	@Temporal(TemporalType.DATE)
+	private Date horaInicio;
 	
-	@ManyToOne
-	@JoinColumn(name="Horarios",nullable=false)
-	private Horario horarios;
-	
+	@Column(name="Hora_Final",nullable=false)
+	@Temporal(TemporalType.DATE)
+	private Date horaFinal;
 	
 	@ManyToOne
 	@JoinColumn(name="Medicos",nullable=false)
-	private Persona idPersona;
-	//SE CAMBIO EL ATRIBUTO private Medico medico; ya que el medico es una herencia de persona
+	private Medico medico;
 	
 	public Agenda() {
 		super();
 	}
-	public Agenda(Integer id, Horario horarios, Persona idPersona) {
+
+	
+	
+	public Agenda(Integer id, Date horaInicio, Date horaFinal, Medico medico) {
 		super();
 		this.id = id;
-		this.horarios = horarios;
-		this.idPersona = idPersona;
+		this.horaInicio = horaInicio;
+		this.horaFinal = horaFinal;
+		this.medico = medico;
 	}
+
+
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Horario getHorarios() {
-		return horarios;
+
+	public Date getHoraInicio() {
+		return horaInicio;
 	}
-	public void setHorarios(Horario horarios) {
-		this.horarios = horarios;
+
+	public void setHoraInicio(Date horaInicio) {
+		this.horaInicio = horaInicio;
 	}
-	public Persona getIdPersona() {
-		return idPersona;
+
+	public Date getHoraFinal() {
+		return horaFinal;
 	}
-	public void setIdPersona(Persona idPersona) {
-		this.idPersona = idPersona;
+
+	public void setHoraFinal(Date horaFinal) {
+		this.horaFinal = horaFinal;
 	}
+
+	public Medico getMedico() {
+		return medico;
+	}
+
+	public void setMedico(Medico medico) {
+		this.medico = medico;
+	}
+	
+	
 
 	
 

@@ -5,20 +5,18 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="Preocedimientos")
+@Inheritance(strategy=InheritanceType.JOINED)
 public class Procedimiento implements Serializable{
 	
 	@Id
-	@Column(name="Id-Procedimiento",nullable=false)
-	private Integer idProcedimiento;
-	
-	
-	@Column(name="Tipo",nullable=false)
-	private TipoProcedimiento tipo;
-	
+	@Column(name="Id_Procedimiento",nullable=false)
+	private Integer idProcedimiento;	
 	
 	@Column(name="Tiempo",nullable=false,length=30)
 	private String tiempo;
@@ -29,10 +27,9 @@ public class Procedimiento implements Serializable{
 	}
 
 
-	public Procedimiento(int idProcedimiento, TipoProcedimiento tipo, String tiempo) {
+	public Procedimiento(int idProcedimiento, String tiempo) {
 		super();
 		this.idProcedimiento = idProcedimiento;
-		this.tipo = tipo;
 		this.tiempo = tiempo;
 	}
 
@@ -45,17 +42,7 @@ public class Procedimiento implements Serializable{
 	public void setIdProcedimiento(int idProcedimiento) {
 		this.idProcedimiento = idProcedimiento;
 	}
-
-
-	public TipoProcedimiento getTipo() {
-		return tipo;
-	}
-
-
-	public void setTipo(TipoProcedimiento tipo) {
-		this.tipo = tipo;
-	}
-
+	
 
 	public String getTiempo() {
 		return tiempo;
@@ -65,9 +52,5 @@ public class Procedimiento implements Serializable{
 	public void setTiempo(String tiempo) {
 		this.tiempo = tiempo;
 	}
-
-
-	
-	
 
 }
