@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Hospital Laura Maria</title>
+	<link href="#{request.contextPath}/css/bootstrap.css" rel='stylesheet'
+		type='text/css' />
+	<link href="#{request.contextPath}/css/style.css" rel='stylesheet'
+		type='text/css' />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link
+		href='#{request.contextPath}/http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800'
+		rel='stylesheet' type='text/css' />
+	<link
+		href='#{request.contextPath}/http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700'
+		rel='stylesheet' type='text/css' />
+	<script type="application/x-javascript">
+		 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+	</script>
+	<!--<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />-->
+	<script src="#{request.contextPath}/js/jquery.min.js"></script>
+	<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			$(".scroll").click(function(event) {
+				event.preventDefault();
+				$('html,body').animate({
+					scrollTop : $(this.hash).offset().top
+				}, 1200);
+			});
+		});
+	</script>
+	<!-- grid-slider -->
+	<script type="text/javascript"
+		src="#{request.contextPath}/js/jquery.mousewheel.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/js/jquery.contentcarousel.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/js/jquery.easing.1.3.js"></script>
+	<!-- //grid-slider -->
+</h:head>
+<h:body>
+	
+	<!-- end header_top -->
+	<!-- start header_bottom -->
+	<div class="header-bottom">
+		<div class="container">
+			<div class="header-bottom_left">
+				<i class="phone"> </i><span>1-200-346-2986</span>
+			</div>
+			<div class="social">
+				<ul>
+					<li class="facebook"><a href="#"><span> </span></a></li>
+					<li class="twitter"><a href="#"><span> </span></a></li>
+					<li class="pinterest"><a href="#"><span> </span></a></li>
+					<li class="google"><a href="#"><span> </span></a></li>
+					<li class="tumblr"><a href="#"><span> </span></a></li>
+					<li class="instagram"><a href="#"><span> </span></a></li>
+					<li class="rss"><a href="#"><span> </span></a></li>
+				</ul>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+	
+
+	<!-- start menu -->
+	<div class="menu" id="menu">
+		<div class="container">
+			<div class="logo">
+				<a href="#{request.contextPath}/index.html"><img
+					src="images/logo.png" alt="" /></a>
+			</div>
+			<div class="h_menu4">
+				<!-- start h_menu4 -->
+				<a class="toggleMenu" href="#">Menu</a>
+				<ul class="nav">
+					<li class="active"><a href="#{request.contextPath}/index.html">Home</a></li>
+					<li><a href="#{request.contextPath}/about.html">About</a></li>
+					<li><a href="#{request.contextPath}/trainers.html">Trainers</a></li>
+					<li><a href="#{request.contextPath}/classes.html">Classes</a>
+
+					</li>
+					<li><a href="#{request.contextPath}/blog.html">Blog</a></li>
+					<li><a href="#{request.contextPath}/pricing.html">Pricing</a></li>
+					<li><a href="#{request.contextPath}/contact.html">Contact</a></li>
+				</ul>
+				<script type="text/javascript"
+					src="#{request.contextPath}/js/nav.js"></script>
+			</div>
+			<!-- end h_menu4 -->
+			<div class="clear"></div>
+		</div>
+	</div>
+		<!-- /DIV PRINCIPAL PARA TRABAJAR-->
+		<section class='aboutus center' id='portafolio'>
+			<div class='container' align="center">
+				<div class="box">
+					<p:messages id="facesMessage" autoUpdate="true" globalOnly="true"
+						closable="true" />
+					<ui:insert name="cuerpo" />
+				</div>
+			</div>
+		</section>
+
+
+</h:body>
+</html>
