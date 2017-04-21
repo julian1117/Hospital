@@ -19,7 +19,6 @@ public class ProgramacionCirugia implements Serializable{
 	
 	@Id
 	@Column(name="Id_Programacion_Cirugia",nullable=false)
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idProgramacionCi;
 	
 	@ManyToOne

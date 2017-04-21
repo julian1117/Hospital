@@ -14,7 +14,6 @@ import javax.persistence.Table;
 public class Pais implements Serializable{
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_Pais")
 	private Integer idPais;
 	

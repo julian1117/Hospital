@@ -16,7 +16,6 @@ import javax.persistence.Table;
 public class Eps implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "Id_Eps")
 	private Integer idEps;
 

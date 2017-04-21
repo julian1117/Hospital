@@ -9,8 +9,6 @@ import javax.persistence.PersistenceContext;
 
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Usuario;
 
-
-
 @Stateless
 @LocalBean
 public class SeguridadEJB {

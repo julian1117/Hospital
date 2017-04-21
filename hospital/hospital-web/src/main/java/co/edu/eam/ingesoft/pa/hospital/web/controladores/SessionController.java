@@ -3,7 +3,7 @@ package co.edu.eam.ingesoft.pa.hospital.web.controladores;
 import java.io.Serializable;
 
 import javax.ejb.EJB;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
@@ -56,12 +56,16 @@ public class SessionController implements Serializable {
 	 */
 	public String login() {
 
+		Messages.addGlobalInfo("us: "+usuario +" cont:  " +contrasena);
 		Usuario useBuscar = seguridadEjb.buscar(usuario);
-		if (useBuscar != null) {
+		Messages.addGlobalInfo(useBuscar.getNombreUsuario());
 
+		if (useBuscar != null) {
+			
 			if (useBuscar.getContrasenia().equals(contrasena)) {
 				use=useBuscar;
 				Faces.setSessionAttribute("usuario",use);
+				Messages.addGlobalInfo("Usuario existe");
 				return "/paginas/seguro/Algo.xhtml?faces-redirect=true";
 			} else {
 				Messages.addGlobalError("contrasena incorrecta");
