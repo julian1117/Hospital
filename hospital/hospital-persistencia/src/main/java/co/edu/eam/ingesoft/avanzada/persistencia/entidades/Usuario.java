@@ -6,12 +6,16 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="Usuario")
+@NamedQuery(name=Usuario.USUARIO,query="SELECT u FROM Usuario u WHERE u.nombreUsuario=?1")
 public class Usuario implements Serializable{
 
+	public static final String USUARIO = "Usuario.listaUs";
+	
 	@Id
 	@JoinColumn(name="Id_Persona")
 	private Persona idPersona;
