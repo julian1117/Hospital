@@ -1,102 +1,153 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Hospital Laura Maria</title>
-	<link href="#{request.contextPath}/css/bootstrap.css" rel='stylesheet'
-		type='text/css' />
-	<link href="#{request.contextPath}/css/style.css" rel='stylesheet'
-		type='text/css' />
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1, maximum-scale=1" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link
-		href='#{request.contextPath}/http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800'
-		rel='stylesheet' type='text/css' />
-	<link
-		href='#{request.contextPath}/http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700'
-		rel='stylesheet' type='text/css' />
-	<script type="application/x-javascript">
-		 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
-	</script>
-	<!--<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />-->
-	<script src="#{request.contextPath}/js/jquery.min.js"></script>
-	<script type="text/javascript">
-		jQuery(document).ready(function($) {
-			$(".scroll").click(function(event) {
-				event.preventDefault();
-				$('html,body').animate({
-					scrollTop : $(this.hash).offset().top
-				}, 1200);
-			});
-		});
-	</script>
-	<!-- grid-slider -->
-	<script type="text/javascript"
-		src="#{request.contextPath}/js/jquery.mousewheel.js"></script>
-	<script type="text/javascript"
-		src="#{request.contextPath}/js/jquery.contentcarousel.js"></script>
-	<script type="text/javascript"
-		src="#{request.contextPath}/js/jquery.easing.1.3.js"></script>
-	<!-- //grid-slider -->
+
+	<!-- start: Meta -->
+	<meta charset="utf-8"/>
+	<title>GotYA FREE BOOTSTRAP THEME by BootstrapMaster</title> 
+	<meta name="description" content="GotYa Free Bootstrap Theme"/>
+	<meta name="keywords" content="Template, Theme, web, html5, css3, Bootstrap" />
+	<meta name="author" content="Łukasz Holeczek from creativeLabs"/>
+	<!-- end: Meta -->
+	
+	<!-- start: Mobile Specific -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+	<!-- end: Mobile Specific -->
+	
+	<!-- start: Facebook Open Graph -->
+	<meta property="og:title" content=""/>
+	<meta property="og:description" content=""/>
+	<meta property="og:type" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:image" content=""/>
+	<!-- end: Facebook Open Graph -->
+
+    <!-- start: CSS -->
+    <link href="#{request.contextPath}/css/bootstrap.css" rel="stylesheet"/>
+    <link href="#{request.contextPath}/css/bootstrap-responsive.css" rel="stylesheet"/>
+	<link href="#{request.contextPath}/css/style.css" rel="stylesheet"/>
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700"/>
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Serif"/>
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Boogaloo"/>
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Economica:700,400italic"/>
+	<!-- end: CSS -->
+
+   
+
 </h:head>
 <h:body>
 	
-	<!-- end header_top -->
-	<!-- start header_bottom -->
-	<div class="header-bottom">
-		<div class="container">
-			<div class="header-bottom_left">
-				<i class="phone"> </i><span>1-200-346-2986</span>
-			</div>
-			<div class="social">
-				<ul>
-					<li class="facebook"><a href="#"><span> </span></a></li>
-					<li class="twitter"><a href="#"><span> </span></a></li>
-					<li class="pinterest"><a href="#"><span> </span></a></li>
-					<li class="google"><a href="#"><span> </span></a></li>
-					<li class="tumblr"><a href="#"><span> </span></a></li>
-					<li class="instagram"><a href="#"><span> </span></a></li>
-					<li class="rss"><a href="#"><span> </span></a></li>
-				</ul>
-			</div>
-			<div class="clear"></div>
-		</div>
-	</div>
 	
-
-	<!-- start menu -->
-	<div class="menu" id="menu">
+	
+		<!--start: Header -->
+	<header>
+		
+		<!--start: Container -->
 		<div class="container">
-			<div class="logo">
-				<a href="#{request.contextPath}/index.html"><img
-					src="images/logo.png" alt="" /></a>
+			
+			<!--start: Row -->
+			<div class="row">
+					
+				<!--start: Logo -->
+				<div class="logo span3">
+						
+					<a class="brand" href="#"><img src="#{request.contextPath}/img/logo.png" alt="Logo"/></a>
+					
+						
+				</div>
+				<!--end: Logo -->
+					
+				<!--start: Navigation -->
+				<div class="span9">
+					
+					<div class="navbar navbar-inverse">
+			    		<div class="navbar-inner">
+			          		<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+			            		<span class="icon-bar"></span>
+			            		<span class="icon-bar"></span>
+			            		<span class="icon-bar"></span>
+			          		</a>
+			          		<div class="nav-collapse collapse">
+			            		<ul class="nav">
+			              			<li class="active"><a href="#{request.contextPath}/index.html">Home</a></li>
+			              			<li><a href="#{request.contextPath}/about.html">About</a></li>
+									<li><a href="#{request.contextPath}/services.html">Services</a></li>
+									<li><a href="#{request.contextPath}/pricing.html">Pricing</a></li>
+			              			<li><a href="#{request.contextPath}/contact.html">Contact</a></li>
+			              			<li class="dropdown">
+			                			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+			                			<ul class="dropdown-menu">
+			                  				<li><a href="#">Action</a></li>
+			                  				<li><a href="#">Another action</a></li>
+			                  				<li><a href="#">Something else here</a></li>
+			                  				<li class="divider"></li>
+			                  				<li class="nav-header">Nav header</li>
+			                  				<li><a href="#">Separated link</a></li>
+			                  				<li><a href="#">One more separated link</a></li>
+			                			</ul>
+			              			</li>
+			            		</ul>
+			          		</div>
+			        	</div>
+			      	</div>
+					
+				</div>	
+				<!--end: Navigation -->
+					
 			</div>
-			<div class="h_menu4">
-				<!-- start h_menu4 -->
-				<a class="toggleMenu" href="#">Menu</a>
-				<ul class="nav">
-					<li class="active"><a href="#{request.contextPath}/index.html">Home</a></li>
-					<li><a href="#{request.contextPath}/about.html">About</a></li>
-					<li><a href="#{request.contextPath}/trainers.html">Trainers</a></li>
-					<li><a href="#{request.contextPath}/classes.html">Classes</a>
-
-					</li>
-					<li><a href="#{request.contextPath}/blog.html">Blog</a></li>
-					<li><a href="#{request.contextPath}/pricing.html">Pricing</a></li>
-					<li><a href="#{request.contextPath}/contact.html">Contact</a></li>
-				</ul>
-				<script type="text/javascript"
-					src="#{request.contextPath}/js/nav.js"></script>
-			</div>
-			<!-- end h_menu4 -->
-			<div class="clear"></div>
+			<!--end: Row -->
+			
 		</div>
+		<!--end: Container-->			
+			
+	</header>
+	<!--end: Header-->
+	
+	
+	<!-- start: Slider -->
+	<div class="slider-wrapper">
+
+		<div id="da-slider" class="da-slider">
+			<div class="da-slide">
+				<h2>Twitter Bootstrap</h2>
+				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+				<a href="#" class="da-link">Read more</a>
+				<div class="da-img"><img src="#{request.contextPath}/img/parallax-slider/twitter.png" alt="image01" /></div>
+			</div>
+			<div class="da-slide">
+				<h2>Responsive Design</h2>
+				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+				<a href="#" class="da-link">Read more</a>
+				<div class="da-img"><img src="#{request.contextPath}/img/parallax-slider/responsive.png" alt="image02" /></div>
+			</div>
+			<div class="da-slide">
+				<h2>HTML5</h2>
+				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+				<a href="#" class="da-link">Read more</a>
+				<div class="da-img"><img src="#{request.contextPath}/img/parallax-slider/html5.png" alt="image03" /></div>
+			</div>
+			<div class="da-slide">
+				<h2>CSS3</h2>
+				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+				<a href="#" class="da-link">Read more</a>
+				<div class="da-img"><img src="#{request.contextPath}/img/parallax-slider/css3.png" alt="image04" /></div>
+			</div>
+			<nav class="da-arrows">
+				<span class="da-arrows-prev"></span>
+				<span class="da-arrows-next"></span>
+			</nav>
+		</div>
+		
 	</div>
-		<!-- /DIV PRINCIPAL PARA TRABAJAR-->
+	<!-- end: Slider -->
+	
+	
+	
+	<!-- /DIV PRINCIPAL PARA TRABAJAR-->
 		<section class='aboutus center' id='portafolio'>
 			<div class='container' align="center">
 				<div class="box">
@@ -104,9 +155,207 @@
 						closable="true" />
 					<ui:insert name="cuerpo" />
 				</div>
-			</div>
-		</section>
 
+			</div>
+
+		</section>
+	
+			
+		
+
+    <!-- start: Footer Menu -->
+	<div id="footer-menu" class="hidden-tablet hidden-phone">
+
+		<!-- start: Container -->
+		<div class="container">
+			
+			<!-- start: Row -->
+			<div class="row">
+
+				<!-- start: Footer Menu Logo -->
+				<div class="span2">
+					<div id="footer-menu-logo">
+						<a href="#"><img src="#{request.contextPath}/img/logo-footer-menu.png" alt="logo" /></a>
+					</div>
+				</div>
+				<!-- end: Footer Menu Logo -->
+
+				<!-- start: Footer Menu Links-->
+				<div class="span9">
+					
+					<div id="footer-menu-links">
+
+						<ul id="footer-nav">
+
+							<li><a href="index.html">Start</a></li>
+
+							<li><a href="about.html">About</a></li>
+
+							<li><a href="services.html">Services</a></li>
+
+							<li><a href="pricing.html">Pricing</a></li>
+							
+							<li><a href="contact.html">Contact</a></li>
+
+						</ul>
+
+					</div>
+					
+				</div>
+				<!-- end: Footer Menu Links-->
+
+				<!-- start: Footer Menu Back To Top -->
+				<div class="span1">
+						
+					<div id="footer-menu-back-to-top">
+						<a href="#"></a>
+					</div>
+				
+				</div>
+				<!-- end: Footer Menu Back To Top -->
+			
+			</div>
+			<!-- end: Row -->
+			
+		</div>
+		<!-- end: Container  -->	
+
+	</div>	
+	<!-- end: Footer Menu -->
+
+	<!-- start: Footer -->
+	<div id="footer">
+		
+		<!-- start: Container -->
+		<div class="container">
+			
+			<!-- start: Row -->
+			<div class="row">
+
+				<!-- start: About -->
+				<div class="span3">
+					
+					<h3>About Us</h3>
+					<p>
+						Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+					</p>
+						
+				</div>
+				<!-- end: About -->
+
+				<!-- start: Photo Stream -->
+				<div class="span3">
+					
+					<h3>We are here!</h3>
+					<div id="small-map-container"><a href="contact.html"></a></div>
+					<iframe id="small-map" width="210" height="210" frameborder="0" scrolling="yes" marginheight="0" marginwidth="0" src="https://maps.google.pl/maps?f=q&amp;source=s_q&amp;hl=pl&amp;geocode=&amp;q=Los+Angeles,+Kalifornia,+Stany+Zjednoczone&amp;aq=0&amp;oq=Los&amp;sll=50.143066,18.85267&amp;sspn=0.057207,0.168915&amp;t=m&amp;ie=UTF8&amp;hq=&amp;hnear=Los+Angeles,+Hrabstwo+Los+Angeles,+Kalifornia,+Stany+Zjednoczone&amp;ll=34.052234,-118.243685&amp;spn=0.036979,0.084457&amp;z=14&amp;iwloc=near&amp;output=embed"></iframe>
+					
+				</div>
+				<!-- end: Photo Stream -->
+
+				<div class="span6">
+				
+					<!-- start: Follow Us -->
+					<h3>Follow Us!</h3>
+					<ul class="social-grid">
+						<li>
+							<div class="social-item">				
+								<div class="social-info-wrap">
+									<div class="social-info">
+										<div class="social-info-front social-twitter">
+											<a href="http://twitter.com"></a>
+										</div>
+										<div class="social-info-back social-twitter-hover">
+											<a href="http://twitter.com"></a>
+										</div>	
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="social-item">				
+								<div class="social-info-wrap">
+									<div class="social-info">
+										<div class="social-info-front social-facebook">
+											<a href="http://facebook.com"></a>
+										</div>
+										<div class="social-info-back social-facebook-hover">
+											<a href="http://facebook.com"></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="social-item">				
+								<div class="social-info-wrap">
+									<div class="social-info">
+										<div class="social-info-front social-dribbble">
+											<a href="http://dribbble.com"></a>
+										</div>
+										<div class="social-info-back social-dribbble-hover">
+											<a href="http://dribbble.com"></a>
+										</div>	
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="social-item">				
+								<div class="social-info-wrap">
+									<div class="social-info">
+										<div class="social-info-front social-flickr">
+											<a href="http://flickr.com"></a>
+										</div>
+										<div class="social-info-back social-flickr-hover">
+											<a href="http://flickr.com"></a>
+										</div>	
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+					<!-- end: Follow Us -->
+				
+					<!-- start: Newsletter -->
+					<form id="newsletter">
+						<h3>Newsletter</h3>
+						<p>Please leave us your email</p>
+						<label for="newsletter_input">@:</label>
+						<input type="text" id="newsletter_input"/>
+						<input type="submit" id="newsletter_submit" value="submit"/>
+					</form>
+					<!-- end: Newsletter -->
+				
+				</div>
+				
+			</div>
+			<!-- end: Row -->	
+			
+		</div>
+		<!-- end: Container  -->
+
+	</div>
+	<!-- end: Footer -->
+
+	<!-- start: Copyright -->
+	<div id="copyright">
+	
+	
+		
+	</div>	
+	<!-- end: Copyright -->
+
+<!-- start: Java Script -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="#{request.contextPath}/js/jquery-1.8.2.js"></script>
+<script src="#{request.contextPath}/js/bootstrap.js"></script>
+<script src="#{request.contextPath}/js/flexslider.js"></script>
+<script src="#{request.contextPath}/js/carousel.js"></script>
+<script src="#{request.contextPath}/js/jquery.cslider.js"></script>
+<script src="#{request.contextPath}/js/slider.js"></script>
+<script defer="defer" src="#{request.contextPath}/js/custom.js"></script>
+<!-- end: Java Script -->
 
 </h:body>
 </html>
