@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+
+
+	<ui:define name="cuerpo">
+
+		<h:form prependId="false">
+
+			<p:panel id="paneldatosP" header="Datos Persona">
+
+				<h:panelGrid id="paneldatos" columns="2">
+				
+				<h:outputLabel for="tftCedula" id="lblCedula"
+						value="#{msj['persona.cedula']}:"></h:outputLabel>
+					<h:inputText id="tftCedula"
+						value="#{personaControler.idPersona}"></h:inputText>
+						
+						
+						<h:outputLabel for="tftNombre" id="lblNombre"
+						value="#{msj['persona.nombre']}:"></h:outputLabel>
+					<h:inputText id="tftNombre"
+						value="#{personaControler.nombre}"></h:inputText>
+						
+						
+						<h:outputLabel for="tftApellido" id="lblApellido"
+						value="#{msj['persona.apellido']}:"></h:outputLabel>
+					<h:inputText id="tftApellido"
+						value="#{personaControler.apellido}"></h:inputText>
+						
+						<h:outputLabel for="tftfecha" id="lblFecha"
+						value="#{msj['persona.fecha']}:"></h:outputLabel>
+						<h:inputText  type="date" name="cumpleanios" step="1" min="2013-01-01" max="2013-12-31" ></h:inputText>
+
+					<h:outputLabel for="tftCiudad" id="lblCiudad" value="Ciudad"></h:outputLabel>
+					<h:selectOneMenu id="tftCiudad" value="#{personaControler.ciudad}"
+						converter="ciudadConver">
+						<f:selectItems value="#{personaControler.nombreCiudad}" var="ciu"
+							itemValue="#{ciu}" itemLabel="#{ciu.nombre}"></f:selectItems>
+					</h:selectOneMenu>
+
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+

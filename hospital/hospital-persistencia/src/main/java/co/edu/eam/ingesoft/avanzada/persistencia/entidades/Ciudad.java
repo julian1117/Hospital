@@ -9,12 +9,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 
 @Entity
 @Table(name="Ciudades")
+@NamedQuery(name=Ciudad.LISTAR_CIUDAD,query="SELECT c FROM Ciudad c")
 public class Ciudad implements Serializable{
+	
+	public static final String LISTAR_CIUDAD= "Ciudad.listarCiudad";
 	
 	@Id
 	@Column(name="Id_Ciudad",nullable=false)

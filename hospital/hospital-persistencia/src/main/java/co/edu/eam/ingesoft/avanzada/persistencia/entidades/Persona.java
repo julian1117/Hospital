@@ -19,12 +19,12 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.Generated;
 
 @Entity
-@Table(name="Personas")
+@Table(name="PERSONAS")
 @Inheritance(strategy=InheritanceType.JOINED)
 public class Persona implements Serializable {
 	
 	@Id
-	@Column(name="Id_Persona",nullable=false)
+	@Column(name="Id",nullable=false)
 	private Integer idPersona;
 	
 	@Column(name="Nombre",nullable=false,length=25)
@@ -33,7 +33,7 @@ public class Persona implements Serializable {
 	@Column(name="Apellido",nullable=false,length=25)
 	private String apellido;
 	
-	@Column(name="Fecha_Nacimiento",nullable=false)
+	@Column(name="Fecha_nacimiento",nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date fechaNacimiento;
 	
@@ -52,19 +52,17 @@ public class Persona implements Serializable {
 	@Column(name="Sexo",nullable=false,length=1)
 	private boolean sexo;
 	
-	@Column(name="Contrasenia",nullable=false,length=20)
-	private String contrasenia;
-	
+
 	@ManyToOne
-	@JoinColumn(name="Ciudad",nullable=false)
+	@JoinColumn(name="Ciudad_Id",nullable=false)
 	private Ciudad ciudad;
 
 	public Persona() {
 		super();
 	}
 
-	public Persona(int idPersona, String nombre, String apellido, Date fechaNacimiento, String telefono,
-			String direccion, String tipoUsuario, String email, boolean sexo, String contrasenia, Ciudad ciudad) {
+	public Persona(Integer idPersona, String nombre, String apellido, Date fechaNacimiento, String telefono,
+			String direccion, String tipoUsuario, String email, boolean sexo, Ciudad ciudad) {
 		super();
 		this.idPersona = idPersona;
 		this.nombre = nombre;
@@ -75,15 +73,14 @@ public class Persona implements Serializable {
 		this.tipoUsuario = tipoUsuario;
 		this.email = email;
 		this.sexo = sexo;
-		this.contrasenia = contrasenia;
 		this.ciudad = ciudad;
 	}
 
-	public int getIdPersona() {
+	public Integer getIdPersona() {
 		return idPersona;
 	}
 
-	public void setIdPersona(int idPersona) {
+	public void setIdPersona(Integer idPersona) {
 		this.idPersona = idPersona;
 	}
 
@@ -151,14 +148,6 @@ public class Persona implements Serializable {
 		this.sexo = sexo;
 	}
 
-	public String getContrasenia() {
-		return contrasenia;
-	}
-
-	public void setContrasenia(String contrasenia) {
-		this.contrasenia = contrasenia;
-	}
-
 	public Ciudad getCiudad() {
 		return ciudad;
 	}
@@ -166,7 +155,7 @@ public class Persona implements Serializable {
 	public void setCiudad(Ciudad ciudad) {
 		this.ciudad = ciudad;
 	}
-	
+
 	
 	
 	

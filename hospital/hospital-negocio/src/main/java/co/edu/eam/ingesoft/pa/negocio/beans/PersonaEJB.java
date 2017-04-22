@@ -1,10 +1,13 @@
 package co.edu.eam.ingesoft.pa.negocio.beans;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Ciudad;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Persona;
 import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
@@ -60,5 +63,7 @@ public class PersonaEJB {
 		persona = buscarPersona(persona.getTipoUsuario());
 		em.merge(persona);
 	}
+	
+	
 
 }
