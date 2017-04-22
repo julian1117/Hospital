@@ -9,8 +9,11 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 
 import org.omnifaces.cdi.ViewScoped;
+import org.omnifaces.util.Messages;
 
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Ciudad;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Persona;
+import co.edu.eam.ingesoft.avanzada.persistencia.enumeraciones.TipoUsuario;
 import co.edu.eam.ingesoft.pa.negocio.beans.GeneralEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.PersonaEJB;
 
@@ -18,7 +21,7 @@ import co.edu.eam.ingesoft.pa.negocio.beans.PersonaEJB;
 @ViewScoped
 public class PersonaControlador implements Serializable {
 	
-	private String idPersona;
+	private Long idPersona;
 	
 	private String nombre;
 	
@@ -30,7 +33,7 @@ public class PersonaControlador implements Serializable {
 	
 	private String direccion;
 	
-	private String tipoUsu;
+	private TipoUsuario tipoUsu;
 	
 	private String email;
 	
@@ -44,12 +47,19 @@ public class PersonaControlador implements Serializable {
 	@EJB
 	private GeneralEJB generalEJB;
 	
+	@EJB
+	private PersonaEJB personaEJB;
+	
 	@PostConstruct
 	public void inicializar(){
 	nombreCiudad = generalEJB.listarCiudad();
 	}
 	
 	public void crearPersona(){
+		
+		Persona per = new Persona(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, tipoUsu, email, sexo, ciudad);
+		personaEJB.crearPersona(per);
+		Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
 		
 	}
 	
@@ -59,12 +69,16 @@ public class PersonaControlador implements Serializable {
 	
 	
 
-	public String getIdPersona() {
+	public Long getIdPersona() {
 		return idPersona;
 	}
 
-	public void setIdPersona(String idPersona) {
+	public void setIdPersona(Long idPersona) {
 		this.idPersona = idPersona;
+	}
+
+	public void setTipoUsu(TipoUsuario tipoUsu) {
+		this.tipoUsu = tipoUsu;
 	}
 
 	public String getNombre() {
@@ -107,13 +121,7 @@ public class PersonaControlador implements Serializable {
 		this.direccion = direccion;
 	}
 
-	public String getTipoUsu() {
-		return tipoUsu;
-	}
 
-	public void setTipoUsu(String tipoUsu) {
-		this.tipoUsu = tipoUsu;
-	}
 
 	public String getEmail() {
 		return email;

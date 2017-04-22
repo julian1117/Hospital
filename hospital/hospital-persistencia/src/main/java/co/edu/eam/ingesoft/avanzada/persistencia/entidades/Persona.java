@@ -18,6 +18,8 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Generated;
 
+import co.edu.eam.ingesoft.avanzada.persistencia.enumeraciones.TipoUsuario;
+
 @Entity
 @Table(name="PERSONAS")
 @Inheritance(strategy=InheritanceType.JOINED)
@@ -44,7 +46,7 @@ public class Persona implements Serializable {
 	private String direccion;
 	
 	@Column(name="Tipo_us",nullable=false,length=30)
-	private String tipoUsuario;
+	private TipoUsuario tipoUsuario;
 	
 	@Column(name="Email", unique=true,nullable=false,length=50)
 	private String email;
@@ -61,9 +63,8 @@ public class Persona implements Serializable {
 		super();
 	}
 
-	
 	public Persona(Long idPersona, String nombre, String apellido, Date fechaNacimiento, String telefono,
-			String direccion, String tipoUsuario, String email, String sexo, Ciudad ciudad) {
+			String direccion, TipoUsuario tipoUsuario, String email, String sexo, Ciudad ciudad) {
 		super();
 		this.idPersona = idPersona;
 		this.nombre = nombre;
@@ -78,13 +79,11 @@ public class Persona implements Serializable {
 	}
 
 
-
-
-
-
 	public Long getIdPersona() {
 		return idPersona;
 	}
+
+
 
 
 	public void setIdPersona(Long idPersona) {
@@ -92,9 +91,13 @@ public class Persona implements Serializable {
 	}
 
 
+
+
 	public String getNombre() {
 		return nombre;
 	}
+
+
 
 
 	public void setNombre(String nombre) {
@@ -102,9 +105,13 @@ public class Persona implements Serializable {
 	}
 
 
+
+
 	public String getApellido() {
 		return apellido;
 	}
+
+
 
 
 	public void setApellido(String apellido) {
@@ -112,9 +119,13 @@ public class Persona implements Serializable {
 	}
 
 
+
+
 	public Date getFechaNacimiento() {
 		return fechaNacimiento;
 	}
+
+
 
 
 	public void setFechaNacimiento(Date fechaNacimiento) {
@@ -122,9 +133,13 @@ public class Persona implements Serializable {
 	}
 
 
+
+
 	public String getTelefono() {
 		return telefono;
 	}
+
+
 
 
 	public void setTelefono(String telefono) {
@@ -132,55 +147,49 @@ public class Persona implements Serializable {
 	}
 
 
+
+
 	public String getDireccion() {
 		return direccion;
 	}
+
+
 
 
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
 
-
-	public String getTipoUsuario() {
+	public TipoUsuario getTipoUsuario() {
 		return tipoUsuario;
 	}
 
-
-	public void setTipoUsuario(String tipoUsuario) {
+	public void setTipoUsuario(TipoUsuario tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
-
-
 	public String getEmail() {
 		return email;
 	}
-
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-
 	public String getSexo() {
 		return sexo;
 	}
-
 
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
 
-
 	public Ciudad getCiudad() {
 		return ciudad;
 	}
 
-
 	public void setCiudad(Ciudad ciudad) {
 		this.ciudad = ciudad;
 	}
-
 
 	@Override
 	public int hashCode() {
