@@ -12,29 +12,54 @@
 			<p:panel id="paneldatosP" header="Datos Persona">
 
 				<h:panelGrid id="paneldatos" columns="2">
-
-					<h:outputLabel for="tftCedula" id="lblCedula"
-						value="#{msj['persona.cedula']}:"></h:outputLabel>
-					<h:inputText id="tftCedula" value="#{personaControler.idPersona}"></h:inputText>
-
-
-					<h:outputLabel for="tftNombre" id="lblNombre"
-						value="#{msj['persona.nombre']}:"></h:outputLabel>
-					<h:inputText id="tftNombre" value="#{personaControler.nombre}"></h:inputText>
-
-
-					<h:outputLabel for="tftApellido" id="lblApellido"
-						value="#{msj['persona.apellido']}:"></h:outputLabel>
-					<h:inputText id="tftApellido" value="#{personaControler.apellido}"></h:inputText>
-
-					<h:outputLabel for="tftfecha" id="lblFecha"
-						value="#{msj['persona.fecha']}:"></h:outputLabel>
-					<h:inputText type="date" name="cumpleanios" step="1"
-						min="2013-01-01" max="2013-12-31"></h:inputText>
-
 				
-
-
+				<h:outputLabel for="tftCedula" id="lblCedula"
+						value="#{msj['persona.cedula']}:"></h:outputLabel>
+					<h:inputText id="tftCedula"
+						value="#{personaControler.idPersona}"></h:inputText>
+						
+						
+						<h:outputLabel for="tftNombre" id="lblNombre"
+						value="#{msj['persona.nombre']}:"></h:outputLabel>
+					<h:inputText id="tftNombre"
+						value="#{personaControler.nombre}"></h:inputText>
+						
+						
+						<h:outputLabel for="tftApellido" id="lblApellido"
+						value="#{msj['persona.apellido']}:"></h:outputLabel>
+					<h:inputText id="tftApellido"
+						value="#{personaControler.apellido}"></h:inputText>
+						
+						<h:outputLabel for="tftfecha" id="lblFecha"
+						value="#{msj['persona.fecha']}:"></h:outputLabel>
+						<h:inputText  type="date" name="cumpleanios" step="1" min="2013-01-01" max="2013-12-31" ></h:inputText>
+						
+						<h:outputLabel for="tftTelefono" id="lblTelefono"
+						value="#{msj['persona.telefono']}:"></h:outputLabel>
+					<h:inputText id="tftTelefono"
+						value="#{personaControler.telefono}"></h:inputText>
+						
+						<h:outputLabel for="tftDireccion" id="lblDireccion"
+						value="#{msj['persona.direccion']}:"></h:outputLabel>
+					<h:inputText id="tftDireccion"
+						value="#{personaControler.direccion}"></h:inputText>
+						
+						<h:outputLabel for="tftTipoUs" id="lblTipoUs"
+						value="#{msj['persona.tipoUsuario']}:"></h:outputLabel>
+					<h:inputText id="tftTipoUs"
+						value="#{personaControler.tipoUsu}"></h:inputText>
+						
+						<h:outputLabel for="tftEmail" id="lblEmail"
+						value="#{msj['persona.email']}:"></h:outputLabel>
+					<h:inputText id="tftEmail"
+						value="#{personaControler.email}"></h:inputText>
+						
+						<h:outputLabel for="tftSexo" id="lblSexo"
+						value="#{msj['persona.sexo']}:"></h:outputLabel>
+					<h:inputText id="tftSexo"
+						value="#{personaControler.sexo}"></h:inputText>
+						
+						
 
 					<h:outputLabel for="tftCiudad" id="lblCiudad" value="Ciudad"></h:outputLabel>
 					<h:selectOneMenu id="tftCiudad" value="#{personaControler.ciudad}"
@@ -45,6 +70,22 @@
 
 				</h:panelGrid>
 			</p:panel>
+			
+				<br></br>
+			<h:panelGrid id="panelbtns" columns="2">
+
+				<p:commandButton id="btnCrear" value="#{msj['persona.crear']}"
+					action="#{personaControler.crearPersona}" class="btn"
+					 />
+				<p:commandButton id="btnBuscar" value="#{msj['persona.buscar']}"
+					action="#{personaControler.buscarPersona}" class="btn"
+					 />
+
+				<!--process="@this,tfCedula" update="paneldatos"  -->
+
+			</h:panelGrid>
+			
+			
 		</h:form>
 	</ui:define>
 

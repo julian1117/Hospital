@@ -49,6 +49,14 @@ public class PersonaControlador implements Serializable {
 	nombreCiudad = generalEJB.listarCiudad();
 	}
 	
+	public void crearPersona(){
+		
+	}
+	
+	public void buscarPersona(){
+		
+	}
+	
 	
 
 	public String getIdPersona() {
