@@ -14,21 +14,21 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="Ciudades")
+@Table(name="CIUDAD")
 @NamedQuery(name=Ciudad.LISTAR_CIUDAD,query="SELECT c FROM Ciudad c")
 public class Ciudad implements Serializable{
 	
 	public static final String LISTAR_CIUDAD= "Ciudad.listarCiudad";
 	
 	@Id
-	@Column(name="Id_Ciudad",nullable=false)
+	@Column(name="Id",nullable=false)
 	private Integer idCiuad;
 	
-	@Column(name="Ciudad",nullable=false,length=25)
+	@Column(name="Nombre",nullable=false,length=25)
 	private String nombre;
 	
 	@ManyToOne
-	@JoinColumn(name="Id_departamento",nullable=false)
+	@JoinColumn(name="DEPARTAMENTO_Id",nullable=false)
 	private Departamento departamento;
 
 	public Ciudad() {

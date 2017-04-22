@@ -10,14 +10,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Paises")
+@Table(name="PAIS")
 public class Pais implements Serializable{
 
 	@Id
-	@Column(name="id_Pais")
+	@Column(name="Id")
 	private Integer idPais;
 	
-	@Column(name="nombre_pais",nullable=false,length=25)
+	@Column(name="Nombre_p",nullable=false,length=25)
 	private String nombre;
 	
 	

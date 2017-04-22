@@ -12,11 +12,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Eps")
+@Table(name = "EPS")
 public class Eps implements Serializable {
 
 	@Id
-	@Column(name = "Id_Eps")
+	@Column(name = "Id")
 	private Integer idEps;
 
 	@Column(name = "Nombre", unique = true, nullable = false, length = 40)

@@ -8,11 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Tipos_Citas")
+@Table(name="TIPOS_CITAS")
 public class TipoCita implements Serializable {
 
 	@Id
-	@Column(name="Id_TipoCita",nullable=false)
+	@Column(name="Id",nullable=false)
 	private Integer idTipoCita;
 	
 	@Column(name="Nombre",unique= false,nullable=false,length=40)

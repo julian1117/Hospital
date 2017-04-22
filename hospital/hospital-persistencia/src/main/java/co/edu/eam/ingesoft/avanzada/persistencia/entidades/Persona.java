@@ -43,7 +43,7 @@ public class Persona implements Serializable {
 	@Column(name="Direccion",nullable=false,length=40)
 	private String direccion;
 	
-	@Column(name="Tipo_Usuario",nullable=false,length=30)
+	@Column(name="Tipo_us",nullable=false,length=30)
 	private String tipoUsuario;
 	
 	@Column(name="Email", unique=true,nullable=false,length=50)
@@ -54,7 +54,7 @@ public class Persona implements Serializable {
 	
 
 	@ManyToOne
-	@JoinColumn(name="Ciudad_Id",nullable=false)
+	@JoinColumn(name="CIUDAD_Id",nullable=false)
 	private Ciudad ciudad;
 
 	public Persona() {

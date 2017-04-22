@@ -10,14 +10,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Causas")
+@Table(name="CAUSAS")
 public class Causa implements Serializable {
 	
 	@Id
-	@Column(name="Id_Causa_Patologia",nullable=false)
+	@Column(name="Id",nullable=false)
 	private Integer idCausasPa;
 	
-	@Column(name="Nombre",nullable=false,length=40)
+	@Column(name="Nombre_causa",nullable=false,length=40)
 	private String nombre;
 
 	public Causa() {

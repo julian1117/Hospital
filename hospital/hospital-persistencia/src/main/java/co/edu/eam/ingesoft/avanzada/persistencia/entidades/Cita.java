@@ -10,30 +10,30 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Citas")
+@Table(name="CITAS")
 public class Cita implements Serializable{
 
 	@Id
-	@Column(name="id_Cita",nullable=false)
+	@Column(name="Id",nullable=false)
 	private Integer idCita;
 	
 	@ManyToOne
-	@JoinColumn(name="Agenda",nullable=false)
+	@JoinColumn(name="AGENDAS_Id",nullable=false)
 	private Agenda agenda;
 	
 	@ManyToOne
-	@JoinColumn(name="Tipo_Cita",nullable=false)
+	@JoinColumn(name="TIPOS_CITAS_Id",nullable=false)
 	private TipoCita tipoCita;
 	
 	@ManyToOne
-	@JoinColumn(name="cita",nullable=true)
+	@JoinColumn(name="CITAS_Id",nullable=true)
 	private Cita cita;
 	
 	@ManyToOne
-	@JoinColumn(name="Paciente",nullable=false)
+	@JoinColumn(name="PACIENTES_PERSONA_Id",nullable=false)
 	private Persona persona;
 	
-	@Column(name="Estado")
+	@Column(name="esteado")
 	private boolean estado;
 
 	public Cita() {

@@ -5,26 +5,29 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Inventarios")
+@Table(name="INVENTARIOS")
 public class Inventario implements Serializable {
 
 	@Id
-	@Column(name="Id_Inventario",nullable=false)
+	@Column(name="Id",nullable=false)
 	private Integer idInventario;
 	
-	@Column(name="Cantidad_Disponible",nullable=false)
+	@Column(name="Cantidad_disponible",nullable=false)
 	private Integer cantidadDisponible;
 	
-	@Column(name="Nombre_Medicamento",nullable=false,length=40)
+	@Column(name="Nombre_medicamento",nullable=false,length=40)
 	private String nombreMedicamento;
 	
-	@Column(name="Tipo_Medicamento",nullable=false)
+	@ManyToOne
+	@JoinColumn(name="TIPO_MEDICAMENTO_Id",nullable=false)
 	private TipoMedicamento tipoMedicamento;
 
-	@Column(name="Precio_medicamento")
+	@Column(name="precio")
 	private Double precioMedicamento;
 	
 	public Inventario(int idInventario, int cantidadDisponible, String nombreMedicamento,

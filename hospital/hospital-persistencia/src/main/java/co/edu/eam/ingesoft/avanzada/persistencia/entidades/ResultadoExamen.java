@@ -16,11 +16,11 @@ import javax.persistence.TemporalType;
 
 
 @Entity
-@Table(name="Resultados_Examenes")
+@Table(name="RESULTADOS_EXAMENES")
 public class ResultadoExamen implements Serializable{
 
 	@Id
-	@Column(name="Id_Resultado",nullable=false)
+	@Column(name="Id",nullable=false)
 	private Integer idResultado;
 	
 	@Column(name="Detalle",nullable=false,length=2000)
@@ -33,8 +33,8 @@ public class ResultadoExamen implements Serializable{
 	
 	@ManyToOne
 	@JoinColumns({
-		@JoinColumn(name="IdOrden_Procedimiento", referencedColumnName = "IdOrden_Procedimiento"),
-		@JoinColumn(name="Id_Procedimiento", referencedColumnName = "Id_Procedimiento")
+		@JoinColumn(name="ORDEN_MEDICINAS_Id", referencedColumnName = "MEDICINAS_Id"),
+		@JoinColumn(name="ORDEN_PROCE_Id", referencedColumnName = "PROCE_Id")
 	})
 	private OrdenProcedimiento ordenProce;
 	

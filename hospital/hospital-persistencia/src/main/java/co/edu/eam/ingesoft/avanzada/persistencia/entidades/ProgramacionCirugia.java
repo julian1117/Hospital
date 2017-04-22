@@ -14,22 +14,22 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Programaciones_Citas")
+@Table(name="PROGRAMACION_CIRUGIAS")
 public class ProgramacionCirugia implements Serializable{
 	
 	@Id
-	@Column(name="Id_Programacion_Cirugia",nullable=false)
+	@Column(name="Id",nullable=false)
 	private Integer idProgramacionCi;
 	
 	@ManyToOne
-	@JoinColumn(name="Id_Quirofano",nullable=false)
+	@JoinColumn(name="QUIROFANOS_Id",nullable=false)
 	private Quirofano idQuirofano;
 	
 	
 	@ManyToOne
 	@JoinColumns({
-		@JoinColumn(name="IdOrden_Procedimiento", referencedColumnName = "IdOrden_Procedimiento",nullable=false),
-		@JoinColumn(name="Id_Procedimiento", referencedColumnName = "Id_Procedimiento",nullable=false)
+		@JoinColumn(name="ORDEN_MEDICINAS_Id", referencedColumnName = "MEDICINAS_Id"),
+		@JoinColumn(name="ORDEN_PROCE_Id", referencedColumnName = "PROCE_Id")
 	})
 	private OrdenProcedimiento ordenProce;
 

@@ -14,40 +14,41 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="Agendas")
+@Table(name="AGENDAS")
 public class Agenda implements Serializable{
 	
 	@Id
-	@Column(name="Id_Agenda",nullable=false)
+	@Column(name="Id",nullable=false)
 	private Integer id;
 	
-	@Column(name="Hora_Inicio",nullable=false)
+	@Column(name="Hora_inicio",nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date horaInicio;
 	
-	@Column(name="Hora_Final",nullable=false)
+	@Column(name="Hora_final",nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date horaFinal;
 	
 	@ManyToOne
-	@JoinColumn(name="Medicos",nullable=false)
+	@JoinColumn(name="MEDICOS_PERSONAS_Id",nullable=false)
 	private Medico medico;
+	
+	@ManyToOne
+	@JoinColumn(name="CONSULTORIOS_id",nullable=false)
+	private Consultorio consultorio;
 	
 	public Agenda() {
 		super();
 	}
 
-	
-	
-	public Agenda(Integer id, Date horaInicio, Date horaFinal, Medico medico) {
+	public Agenda(Integer id, Date horaInicio, Date horaFinal, Medico medico, Consultorio consultorio) {
 		super();
 		this.id = id;
 		this.horaInicio = horaInicio;
 		this.horaFinal = horaFinal;
 		this.medico = medico;
+		this.consultorio = consultorio;
 	}
-
-
 
 	public Integer getId() {
 		return id;
@@ -80,6 +81,15 @@ public class Agenda implements Serializable{
 	public void setMedico(Medico medico) {
 		this.medico = medico;
 	}
+
+	public Consultorio getConsultorio() {
+		return consultorio;
+	}
+
+	public void setConsultorio(Consultorio consultorio) {
+		this.consultorio = consultorio;
+	}
+
 	
 	
 

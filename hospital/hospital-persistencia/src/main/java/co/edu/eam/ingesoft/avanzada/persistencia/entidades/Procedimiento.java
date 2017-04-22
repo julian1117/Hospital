@@ -10,12 +10,12 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Preocedimientos")
+@Table(name="PROCEDIMIENTOS")
 @Inheritance(strategy=InheritanceType.JOINED)
 public class Procedimiento implements Serializable{
 	
 	@Id
-	@Column(name="Id_Procedimiento",nullable=false)
+	@Column(name="Id",nullable=false)
 	private Integer idProcedimiento;	
 	
 	@Column(name="Tiempo",nullable=false,length=30)

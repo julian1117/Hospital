@@ -2,6 +2,7 @@ package co.edu.eam.ingesoft.avanzada.persistencia.entidades;
 
 import java.io.Serializable;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -12,20 +13,21 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="Cirugias")
+@Table(name="CIRUGIAS")
+@AttributeOverride(name="PROCEDIMIENTOS_Id_proce",column=@Column(name="PROCEDIMIENTOS_Id"))
 public class Cirugia extends Procedimiento implements Serializable {
 	
 	@Column(name="Tiempo_Porcedimiento",nullable=false)
 	private String tiempoProcedimiento;
 	
 	@ManyToOne
-	@JoinColumn(name="Tipo_Cirugia",nullable=false)
+	@JoinColumn(name="TIPO_CIRUGIAS_Id",nullable=false)
 	private TipoCirugia tipoCirugia;
 	
-	@Column(name="Descripcion_PacienteIni",nullable=false,length=2000)
+	@Column(name="Descripcion_pasiente_inicio",nullable=false,length=2000)
 	private String descripcionPacienteInicio;
 	
-	@Column(name="Descripcion_PacienteFinal",nullable=false,length=2000)
+	@Column(name="Descripcion_pasiente_final",nullable=false,length=2000)
 	private String descripcionPacienteFinal;
 
 	public Cirugia() {

@@ -6,25 +6,27 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 
 @Entity
-@Table(name="Usuario")
+@Table(name="USUARIOS")
 @NamedQuery(name=Usuario.USUARIO,query="SELECT u FROM Usuario u WHERE u.nombreUsuario=?1")
 public class Usuario implements Serializable{
 
 	public static final String USUARIO = "Usuario.listUs";
 	
 	@Id
-	@JoinColumn(name="Id_Persona")
+	@ManyToOne
+	@JoinColumn(name="PERSONAS_Id")	
 	private Persona idPersona;
 	
-	@Column(name="Nombre_Usuario")
+	@Column(name="nombre_usu")
 	private String nombreUsuario;
 	
-	@Column(name="Contrasenia")
+	@Column(name="contrasenia")
 	private String contrasenia;
 
 	public Usuario() {

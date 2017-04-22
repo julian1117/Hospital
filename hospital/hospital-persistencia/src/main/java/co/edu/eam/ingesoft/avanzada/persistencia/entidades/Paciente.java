@@ -12,12 +12,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Pacientes")
+@Table(name = "PACIENTES")
 @AttributeOverride(name="idPersona",column=@Column(name="PERSONA_Id"))
 public class Paciente extends Persona  implements Serializable {
 
 	@ManyToOne
-	@JoinColumn(name = "Eps", nullable = false)
+	@JoinColumn(name = "EPS_Id", nullable = false)
 	private Eps eps;
 
 	

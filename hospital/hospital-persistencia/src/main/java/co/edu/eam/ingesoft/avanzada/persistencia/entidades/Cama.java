@@ -11,11 +11,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Camas")
+@Table(name="CAMAS")
 public class Cama implements Serializable{
 
 	@Id
-	@Column(name="Id_Cama",nullable=false)
+	@Column(name="Id",nullable=false)
 	private Integer idCama;
 	
 	@Column(name="Disponibilidad",nullable=false)
@@ -23,7 +23,7 @@ public class Cama implements Serializable{
 	
 	
 	@OneToOne
-	@JoinColumn(name="Hospitalizacion",unique=true,nullable=false)
+	@JoinColumn(name="HOSPNES_PROCEDIMIENTOS_Id",unique=true,nullable=false)
 	private Hospitalizacion hospitalizacion;
 
 	public Cama() {

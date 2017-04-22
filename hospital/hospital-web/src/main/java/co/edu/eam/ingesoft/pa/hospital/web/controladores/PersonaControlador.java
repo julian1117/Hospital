@@ -46,7 +46,7 @@ public class PersonaControlador implements Serializable {
 	
 	@PostConstruct
 	public void inicializar(){
-//	nombreCiudad = generalEJB.listarCiudad();
+	nombreCiudad = generalEJB.listarCiudad();
 	}
 	
 	

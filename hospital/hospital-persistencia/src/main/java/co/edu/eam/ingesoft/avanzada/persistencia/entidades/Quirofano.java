@@ -18,19 +18,19 @@ public class Quirofano implements Serializable{
 	@Column(name="Id",nullable=false)
 	private Integer id;
 	
-	@Column(name="Detalle_Impemento",nullable=false,length=2000)
+	@Column(name="Detalle_implementos",nullable=false,length=2000)
 	private String detalleImplementos;
 	
-	@Column(name="Nombre_Quirofano",nullable=false,length=30)
+	@Column(name="Nombre_quirofano",nullable=false,length=30)
 	private String nombreQuirofano;
 	
 	@Column(name="Ocupado",nullable=false)
 	private boolean ocupado;
 	
-	@Column(name="Detalle_Ocupacion",nullable=false,length=2000)
+	@Column(name="Detalle_ocupacion",nullable=false,length=2000)
 	private String detalleOcupacion;
 	
-	@Column(name="Fecha_Ocupado",nullable=false)
+	@Column(name="Fecha_ocupado",nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date fechaOcupado;
 

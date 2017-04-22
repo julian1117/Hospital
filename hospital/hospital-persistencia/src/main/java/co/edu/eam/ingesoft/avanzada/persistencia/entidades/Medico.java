@@ -16,18 +16,27 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="Medicos")
-@AttributeOverride(name="idPersona",column=@Column(name="PERSONA_Id"))
+@Table(name="MEDICOS")
+@AttributeOverride(name="idPersona",column=@Column(name="PERSONAS_Id"))
 public class Medico  extends Persona implements Serializable{
 	
 	@ManyToOne
-	@JoinColumn(name="Especializaciones",nullable=true)
+	@JoinColumn(name="ESPECIALIZACIONES_Id",nullable=true)
 	private Especializacione especializaciones;
 	
 
 	public Medico() {
 		super();
 	}
+	
+	
+
+	public Medico(Especializacione especializaciones) {
+		super();
+		this.especializaciones = especializaciones;
+	}
+
+
 
 	public Especializacione getEspecializaciones() {
 		return especializaciones;

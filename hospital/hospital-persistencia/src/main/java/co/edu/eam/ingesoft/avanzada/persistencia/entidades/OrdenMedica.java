@@ -13,19 +13,19 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="Ordenes_Medicas")
+@Table(name="ORDENES_MEDICAS")
 public class OrdenMedica implements Serializable{
 
 	@Id
-	@Column(name="Id_Orden",nullable=false)
+	@Column(name="Id",nullable=false)
 	private Integer idOrden;
 	
 	
 	@ManyToOne
-	@JoinColumn(name="Cita",nullable=false)
+	@JoinColumn(name="CITAS_Id",nullable=false)
 	private Cita cita;
 	
-	@Column(name="Fecha",nullable=false)
+	@Column(name="FECHA",nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
 

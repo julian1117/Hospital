@@ -8,14 +8,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Tratamientos")
+@Table(name="TRATAMIENTOS")
 public class Tratamiento implements Serializable{
 	 
 	@Id
-	@Column(name="Id_Tratamiento",nullable=false)
+	@Column(name="Id",nullable=false)
 	private Integer idTratamiento; 
 	
-	@Column(name="Nombre_Patologia",nullable=false,length=40)
+	@Column(name="Nombre_patalogia",nullable=false,length=40)
 	private String nombrePatologia;
 
 	public Tratamiento() {

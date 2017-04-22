@@ -10,18 +10,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Diagnosticos")
+@Table(name="DIGNOSTICO")
 @IdClass(DiagnosticoPK.class)
 public class Diagnostico implements Serializable{
 	
 	@Id
 	@ManyToOne
-	@JoinColumn(name="Id_Cita",nullable=false)
+	@JoinColumn(name="CITAS_Id",nullable=false)
 	private Cita idCita;
 	
 	@Id
 	@ManyToOne
-	@JoinColumn(name="Patologia_Id",nullable=false)
+	@JoinColumn(name="PATOLOGIAS_Id",nullable=false)
 	private Patologia patologiaId;
 
 	public Diagnostico() {
