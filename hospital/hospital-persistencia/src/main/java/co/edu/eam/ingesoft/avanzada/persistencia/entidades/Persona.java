@@ -24,8 +24,8 @@ import org.hibernate.annotations.Generated;
 public class Persona implements Serializable {
 	
 	@Id
-	@Column(name="Id",nullable=false)
-	private Integer idPersona;
+	@Column(name="PERSONAS_ID",nullable=false)
+	private Long idPersona;
 	
 	@Column(name="Nombre",nullable=false,length=25)
 	private String nombre;
@@ -50,7 +50,7 @@ public class Persona implements Serializable {
 	private String email;
 	
 	@Column(name="Sexo",nullable=false,length=1)
-	private boolean sexo;
+	private String sexo;
 	
 
 	@ManyToOne
@@ -61,8 +61,9 @@ public class Persona implements Serializable {
 		super();
 	}
 
-	public Persona(Integer idPersona, String nombre, String apellido, Date fechaNacimiento, String telefono,
-			String direccion, String tipoUsuario, String email, boolean sexo, Ciudad ciudad) {
+	
+	public Persona(Long idPersona, String nombre, String apellido, Date fechaNacimiento, String telefono,
+			String direccion, String tipoUsuario, String email, String sexo, Ciudad ciudad) {
 		super();
 		this.idPersona = idPersona;
 		this.nombre = nombre;
@@ -76,84 +77,134 @@ public class Persona implements Serializable {
 		this.ciudad = ciudad;
 	}
 
-	public Integer getIdPersona() {
+
+
+
+
+
+	public Long getIdPersona() {
 		return idPersona;
 	}
 
-	public void setIdPersona(Integer idPersona) {
+
+	public void setIdPersona(Long idPersona) {
 		this.idPersona = idPersona;
 	}
+
 
 	public String getNombre() {
 		return nombre;
 	}
 
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
 
 	public String getApellido() {
 		return apellido;
 	}
 
+
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
+
 
 	public Date getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
+
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
+
 
 	public String getTelefono() {
 		return telefono;
 	}
 
+
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
+
 
 	public String getDireccion() {
 		return direccion;
 	}
 
+
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
+
 
 	public String getTipoUsuario() {
 		return tipoUsuario;
 	}
 
+
 	public void setTipoUsuario(String tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
+
 
 	public String getEmail() {
 		return email;
 	}
 
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	public boolean isSexo() {
+
+	public String getSexo() {
 		return sexo;
 	}
 
-	public void setSexo(boolean sexo) {
+
+	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
+
 
 	public Ciudad getCiudad() {
 		return ciudad;
 	}
 
+
 	public void setCiudad(Ciudad ciudad) {
 		this.ciudad = ciudad;
+	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((idPersona == null) ? 0 : idPersona.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Persona other = (Persona) obj;
+		if (idPersona == null) {
+			if (other.idPersona != null)
+				return false;
+		} else if (!idPersona.equals(other.idPersona))
+			return false;
+		return true;
 	}
 
 	

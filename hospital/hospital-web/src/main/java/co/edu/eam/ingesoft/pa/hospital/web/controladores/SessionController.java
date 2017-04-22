@@ -56,9 +56,8 @@ public class SessionController implements Serializable {
 	 */
 	public String login() {
 
-		Messages.addGlobalInfo("us: "+usuario +" cont:  " +contrasena);
+	
 		Usuario useBuscar = seguridadEjb.buscar(usuario);
-		Messages.addGlobalInfo(useBuscar.getNombreUsuario());
 
 		if (useBuscar != null) {
 			

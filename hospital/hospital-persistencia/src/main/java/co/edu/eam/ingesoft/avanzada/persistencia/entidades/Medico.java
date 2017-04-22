@@ -2,6 +2,7 @@ package co.edu.eam.ingesoft.avanzada.persistencia.entidades;
 
 import java.io.Serializable;
 
+import javax.persistence.AssociationOverride;
 import javax.persistence.AttributeOverride;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,7 +18,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="MEDICOS")
-@AttributeOverride(name="idPersona",column=@Column(name="PERSONAS_Id"))
+//@AssociationOverride(name="idPersona", joinColumns=@JoinColumn(name="PERSONAS_id"))
 public class Medico  extends Persona implements Serializable{
 	
 	@ManyToOne

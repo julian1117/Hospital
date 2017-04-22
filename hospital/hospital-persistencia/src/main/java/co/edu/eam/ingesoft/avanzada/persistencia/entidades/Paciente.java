@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "PACIENTES")
-@AttributeOverride(name="idPersona",column=@Column(name="PERSONA_Id"))
+//@AttributeOverride(name="idPersona",column=@Column(name="PERSONA_Id"))
 public class Paciente extends Persona  implements Serializable {
 
 	@ManyToOne
