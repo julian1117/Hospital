@@ -23,7 +23,7 @@ public class PersonaEJB {
 	 * @param persona persona que se va a crear
 	 */
 	public void crearPersona(Persona persona){
-		Persona buscar = buscarPersona(persona.getTipoUsuario());
+		Persona buscar = buscarPersona(persona.getIdPersona().toString());
 		
 		if(buscar == null){
 			em.persist(persona);
@@ -50,7 +50,7 @@ public class PersonaEJB {
 	 * @param persona persona la cual se eliminara
 	 */
 	public void eliminar(Persona persona){
-		persona = buscarPersona(persona.getTipoUsuario());
+		persona = buscarPersona(persona.getIdPersona().toString());
 		em.remove(persona);
 	}
 	
@@ -60,7 +60,7 @@ public class PersonaEJB {
 	 * modificaciones en el sistema
 	 */
 	public void editar(Persona persona){
-		persona = buscarPersona(persona.getTipoUsuario());
+		persona = buscarPersona(persona.getIdPersona().toString());
 		em.merge(persona);
 	}
 	
