@@ -19,7 +19,7 @@ import co.edu.eam.ingesoft.pa.negocio.beans.MedicoEJB;
 
 @Named(value = "medicoController")
 @ViewScoped
-public class MedicoControlador implements Serializable{
+public class CitaControlador implements Serializable{
 	
 	@Pattern(regexp="[0-9]*",message="Solo numeros")
 	@Length(min=1,max=10,message="Longitus de 1 a 10")
