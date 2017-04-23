@@ -7,12 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="CITAS")
+@NamedQuery(name=Cita.LISTA_CITAS_PACIENTE,query="SELECT c FROM Cita c WHERE c.persona.idPersona=?1")
 public class Cita implements Serializable{
 
+	public static final String LISTA_CITAS_PACIENTE = "Cita.listaCitaPaciente";
+	
 	@Id
 	@Column(name="Id",nullable=false)
 	private Integer idCita;
@@ -31,7 +35,7 @@ public class Cita implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="PACIENTES_PERSONA_Id",nullable=false)
-	private Persona persona;
+	private Paciente persona;
 	
 	@Column(name="esteado")
 	private boolean estado;
@@ -40,7 +44,7 @@ public class Cita implements Serializable{
 		super();
 	}
 
-	public Cita(Integer idCita, Agenda agenda, TipoCita tipoCita, Cita cita, Persona persona, boolean estado) {
+	public Cita(Integer idCita, Agenda agenda, TipoCita tipoCita, Cita cita, Paciente persona, boolean estado) {
 		super();
 		this.idCita = idCita;
 		this.agenda = agenda;
@@ -82,11 +86,11 @@ public class Cita implements Serializable{
 		this.cita = cita;
 	}
 
-	public Persona getPersona() {
+	public Paciente getPersona() {
 		return persona;
 	}
 
-	public void setPersona(Persona persona) {
+	public void setPersona(Paciente persona) {
 		this.persona = persona;
 	}
 
@@ -98,6 +102,7 @@ public class Cita implements Serializable{
 		this.estado = estado;
 	}
 
+	
 	
 	
 	

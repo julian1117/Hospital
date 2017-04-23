@@ -3,10 +3,96 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
-	
+
 	<ui:define name="cuerpo">
 		<h:form prependId="false">
-			
+			<p:panel id="datosPanelPrincipal" header="Gestion de Citas Medicas">
+
+
+				<p:panel header="Buscar Paciente">
+
+					<h:outputLabel for="tfCedula" id="lbCedula"
+						value="#{msj['cita.numeroId']}:" />
+					<h:inputText id="tfCedula"
+						value="#{medicoController.cedulaPaciente}" class="form-control" />
+					<p:message for="tfCedula" />
+					
+					<p:commandButton id="btnBuscarPaciente"
+						value="#{msj['cita.buscaPaciente']}:"
+						action="#{medicoController.buscarPaciente()}"
+						process="@this datosPanelPrincipal " update="panelTablas" />
+
+				</p:panel>
+
+
+				<h:panelGrid id="datosPanelB" columns="2">
+
+
+					<h:outputLabel for="cbDoctor" id="lbDoctor"
+						value="#{msj['cita.selctMedico']}:" />
+					<h:selectOneMenu id="cbDoctor" value="#{medicoController.medico}"
+						converter="MedicoConver" class="form-control">
+						<p align="right">
+							<f:selectItems value="#{medicoController.listaMedicos}" var="doc"
+								itemValue="#{doc}" itemLabel="#{doc.nombre}" />
+						</p>
+					</h:selectOneMenu>
+
+					<h:outputLabel for="cbTipoCita" id="lbTipoCita"
+						value="#{msj['cita.tipoCi']}:" />
+					<h:selectOneMenu id="cbTipoCita"
+						value="#{medicoController.tipoCita}" converter="MedicoConver"
+						class="form-control">
+						<p align="right">
+							<f:selectItems value="#{medicoController.listTipoCita}" var="doc"
+								itemValue="#{doc}" itemLabel="#{doc.nombre}" />
+						</p>
+					</h:selectOneMenu>
+
+				</h:panelGrid>
+
+				<h:panelGrid id="botonesPanel" columns="2">
+					<p:commandButton id="btnAsignarCita"
+						value="#{msj['cita.asigNar']}:"
+						action="#{medicoController.asignarCita}"
+						process="@this datosPanelPrincipal " update="panelTablas" />
+
+				</h:panelGrid>
+
+				<p:dataTable id="panelTablas"
+					value="#{medicoController.listaCita}" var="doc" border="1"
+					class="table table-striped">
+					<p:column headerText="Orden">
+						<h:outputLabel value="#{doc.idCita}" />
+					</p:column>
+					<p:column headerText="Nombre Paciente">
+						<h:outputLabel value="#{doc.persona.nombre}" />
+					</p:column>
+					<p:column headerText="Doctor">
+						<h:outputLabel value="#" />
+					</p:column>
+					<p:column headerText="Fecha de la cita">
+						<h:outputLabel value="#" />
+					</p:column>
+					<p:column headerText="Tipo de cita">
+						<h:outputLabel value="#" />
+					</p:column>
+					<p:column headerText="Consultroio">
+						<h:outputLabel value="#" />
+					</p:column>
+					<p:column headerText="Opciones">
+						<p:commandButton action="#"
+							styleClass="ui-priority-primary" process="@this "
+							value="Eliminar Cita" update="panelTablas" />
+					</p:column>
+				</p:dataTable>
+
+
+
+			</p:panel>
+
+
+
 		</h:form>
 	</ui:define>
 

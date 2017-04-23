@@ -8,26 +8,28 @@ import javax.faces.convert.FacesConverter;
 import javax.inject.Named;
 
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Medico;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoCita;
+import co.edu.eam.ingesoft.pa.negocio.beans.CitaEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.MedicoEJB;
 
-@FacesConverter(value="MedicoConver", forClass=Medico.class)
-@Named("MedicoConver")
-public class MedicoConvertidor implements Converter{
+@FacesConverter(value="tipoCitaConver", forClass=Medico.class)
+@Named("tipoCitaConver")
+public class TipoCitaConvertidor implements Converter{
 
 	@EJB
-	private MedicoEJB medicoEJB;
+	private CitaEJB citaEJB;
 	
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String value) {
 		if(value == null || value.trim().length()==0 || value.equals("Seleccion...")){
 			return null;
 		}
-		return medicoEJB.buscarMedico(Long.parseLong(value));
+		return citaEJB.buscarTipoDeCita(Integer.parseInt(value));
 	}
 
 	public String getAsString(FacesContext arg0, UIComponent arg1, Object value) {
 		if(value instanceof Medico){
-			Medico medico = (Medico) value;
-			return medico.getNombre() +" " +medico.getApellido();
+			TipoCita tp = (TipoCita) value;
+			return tp.getNombre() ;
 		}
 		return null;
 	}

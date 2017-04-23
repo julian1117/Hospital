@@ -7,10 +7,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.hibernate.loader.custom.Return;
-
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Medico;
-import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Usuario;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoCita;
 import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
 @Stateless
@@ -48,10 +46,18 @@ public class MedicoEJB {
 		return med;
 	}
 	
+	
+	
+	/**
+	 * Lista de medicos
+	 * @return
+	 */
 	public List<Medico> listaMedicos(){
 		List<Medico> medico = em.createNamedQuery(Medico.LISTA_MEDICOS).getResultList();		
 		return medico;
-
 	}
+	
+	
+	
 
 }
