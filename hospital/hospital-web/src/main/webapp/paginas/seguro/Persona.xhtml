@@ -73,12 +73,15 @@
 			<br></br>
 			<h:panelGrid id="panelbtns" columns="2">
 
-				<p:commandButton id="btnCrear" value="#{msj['persona.crear']}"
-					action="#{personaControler.crearPersona}" class="btn"
-					process="@this,paneldatos" update="paneldatos"
-					 />
+				<p:commandButton id="btnCrear" 
+				value="#{msj['persona.crear']}"
+				action="#{personaControler.crearPersona}"
+				process="@this paneldatosP"
+				update="paneldatosP"></p:commandButton>	
+					
+					
 				<p:commandButton id="btnBuscar" value="#{msj['persona.buscar']}"
-					action="#{personaControler.buscarPersona}" class="btn" />
+					action="#{personaControler.buscar}" class="btn" />
 
 				
 
