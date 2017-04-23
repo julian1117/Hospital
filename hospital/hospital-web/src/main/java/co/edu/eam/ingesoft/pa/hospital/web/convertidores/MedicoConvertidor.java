@@ -27,7 +27,7 @@ public class MedicoConvertidor implements Converter{
 	public String getAsString(FacesContext arg0, UIComponent arg1, Object value) {
 		if(value instanceof Medico){
 			Medico medico = (Medico) value;
-			return medico.getNombre() +" " +medico.getApellido();
+			return medico.getIdPersona()+"";
 		}
 		return null;
 	}

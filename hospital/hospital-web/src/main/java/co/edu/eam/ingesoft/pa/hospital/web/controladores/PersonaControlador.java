@@ -58,6 +58,26 @@ public class PersonaControlador implements Serializable {
 	}
 	
 	
+	public void crearPersona(){
+		Messages.addFlashGlobalInfo("Exito!! " +idPersona +nombre +apellido +telefono +direccion +tipoUsu +email +sexo +ciudad);
+
+//		try {
+//			Ciudad ciu = generalEJB.buscarCiudad(ciudad.getIdCiuad());
+//			
+//			Persona per = new Persona(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, tipoUsu, email, sexo, ciu);
+//			personaEJB.crearPersona(per);
+//			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		
+		
+	}
+	
+	
+	
+	
+	
 	
 	public TipoUsuario[] getTipoUsuarios(){
 		return TipoUsuario.values();
@@ -171,21 +191,7 @@ public class PersonaControlador implements Serializable {
 		this.personaEJB = personaEJB;
 	}
 	
-	public void crearPersona(){
-		Messages.addFlashGlobalInfo("Exito!!");
 
-		try {
-			Ciudad ciu = generalEJB.buscarCiudad(ciudad.getIdCiuad());
-			
-			Persona per = new Persona(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, tipoUsu, email, sexo, ciu);
-			personaEJB.crearPersona(per);
-			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		
-	}
 	
 	
 	

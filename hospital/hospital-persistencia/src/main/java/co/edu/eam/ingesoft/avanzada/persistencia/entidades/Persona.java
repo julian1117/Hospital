@@ -47,6 +47,7 @@ public class Persona implements Serializable {
 	@Column(name="Direccion",nullable=false,length=40)
 	private String direccion;
 	
+	@Enumerated(EnumType.STRING)
 	@Column(name="Tipo_us",nullable=false,length=30)
 	private TipoUsuario tipoUsuario;
 	

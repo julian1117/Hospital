@@ -45,9 +45,7 @@ public class MedicoEJB {
 		Medico med = em.find(Medico.class, id);
 		return med;
 	}
-	
-	
-	
+		
 	/**
 	 * Lista de medicos
 	 * @return

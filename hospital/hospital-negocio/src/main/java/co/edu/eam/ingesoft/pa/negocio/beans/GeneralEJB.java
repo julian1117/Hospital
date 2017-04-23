@@ -16,7 +16,7 @@ public class GeneralEJB {
 	@PersistenceContext
 	private EntityManager em;
 	
-	public Ciudad buscarCiudad(int ciudad){
+	public Ciudad buscarCiudad(Integer ciudad){
 		Ciudad ci = em.find(Ciudad.class, ciudad);
 		return ci;
 	}

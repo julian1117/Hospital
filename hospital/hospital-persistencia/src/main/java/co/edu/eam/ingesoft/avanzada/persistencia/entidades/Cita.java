@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="CITAS")
-@NamedQuery(name=Cita.LISTA_CITAS_PACIENTE,query="SELECT c FROM Cita c WHERE c.persona.idPersona=?1")
+@NamedQuery(name=Cita.LISTA_CITAS_PACIENTE,query="SELECT c FROM Cita c WHERE c.persona.idPersona=?1 AND c.estado=true")
 public class Cita implements Serializable{
 
 	public static final String LISTA_CITAS_PACIENTE = "Cita.listaCitaPaciente";

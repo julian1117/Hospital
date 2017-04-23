@@ -13,14 +13,14 @@
 
 					<h:outputLabel for="tfCedula" id="lbCedula"
 						value="#{msj['cita.numeroId']}:" />
-					<h:inputText id="tfCedula"
-						value="#{medicoController.cedulaPaciente}" class="form-control" />
+					<h:inputText id="tfCedula" value="#{citaController.cedulaPaciente}"
+						class="form-control" />
 					<p:message for="tfCedula" />
-					
+
 					<p:commandButton id="btnBuscarPaciente"
-						value="#{msj['cita.buscaPaciente']}:"
-						action="#{medicoController.buscarPaciente()}"
-						process="@this datosPanelPrincipal " update="panelTablas" />
+						value="#{msj['cita.buscaPaciente']}"
+						action="#{citaController.buscarPaciente()}"
+						process="@this tfCedula" update="panelTablas" />
 
 				</p:panel>
 
@@ -30,21 +30,20 @@
 
 					<h:outputLabel for="cbDoctor" id="lbDoctor"
 						value="#{msj['cita.selctMedico']}:" />
-					<h:selectOneMenu id="cbDoctor" value="#{medicoController.medico}"
+					<h:selectOneMenu id="cbDoctor" value="#{citaController.medico}"
 						converter="MedicoConver" class="form-control">
 						<p align="right">
-							<f:selectItems value="#{medicoController.listaMedicos}" var="doc"
-								itemValue="#{doc}" itemLabel="#{doc.nombre}" />
+							<f:selectItems value="#{citaController.listaMedicos}" var="doc"
+								itemValue="#{doc}" itemLabel="#{doc.nombre} #{doc.apellido}" />
 						</p>
 					</h:selectOneMenu>
 
 					<h:outputLabel for="cbTipoCita" id="lbTipoCita"
 						value="#{msj['cita.tipoCi']}:" />
-					<h:selectOneMenu id="cbTipoCita"
-						value="#{medicoController.tipoCita}" converter="MedicoConver"
-						class="form-control">
+					<h:selectOneMenu id="cbTipoCita" value="#{citaController.tipoCita}"
+						converter="MedicoConver" class="form-control">
 						<p align="right">
-							<f:selectItems value="#{medicoController.listTipoCita}" var="doc"
+							<f:selectItems value="#{citaController.listTipoCita}" var="doc"
 								itemValue="#{doc}" itemLabel="#{doc.nombre}" />
 						</p>
 					</h:selectOneMenu>
@@ -53,40 +52,42 @@
 
 				<h:panelGrid id="botonesPanel" columns="2">
 					<p:commandButton id="btnAsignarCita"
-						value="#{msj['cita.asigNar']}:"
-						action="#{medicoController.asignarCita}"
+						value="#{msj['cita.asigNar']}"
+						action="#{citaController.asignarCita}"
 						process="@this datosPanelPrincipal " update="panelTablas" />
 
 				</h:panelGrid>
-
-				<p:dataTable id="panelTablas"
-					value="#{medicoController.listaCita}" var="doc" border="1"
-					class="table table-striped">
-					<p:column headerText="Orden">
-						<h:outputLabel value="#{doc.idCita}" />
-					</p:column>
-					<p:column headerText="Nombre Paciente">
-						<h:outputLabel value="#{doc.persona.nombre}" />
-					</p:column>
-					<p:column headerText="Doctor">
-						<h:outputLabel value="#" />
-					</p:column>
-					<p:column headerText="Fecha de la cita">
-						<h:outputLabel value="#" />
-					</p:column>
-					<p:column headerText="Tipo de cita">
-						<h:outputLabel value="#" />
-					</p:column>
-					<p:column headerText="Consultroio">
-						<h:outputLabel value="#" />
-					</p:column>
-					<p:column headerText="Opciones">
-						<p:commandButton action="#"
-							styleClass="ui-priority-primary" process="@this "
-							value="Eliminar Cita" update="panelTablas" />
-					</p:column>
-				</p:dataTable>
-
+				<br />
+				<p:panel header="Citas pendientes del paciente" id="panelTabla">
+					<p:dataTable id="panelTablas" value="#{citaController.listaCita}"
+						var="doc" border="1" class="table table-striped">
+						<p:column headerText="Orden">
+							<h:outputLabel value="#{doc.idCita}" />
+						</p:column>
+						<p:column headerText="Nombre Paciente">
+							<h:outputLabel
+								value="#{doc.persona.nombre} #{doc.persona.apellido}" />
+						</p:column>
+						<p:column headerText="Doctor">
+							<h:outputLabel
+								value="#{doc.agenda.medico.nombre} #{doc.agenda.medico.apellido}" />
+						</p:column>
+						<p:column headerText="Fecha de la cita">
+							<h:outputLabel value="#{doc.agenda.horaInicio}" />
+						</p:column>
+						<p:column headerText="Tipo de cita">
+							<h:outputLabel value="#{doc.tipoCita.nombre}" />
+						</p:column>
+						<p:column headerText="Consultroio">
+							<h:outputLabel value="#{doc.agenda.consultorio.ubicacion}" />
+						</p:column>
+						<p:column headerText="Opciones">
+							<p:commandButton action="#{citaController.eliminarCita(doc)}"
+								styleClass="ui-priority-primary" process="@this "
+								value="Eliminar Cita" update="panelTablas" />
+						</p:column>
+					</p:dataTable>
+				</p:panel>
 
 
 			</p:panel>

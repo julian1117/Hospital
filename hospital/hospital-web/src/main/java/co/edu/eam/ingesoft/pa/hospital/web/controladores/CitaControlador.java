@@ -10,6 +10,7 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 import org.omnifaces.cdi.ViewScoped;
+import org.omnifaces.util.Messages;
 
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cita;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Medico;
@@ -17,50 +18,65 @@ import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoCita;
 import co.edu.eam.ingesoft.pa.negocio.beans.CitaEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.MedicoEJB;
 
-@Named(value = "medicoController")
+@Named(value = "citaController")
 @ViewScoped
-public class CitaControlador implements Serializable{
-	
-	@Pattern(regexp="[0-9]*",message="Solo numeros")
-	@Length(min=1,max=10,message="Longitus de 1 a 10")
+public class CitaControlador implements Serializable {
+
 	private Long cedulaPaciente;
-	
+
 	private Medico medico;
-	
+
 	private List<Medico> listaMedicos;
-	
+
 	private TipoCita tipoCita;
-	
+
 	private List<TipoCita> listTipoCita;
-	
+
 	private List<Cita> listaCita;
-	
-	
-
-
 
 	@EJB
 	private MedicoEJB medicoEJB;
-	
+
 	@EJB
 	private CitaEJB citaEJB;
-	
-	
+
 	@PostConstruct
-	public void inicializar(){
-		listaMedicos=medicoEJB.listaMedicos();
-		listTipoCita=citaEJB.listaTipoCita();
+	public void inicializar() {
+		listaMedicos = medicoEJB.listaMedicos();
+		listTipoCita = citaEJB.listaTipoCita();
 	}
-	
-	
-	public void buscarPaciente(){
-		listaCita= citaEJB.listCitaPaciente(cedulaPaciente);
+
+	/**
+	 * Busca todas las citas del apciente que esten como no atendidas
+	 */
+	public void buscarPaciente() {
+		listaCita = citaEJB.listCitaPaciente(cedulaPaciente);
+		Messages.addFlashGlobalInfo(medico.getNombre());
+		if(listaCita.isEmpty()){
+			Messages.addFlashGlobalError("El paciente no tiene citas regsitradas en el momento");
+		}
 	}
-	
-	
-	public void asignarCita(){
-		
+
+	/**
+	 * Registrar cita del paciente
+	 */
+	public void asignarCita() {
+
 	}
+
+	/**
+	 * Elimina cita del paciente
+	 * @param cita
+	 */
+	public void eliminarCita(Cita cita) {
+		try {
+			citaEJB.eliminarCitaPaciente(cita);
+			Messages.addFlashGlobalInfo("La cita fue eliminada con exito");
+		} catch (Exception e) {
+			Messages.addFlashGlobalError(e.getMessage());
+		}
+	}
+
 	
 	
 	public Medico getMedico() {
@@ -77,7 +93,7 @@ public class CitaControlador implements Serializable{
 
 	public void setListaMedicos(List<Medico> listaMedicos) {
 		this.listaMedicos = listaMedicos;
-	}	
+	}
 
 	public TipoCita getTipoCita() {
 		return tipoCita;
@@ -110,7 +126,5 @@ public class CitaControlador implements Serializable{
 	public void setListaCita(List<Cita> listaCita) {
 		this.listaCita = listaCita;
 	}
-	
-	
 
 }
