@@ -43,6 +43,8 @@ public class PersonaControlador implements Serializable {
 	
 	private List<Ciudad> nombreCiudad;
 	
+
+	
 		
 	@EJB
 	private GeneralEJB generalEJB;
@@ -55,19 +57,15 @@ public class PersonaControlador implements Serializable {
 	nombreCiudad = generalEJB.listarCiudad();
 	}
 	
-	public void crearPersona(){
-		
-		Persona per = new Persona(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, tipoUsu, email, sexo, ciudad);
-		personaEJB.crearPersona(per);
-		Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
-		
+	
+	
+	public TipoUsuario[] getTipoUsuarios(){
+		return TipoUsuario.values();
 	}
 	
 	public void buscarPersona(){
 		
 	}
-	
-	
 
 	public Long getIdPersona() {
 		return idPersona;
@@ -75,10 +73,6 @@ public class PersonaControlador implements Serializable {
 
 	public void setIdPersona(Long idPersona) {
 		this.idPersona = idPersona;
-	}
-
-	public void setTipoUsu(TipoUsuario tipoUsu) {
-		this.tipoUsu = tipoUsu;
 	}
 
 	public String getNombre() {
@@ -121,7 +115,13 @@ public class PersonaControlador implements Serializable {
 		this.direccion = direccion;
 	}
 
+	public TipoUsuario getTipoUsu() {
+		return tipoUsu;
+	}
 
+	public void setTipoUsu(TipoUsuario tipoUsu) {
+		this.tipoUsu = tipoUsu;
+	}
 
 	public String getEmail() {
 		return email;
@@ -155,14 +155,36 @@ public class PersonaControlador implements Serializable {
 		this.nombreCiudad = nombreCiudad;
 	}
 
-
-
 	public GeneralEJB getGeneralEJB() {
 		return generalEJB;
 	}
 
 	public void setGeneralEJB(GeneralEJB generalEJB) {
 		this.generalEJB = generalEJB;
+	}
+
+	public PersonaEJB getPersonaEJB() {
+		return personaEJB;
+	}
+
+	public void setPersonaEJB(PersonaEJB personaEJB) {
+		this.personaEJB = personaEJB;
+	}
+	
+	public void crearPersona(){
+		Messages.addFlashGlobalInfo("Exito!!");
+
+		try {
+			Ciudad ciu = generalEJB.buscarCiudad(ciudad.getIdCiuad());
+			
+			Persona per = new Persona(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, tipoUsu, email, sexo, ciu);
+			personaEJB.crearPersona(per);
+			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 	
