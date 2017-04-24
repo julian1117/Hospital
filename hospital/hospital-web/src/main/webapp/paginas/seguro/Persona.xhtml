@@ -56,7 +56,7 @@
 						value="#{msj['persona.sexo']}:"></h:outputLabel>
 					<h:inputText id="tftSexo" value="#{personaControler.sexo}"></h:inputText>
 
-					<h:outputLabel for="tftCiudad" id="lblCiudad" value="Ciudad"/>
+					<h:outputLabel for="tftCiudad" id="lblCiudad" value="Ciudad" />
 					<h:selectOneMenu id="tftCiudad" value="#{personaControler.ciudad}"
 						converter="ciudadConver" class="form-control">
 						<p align="right">
@@ -79,24 +79,6 @@
 					</h:panelGrid>
 				</h:panelGrid>
 			</p:panel>
-
-
-<<<<<<< HEAD
-=======
-				<p:commandButton id="btnCrear" 
-				value="#{msj['persona.crear']}"
-				action="#{personaControler.crearPersona}"
-				process="@this paneldatosP"
-				update="paneldatosP"></p:commandButton>	
-					
-					
-				<p:commandButton id="btnBuscar" value="#{msj['persona.buscar']}"
-					action="#{personaControler.buscar}" class="btn" />
-
-				
-
-			</h:panelGrid>
->>>>>>> branch 'master' of https://github.com/julian1117/Hospital.git
 
 
 		</h:form>

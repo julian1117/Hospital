@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import org.omnifaces.cdi.ViewScoped;
@@ -173,20 +175,60 @@ public class PersonaControlador implements Serializable {
 	
 	public void crearPersona(){
 		Messages.addFlashGlobalInfo("Exito!!");
-
-		try {
-			Ciudad ciu = generalEJB.buscarCiudad(ciudad.getIdCiuad());
-			
-			Persona per = new Persona(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, tipoUsu, email, sexo, ciu);
-			personaEJB.crearPersona(per);
-			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		 
+		 		try {
+		 			Ciudad ciu = generalEJB.buscarCiudad(ciudad.getIdCiuad());
+		 			
+		 			Persona per = new Persona(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, tipoUsu, email, sexo, ciu);
+		 			personaEJB.crearPersona(per);
+		 			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
+		 		} catch (Exception e) {
+		 			e.printStackTrace();
+		 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,e.getMessage(), null));
+		 		}
+		 		
+		 		idPersona=null;
+		 		nombre="";
+		 		apellido="";
+		 		fechaNacimiento=null;
+		 		telefono="";
+		 		tipoUsu=null;
+		 	email="";
+		 		sexo="";
+		 		ciudad=null;
 		
 		
 	}
 	
+	public void buscar(){
+		 		Persona persona = personaEJB.buscarPersona(idPersona);
+		 		if(persona != null){
+		 			nombre=persona.getNombre();
+		 			apellido= persona.getApellido();
+		 			fechaNacimiento=persona.getFechaNacimiento();
+		 			telefono=persona.getTelefono();
+		 			direccion=persona.getDireccion();
+		 			tipoUsu=persona.getTipoUsuario();
+		 			email=persona.getEmail();
+		 			sexo=persona.getSexo();
+		 			ciudad=null;
+		 		}
+		 	}
+		 	
+		 	
+		 	public void editar(){
+		 		Persona persona = personaEJB.buscarPersona(idPersona);
+		 		Ciudad ciu = generalEJB.buscarCiudad(ciudad.getIdCiuad());
+		 
+		 		if(persona != null){
+		 			Persona per = new Persona(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, tipoUsu, email, sexo, ciu);
+		 			personaEJB.editar(per);
+		 		}
+		 	}
+		 	
+		 	public void eliminar(Persona persona){
+		 		personaEJB.eliminar(persona);
+		 	}
 	
 	
 
