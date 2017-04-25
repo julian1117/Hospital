@@ -1,6 +1,7 @@
 package co.edu.eam.ingesoft.pa.hospital.web.controladores;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -45,6 +46,8 @@ public class PersonaControlador implements Serializable {
 	
 	private List<Ciudad> nombreCiudad;
 	
+	private String fechastr;
+	
 
 	
 		
@@ -61,6 +64,21 @@ public class PersonaControlador implements Serializable {
 	
 	
 	
+	
+	public String getFechastr() {
+		return fechastr;
+	}
+
+
+
+
+	public void setFechastr(String fechastr) {
+		this.fechastr = fechastr;
+	}
+
+
+
+
 	public TipoUsuario[] getTipoUsuarios(){
 		return TipoUsuario.values();
 	}
@@ -178,7 +196,7 @@ public class PersonaControlador implements Serializable {
 		 
 		 		try {
 		 			Ciudad ciu = generalEJB.buscarCiudad(ciudad.getIdCiuad());
-		 			
+		 			fechaNacimiento=new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
 		 			Persona per = new Persona(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, tipoUsu, email, sexo, ciu);
 		 			personaEJB.crearPersona(per);
 		 			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");

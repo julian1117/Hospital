@@ -27,10 +27,13 @@
 						value="#{msj['persona.apellido']}:"></h:outputLabel>
 					<h:inputText id="tftApellido" value="#{personaControler.apellido}"></h:inputText>
 
-					<h:outputLabel for="tftfecha" id="lblFecha"
-						value="#{msj['persona.fecha']}:"></h:outputLabel>
-					<h:inputText id="tftfecha" type="date" name="cumpleanios" step="1"
-						min="2013-01-01" max="2013-12-31"></h:inputText>
+
+					<p:outputLabel for="button" value="Button:" />
+					<p:calendar id="button" value="#{personaControler.fechaNacimiento}"
+						 mode="inline" />
+
+
+
 
 					<h:outputLabel for="tftTelefono" id="lblTelefono"
 						value="#{msj['persona.telefono']}:"></h:outputLabel>
