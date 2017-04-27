@@ -29,7 +29,7 @@
 
 
 					<p:outputLabel for="button" value="Button:" />
-					<p:calendar id="button" value="#{personaControler.fechaNacimiento}"
+					<h:inputText id="button" value="#{personaControler.fechastr}"
 						 mode="inline" />
 
 
@@ -62,18 +62,18 @@
 					<h:outputLabel for="tftCiudad" id="lblCiudad" value="Ciudad" />
 					<h:selectOneMenu id="tftCiudad" value="#{personaControler.ciudad}"
 						converter="ciudadConver" class="form-control">
-						<p align="right">
+						
 							<f:selectItems value="#{personaControler.nombreCiudad}" var="doc"
 								itemValue="#{doc}" itemLabel="#{doc.nombre}" />
-						</p>
+						
 					</h:selectOneMenu>
 
 
 					<br></br>
 					<h:panelGrid id="panelbtns" columns="2">
 						<p:commandButton id="btnCrear" value="#{msj['persona.crear']}"
-							action="#{personaControler.crearPersona}"
-							process="@this tftCedula tftNombre tftApellido tftTelefono tftDireccion tftDireccion tftEmail tftSexo" />
+							actionListener="#{personaControler.crearPersona()}"
+							process="@this paneldatos" />
 
 
 						<p:commandButton id="btnBuscar" value="#{msj['persona.buscar']}"

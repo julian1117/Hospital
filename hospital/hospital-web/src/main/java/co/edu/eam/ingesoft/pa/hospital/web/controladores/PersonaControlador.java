@@ -159,13 +159,20 @@ public class PersonaControlador implements Serializable {
 		this.sexo = sexo;
 	}
 
+	
 	public Ciudad getCiudad() {
 		return ciudad;
 	}
 
+
+
+
 	public void setCiudad(Ciudad ciudad) {
 		this.ciudad = ciudad;
 	}
+
+
+
 
 	public List<Ciudad> getNombreCiudad() {
 		return nombreCiudad;

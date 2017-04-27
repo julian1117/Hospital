@@ -65,6 +65,33 @@ public class Ciudad implements Serializable{
 	public void setDepartamento(Departamento departamento) {
 		this.departamento = departamento;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((idCiuad == null) ? 0 : idCiuad.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Ciudad other = (Ciudad) obj;
+		if (idCiuad == null) {
+			if (other.idCiuad != null)
+				return false;
+		} else if (!idCiuad.equals(other.idCiuad))
+			return false;
+		return true;
+	}
+	
+	
 	
 	
 

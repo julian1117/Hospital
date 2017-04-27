@@ -28,7 +28,7 @@ public class CiudadConvertidor implements Converter{
 		// TODO Auto-generated method stub
 		if(value instanceof Ciudad){
 			Ciudad ciu = (Ciudad) value;
-			return ciu.getNombre();
+			return String.valueOf(ciu.getIdCiuad());
 		}
 		return null;
 	}
