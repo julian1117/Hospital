@@ -50,8 +50,14 @@ public class PersonaEJB {
 	 * @param persona persona la cual se eliminara
 	 */
 	public void eliminar(Persona persona){
-		persona = buscarPersona(persona.getIdPersona());
-		em.remove(persona);
+		Persona p = buscarPersona(persona.getIdPersona());
+		if(p!=null){
+			em.remove(persona);
+		}else{
+			throw new ExcepcionNegocio("La persona no se encuentra en el sistema");
+
+		}
+		
 	}
 	
 	/**
@@ -60,7 +66,7 @@ public class PersonaEJB {
 	 * modificaciones en el sistema
 	 */
 	public void editar(Persona persona){
-		persona = buscarPersona(persona.getIdPersona());
+//		persona = buscarPersona(persona.getIdPersona());
 		em.merge(persona);
 	}
 	
