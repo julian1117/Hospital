@@ -46,8 +46,7 @@ public class CitaEJB {
 	 * @return
 	 */
 	public List<Cita> listCitaPaciente(Long cedula) {
-		List<Cita> citas = em.createNamedQuery(Cita.LISTA_CITAS_PACIENTE).setParameter(1, cedula).getResultList();
-		return citas;
+		return em.createNamedQuery(Cita.LISTA_CITAS_PACIENTE).setParameter(1, cedula).getResultList();	
 	}
 
 	/**

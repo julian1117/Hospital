@@ -51,8 +51,8 @@ public class MedicoEJB {
 	 * @return
 	 */
 	public List<Medico> listaMedicos(){
-		List<Medico> medico = em.createNamedQuery(Medico.LISTA_MEDICOS).getResultList();		
-		return medico;
+		return em.createNamedQuery(Medico.LISTA_MEDICOS).getResultList();		
+		 
 	}
 	
 	

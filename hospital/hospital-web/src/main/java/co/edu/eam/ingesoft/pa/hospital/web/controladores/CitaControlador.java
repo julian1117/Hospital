@@ -51,7 +51,7 @@ public class CitaControlador implements Serializable {
 	 */
 	public void buscarPaciente() {
 		listaCita = citaEJB.listCitaPaciente(cedulaPaciente);
-		Messages.addFlashGlobalInfo(medico.getNombre());
+		//Messages.addFlashGlobalInfo("Medico: " +medico.getNombre());
 		if(listaCita.isEmpty()){
 			Messages.addFlashGlobalError("El paciente no tiene citas regsitradas en el momento");
 		}

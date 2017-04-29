@@ -47,6 +47,32 @@ public class TipoCita implements Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((idTipoCita == null) ? 0 : idTipoCita.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TipoCita other = (TipoCita) obj;
+		if (idTipoCita == null) {
+			if (other.idTipoCita != null)
+				return false;
+		} else if (!idTipoCita.equals(other.idTipoCita))
+			return false;
+		return true;
+	}
+	
 	
 	
 }

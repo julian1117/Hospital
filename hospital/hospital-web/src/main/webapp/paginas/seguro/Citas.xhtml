@@ -19,8 +19,8 @@
 
 					<p:commandButton id="btnBuscarPaciente"
 						value="#{msj['cita.buscaPaciente']}"
-						action="#{citaController.buscarPaciente()}"
-						process="@this tfCedula" update="panelTablas" />
+						action="#{citaController.buscarPaciente}"
+						process="@this tfCedula panelTablas" update="panelTablas" />
 
 				</p:panel>
 
@@ -39,9 +39,9 @@
 					</h:selectOneMenu>
 
 					<h:outputLabel for="cbTipoCita" id="lbTipoCita"
-						value="#{msj['cita.tipoCi']}:" />
+						value="#{msj['cita.tipoCi']}" />
 					<h:selectOneMenu id="cbTipoCita" value="#{citaController.tipoCita}"
-						converter="MedicoConver" class="form-control">
+						converter="tipoCitaConver" class="form-control">
 						<p align="right">
 							<f:selectItems value="#{citaController.listTipoCita}" var="doc"
 								itemValue="#{doc}" itemLabel="#{doc.nombre}" />
@@ -58,7 +58,7 @@
 
 				</h:panelGrid>
 				<br />
-				<p:panel header="Citas pendientes del paciente" id="panelTabla">
+				<p:panel header="Citas pendientes del paciente" id="panelTab">
 					<p:dataTable id="panelTablas" value="#{citaController.listaCita}"
 						var="doc" border="1" class="table table-striped">
 						<p:column headerText="Orden">
@@ -98,3 +98,4 @@
 	</ui:define>
 
 </ui:composition>
+				

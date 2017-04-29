@@ -51,4 +51,6 @@ public class Medico  extends Persona implements Serializable{
 		this.especializaciones = especializaciones;
 	}
 	
+	
+	
 }

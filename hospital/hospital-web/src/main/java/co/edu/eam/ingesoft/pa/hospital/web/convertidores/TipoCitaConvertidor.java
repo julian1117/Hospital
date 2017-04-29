@@ -12,7 +12,7 @@ import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoCita;
 import co.edu.eam.ingesoft.pa.negocio.beans.CitaEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.MedicoEJB;
 
-@FacesConverter(value="tipoCitaConver", forClass=Medico.class)
+@FacesConverter(value="tipoCitaConver", forClass=TipoCita.class)
 @Named("tipoCitaConver")
 public class TipoCitaConvertidor implements Converter{
 
@@ -27,9 +27,9 @@ public class TipoCitaConvertidor implements Converter{
 	}
 
 	public String getAsString(FacesContext arg0, UIComponent arg1, Object value) {
-		if(value instanceof Medico){
+		if(value instanceof TipoCita){
 			TipoCita tp = (TipoCita) value;
-			return tp.getNombre() ;
+			return String.valueOf(tp.getIdTipoCita()) ;
 		}
 		return null;
 	}
