@@ -226,6 +226,7 @@ public class PersonaControlador implements Serializable {
 	}
 	
 	public void buscar(){
+		Messages.addFlashGlobalInfo("Exito!!");
 		 		Persona persona = personaEJB.buscarPersona(idPersona);
 		 		if(persona != null){
 		 			nombre=persona.getNombre();
@@ -236,23 +237,36 @@ public class PersonaControlador implements Serializable {
 		 			tipoUsu=persona.getTipoUsuario();
 		 			email=persona.getEmail();
 		 			sexo=persona.getSexo();
-		 			ciudad=null;
+		 			ciudad=persona.getCiudad();
 		 		}
 		 	}
 		 	
 		 	
 		 	public void editar(){
-		 		Persona persona = personaEJB.buscarPersona(idPersona);
-		 		Ciudad ciu = generalEJB.buscarCiudad(ciudad.getIdCiuad());
-		 
-		 		if(persona != null){
-		 			Persona per = new Persona(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, tipoUsu, email, sexo, ciu);
-		 			personaEJB.editar(per);
-		 		}
+		 		Messages.addFlashGlobalInfo("Exito!!");
+		 		try {
+		 			
+		 			Persona persona = personaEJB.buscarPersona(idPersona);
+			 		Ciudad ciu = generalEJB.buscarCiudad(ciudad.getIdCiuad());
+			 		fechaNacimiento=new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
+			 
+			 		if(persona != null){
+			 			Persona per = new Persona(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, tipoUsu, email, sexo, ciu);
+			 			personaEJB.editar(per);
+			 			Messages.addFlashGlobalInfo("Editado con exito!!");
+			 		}
+				} catch (Exception e) {
+					e.printStackTrace();
+		 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,e.getMessage(), null));
+		 		
+				}
+		 		
 		 	}
 		 	
-		 	public void eliminar(Persona persona){
-		 		personaEJB.eliminar(persona);
+		 	public void eliminar(){
+		 		Persona per = personaEJB.buscarPersona(idPersona);
+		 		personaEJB.eliminar(per);
+		 		Messages.addFlashGlobalInfo("eliminado con exito!!");
 		 	}
 	
 	
