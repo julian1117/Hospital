@@ -254,6 +254,16 @@ public class PersonaControlador implements Serializable {
 			 			Persona per = new Persona(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, tipoUsu, email, sexo, ciu);
 			 			personaEJB.editar(per);
 			 			Messages.addFlashGlobalInfo("Editado con exito!!");
+			 			
+			 			idPersona=null;
+				 		nombre="";
+				 		apellido="";
+				 		fechaNacimiento=null;
+				 		telefono="";
+				 		tipoUsu=null;
+				 	email="";
+				 		sexo="";
+				 		ciudad=null;
 			 		}
 				} catch (Exception e) {
 					e.printStackTrace();

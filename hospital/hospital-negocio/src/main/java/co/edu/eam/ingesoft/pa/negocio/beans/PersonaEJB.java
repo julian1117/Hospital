@@ -52,7 +52,7 @@ public class PersonaEJB {
 	public void eliminar(Persona persona){
 		Persona p = buscarPersona(persona.getIdPersona());
 		if(p!=null){
-			em.remove(persona);
+			em.remove(p);
 		}else{
 			throw new ExcepcionNegocio("La persona no se encuentra en el sistema");
 
