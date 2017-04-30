@@ -1,6 +1,9 @@
 package co.edu.eam.ingesoft.pa.hospital.web.controladores;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -33,6 +36,10 @@ public class CitaControlador implements Serializable {
 	private List<TipoCita> listTipoCita;
 
 	private List<Cita> listaCita;
+	
+	private String fecha;
+	
+	private Date fechaCita;
 
 	@EJB
 	private MedicoEJB medicoEJB;
@@ -59,9 +66,16 @@ public class CitaControlador implements Serializable {
 
 	/**
 	 * Registrar cita del paciente
+	 * @throws ParseException 
 	 */
 	public void asignarCita() {
-
+		try{
+		fechaCita=new SimpleDateFormat("dd-MM-yyyy").parse(fecha);
+		
+		
+		}catch (Exception e) {
+			Messages.addFlashGlobalError(e.getMessage());
+		}
 	}
 
 	/**
@@ -127,4 +141,19 @@ public class CitaControlador implements Serializable {
 		this.listaCita = listaCita;
 	}
 
+	public String getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
+
+	public Date getFechaCita() {
+		return fechaCita;
+	}
+
+	public void setFechaCita(Date fechaCita) {
+		this.fechaCita = fechaCita;
+	}
 }
