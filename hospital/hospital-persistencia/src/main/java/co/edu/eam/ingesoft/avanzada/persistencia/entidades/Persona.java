@@ -47,9 +47,9 @@ public class Persona implements Serializable {
 	@Column(name="Direccion",nullable=false,length=40)
 	private String direccion;
 	
-	@Enumerated(EnumType.STRING)
+//	@Enumerated(EnumType.STRING)
 	@Column(name="Tipo_us",nullable=false,length=30)
-	private TipoUsuario tipoUsuario;
+	private String tipoUsuario;
 	
 	@Column(name="Email", unique=true,nullable=false,length=50)
 	private String email;
@@ -67,7 +67,7 @@ public class Persona implements Serializable {
 	}
 
 	public Persona(Long idPersona, String nombre, String apellido, Date fechaNacimiento, String telefono,
-			String direccion, TipoUsuario tipoUsuario, String email, String sexo, Ciudad ciudad) {
+			String direccion, String tipoUsuario, String email, String sexo, Ciudad ciudad) {
 		super();
 		this.idPersona = idPersona;
 		this.nombre = nombre;
@@ -163,11 +163,11 @@ public class Persona implements Serializable {
 		this.direccion = direccion;
 	}
 
-	public TipoUsuario getTipoUsuario() {
+	public String getTipoUsuario() {
 		return tipoUsuario;
 	}
 
-	public void setTipoUsuario(TipoUsuario tipoUsuario) {
+	public void setTipoUsuario(String tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
 	public String getEmail() {

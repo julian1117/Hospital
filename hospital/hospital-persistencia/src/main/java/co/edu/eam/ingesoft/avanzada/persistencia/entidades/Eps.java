@@ -9,12 +9,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "EPS")
+@NamedQuery(name=Eps.LISTAR_EPS,query="SELECT e FROM Eps e")
 public class Eps implements Serializable {
 
+	public static final String LISTAR_EPS = "Eps.listar";
+	
 	@Id
 	@Column(name = "Id")
 	private Integer idEps;

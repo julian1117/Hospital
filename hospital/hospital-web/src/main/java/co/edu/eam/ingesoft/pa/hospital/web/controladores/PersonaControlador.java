@@ -15,6 +15,8 @@ import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Messages;
 
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Ciudad;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Eps;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Paciente;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Persona;
 import co.edu.eam.ingesoft.avanzada.persistencia.enumeraciones.TipoUsuario;
 import co.edu.eam.ingesoft.pa.negocio.beans.GeneralEJB;
@@ -36,7 +38,7 @@ public class PersonaControlador implements Serializable {
 	
 	private String direccion;
 	
-	private TipoUsuario tipoUsu;
+	private String tipoUsu;
 	
 	private String email;
 	
@@ -48,7 +50,9 @@ public class PersonaControlador implements Serializable {
 	
 	private String fechastr;
 	
-
+	private Eps eps;
+	
+	private List<Eps> listaEps;
 	
 		
 	@EJB
@@ -65,6 +69,34 @@ public class PersonaControlador implements Serializable {
 	
 	
 	
+	public Eps getEps() {
+		return eps;
+	}
+
+
+
+
+	public void setEps(Eps eps) {
+		this.eps = eps;
+	}
+
+
+
+
+	public List<Eps> getListaEps() {
+		return listaEps;
+	}
+
+
+
+
+	public void setListaEps(List<Eps> listaEps) {
+		this.listaEps = listaEps;
+	}
+
+
+
+
 	public String getFechastr() {
 		return fechastr;
 	}
@@ -79,10 +111,24 @@ public class PersonaControlador implements Serializable {
 
 
 
-	public TipoUsuario[] getTipoUsuarios(){
-		return TipoUsuario.values();
-	}
+//	public TipoUsuario[] getTipoUsuarios(){
+//		return TipoUsuario.values();
+//	}
 	
+	public String getTipoUsu() {
+		return tipoUsu;
+	}
+
+
+
+
+	public void setTipoUsu(String tipoUsu) {
+		this.tipoUsu = tipoUsu;
+	}
+
+
+
+
 	public void buscarPersona(){
 		
 	}
@@ -135,13 +181,13 @@ public class PersonaControlador implements Serializable {
 		this.direccion = direccion;
 	}
 
-	public TipoUsuario getTipoUsu() {
-		return tipoUsu;
-	}
-
-	public void setTipoUsu(TipoUsuario tipoUsu) {
-		this.tipoUsu = tipoUsu;
-	}
+//	public TipoUsuario getTipoUsu() {
+//		return tipoUsu;
+//	}
+//
+//	public void setTipoUsu(TipoUsuario tipoUsu) {
+//		this.tipoUsu = tipoUsu;
+//	}
 
 	public String getEmail() {
 		return email;
@@ -204,8 +250,11 @@ public class PersonaControlador implements Serializable {
 		 		try {
 		 			Ciudad ciu = generalEJB.buscarCiudad(ciudad.getIdCiuad());
 		 			fechaNacimiento=new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
-		 			Persona per = new Persona(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, tipoUsu, email, sexo, ciu);
+		 			Persona per = new Persona(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, "Paciente", email, sexo, ciu);
 		 			personaEJB.crearPersona(per);
+		 			Paciente pa = new Paciente(eps, per);
+//		 			hacer ejbpaciente
+		 			
 		 			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
 		 		} catch (Exception e) {
 		 			e.printStackTrace();
