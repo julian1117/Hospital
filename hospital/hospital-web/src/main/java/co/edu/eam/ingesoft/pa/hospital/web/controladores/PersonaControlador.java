@@ -69,15 +69,9 @@ public class PersonaControlador implements Serializable {
 		return fechastr;
 	}
 
-
-
-
 	public void setFechastr(String fechastr) {
 		this.fechastr = fechastr;
 	}
-
-
-
 
 	public TipoUsuario[] getTipoUsuarios(){
 		return TipoUsuario.values();
@@ -218,7 +212,7 @@ public class PersonaControlador implements Serializable {
 		 		fechaNacimiento=null;
 		 		telefono="";
 		 		tipoUsu=null;
-		 	email="";
+		 		email="";
 		 		sexo="";
 		 		ciudad=null;
 		

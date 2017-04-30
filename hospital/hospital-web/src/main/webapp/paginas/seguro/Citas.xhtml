@@ -38,6 +38,10 @@
 						</p>
 					</h:selectOneMenu>
 
+					<p:outputLabel for="tftFechaCita" value="Fecha" />
+					<h:inputText id="tftFechaCita"
+						value="#{citaController.fecha}" mode="inline" />
+
 					<h:outputLabel for="cbTipoCita" id="lbTipoCita"
 						value="#{msj['cita.tipoCi']}" />
 					<h:selectOneMenu id="cbTipoCita" value="#{citaController.tipoCita}"
@@ -51,8 +55,7 @@
 				</h:panelGrid>
 
 				<h:panelGrid id="botonesPanel" columns="2">
-					<p:commandButton id="btnAsignarCita"
-						value="#{msj['cita.asigNar']}"
+					<p:commandButton id="btnAsignarCita" value="#{msj['cita.asigNar']}"
 						action="#{citaController.asignarCita}"
 						process="@this datosPanelPrincipal " update="panelTablas" />
 
@@ -98,4 +101,4 @@
 	</ui:define>
 
 </ui:composition>
-				
+
