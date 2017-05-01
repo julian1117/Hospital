@@ -34,7 +34,7 @@ public class Agenda implements Serializable{
 	private Medico medico;
 	
 	@ManyToOne
-	@JoinColumn(name="CONSULTORIOS_id",nullable=false)
+	@JoinColumn(name="CONSULTORIOS_id")
 	private Consultorio consultorio;
 	
 	public Agenda() {

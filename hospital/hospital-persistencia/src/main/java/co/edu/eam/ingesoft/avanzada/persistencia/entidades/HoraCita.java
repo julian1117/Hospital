@@ -3,12 +3,16 @@ package co.edu.eam.ingesoft.avanzada.persistencia.entidades;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="HORAS_CITAS")
+@NamedQuery(name=HoraCita.LISTA_HORAS,query="SELECT h FROM HoraCita h")
 public class HoraCita {
 
+	public static final String LISTA_HORAS = "HorasCita.listaHoras";
+	
 	@Id
 	@Column(name="id")
 	private Integer id;

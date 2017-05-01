@@ -15,19 +15,31 @@ import org.hibernate.validator.constraints.Length;
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Messages;
 
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Agenda;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cita;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.HoraCita;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Medico;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Paciente;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoCita;
 import co.edu.eam.ingesoft.pa.negocio.beans.CitaEJB;
+import co.edu.eam.ingesoft.pa.negocio.beans.GeneralEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.MedicoEJB;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 @Named(value = "citaController")
 @ViewScoped
 public class CitaControlador implements Serializable {
 
-	private Long cedulaPaciente;
+	@Pattern(regexp="[0-9]*",message="Solo numeros")
+	@Length(min=8,max=10,message="Longitus de 8 a 10")
+	private String cedulaPaciente;
 
 	private Medico medico;
+
+	private HoraCita horaCita;
 
 	private List<Medico> listaMedicos;
 
@@ -36,9 +48,11 @@ public class CitaControlador implements Serializable {
 	private List<TipoCita> listTipoCita;
 
 	private List<Cita> listaCita;
-	
+
+	private List<HoraCita> listaHorasAgenda;
+
 	private String fecha;
-	
+
 	private Date fechaCita;
 
 	@EJB
@@ -47,52 +61,76 @@ public class CitaControlador implements Serializable {
 	@EJB
 	private CitaEJB citaEJB;
 
+	@EJB
+	private GeneralEJB generalEJB;
+
 	@PostConstruct
 	public void inicializar() {
 		listaMedicos = medicoEJB.listaMedicos();
 		listTipoCita = citaEJB.listaTipoCita();
+		listaHorasAgenda = generalEJB.listaHora();
 	}
 
 	/**
 	 * Busca todas las citas del apciente que esten como no atendidas
 	 */
 	public void buscarPaciente() {
-		listaCita = citaEJB.listCitaPaciente(cedulaPaciente);
-		//Messages.addFlashGlobalInfo("Medico: " +medico.getNombre());
-		if(listaCita.isEmpty()){
+		listaCita = citaEJB.listCitaPaciente(Long.parseLong(cedulaPaciente));
+		if (listaCita.isEmpty()) {
 			Messages.addFlashGlobalError("El paciente no tiene citas regsitradas en el momento");
 		}
 	}
 
 	/**
 	 * Registrar cita del paciente
-	 * @throws ParseException 
+	 * 
+	 * @throws ParseException
 	 */
 	public void asignarCita() {
-		try{
-		fechaCita=new SimpleDateFormat("dd-MM-yyyy").parse(fecha);
-		
-		
-		}catch (Exception e) {
+		try {
+			fechaCita = new SimpleDateFormat("dd-MM-yyyy").parse(fecha);
+			
+			Paciente paciente = citaEJB.buscarPaciente(Long.parseLong(cedulaPaciente));
+			
+			Agenda agenda = new Agenda();
+			agenda.setId(4);
+			agenda.setMedico(medico);
+			agenda.setFechaCita(fechaCita);
+			agenda.setConsultorio(null);
+			agenda.setHora(horaCita);
+			
+			Cita cita = new Cita();
+			cita.setIdCita(5);
+			cita.setPersona(paciente);
+			cita.setTipoCita(tipoCita);
+			cita.setAgenda(agenda);
+			
+			citaEJB.crearCita(agenda,cita);
+			listaCita = citaEJB.listCitaPaciente(Long.parseLong(cedulaPaciente));
+
+			Messages.addFlashGlobalInfo("Se agendo la cita con exito");
+			
+		} catch (Exception e) {
 			Messages.addFlashGlobalError(e.getMessage());
 		}
 	}
 
 	/**
 	 * Elimina cita del paciente
+	 * 
 	 * @param cita
 	 */
 	public void eliminarCita(Cita cita) {
 		try {
 			citaEJB.eliminarCitaPaciente(cita);
+			listaCita = citaEJB.listCitaPaciente(Long.parseLong(cedulaPaciente));
+
 			Messages.addFlashGlobalInfo("La cita fue eliminada con exito");
 		} catch (Exception e) {
 			Messages.addFlashGlobalError(e.getMessage());
 		}
 	}
 
-	
-	
 	public Medico getMedico() {
 		return medico;
 	}
@@ -125,11 +163,11 @@ public class CitaControlador implements Serializable {
 		this.listTipoCita = listTipoCita;
 	}
 
-	public Long getCedulaPaciente() {
+	public String getCedulaPaciente() {
 		return cedulaPaciente;
 	}
 
-	public void setCedulaPaciente(Long cedulaPaciente) {
+	public void setCedulaPaciente(String cedulaPaciente) {
 		this.cedulaPaciente = cedulaPaciente;
 	}
 
@@ -156,4 +194,21 @@ public class CitaControlador implements Serializable {
 	public void setFechaCita(Date fechaCita) {
 		this.fechaCita = fechaCita;
 	}
+
+	public HoraCita getHoraCita() {
+		return horaCita;
+	}
+
+	public void setHoraCita(HoraCita horaCita) {
+		this.horaCita = horaCita;
+	}
+
+	public List<HoraCita> getListaHorasAgenda() {
+		return listaHorasAgenda;
+	}
+
+	public void setListaHorasAgenda(List<HoraCita> listaHorasAgenda) {
+		this.listaHorasAgenda = listaHorasAgenda;
+	}
+
 }

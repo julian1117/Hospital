@@ -7,7 +7,9 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Agenda;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cita;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Paciente;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoCita;
 import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
@@ -17,6 +19,34 @@ public class CitaEJB {
 
 	@PersistenceContext
 	private EntityManager em;
+
+	/**
+	 * 
+	 */
+	public void crearCita(Agenda agenda,Cita cita) {
+		Cita citaB = buscarCita(cita.getIdCita());
+		if (citaB == null) {
+			em.persist(agenda);
+			em.persist(cita);
+		} else {
+			throw new ExcepcionNegocio("La cita ya existe");
+		}
+	}
+
+	public Cita buscarCita(Integer id) {
+		return em.find(Cita.class, id);
+	}
+
+	/**
+	 * Buscar paciente por cedula
+	 * 
+	 * @param cedula
+	 *            del paciente
+	 * @return obeto paciente
+	 */
+	public Paciente buscarPaciente(Long cedula) {
+		return em.find(Paciente.class, cedula);
+	}
 
 	/**
 	 * Permite buscar tipos de cita par aun paciente
@@ -46,7 +76,7 @@ public class CitaEJB {
 	 * @return
 	 */
 	public List<Cita> listCitaPaciente(Long cedula) {
-		return em.createNamedQuery(Cita.LISTA_CITAS_PACIENTE).setParameter(1, cedula).getResultList();	
+		return em.createNamedQuery(Cita.LISTA_CITAS_PACIENTE).setParameter(1, cedula).getResultList();
 	}
 
 	/**
@@ -59,10 +89,16 @@ public class CitaEJB {
 		return em.find(Cita.class, codigoCita);
 	}
 
+	public Agenda buscarAgenda(Integer id){
+		return em.find(Agenda.class, id);
+	}
+	
 	public void eliminarCitaPaciente(Cita codigoCita) {
 		try {
-			Cita citaEliminar = buscarCitaPaciente(codigoCita.getIdCita());			
+			Cita citaEliminar = buscarCitaPaciente(codigoCita.getIdCita());
 			em.remove(citaEliminar);
+			Agenda elimanrAgenda = buscarAgenda(citaEliminar.getAgenda().getId());
+			em.remove(elimanrAgenda);
 		} catch (ExcepcionNegocio e) {
 			throw new ExcepcionNegocio("No fue posible eliminar la cita");
 		}
