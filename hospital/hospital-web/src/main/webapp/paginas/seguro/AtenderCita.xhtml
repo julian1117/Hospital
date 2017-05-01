@@ -1,0 +1,106 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+
+	<ui:define name="cuerpo">
+		<h:form prependId="false">
+
+			<p:growl id="growl" showDetail="true" sticky="true" />
+			<p:panel id="datosPanelPrincipal" header="Registro de la Cita Medica">
+
+				<p:accordionPanel>
+					<p:tab title="Buscar Paciente">
+						<p:panelGrid columns="4">
+
+							<h:outputLabel for="tfCedula" id="lbCedula"
+								value="#{msj['cita.numeroId']}:" />
+							<h:inputText id="tfCedula"
+								value="#{atenderCitaController.cedulaPaciente}"
+								class="form-control" />
+							<p:message for="tfCedula" />
+
+							<p:commandButton id="btnBuscarPaciente"
+								value="#{msj['cita.buscaPaciente']}"
+								action="#{atenderCitaController.buscarPaciente}"
+								process="@this tfCedula" update="cbCitas growl"
+								icon="ui-icon-search" />
+
+						</p:panelGrid>
+
+						<h:outputLabel for="cbCitas" id="lbCitas"
+							value="#{msj['cita.lisCitas']}:" />
+						<h:selectOneMenu id="cbCitas"
+							value="#{atenderCitaController.cita}" converter="citaConver">
+							<f:selectItems value="#{atenderCitaController.listaCita}"
+								var="doc" itemValue="#{doc}" itemLabel="#{doc.idCita}" />
+						</h:selectOneMenu>
+
+
+
+					</p:tab>
+				</p:accordionPanel>
+
+				<p:accordionPanel>
+					<p:tab title="Diagnostico">
+						<p:panelGrid columns="2">
+
+							<p:panel>
+								 <h:outputLabel for="cbPatologia" id="lbPatologia"
+									value="#{msj['clieAt.patologia']}" />
+								<h:selectOneMenu id="cbPatologia"
+									value="#{atenderCitaController.patologia}"
+									converter="patologiaConver">
+									<f:selectItems value="#{atenderCitaController.listaPatolgia}"
+										var="doc" itemValue="#{doc}" itemLabel="#{doc.nombre}" />
+								</h:selectOneMenu>
+								 
+
+								<h:outputLabel for="descripcionPatoligia"
+									id="lbdescripcionPatoligia"
+									value="#{msj['clieAt.descripcionPatoligia']}" />
+								<p:inputTextarea rows="10" cols="100" completeMethod="#"
+									queryDelay="750" minQueryLength="4" />
+
+							</p:panel>
+
+							<p:panel>
+								<h:outputLabel for="cbSintomas" id="lbSintomas"
+									value="#{msj['clieAt.sintoma']}" />
+								<h:selectOneMenu id="cbSintomas"
+									value="#{atenderCitaController.sintoma}"
+									converter="sintomaConver">
+									<f:selectItems value="#{atenderCitaController.listaSintomas}"
+										var="doc" itemValue="#{doc}" itemLabel="#{doc.nombreSintoma}" />
+								</h:selectOneMenu>
+								
+								<h:outputLabel for="cbCausas" id="lbCausas"
+									value="#{msj['clieAt.causa']}" />
+								<h:selectOneMenu id="cbCausas"
+									value="#{atenderCitaController.causa}"
+									converter="causaConver">
+									<f:selectItems value="#{atenderCitaController.listaCausas}"
+										var="doc" itemValue="#{doc}" itemLabel="#{doc.nombre}" />
+								</h:selectOneMenu>
+								
+								<h:outputLabel for="cbTratamiento" id="lbTratamiento"
+									value="#{msj['clieAt.tratamiento']}" />
+								<h:selectOneMenu id="cbTratamiento"
+									value="#{atenderCitaController.tratamiento}"
+									converter="tratamientoConver">
+									<f:selectItems value="#{atenderCitaController.listaTratamiento}"
+										var="doc" itemValue="#{doc}" itemLabel="#{doc.nombrePatologia}" />
+								</h:selectOneMenu>
+								
+							</p:panel>
+
+						</p:panelGrid>
+					</p:tab>
+				</p:accordionPanel>
+
+			</p:panel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

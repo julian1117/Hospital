@@ -7,9 +7,13 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Causa;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Ciudad;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Eps;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.HoraCita;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Patologia;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Sintoma;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Tratamiento;
 
 @Stateless
 @LocalBean
@@ -63,4 +67,74 @@ public class GeneralEJB {
 		return em.find(HoraCita.class, id);
 	}
 	
+	/**
+	 * Busca un objeto patologia
+	 * @param id por el que se busca
+	 * @return objeto patologia
+	 */
+	public Patologia buscarPatologia (Integer id){
+		return em.find(Patologia.class, id);
+	}
+	
+	/**
+	 * Lista de patologias
+	 * @return lista de patologias
+	 */
+	public List<Patologia> listaPatologia (){
+		return em.createNamedQuery(Patologia.LISTA_PATOLOGIA).getResultList();
+	}
+	
+	public List<HoraCita> listaHora(){
+		return em.createNamedQuery(HoraCita.LISTA_HORAS).getResultList();
+	}
+	
+	/**
+	 * Buscar una causa 
+	 * @param id por el que se busca
+	 * @return objeto cuasa
+	 */
+	public Causa buscarCausa(Integer id){
+		return em.find(Causa.class, id);
+	}
+	
+	/**
+	 * Lista de causas
+	 * @return lista de causas
+	 */
+	public List<Causa> listaCausa(){
+		return em.createNamedQuery(Causa.LISTA_CAUSAS).getResultList();
+	}
+	
+	/**
+	 * Busca un sintoma
+	 * @return objeto sintoma
+	 */
+	public Sintoma buscarSintoma(Integer id){
+		return em.find(Sintoma.class, id);
+	}
+	
+	/**
+	 * lista de sintomas
+	 * @return
+	 */
+	public List<Sintoma> listaSintoma(){
+		return em.createNamedQuery(Sintoma.LISTA_SINTOMAS).getResultList();
+	}
+	
+	/**
+	 * Busca un tratamiento por id
+	 * @param id del tratamiento
+	 * @return objeto tratamiento
+	 */
+	public Tratamiento buscarTratamiento(Integer id){
+		return em.find(Tratamiento.class, id);
+	}
+	
+	/**
+	 * Lista de tratamientos
+	 * @return lista de tratamientos
+	 */
+	public List<Tratamiento> listaTratamiento(){
+		return em.createNamedQuery(Tratamiento.LISTA_TRATAMIENTO).getResultList();
+	}
 }

@@ -7,12 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="PATOLOGIAS_TRATAMIENTOS")
+@NamedQuery(name=Patologia.LISTA_PATOLOGIA,query="SELECT p FROM Patologia p")
 public class Patologia implements Serializable{
 	 
+	public static final String LISTA_PATOLOGIA = "Patologia.listaPato";
+	
 	@Id
 	@Column(name="Id",nullable=false)
 	private Integer idPatologia;
@@ -75,7 +79,32 @@ public class Patologia implements Serializable{
 	}
 
 
-	
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((idPatologia == null) ? 0 : idPatologia.hashCode());
+		return result;
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Patologia other = (Patologia) obj;
+		if (idPatologia == null) {
+			if (other.idPatologia != null)
+				return false;
+		} else if (!idPatologia.equals(other.idPatologia))
+			return false;
+		return true;
+	}
 	
 }

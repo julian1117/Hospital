@@ -102,6 +102,31 @@ public class Cita implements Serializable{
 		this.estado = estado;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((idCita == null) ? 0 : idCita.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cita other = (Cita) obj;
+		if (idCita == null) {
+			if (other.idCita != null)
+				return false;
+		} else if (!idCita.equals(other.idCita))
+			return false;
+		return true;
+	}
+
 	
 	
 	
