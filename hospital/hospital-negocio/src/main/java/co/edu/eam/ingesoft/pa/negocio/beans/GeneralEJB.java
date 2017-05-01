@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Causa;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Ciudad;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Eps;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Especializacione;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.HoraCita;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Patologia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Sintoma;
@@ -136,5 +137,22 @@ public class GeneralEJB {
 	 */
 	public List<Tratamiento> listaTratamiento(){
 		return em.createNamedQuery(Tratamiento.LISTA_TRATAMIENTO).getResultList();
+	}
+	
+	/**
+	 * busca las espacializaciones qie hay en el sistema
+	 * @param id de la especializacion a buscar
+	 * @return
+	 */
+	public Especializacione buscarEspecializacione(Integer id){
+		return em.find(Especializacione.class, id);
+	}
+	
+	/**
+	 * lista las esoecializaciones encontradas en el sistema 
+	 * @return las especializaciones encontradas
+	 */
+	public List<Especializacione> listarEspecializacione(){
+		return em.createNamedQuery(Especializacione.LISTAR_CIUDAD).getResultList();
 	}
 }
