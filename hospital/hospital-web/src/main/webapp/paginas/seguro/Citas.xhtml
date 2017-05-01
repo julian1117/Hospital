@@ -6,60 +6,81 @@
 
 	<ui:define name="cuerpo">
 		<h:form prependId="false">
+			<p:growl id="growl" showDetail="true" sticky="true" />
 			<p:panel id="datosPanelPrincipal" header="Gestion de Citas Medicas">
 
 
-				<p:panel header="Buscar Paciente">
 
-					<h:outputLabel for="tfCedula" id="lbCedula"
-						value="#{msj['cita.numeroId']}:" />
-					<h:inputText id="tfCedula" value="#{citaController.cedulaPaciente}"
-						class="form-control" />
-					<p:message for="tfCedula" />
+				<p:accordionPanel>
+					<p:tab title="Buscar Paciente">
+						<h:outputLabel for="tfCedula" id="lbCedula"
+							value="#{msj['cita.numeroId']}:" />
+						<h:inputText id="tfCedula"
+							value="#{citaController.cedulaPaciente}" class="form-control"
+							required="true" />
+						<p:message for="tfCedula" />
 
-					<p:commandButton id="btnBuscarPaciente"
-						value="#{msj['cita.buscaPaciente']}"
-						action="#{citaController.buscarPaciente}"
-						process="@this tfCedula panelTablas" update="panelTablas" />
+						<p:commandButton id="btnBuscarPaciente"
+							value="#{msj['cita.buscaPaciente']}"
+							action="#{citaController.buscarPaciente}"
+							process="@this tfCedula panelTablas" update="panelTablas growl"
+							icon="ui-icon-search" />
 
-				</p:panel>
+					</p:tab>
+				</p:accordionPanel>
 
+				
+				<p:accordionPanel>
+					<p:tab title="Asignacion de cita" id="panelTabB">
+					<h:panelGrid id="datosPanelB" columns="2">
+						<h:outputLabel for="cbDoctor" id="lbDoctor"
+							value="#{msj['cita.selctMedico']}:" />
+						<h:selectOneMenu id="cbDoctor" value="#{citaController.medico}"
+							converter="MedicoConver" class="form-control">
+							<p align="right">
+								<f:selectItems value="#{citaController.listaMedicos}" var="doc"
+									itemValue="#{doc}" itemLabel="#{doc.nombre} #{doc.apellido}" />
+							</p>
+						</h:selectOneMenu>
 
-				<h:panelGrid id="datosPanelB" columns="2">
+						<p:outputLabel for="tftFechaCita" value="Fecha" />
+						<h:inputText id="tftFechaCita" value="#{citaController.fecha}"
+							mode="inline" />
 
+						<h:outputLabel for="cbHora" id="lbHoraCita"
+							value="#{msj['cita.horaC']}" />
+						<h:selectOneMenu id="cbHora" value="#{citaController.horaCita}"
+							converter="horasConverter" class="form-control">
+							<p align="right">
+								<f:selectItems value="#{citaController.listaHorasAgenda}"
+									var="doc" itemValue="#{doc}" itemLabel="#{doc.hora}" />
+							</p>
+						</h:selectOneMenu>
 
-					<h:outputLabel for="cbDoctor" id="lbDoctor"
-						value="#{msj['cita.selctMedico']}:" />
-					<h:selectOneMenu id="cbDoctor" value="#{citaController.medico}"
-						converter="MedicoConver" class="form-control">
-						<p align="right">
-							<f:selectItems value="#{citaController.listaMedicos}" var="doc"
-								itemValue="#{doc}" itemLabel="#{doc.nombre} #{doc.apellido}" />
-						</p>
-					</h:selectOneMenu>
+						<h:outputLabel for="cbTipoCita" id="lbTipoCita"
+							value="#{msj['cita.tipoCi']}" />
+						<h:selectOneMenu id="cbTipoCita"
+							value="#{citaController.tipoCita}" converter="tipoCitaConver"
+							class="form-control">
+							<p align="right">
+								<f:selectItems value="#{citaController.listTipoCita}" var="doc"
+									itemValue="#{doc}" itemLabel="#{doc.nombre}" />
+							</p>
+						</h:selectOneMenu>
 
-					<p:outputLabel for="tftFechaCita" value="Fecha" />
-					<h:inputText id="tftFechaCita"
-						value="#{citaController.fecha}" mode="inline" />
+					</h:panelGrid>
 
-					<h:outputLabel for="cbTipoCita" id="lbTipoCita"
-						value="#{msj['cita.tipoCi']}" />
-					<h:selectOneMenu id="cbTipoCita" value="#{citaController.tipoCita}"
-						converter="tipoCitaConver" class="form-control">
-						<p align="right">
-							<f:selectItems value="#{citaController.listTipoCita}" var="doc"
-								itemValue="#{doc}" itemLabel="#{doc.nombre}" />
-						</p>
-					</h:selectOneMenu>
+					<h:panelGrid id="botonesPanel" columns="2">
+						<p:commandButton id="btnAsignarCita"
+							value="#{msj['cita.asigNar']}"
+							action="#{citaController.asignarCita}"
+							process="@this datosPanelPrincipal panelTablas"
+							update="panelTab panelTablas growl" icon="ui-icon-check" />
+					</h:panelGrid>
 
-				</h:panelGrid>
-
-				<h:panelGrid id="botonesPanel" columns="2">
-					<p:commandButton id="btnAsignarCita" value="#{msj['cita.asigNar']}"
-						action="#{citaController.asignarCita}"
-						process="@this datosPanelPrincipal " update="panelTablas" />
-
-				</h:panelGrid>
+				</p:tab>
+				</p:accordionPanel>
+				
 				<br />
 				<p:panel header="Citas pendientes del paciente" id="panelTab">
 					<p:dataTable id="panelTablas" value="#{citaController.listaCita}"
@@ -76,7 +97,7 @@
 								value="#{doc.agenda.medico.nombre} #{doc.agenda.medico.apellido}" />
 						</p:column>
 						<p:column headerText="Fecha de la cita">
-							<h:outputLabel value="#{doc.agenda.horaInicio}" />
+							<h:outputLabel value="#{doc.agenda.fechaCita}" />
 						</p:column>
 						<p:column headerText="Tipo de cita">
 							<h:outputLabel value="#{doc.tipoCita.nombre}" />
@@ -86,8 +107,8 @@
 						</p:column>
 						<p:column headerText="Opciones">
 							<p:commandButton action="#{citaController.eliminarCita(doc)}"
-								styleClass="ui-priority-primary" process="@this "
-								value="Eliminar Cita" update="panelTablas" />
+								styleClass="ui-priority-primary" process="@this panelTablas"
+								value="Eliminar Cita" update="panelTablas growl" />
 						</p:column>
 					</p:dataTable>
 				</p:panel>

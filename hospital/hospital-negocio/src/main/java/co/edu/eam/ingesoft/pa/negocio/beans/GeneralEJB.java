@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Ciudad;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Eps;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.HoraCita;
 
 @Stateless
 @LocalBean
@@ -53,4 +54,13 @@ public class GeneralEJB {
 		return em.createNamedQuery(Eps.LISTAR_EPS).getResultList();
 	}
 
+	/**
+	 * Buscar hora cita
+	 * @param id de la cita
+	 * @return objeto cita
+	 */
+	public HoraCita buscarHoraCita(Integer id){
+		return em.find(HoraCita.class, id);
+	}
+	
 }
