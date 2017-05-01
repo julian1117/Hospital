@@ -20,6 +20,7 @@ import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Paciente;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Persona;
 import co.edu.eam.ingesoft.avanzada.persistencia.enumeraciones.TipoUsuario;
 import co.edu.eam.ingesoft.pa.negocio.beans.GeneralEJB;
+import co.edu.eam.ingesoft.pa.negocio.beans.PacienteEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.PersonaEJB;
 
 @Named("personaControler")
@@ -61,72 +62,31 @@ public class PersonaControlador implements Serializable {
 	@EJB
 	private PersonaEJB personaEJB;
 	
+	@EJB
+	private PacienteEJB pacienteEJB;
+	
 	@PostConstruct
 	public void inicializar(){
 	nombreCiudad = generalEJB.listarCiudad();
+	listaEps = generalEJB.listarEps();
 	}
 	
 	
 	
-	
-	public Eps getEps() {
-		return eps;
-	}
-
-
-
-
-	public void setEps(Eps eps) {
-		this.eps = eps;
-	}
-
-
-
-
-	public List<Eps> getListaEps() {
-		return listaEps;
-	}
-
-
-
-
-	public void setListaEps(List<Eps> listaEps) {
-		this.listaEps = listaEps;
-	}
-
-
-
-
-	public String getFechastr() {
-		return fechastr;
-	}
-
-	public void setFechastr(String fechastr) {
-		this.fechastr = fechastr;
-	}
-
 //	public TipoUsuario[] getTipoUsuarios(){
 //		return TipoUsuario.values();
 //	}
+
+//	public TipoUsuario getTipoUsu() {
+//		return tipoUsu;
+//	}
+//
+//	public void setTipoUsu(TipoUsuario tipoUsu) {
+//		this.tipoUsu = tipoUsu;
+//	}
+
+
 	
-	public String getTipoUsu() {
-		return tipoUsu;
-	}
-
-
-
-
-	public void setTipoUsu(String tipoUsu) {
-		this.tipoUsu = tipoUsu;
-	}
-
-
-
-
-	public void buscarPersona(){
-		
-	}
-
 	public Long getIdPersona() {
 		return idPersona;
 	}
@@ -175,13 +135,13 @@ public class PersonaControlador implements Serializable {
 		this.direccion = direccion;
 	}
 
-//	public TipoUsuario getTipoUsu() {
-//		return tipoUsu;
-//	}
-//
-//	public void setTipoUsu(TipoUsuario tipoUsu) {
-//		this.tipoUsu = tipoUsu;
-//	}
+	public String getTipoUsu() {
+		return tipoUsu;
+	}
+
+	public void setTipoUsu(String tipoUsu) {
+		this.tipoUsu = tipoUsu;
+	}
 
 	public String getEmail() {
 		return email;
@@ -199,20 +159,13 @@ public class PersonaControlador implements Serializable {
 		this.sexo = sexo;
 	}
 
-	
 	public Ciudad getCiudad() {
 		return ciudad;
 	}
 
-
-
-
 	public void setCiudad(Ciudad ciudad) {
 		this.ciudad = ciudad;
 	}
-
-
-
 
 	public List<Ciudad> getNombreCiudad() {
 		return nombreCiudad;
@@ -220,6 +173,30 @@ public class PersonaControlador implements Serializable {
 
 	public void setNombreCiudad(List<Ciudad> nombreCiudad) {
 		this.nombreCiudad = nombreCiudad;
+}
+
+	public String getFechastr() {
+		return fechastr;
+	}
+
+	public void setFechastr(String fechastr) {
+		this.fechastr = fechastr;
+	}
+
+	public Eps getEps() {
+		return eps;
+	}
+
+	public void setEps(Eps eps) {
+		this.eps = eps;
+	}
+
+	public List<Eps> getListaEps() {
+		return listaEps;
+	}
+
+	public void setListaEps(List<Eps> listaEps) {
+		this.listaEps = listaEps;
 	}
 
 	public GeneralEJB getGeneralEJB() {
@@ -237,6 +214,15 @@ public class PersonaControlador implements Serializable {
 	public void setPersonaEJB(PersonaEJB personaEJB) {
 		this.personaEJB = personaEJB;
 	}
+
+	public PacienteEJB getPacienteEJB() {
+		return pacienteEJB;
+	}
+
+	public void setPacienteEJB(PacienteEJB pacienteEJB) {
+		this.pacienteEJB = pacienteEJB;
+	}
+
 	
 	public void crearPersona(){
 		Messages.addFlashGlobalInfo("Exito!!");
@@ -246,8 +232,11 @@ public class PersonaControlador implements Serializable {
 		 			fechaNacimiento=new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
 		 			Persona per = new Persona(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, "Paciente", email, sexo, ciu);
 		 			personaEJB.crearPersona(per);
-		 			Paciente pa = new Paciente(eps, per);
+		 			
 //		 			hacer ejbpaciente
+		 			Eps epsB = generalEJB.buscarEps(eps.getIdEps());
+		 			Paciente pa = new Paciente(epsB);
+		 			pacienteEJB.crearPaciente(pa);
 		 			
 		 			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
 		 		} catch (Exception e) {
@@ -269,7 +258,7 @@ public class PersonaControlador implements Serializable {
 	}
 	
 	public void buscar(){
-		Messages.addFlashGlobalInfo("Exito!!");
+		
 		 		Persona persona = personaEJB.buscarPersona(idPersona);
 		 		if(persona != null){
 		 			nombre=persona.getNombre();
@@ -281,6 +270,8 @@ public class PersonaControlador implements Serializable {
 		 			email=persona.getEmail();
 		 			sexo=persona.getSexo();
 		 			ciudad=persona.getCiudad();
+		 		}else{
+		 			Messages.addFlashGlobalInfo("El paciente no se encuentra registardo");
 		 		}
 		 	}
 		 	

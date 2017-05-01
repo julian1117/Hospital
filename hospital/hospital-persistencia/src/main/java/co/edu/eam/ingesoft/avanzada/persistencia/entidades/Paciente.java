@@ -20,29 +20,27 @@ public class Paciente extends Persona  implements Serializable {
 	@JoinColumn(name = "EPS_Id", nullable = false)
 	private Eps eps;
 
-	
 
 	public Paciente() {
 		super();
 	}
 
-	/**
-	 * constructor
-	 * @param eps
-	 * @param persona
-	 */
-	public Paciente(Eps eps, Persona persona) {
+
+	public Paciente(Eps eps) {
 		super();
 		this.eps = eps;
 	}
+
 
 	public Eps getEps() {
 		return eps;
 	}
 
+
 	public void setEps(Eps eps) {
 		this.eps = eps;
 	}
 
+	
 	
 }

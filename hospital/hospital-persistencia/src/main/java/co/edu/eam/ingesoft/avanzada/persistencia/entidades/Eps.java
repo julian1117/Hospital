@@ -63,6 +63,33 @@ public class Eps implements Serializable {
 	public void setPrepagada(boolean prepagada) {
 		this.prepagada = prepagada;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((idEps == null) ? 0 : idEps.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Eps other = (Eps) obj;
+		if (idEps == null) {
+			if (other.idEps != null)
+				return false;
+		} else if (!idEps.equals(other.idEps))
+			return false;
+		return true;
+	}
+	
+	
 	
 	
 
