@@ -11,7 +11,7 @@
 			<p:panel id="datosPanelPrincipal" header="Registro de la Cita Medica">
 
 				<p:accordionPanel>
-					<p:tab title="Buscar Paciente">
+					<p:tab title="BUSCAR PACIENTES">
 						<p:panelGrid columns="4">
 
 							<h:outputLabel for="tfCedula" id="lbCedula"
@@ -43,10 +43,10 @@
 				</p:accordionPanel>
 
 				<p:accordionPanel>
-					<p:tab title="Diagnostico">
+					<p:tab title="DIAGNOSTICO">
 						<p:panelGrid columns="2">
 
-							<p:panel id="datosPatologia">
+							<p:panel id="datosPatologia" border="0">
 								<h:outputLabel for="cbPatologia" id="lbPatologia"
 									value="#{msj['citaAt.patologias']}" />
 								<h:selectOneMenu id="cbPatologia"
@@ -68,6 +68,11 @@
 									value="#{atenderCitaController.textoDesPatologia}" rows="10"
 									cols="100" completeMethod="#" queryDelay="750"
 									minQueryLength="6" />
+								<br />
+								<br />
+								<p:commandButton id="btnGuardarPatologia"
+									value="#{msj['citaAT.guPatologia']}" action="#" process="@this"
+									update="growl" icon="ui-icon-plus" />
 
 							</p:panel>
 
@@ -81,6 +86,10 @@
 										var="doc" itemValue="#{doc}" itemLabel="#{doc.nombreSintoma}" />
 								</h:selectOneMenu>
 
+								<p:commandButton id="btnGuardarSintoma"
+									value="#{msj['citaAT.guSintoma']}" action="#" process="@this"
+									update="growl" icon="ui-icon-plus" />
+
 								<h:outputLabel for="cbCausas" id="lbCausas"
 									value="#{msj['clieAt.causa']}" />
 								<h:selectOneMenu id="cbCausas"
@@ -88,6 +97,10 @@
 									<f:selectItems value="#{atenderCitaController.listaCausas}"
 										var="doc" itemValue="#{doc}" itemLabel="#{doc.nombre}" />
 								</h:selectOneMenu>
+
+								<p:commandButton id="btnGuardarCausas"
+									value="#{msj['citaAT.guCausa']}" action="#" process="@this"
+									update="growl" icon="ui-icon-plus" />
 
 								<h:outputLabel for="cbTratamiento" id="lbTratamiento"
 									value="#{msj['clieAt.tratamiento']}" />
@@ -99,17 +112,34 @@
 										itemValue="#{doc}" itemLabel="#{doc.nombrePatologia}" />
 								</h:selectOneMenu>
 
+								<p:commandButton id="btnGuardarTratamineto"
+									value="#{msj['citaAT.guTratamiento']}" action="#"
+									process="@this" update="growl" icon="ui-icon-plus" />
+
 							</p:panel>
 
 						</p:panelGrid>
-						
+
+
+						<br />
 						<h:outputLabel for="descripcionMedPatoligia"
-									id="lbdescripcionMedicoPatoligia"
-									value="#{msj['clieAT.descripMedico']}" />
-								<p:inputTextarea id="descripcionMedPatoligia"
-									value="#{atenderCitaController.textoDesPatologia}" rows="10"
-									cols="100" completeMethod="#"/>
-						
+							id="lbdescripcionMedicoPatoligia"
+							value="#{msj['clieAT.descripMedico']}" />
+						<p:inputTextarea id="descripcionMedPatoligia"
+							value="#{atenderCitaController.textoDesPatologia}" rows="10"
+							cols="100" completeMethod="#" />
+						<br />
+						<br />
+						<p:commandButton id="btnGuardar" value="#{msj['citaAT.guardar']}"
+							action="#" process="@this" update="growl" icon="ui-icon-disk" />
+
+
+					</p:tab>
+				</p:accordionPanel>
+
+				<p:accordionPanel>
+					<p:tab title="ORDENES">
+
 					</p:tab>
 				</p:accordionPanel>
 
