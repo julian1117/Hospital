@@ -65,7 +65,7 @@ public class SessionController implements Serializable {
 				use=useBuscar;
 				Faces.setSessionAttribute("usuario",use);
 				Messages.addGlobalInfo("Usuario existe");
-				return "/paginas/seguro/Algo.xhtml?faces-redirect=true";
+				return "/paginas/seguro/Citas.xhtml?faces-redirect=true";
 			} else {
 				Messages.addGlobalError("contrasena incorrecta");
 			}
@@ -86,11 +86,11 @@ public class SessionController implements Serializable {
 		HttpSession sesion;
 		sesion=(HttpSession)Faces.getSession();
 		sesion.invalidate();
-		return "/paginas/publico/Algo.xhtml?faces-redirect=true";
+		return "/paginas/publico/login.xhtml?faces-redirect=true";
 
 	}
 	
-	public boolean isSeccion(){
+	public boolean isSesion(){
 		return use!=null;
 	}
 

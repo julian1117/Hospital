@@ -6,18 +6,14 @@
 
 	<ui:define name="cuerpo">
 		<h:form prependId="false">
-			<p:growl id="growl" showDetail="true" sticky="true" />
 			<p:panel id="datosPanelPrincipal" header="Gestion de Citas Medicas">
-
-
 
 				<p:accordionPanel>
 					<p:tab title="Buscar Paciente">
 						<h:outputLabel for="tfCedula" id="lbCedula"
 							value="#{msj['cita.numeroId']}:" />
 						<h:inputText id="tfCedula"
-							value="#{citaController.cedulaPaciente}" class="form-control"
-							required="true" />
+							value="#{citaController.cedulaPaciente}" class="form-control"/>
 						<p:message for="tfCedula" />
 
 						<p:commandButton id="btnBuscarPaciente"
