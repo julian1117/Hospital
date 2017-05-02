@@ -5,11 +5,15 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="ESPECIALIZACIONES")
+@NamedQuery(name=Especializacione.LISTAR_CIUDAD,query="SELECT e FROM Especializacione e")
 public class Especializacione implements Serializable{
+	
+	public static final String LISTAR_CIUDAD="Especializacione.listar";
 
 	@Id
 	@Column(name="Id",nullable=false)
@@ -43,6 +47,33 @@ public class Especializacione implements Serializable{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((idEspecializacion == null) ? 0 : idEspecializacion.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Especializacione other = (Especializacione) obj;
+		if (idEspecializacion == null) {
+			if (other.idEspecializacion != null)
+				return false;
+		} else if (!idEspecializacion.equals(other.idEspecializacion))
+			return false;
+		return true;
+	}
+	
+	
 	
 	
 	

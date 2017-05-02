@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Medico;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Persona;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoCita;
 import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
@@ -24,9 +25,9 @@ public class MedicoEJB {
 	 */
 	public void crearMedico(Medico medico){
 		
-		Medico buscar = buscarMedico(medico.getIdPersona());
+		Persona buscar = buscarMedico(medico.getIdPersona());
 		
-		if(buscar == null){
+		if(buscar != null){
 			em.persist(medico);
 		}else{
 			throw new ExcepcionNegocio("El medico ya se encuentra en el sistema");
@@ -53,6 +54,10 @@ public class MedicoEJB {
 	public List<Medico> listaMedicos(){
 		return em.createNamedQuery(Medico.LISTA_MEDICOS).getResultList();		
 		 
+	}
+	
+	public void editarMedico(Medico medico){
+		em.merge(medico);
 	}
 	
 	

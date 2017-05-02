@@ -10,7 +10,9 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.Length;
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Messages;
 
@@ -27,15 +29,24 @@ import co.edu.eam.ingesoft.pa.negocio.beans.PersonaEJB;
 @ViewScoped
 public class PersonaControlador implements Serializable {
 	
+//	@Pattern(regexp="[0-9]*",message="solo numeros")
+//	@Length(min=4,max=10,message="longitud entre 5 y 10")
 	private Long idPersona;
 	
+//	@Pattern(regexp="[A-Za-z ]*",message="solo Letras")
+//	@Length(min=4,max=10,message="longitud entre 5 y 50")
 	private String nombre;
 	
+//	@Pattern(regexp="[A-Za-z ]*",message="solo Letras")
+//	@Length(min=4,max=10,message="longitud entre 5 y 50")
 	private String apellido;
 	
 	private Date fechaNacimiento;
 	
+//	@Pattern(regexp="[0-9]*",message="solo numeros")
+//	@Length(min=10,max=10,message="longitud entre 10 y 15")
 	private String telefono;
+	
 	
 	private String direccion;
 	
@@ -225,18 +236,27 @@ public class PersonaControlador implements Serializable {
 
 	
 	public void crearPersona(){
-		Messages.addFlashGlobalInfo("Exito!!");
 		 
 		 		try {
 		 			Ciudad ciu = generalEJB.buscarCiudad(ciudad.getIdCiuad());
 		 			fechaNacimiento=new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
 		 			Persona per = new Persona(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, "Paciente", email, sexo, ciu);
-		 			personaEJB.crearPersona(per);
+
+		 			Eps epsB = generalEJB.buscarEps(eps.getIdEps());		 			
+		 				 			
+		 			Paciente paciente = new Paciente(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, "Pacienta", per.getEmail(), sexo, ciu, epsB);
+		 			personaEJB.crearPersona(paciente);	
+		 			pacienteEJB.crearPaciente(paciente);
 		 			
-//		 			hacer ejbpaciente
-		 			Eps epsB = generalEJB.buscarEps(eps.getIdEps());
-		 			Paciente pa = new Paciente(epsB);
-		 			pacienteEJB.crearPaciente(pa);
+		 			idPersona=null;
+			 		nombre="";
+			 		apellido="";
+			 		fechaNacimiento=null;
+			 		telefono="";
+			 		tipoUsu=null;
+			 		email="";
+			 		sexo="";
+			 		ciudad=null;
 		 			
 		 			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
 		 		} catch (Exception e) {
@@ -244,22 +264,14 @@ public class PersonaControlador implements Serializable {
 		 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,e.getMessage(), null));
 		 		}
 		 		
-		 		idPersona=null;
-		 		nombre="";
-		 		apellido="";
-		 		fechaNacimiento=null;
-		 		telefono="";
-		 		tipoUsu=null;
-		 		email="";
-		 		sexo="";
-		 		ciudad=null;
+		 		
 		
 		
 	}
 	
 	public void buscar(){
 		
-		 		Persona persona = personaEJB.buscarPersona(idPersona);
+		 		Paciente persona = pacienteEJB.buscarPaciente(idPersona);
 		 		if(persona != null){
 		 			nombre=persona.getNombre();
 		 			apellido= persona.getApellido();
@@ -269,6 +281,7 @@ public class PersonaControlador implements Serializable {
 		 			tipoUsu=persona.getTipoUsuario();
 		 			email=persona.getEmail();
 		 			sexo=persona.getSexo();
+		 			eps = persona.getEps();
 		 			ciudad=persona.getCiudad();
 		 		}else{
 		 			Messages.addFlashGlobalInfo("El paciente no se encuentra registardo");
@@ -277,16 +290,36 @@ public class PersonaControlador implements Serializable {
 		 	
 		 	
 		 	public void editar(){
-		 		Messages.addFlashGlobalInfo("Exito!!");
 		 		try {
 		 			
-		 			Persona persona = personaEJB.buscarPersona(idPersona);
-			 		Ciudad ciu = generalEJB.buscarCiudad(ciudad.getIdCiuad());
+//		 			Persona persona = personaEJB.buscarPersona(idPersona);
+//			 		Ciudad ciu = generalEJB.buscarCiudad(ciudad.getIdCiuad());
+//			 		fechaNacimiento=new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
+//			 
+//			 		if(persona != null){
+//			 			Persona per = new Persona(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, tipoUsu, email, sexo, ciu);
+//			 			personaEJB.editar(per);
+//			 			Messages.addFlashGlobalInfo("Editado con exito!!");
+//			 			
+//			 			idPersona=null;
+//				 		nombre="";
+//				 		apellido="";
+//				 		fechaNacimiento=null;
+//				 		telefono="";
+//				 		tipoUsu=null;
+//				 	email="";
+//				 		sexo="";
+//				 		ciudad=null;
+//			 		}
+//			 		
+			 		
+			 		Paciente paciente = pacienteEJB.buscarPaciente(idPersona);
+			 		Ciudad ciud = generalEJB.buscarCiudad(ciudad.getIdCiuad());
 			 		fechaNacimiento=new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
-			 
-			 		if(persona != null){
-			 			Persona per = new Persona(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, tipoUsu, email, sexo, ciu);
-			 			personaEJB.editar(per);
+			 		
+			 		if(paciente!=null){
+			 			Paciente pa = new Paciente(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, "Paciente", email, sexo, ciud, eps);
+			 			pacienteEJB.editarPaciente(pa);
 			 			Messages.addFlashGlobalInfo("Editado con exito!!");
 			 			
 			 			idPersona=null;
@@ -295,10 +328,12 @@ public class PersonaControlador implements Serializable {
 				 		fechaNacimiento=null;
 				 		telefono="";
 				 		tipoUsu=null;
-				 	email="";
+				 		email="";
 				 		sexo="";
 				 		ciudad=null;
+				 		eps=null;
 			 		}
+			 		
 				} catch (Exception e) {
 					e.printStackTrace();
 		 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,e.getMessage(), null));

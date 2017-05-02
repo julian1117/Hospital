@@ -7,13 +7,12 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Named;
 
-import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Ciudad;
-import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Eps;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Especializacione;
 import co.edu.eam.ingesoft.pa.negocio.beans.GeneralEJB;
 
-@FacesConverter(value="epsCover",forClass=Eps.class)
-@Named("epsCover")
-public class EpsConvertidor implements Converter {
+@FacesConverter(value = "EspecializacionesConver", forClass = Especializacione.class)
+@Named("EspecializacionesConver")
+public class EspecializacionesConvertidor implements Converter {
 
 	@EJB
 	private GeneralEJB generalEJB;
@@ -22,16 +21,18 @@ public class EpsConvertidor implements Converter {
 		if(value == null || value.trim().length()==0 || value.equals("Seleccion...")){
 			return null;
 		}
-		return generalEJB.buscarEps(Integer.parseInt(value));
+		return generalEJB.buscarEspecializacione(Integer.parseInt(value));
 	
 	}
 
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
-		if(value instanceof Eps){
-			Eps eps = (Eps) value;
-			return String.valueOf(eps.getIdEps());
+		if(value instanceof Especializacione){
+			Especializacione especializacion = (Especializacione) value;
+			return String.valueOf(especializacion.getIdEspecializacion());
 		}
 		return null;
 	}
+	
+	
 
 }

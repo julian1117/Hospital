@@ -1,6 +1,7 @@
 package co.edu.eam.ingesoft.avanzada.persistencia.entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
@@ -24,6 +25,17 @@ public class Paciente extends Persona  implements Serializable {
 	public Paciente() {
 		super();
 	}
+
+
+	
+	
+	public Paciente(Long idPersona, String nombre, String apellido, Date fechaNacimiento, String telefono,
+			String direccion, String tipoUsuario, String email, String sexo, Ciudad ciudad, Eps eps) {
+		super(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, tipoUsuario, email, sexo, ciudad);
+		this.eps = eps;
+	}
+
+
 
 
 	public Paciente(Eps eps) {

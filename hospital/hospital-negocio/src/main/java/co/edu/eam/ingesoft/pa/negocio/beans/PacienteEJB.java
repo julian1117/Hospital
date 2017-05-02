@@ -21,12 +21,22 @@ public class PacienteEJB {
 	private PersonaEJB persnaEJB;
 	
 	public void crearPaciente(Paciente paciente){
-		Persona buscarPer = persnaEJB.buscarPersona(paciente.getIdPersona());
+		Persona buscarPer = buscarPaciente(paciente.getIdPersona());
+		
 		if(buscarPer!=null){
-			em.persist(paciente);
+					em.persist(paciente);
 		}else{
 			throw new ExcepcionNegocio("La persona no se encuentra en el sistema");
 		}
+	}
+	
+	public Paciente buscarPaciente(Long id){
+		Paciente paciente = em.find(Paciente.class, id);
+		return paciente;
+	}
+	
+	public void editarPaciente(Paciente paciente){
+		em.merge(paciente);
 	}
 	
 	
