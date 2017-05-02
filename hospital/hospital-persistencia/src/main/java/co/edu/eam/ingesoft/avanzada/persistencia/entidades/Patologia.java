@@ -11,20 +11,20 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="PATOLOGIAS_TRATAMIENTOS")
+@Table(name="PATOLOGIAS")
 @NamedQuery(name=Patologia.LISTA_PATOLOGIA,query="SELECT p FROM Patologia p")
 public class Patologia implements Serializable{
 	 
 	public static final String LISTA_PATOLOGIA = "Patologia.listaPato";
-	
+	//CAMbio de  name's mapeada
 	@Id
-	@Column(name="Id",nullable=false)
+	@Column(name="id",nullable=false)
 	private Integer idPatologia;
 	
-	@Column(name="Descripcion",nullable=false,length=2000)
+	@Column(name="descripcion",nullable=false,length=2000)
 	private String descripcion;
 	
-	@Column(name="Nombre",nullable=false,length=40)
+	@Column(name="nombre",nullable=false,length=40)
 	private String nombre;
 	
 	

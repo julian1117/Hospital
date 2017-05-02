@@ -28,6 +28,8 @@ public class AtenderCitaController implements Serializable {
 	@Length(min = 8, max = 11, message = "La longitud debe ser de 8 a 11 numer")
 	private String cedulaPaciente;
 
+	private String textoDesPatologia;
+	
 	private Cita cita;
 
 	private Patologia patologia;
@@ -48,6 +50,8 @@ public class AtenderCitaController implements Serializable {
 
 	private List<Tratamiento> listaTratamiento;
 
+	
+	
 	@EJB
 	private CitaEJB citaEJB;
 
@@ -56,11 +60,18 @@ public class AtenderCitaController implements Serializable {
 
 	@PostConstruct
 	public void inicializar() {
-//		listaPatolgia = generalEJB.listaPatologia();
+		listaPatolgia = generalEJB.listaPatologia();
 		listaCausas = generalEJB.listaCausa();
 		listaSintomas = generalEJB.listaSintoma();
 		listaTratamiento = generalEJB.listaTratamiento();
 	 }
+	
+	public void descPatologia(){
+		
+		Patologia patolo = generalEJB.buscarPatologia(patologia.getIdPatologia());
+		
+		textoDesPatologia = patolo.getDescripcion();
+	}
 
 	/**
 	 * Busca todas las citas del apciente que esten como no atendidas
@@ -161,5 +172,14 @@ public class AtenderCitaController implements Serializable {
 	public void setListaTratamiento(List<Tratamiento> listaTratamiento) {
 		this.listaTratamiento = listaTratamiento;
 	}
+
+	public String getTextoDesPatologia() {
+		return textoDesPatologia;
+	}
+
+	public void setTextoDesPatologia(String textoDesPatologia) {
+		this.textoDesPatologia = textoDesPatologia;
+	}
+	
 
 }

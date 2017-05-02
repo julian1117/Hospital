@@ -152,7 +152,7 @@ public class GeneralEJB {
 	 * lista las esoecializaciones encontradas en el sistema 
 	 * @return las especializaciones encontradas
 	 */
-	public List<Especializacione> listarEspecializacione(){
-		return em.createNamedQuery(Especializacione.LISTAR_CIUDAD).getResultList();
-	}
+//	public List<Especializacione> listarEspecializacione(){
+//		return em.createNamedQuery(Especializacione.LISTAR_CIUDAD).getResultList();
+//	}
 }

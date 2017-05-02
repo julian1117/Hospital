@@ -46,22 +46,28 @@
 					<p:tab title="Diagnostico">
 						<p:panelGrid columns="2">
 
-							<p:panel>
-								 <h:outputLabel for="cbPatologia" id="lbPatologia"
-									value="#{msj['clieAt.patologia']}" />
+							<p:panel id="datosPatologia">
+								<h:outputLabel for="cbPatologia" id="lbPatologia"
+									value="#{msj['citaAt.patologias']}" />
 								<h:selectOneMenu id="cbPatologia"
 									value="#{atenderCitaController.patologia}"
 									converter="patologiaConver">
 									<f:selectItems value="#{atenderCitaController.listaPatolgia}"
 										var="doc" itemValue="#{doc}" itemLabel="#{doc.nombre}" />
+
+									<f:ajax event="change" execute="@this"
+										render="descripcionPatoligia"
+										listener="#{atenderCitaController.descPatologia}" />
 								</h:selectOneMenu>
-								 
+
 
 								<h:outputLabel for="descripcionPatoligia"
 									id="lbdescripcionPatoligia"
 									value="#{msj['clieAt.descripcionPatoligia']}" />
-								<p:inputTextarea rows="10" cols="100" completeMethod="#"
-									queryDelay="750" minQueryLength="4" />
+								<p:inputTextarea id="descripcionPatoligia"
+									value="#{atenderCitaController.textoDesPatologia}" rows="10"
+									cols="100" completeMethod="#" queryDelay="750"
+									minQueryLength="6" />
 
 							</p:panel>
 
@@ -74,28 +80,36 @@
 									<f:selectItems value="#{atenderCitaController.listaSintomas}"
 										var="doc" itemValue="#{doc}" itemLabel="#{doc.nombreSintoma}" />
 								</h:selectOneMenu>
-								
+
 								<h:outputLabel for="cbCausas" id="lbCausas"
 									value="#{msj['clieAt.causa']}" />
 								<h:selectOneMenu id="cbCausas"
-									value="#{atenderCitaController.causa}"
-									converter="causaConver">
+									value="#{atenderCitaController.causa}" converter="causaConver">
 									<f:selectItems value="#{atenderCitaController.listaCausas}"
 										var="doc" itemValue="#{doc}" itemLabel="#{doc.nombre}" />
 								</h:selectOneMenu>
-								
+
 								<h:outputLabel for="cbTratamiento" id="lbTratamiento"
 									value="#{msj['clieAt.tratamiento']}" />
 								<h:selectOneMenu id="cbTratamiento"
 									value="#{atenderCitaController.tratamiento}"
 									converter="tratamientoConver">
-									<f:selectItems value="#{atenderCitaController.listaTratamiento}"
-										var="doc" itemValue="#{doc}" itemLabel="#{doc.nombrePatologia}" />
+									<f:selectItems
+										value="#{atenderCitaController.listaTratamiento}" var="doc"
+										itemValue="#{doc}" itemLabel="#{doc.nombrePatologia}" />
 								</h:selectOneMenu>
-								
+
 							</p:panel>
 
 						</p:panelGrid>
+						
+						<h:outputLabel for="descripcionMedPatoligia"
+									id="lbdescripcionMedicoPatoligia"
+									value="#{msj['clieAT.descripMedico']}" />
+								<p:inputTextarea id="descripcionMedPatoligia"
+									value="#{atenderCitaController.textoDesPatologia}" rows="10"
+									cols="100" completeMethod="#"/>
+						
 					</p:tab>
 				</p:accordionPanel>
 
