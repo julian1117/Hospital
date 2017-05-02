@@ -240,25 +240,23 @@ public class PersonaControlador implements Serializable {
 		 		try {
 		 			Ciudad ciu = generalEJB.buscarCiudad(ciudad.getIdCiuad());
 		 			fechaNacimiento=new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
-		 			Persona per = new Persona(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, "Paciente", email, sexo, ciu);
 
 		 			Eps epsB = generalEJB.buscarEps(eps.getIdEps());		 			
 		 				 			
-		 			Paciente paciente = new Paciente(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, "Pacienta", per.getEmail(), sexo, ciu, epsB);
-		 			personaEJB.crearPersona(paciente);	
+		 			Paciente paciente = new Paciente(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, "Pacienta", email, sexo, ciu, epsB);
 		 			pacienteEJB.crearPaciente(paciente);
-		 			
 		 			idPersona=null;
 			 		nombre="";
 			 		apellido="";
 			 		fechaNacimiento=null;
 			 		telefono="";
-			 		tipoUsu=null;
+			 		tipoUsu="";
 			 		email="";
 			 		sexo="";
 			 		ciudad=null;
-		 			
 		 			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
+		 			
+		 			
 		 		} catch (Exception e) {
 		 			e.printStackTrace();
 		 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,e.getMessage(), null));
@@ -320,8 +318,7 @@ public class PersonaControlador implements Serializable {
 			 		if(paciente!=null){
 			 			Paciente pa = new Paciente(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, "Paciente", email, sexo, ciud, eps);
 			 			pacienteEJB.editarPaciente(pa);
-			 			Messages.addFlashGlobalInfo("Editado con exito!!");
-			 			
+			 						 			
 			 			idPersona=null;
 				 		nombre="";
 				 		apellido="";
@@ -332,6 +329,8 @@ public class PersonaControlador implements Serializable {
 				 		sexo="";
 				 		ciudad=null;
 				 		eps=null;
+				 		
+				 		Messages.addFlashGlobalInfo("Editado con exito!!");
 			 		}
 			 		
 				} catch (Exception e) {

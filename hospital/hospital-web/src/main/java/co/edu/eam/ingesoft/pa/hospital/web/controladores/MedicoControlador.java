@@ -202,11 +202,9 @@ public class MedicoControlador implements Serializable {
 		try {
 			Ciudad ciu = generalEJB.buscarCiudad(ciudad.getIdCiuad());
  			fechaNacimiento=new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
- 			Persona per = new Persona(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, "Paciente", email, sexo, ciu);
- 			Especializacione especi = generalEJB.buscarEspecializacione(especializacion.getIdEspecializacion());
+			Especializacione especi = generalEJB.buscarEspecializacione(especializacion.getIdEspecializacion());
  			
  			Medico medico = new Medico(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, "Medico", email, sexo, ciu, especi);
- 			personaEJB.crearPersona(medico);
  			medicoEJB.crearMedico(medico);
  			
  			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
