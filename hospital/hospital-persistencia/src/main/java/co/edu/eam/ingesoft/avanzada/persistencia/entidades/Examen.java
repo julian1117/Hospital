@@ -16,7 +16,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-
+@Table(name="EXAMENES")
 public class Examen implements Serializable{
 	
 	@Id
