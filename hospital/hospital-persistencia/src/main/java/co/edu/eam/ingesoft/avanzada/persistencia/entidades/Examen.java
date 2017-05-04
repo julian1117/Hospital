@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="EXAMENES")
-@AttributeOverride(name="PROCEDIMIENTOS_Id_proce",column=@Column(name="PROCEDIMIENTOS_Id"))
+//@AttributeOverride(name="PROCEDIMIENTOS_Id_proce",column=@Column(name="PROCEDIMIENTOS_Id"))
 public class Examen extends Procedimiento implements Serializable{
 	
 	@ManyToOne
@@ -27,6 +27,16 @@ public class Examen extends Procedimiento implements Serializable{
 	public Examen() {
 		super();
 	}
+
+	
+	
+	public Examen(int idProcedimiento, String tiempo, TipoExamen tipoExamen, String descripcion) {
+		super(idProcedimiento, tiempo);
+		this.tipoExamen = tipoExamen;
+		this.descripcion = descripcion;
+	}
+
+
 
 	public Examen(TipoExamen tipoExamen, String descripcion) {
 		super();
