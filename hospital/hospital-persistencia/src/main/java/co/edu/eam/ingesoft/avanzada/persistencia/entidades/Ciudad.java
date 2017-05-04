@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 
@@ -21,6 +22,8 @@ public class Ciudad implements Serializable{
 	public static final String LISTAR_CIUDAD= "Ciudad.listarCiudad";
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CIUDADES_SEQ")
+    @SequenceGenerator(sequenceName = "CIUDAD_SEQ", allocationSize = 1, name = "CIUDADES_SEQ")
 	@Column(name="Id",nullable=false)
 	private Integer idCiuad;
 	

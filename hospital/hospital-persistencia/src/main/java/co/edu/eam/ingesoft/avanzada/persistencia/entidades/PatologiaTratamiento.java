@@ -2,6 +2,7 @@ package co.edu.eam.ingesoft.avanzada.persistencia.entidades;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -13,15 +14,17 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="PATOLOGIAS_TRATAMIENTOS")
-@IdClass(PatologiaTratamientoPK.class)
 public class PatologiaTratamiento implements Serializable{
 	
 	@Id
+	@Column(name="id",nullable=false)
+	private Integer id;
+	
 	@ManyToOne
 	@JoinColumn(name="PATOLOGIAS_Id",nullable=false)
 	private Patologia patologiaa;
 	
-	@Id
+	
 	@ManyToOne
 	@JoinColumn(name="TRATAMIENTOS_Id",nullable=false)
 	private Tratamiento tratamient;
@@ -30,27 +33,38 @@ public class PatologiaTratamiento implements Serializable{
 		super();
 	}
 
-	public PatologiaTratamiento(Patologia patologia, Tratamiento tratamiento) {
+	public PatologiaTratamiento(Integer id, Patologia patologiaa, Tratamiento tratamient) {
 		super();
-		this.patologiaa = patologia;
-		this.tratamient = tratamiento;
+		this.id = id;
+		this.patologiaa = patologiaa;
+		this.tratamient = tratamient;
 	}
 
-	public Patologia getPatologia() {
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Patologia getPatologiaa() {
 		return patologiaa;
 	}
 
-	public void setPatologia(Patologia patologia) {
-		this.patologiaa = patologia;
+	public void setPatologiaa(Patologia patologiaa) {
+		this.patologiaa = patologiaa;
 	}
 
-	public Tratamiento getTratamiento() {
+	public Tratamiento getTratamient() {
 		return tratamient;
 	}
 
-	public void setTratamiento(Tratamiento tratamiento) {
-		this.tratamient = tratamiento;
+	public void setTratamient(Tratamiento tratamient) {
+		this.tratamient = tratamient;
 	}
+
+	
 
 	
 	

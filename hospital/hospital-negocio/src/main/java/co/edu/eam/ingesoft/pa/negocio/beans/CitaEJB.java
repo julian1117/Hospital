@@ -23,14 +23,14 @@ public class CitaEJB {
 	/**
 	 * 
 	 */
-	public void crearCita(Agenda agenda,Cita cita) {
-		Cita citaB = buscarCita(cita.getIdCita());
-		if (citaB == null) {
+	public void crearCita(Agenda agenda, Cita cita) {
+//		Cita citaB = buscarCita(cita.getIdCita());
+//		if (citaB == null) {
 			em.persist(agenda);
 			em.persist(cita);
-		} else {
-			throw new ExcepcionNegocio("La cita ya existe");
-		}
+//		} else {
+//			throw new ExcepcionNegocio("La cita ya existe");
+//		}
 	}
 
 	public Cita buscarCita(Integer id) {
@@ -75,6 +75,12 @@ public class CitaEJB {
 	 * @param cedula
 	 * @return
 	 */
+
+//	public List<Object> listaCitaPaciente(Long cedula) {
+//		return em.createNativeQuery(
+//				"SELECT * FROM ((((CITAS c LEFT JOIN PERSONAS pac ON c.PACIENTES_PERSONA_ID = pac.PERSONAS_ID ) LEFT JOIN TIPOS_CITAS tp ON tp.ID = c.TIPOS_CITAS_ID) LEFT JOIN AGENDAS a on c.AGENDAS_ID = a.ID) LEFT JOIN CONSULTORIOS con on con.ID = a.CONSULTORIOS_ID) LEFT JOIN PERSONAS pm on pm.PERSONAS_ID = a.MEDICOS_PERSONAS_ID WHERE c.PACIENTES_PERSONA_ID=?1 AND c.ESTEADO=0")..getResultList();
+//	}
+
 	public List<Cita> listCitaPaciente(Long cedula) {
 		return em.createNamedQuery(Cita.LISTA_CITAS_PACIENTE).setParameter(1, cedula).getResultList();
 	}
@@ -89,10 +95,10 @@ public class CitaEJB {
 		return em.find(Cita.class, codigoCita);
 	}
 
-	public Agenda buscarAgenda(Integer id){
+	public Agenda buscarAgenda(Integer id) {
 		return em.find(Agenda.class, id);
 	}
-	
+
 	public void eliminarCitaPaciente(Cita codigoCita) {
 		try {
 			Cita citaEliminar = buscarCitaPaciente(codigoCita.getIdCita());

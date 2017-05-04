@@ -92,21 +92,19 @@ public class CitaControlador implements Serializable {
 			
 			Paciente paciente = citaEJB.buscarPaciente(Long.parseLong(cedulaPaciente));
 			
-			Agenda agenda = new Agenda();
-			agenda.setId(4);
-			agenda.setMedico(medico);
-			agenda.setFechaCita(fechaCita);
-			agenda.setConsultorio(null);
-			agenda.setHora(horaCita);
-			
-			Cita cita = new Cita();
-			cita.setIdCita(5);
-			cita.setPersona(paciente);
-			cita.setTipoCita(tipoCita);
-			cita.setAgenda(agenda);
-			
-			citaEJB.crearCita(agenda,cita);
-			listaCita = citaEJB.listCitaPaciente(Long.parseLong(cedulaPaciente));
+//			Agenda agenda = new Agenda();
+//			agenda.setMedico(medico);
+//			agenda.setFechaCita(fechaCita);
+//			agenda.setConsultorio(null);
+//			agenda.setHora(horaCita);
+//			
+//			Cita cita = new Cita();
+//			cita.setPersona(paciente);
+//			cita.setTipoCita(tipoCita);
+//			cita.setAgenda(agenda);
+//			
+//			citaEJB.crearCita(agenda,cita);
+//			listaCita = citaEJB.listCitaPaciente(Long.parseLong(cedulaPaciente));
 
 			Messages.addFlashGlobalInfo("Se agendo la cita con exito");
 			

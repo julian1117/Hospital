@@ -43,7 +43,7 @@
 
 				<p:accordionPanel>
 					<p:tab title="DIAGNOSTICO">
-						<p:panelGrid columns="2">
+						<p:panelGrid columns="2" styleClass="ui-noborder">
 
 							<p:panel id="datosPatologia" border="0">
 								<h:outputLabel for="cbPatologia" id="lbPatologia"
@@ -132,12 +132,6 @@
 						<p:commandButton id="btnGuardar" value="#{msj['citaAT.guardar']}"
 							action="#" process="@this" update="growl" icon="ui-icon-disk" />
 
-
-					</p:tab>
-				</p:accordionPanel>
-
-				<p:accordionPanel>
-					<p:tab title="ORDENES">
 
 					</p:tab>
 				</p:accordionPanel>

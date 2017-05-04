@@ -11,15 +11,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 @Entity
 @Table(name="CAUSAS_PATOLIGIA")
-@IdClass(CausaPatologiaPK.class)
 public class CausaPatologia implements Serializable {
 
 	@Id
+	@Column(name="id",nullable=false)
+	private Integer id;
+	
 	@ManyToOne
 	@JoinColumn(name="CAUSAS_Id",nullable=false)
 	private Causa causaPatologia;
 	
-	@Id
+	
 	@ManyToOne
 	@JoinColumn(name="PATOLOGIAS_Id",nullable=false)
 	private Patologia patologia;
@@ -28,10 +30,19 @@ public class CausaPatologia implements Serializable {
 		super();
 	}
 
-	public CausaPatologia(Causa causaPatologia, Patologia patologia) {
+	public CausaPatologia(Integer id, Causa causaPatologia, Patologia patologia) {
 		super();
+		this.id = id;
 		this.causaPatologia = causaPatologia;
 		this.patologia = patologia;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Causa getCausaPatologia() {

@@ -2,6 +2,7 @@ package co.edu.eam.ingesoft.avanzada.persistencia.entidades;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -11,15 +12,17 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="PATOLOGIA_SINTOMAS")
-@IdClass(PatologiaSintomaPK.class)
 public class PatologiaSintoma implements Serializable{
 	
 	@Id
+	@Column(name="id",nullable=false)
+	private Integer id;
+	
 	@ManyToOne
 	@JoinColumn(name="PATOLOGIAS_Id",nullable=false)
 	private Patologia patologia;
 	
-	@Id
+	
 	@ManyToOne
 	@JoinColumn(name="SINTOMAS_Id",nullable=false)
 	private Sintoma sintoma;
@@ -28,10 +31,19 @@ public class PatologiaSintoma implements Serializable{
 		super();
 	}
 
-	public PatologiaSintoma(Patologia patologia, Sintoma sintoma) {
+	public PatologiaSintoma(Integer id, Patologia patologia, Sintoma sintoma) {
 		super();
+		this.id = id;
 		this.patologia = patologia;
 		this.sintoma = sintoma;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Patologia getPatologia() {
@@ -49,6 +61,10 @@ public class PatologiaSintoma implements Serializable{
 	public void setSintoma(Sintoma sintoma) {
 		this.sintoma = sintoma;
 	}
+	
+	
+
+	
 	
 	
 

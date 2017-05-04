@@ -5,19 +5,27 @@ import java.io.Serializable;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="HOSPITALIZACIONES")
-@AttributeOverride(name="PROCEDIMIENTOS_Id_proce",column=@Column(name="PROCEDIMIENTOS_Id"))
-public class Hospitalizacion extends Procedimiento implements Serializable{
+public class Hospitalizacion  implements Serializable{
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "HOSPITALIZACION_SEQ")
+    @SequenceGenerator(sequenceName = "HOSPITALIZACIONES_SEQ", allocationSize = 1, name = "HOSPITALIZACION_SEQ")
+	@Column(name="ID_CIRUGIA",nullable=false)
+	private Integer id;
 	
 	@Column(name="Detalle_hospitalizacion",length=2000)
-	private String detalleProce;
+	private String detalleHospi;
 	
 	@Column(name="Motivo",length=50)
 	private String motivo;
@@ -26,20 +34,27 @@ public class Hospitalizacion extends Procedimiento implements Serializable{
 		super();
 	}
 
-	public Hospitalizacion(Procedimiento procedimiento, String detalleProce, String motivo) {
+	public Hospitalizacion(Integer id, String detalleHospi, String motivo) {
 		super();
-		;
-		this.detalleProce = detalleProce;
+		this.id = id;
+		this.detalleHospi = detalleHospi;
 		this.motivo = motivo;
 	}
 
-
-	public String getDetalleProce() {
-		return detalleProce;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setDetalleProce(String detalleProce) {
-		this.detalleProce = detalleProce;
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getDetalleHospi() {
+		return detalleHospi;
+	}
+
+	public void setDetalleHospi(String detalleHospi) {
+		this.detalleHospi = detalleHospi;
 	}
 
 	public String getMotivo() {
@@ -49,6 +64,8 @@ public class Hospitalizacion extends Procedimiento implements Serializable{
 	public void setMotivo(String motivo) {
 		this.motivo = motivo;
 	}
+
+	
 	
 	
 

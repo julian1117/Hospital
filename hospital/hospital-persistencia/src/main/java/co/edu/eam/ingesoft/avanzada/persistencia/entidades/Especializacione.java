@@ -4,8 +4,11 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -16,6 +19,8 @@ public class Especializacione implements Serializable{
 	public static final String LISTAR_CIUDAD="Especializacione.listar";
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ESPECIALIZACIONE_SEQ")
+    @SequenceGenerator(sequenceName = "ESPECIALIZACIONES_SEQ", allocationSize = 1, name = "ESPECIALIZACIONE_SEQ")
 	@Column(name="Id",nullable=false)
 	private Integer idEspecializacion;
 	

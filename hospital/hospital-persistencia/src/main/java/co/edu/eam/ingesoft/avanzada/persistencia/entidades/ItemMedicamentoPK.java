@@ -6,7 +6,7 @@ public class ItemMedicamentoPK implements Serializable{
 	
 	private Integer idInventario;
 	
-	private Integer idOrden;
+	private Integer idCita;
 
 	public ItemMedicamentoPK() {
 		super();
@@ -15,7 +15,7 @@ public class ItemMedicamentoPK implements Serializable{
 	public ItemMedicamentoPK(int idInventario, int idOrden) {
 		super();
 		this.idInventario = idInventario;
-		this.idOrden = idOrden;
+		this.idCita = idOrden;
 	}
 
 	public int getIdInventario() {
@@ -27,11 +27,11 @@ public class ItemMedicamentoPK implements Serializable{
 	}
 
 	public int getIdOrden() {
-		return idOrden;
+		return idCita;
 	}
 
 	public void setIdOrden(int idOrden) {
-		this.idOrden = idOrden;
+		this.idCita = idOrden;
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class ItemMedicamentoPK implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + idInventario;
-		result = prime * result + idOrden;
+		result = prime * result + idCita;
 		return result;
 	}
 
@@ -54,7 +54,7 @@ public class ItemMedicamentoPK implements Serializable{
 		ItemMedicamentoPK other = (ItemMedicamentoPK) obj;
 		if (idInventario != other.idInventario)
 			return false;
-		if (idOrden != other.idOrden)
+		if (idCita != other.idCita)
 			return false;
 		return true;
 	}

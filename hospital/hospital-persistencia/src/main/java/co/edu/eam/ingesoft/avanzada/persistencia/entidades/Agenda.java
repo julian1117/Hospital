@@ -5,10 +5,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,16 +20,17 @@ import javax.persistence.TemporalType;
 public class Agenda implements Serializable{
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "AGENDA_SEQ")
+    @SequenceGenerator(sequenceName = "AGENDAS_SEQ", allocationSize = 1, name = "AGENDA_SEQ")
 	@Column(name="Id",nullable=false)
 	private Integer id;
 	
-	@Column(name="fecha_cita",nullable=false)
-	@Temporal(TemporalType.DATE)
-	private Date fechaCita;
+	@Column(name="Hora_inicio",nullable=false)
+	private String horaInicio;
 	
-	@ManyToOne
-	@JoinColumn(name="HORA",nullable=false)
-	private HoraCita hora;
+	
+	@Column(name="Hora_final",nullable=false)
+	private String horaFinal;
 	
 	@ManyToOne
 	@JoinColumn(name="MEDICOS_PERSONAS_Id",nullable=false)
@@ -41,54 +44,66 @@ public class Agenda implements Serializable{
 		super();
 	}
 
-	public Agenda(Integer id, Date fechaCita, HoraCita hora, Medico medico, Consultorio consultorio) {
-		super();
-		this.id = id;
-		this.fechaCita = fechaCita;
-		this.hora = hora;
-		this.medico = medico;
-		this.consultorio = consultorio;
-	}
-
+	
 	public Integer getId() {
 		return id;
 	}
+
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public Date getFechaCita() {
-		return fechaCita;
+
+	public String getHoraInicio() {
+		return horaInicio;
 	}
 
-	public void setFechaCita(Date fechaCita) {
-		this.fechaCita = fechaCita;
+
+	public void setHoraInicio(String horaInicio) {
+		this.horaInicio = horaInicio;
 	}
 
-	public HoraCita getHora() {
-		return hora;
+
+	public String getHoraFinal() {
+		return horaFinal;
 	}
 
-	public void setHora(HoraCita hora) {
-		this.hora = hora;
+
+	public void setHoraFinal(String horaFinal) {
+		this.horaFinal = horaFinal;
 	}
+
 
 	public Medico getMedico() {
 		return medico;
 	}
 
+
 	public void setMedico(Medico medico) {
 		this.medico = medico;
 	}
+
 
 	public Consultorio getConsultorio() {
 		return consultorio;
 	}
 
+
 	public void setConsultorio(Consultorio consultorio) {
 		this.consultorio = consultorio;
 	}
+
+
+	public Agenda(Integer id, String horaInicio, String horaFinal, Medico medico, Consultorio consultorio) {
+		super();
+		this.id = id;
+		this.horaInicio = horaInicio;
+		this.horaFinal = horaFinal;
+		this.medico = medico;
+		this.consultorio = consultorio;
+	}
+
 
 	@Override
 	public int hashCode() {

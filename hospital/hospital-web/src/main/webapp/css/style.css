@@ -1,5 +1,5 @@
 /*!
-* Author: Łukasz Holeczek
+* Author: Å�ukasz Holeczek
 * Template: GotYA - HTML5 Responsive Bootstrap Theme
 * Version: 1.0.0 
 * Bootstrap version: 2.1.
@@ -535,6 +535,10 @@ html[xmlns] .slides {display: block;}
 	margin-bottom: 6px;
 	margin-left: 20px;
 	width: 70%;
+}
+
+.ui-inputtextarea{
+	width: 500px!important;
 }
 
 .icons-box-vert h3 {

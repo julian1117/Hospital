@@ -4,10 +4,13 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -18,13 +21,15 @@ public class Patologia implements Serializable{
 	public static final String LISTA_PATOLOGIA = "Patologia.listaPato";
 	//CAMbio de  name's mapeada
 	@Id
-	@Column(name="id",nullable=false)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PATOLOGIA_SEQ")
+    @SequenceGenerator(sequenceName = "PATOLOGIAS_SEQ", allocationSize = 1, name = "PATOLOGIA_SEQ")
+	@Column(name="Id",nullable=false)
 	private Integer idPatologia;
 	
-	@Column(name="descripcion",nullable=false,length=2000)
+	@Column(name="Descripcion",nullable=false,length=2000)
 	private String descripcion;
 	
-	@Column(name="nombre",nullable=false,length=40)
+	@Column(name="Nombre",nullable=false,length=40)
 	private String nombre;
 	
 	

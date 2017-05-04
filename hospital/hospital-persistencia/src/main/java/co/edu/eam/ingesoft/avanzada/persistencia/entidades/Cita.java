@@ -4,10 +4,13 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +21,8 @@ public class Cita implements Serializable{
 	public static final String LISTA_CITAS_PACIENTE = "Cita.listaCitaPaciente";
 	
 	@Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CIT_SEQ")
+    @SequenceGenerator(sequenceName = "CITAS_SEQ", allocationSize = 1, name = "CIT_SEQ")
 	@Column(name="Id",nullable=false)
 	private Integer idCita;
 	
@@ -39,12 +44,109 @@ public class Cita implements Serializable{
 	
 	@Column(name="esteado")
 	private boolean estado;
+	
+	@ManyToOne
+	@JoinColumn(name="HORAS_CITAS_id",nullable=false)
+	private HoraCita horaCita;
 
 	public Cita() {
 		super();
 	}
 
-	public Cita(Integer idCita, Agenda agenda, TipoCita tipoCita, Cita cita, Paciente persona, boolean estado) {
+	
+
+	public Integer getIdCita() {
+		return idCita;
+	}
+
+
+
+	public void setIdCita(Integer idCita) {
+		this.idCita = idCita;
+	}
+
+
+
+	public Agenda getAgenda() {
+		return agenda;
+	}
+
+
+
+	public void setAgenda(Agenda agenda) {
+		this.agenda = agenda;
+	}
+
+
+
+	public TipoCita getTipoCita() {
+		return tipoCita;
+	}
+
+
+
+	public void setTipoCita(TipoCita tipoCita) {
+		this.tipoCita = tipoCita;
+	}
+
+
+
+	public Cita getCita() {
+		return cita;
+	}
+
+
+
+	public void setCita(Cita cita) {
+		this.cita = cita;
+	}
+
+
+
+	public Paciente getPersona() {
+		return persona;
+	}
+
+
+
+	public void setPersona(Paciente persona) {
+		this.persona = persona;
+	}
+
+
+
+	public boolean isEstado() {
+		return estado;
+	}
+
+
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
+
+
+
+	public HoraCita getHoraCita() {
+		return horaCita;
+	}
+
+
+
+	public void setHoraCita(HoraCita horaCita) {
+		this.horaCita = horaCita;
+	}
+
+
+
+	public static String getListaCitasPaciente() {
+		return LISTA_CITAS_PACIENTE;
+	}
+
+
+
+	public Cita(Integer idCita, Agenda agenda, TipoCita tipoCita, Cita cita, Paciente persona, boolean estado,
+			HoraCita horaCita) {
 		super();
 		this.idCita = idCita;
 		this.agenda = agenda;
@@ -52,55 +154,10 @@ public class Cita implements Serializable{
 		this.cita = cita;
 		this.persona = persona;
 		this.estado = estado;
+		this.horaCita = horaCita;
 	}
 
-	public Integer getIdCita() {
-		return idCita;
-	}
 
-	public void setIdCita(Integer idCita) {
-		this.idCita = idCita;
-	}
-
-	public Agenda getAgenda() {
-		return agenda;
-	}
-
-	public void setAgenda(Agenda agenda) {
-		this.agenda = agenda;
-	}
-
-	public TipoCita getTipoCita() {
-		return tipoCita;
-	}
-
-	public void setTipoCita(TipoCita tipoCita) {
-		this.tipoCita = tipoCita;
-	}
-
-	public Cita getCita() {
-		return cita;
-	}
-
-	public void setCita(Cita cita) {
-		this.cita = cita;
-	}
-
-	public Paciente getPersona() {
-		return persona;
-	}
-
-	public void setPersona(Paciente persona) {
-		this.persona = persona;
-	}
-
-	public boolean isEstado() {
-		return estado;
-	}
-
-	public void setEstado(boolean estado) {
-		this.estado = estado;
-	}
 
 	@Override
 	public int hashCode() {

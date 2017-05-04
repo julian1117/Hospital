@@ -2,7 +2,6 @@ package co.edu.eam.ingesoft.avanzada.persistencia.entidades;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -11,9 +10,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="DIGNOSTICO")
-@IdClass(DiagnosticoPK.class)
-public class Diagnostico implements Serializable{
+@IdClass(OrdenCirugiaPK.class)
+@Table(name="ORDEN_CIRUGIAS")
+public class OrdenCirugia implements Serializable{
 	
 	@Id
 	@ManyToOne
@@ -22,20 +21,19 @@ public class Diagnostico implements Serializable{
 	
 	@Id
 	@ManyToOne
-	@JoinColumn(name="PATOLOGIAS_Id",nullable=false)
-	private Patologia patologiaId;
+	@JoinColumn(name="CIRUGIAS_ID_CIRUGIA",nullable=false)
+	private Cirugia idCirugia;
 	
-	@Column(name="diagnostico_medico",nullable=false)
-	private String diagnostico;
+	
 
-	public Diagnostico() {
+	public OrdenCirugia() {
 		super();
 	}
 
-	public Diagnostico(Cita idCita, Patologia patologiaId) {
+	public OrdenCirugia(Cita idCita, Cirugia idCirugia) {
 		super();
 		this.idCita = idCita;
-		this.patologiaId = patologiaId;
+		this.idCirugia = idCirugia;
 	}
 
 	public Cita getIdCita() {
@@ -46,12 +44,12 @@ public class Diagnostico implements Serializable{
 		this.idCita = idCita;
 	}
 
-	public Patologia getPatologiaId() {
-		return patologiaId;
+	public Cirugia getIdCirugia() {
+		return idCirugia;
 	}
 
-	public void setPatologiaId(Patologia patologiaId) {
-		this.patologiaId = patologiaId;
+	public void setIdCirugia(Cirugia idCirugia) {
+		this.idCirugia = idCirugia;
 	}
 	
 	

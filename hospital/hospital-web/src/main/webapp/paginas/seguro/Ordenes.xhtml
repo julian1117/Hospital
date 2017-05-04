@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+
+	<ui:define name="cuerpo">
+		<h:form prependId="false">
+
+			<p:accordionPanel>
+				<p:tab title="ORDEN MEDICA">
+				
+				<h:outputLabel for="tfCedula" id="lbCedula"
+								value="#{msj['cita.numeroId']}:" />
+							<h:inputText id="tfCedula"
+								value="#{atenderCitaController.cedulaPaciente}"
+								class="form-control" />
+							<p:message for="tfCedula" />
+				
+					<p:commandButton id="btnGenerarOrdenMedica"
+						value="#{msj['citaAT.guPatologia']}" action="#" process="@this"
+						update="growl" icon="ui-icon-plus" />
+				</p:tab>
+			
+				<p:tab title="ORDEN MEDICAMENTOS">
+				
+				<h:outputLabel for="tfCedulaB" id="lbCedulaB"
+								value="#{msj['cita.numeroId']}:" />
+							<h:inputText id="tfCedulaB"
+								value="#{atenderCitaController.cedulaPaciente}"
+								class="form-control" />
+							<p:message for="tfCedula" />
+				
+					<p:commandButton id="btnGenerarOrdenMedicamento"
+						value="#{msj['citaAT.guPatologia']}" action="#" process="@this"
+						update="growl" icon="ui-icon-plus" />
+				</p:tab>
+			</p:accordionPanel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

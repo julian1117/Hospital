@@ -4,9 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -14,6 +17,8 @@ import javax.persistence.Table;
 public class Inventario implements Serializable {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "INVENTARIO_SEQ")
+    @SequenceGenerator(sequenceName = "INVENTARIOS_SEQ", allocationSize = 1, name = "INVENTARIO_SEQ")
 	@Column(name="Id",nullable=false)
 	private Integer idInventario;
 	

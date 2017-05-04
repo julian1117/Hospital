@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -14,6 +15,8 @@ import javax.persistence.Table;
 public class Pais implements Serializable{
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PAISES_SEQ")
+    @SequenceGenerator(sequenceName = "PAIS_SEQ", allocationSize = 1, name = "PAISES_SEQ")
 	@Column(name="Id")
 	private Integer idPais;
 	

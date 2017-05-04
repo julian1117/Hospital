@@ -5,11 +5,14 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,6 +23,8 @@ import javax.persistence.TemporalType;
 public class ResultadoExamen implements Serializable{
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RESULTADOS_SEQ")
+    @SequenceGenerator(sequenceName = "RESULTADOS_EXAMENES_SEQ", allocationSize = 1, name = "RESULTADOS_SEQ")
 	@Column(name="Id",nullable=false)
 	private Integer idResultado;
 	
@@ -30,35 +35,26 @@ public class ResultadoExamen implements Serializable{
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
 	
-	
-	@ManyToOne
-	@JoinColumns({
-		@JoinColumn(name="ORDEN_MEDICINAS_Id", referencedColumnName = "MEDICINAS_Id"),
-		@JoinColumn(name="ORDEN_PROCE_Id", referencedColumnName = "PROCE_Id")
-	})
-	private OrdenProcedimiento ordenProce;
-	
 
 	public ResultadoExamen() {
 		super();
 	}
 
 
-	public ResultadoExamen(int idResultado, String detalle, Date fecha, OrdenProcedimiento ordenProce) {
+	public ResultadoExamen(Integer idResultado, String detalle, Date fecha) {
 		super();
 		this.idResultado = idResultado;
 		this.detalle = detalle;
 		this.fecha = fecha;
-		this.ordenProce = ordenProce;
 	}
 
 
-	public int getIdResultado() {
+	public Integer getIdResultado() {
 		return idResultado;
 	}
 
 
-	public void setIdResultado(int idResultado) {
+	public void setIdResultado(Integer idResultado) {
 		this.idResultado = idResultado;
 	}
 
@@ -82,17 +78,6 @@ public class ResultadoExamen implements Serializable{
 		this.fecha = fecha;
 	}
 
-
-	public OrdenProcedimiento getOrdenProce() {
-		return ordenProce;
-	}
-
-
-	public void setOrdenProce(OrdenProcedimiento ordenProce) {
-		this.ordenProce = ordenProce;
-	}
-
-	
 	
 	
 	

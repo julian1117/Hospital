@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -16,6 +17,8 @@ import javax.persistence.Table;
 public class Departamento implements Serializable{
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "DEPARTAMENTOS_SEQ")
+    @SequenceGenerator(sequenceName = "DEPARTAMENTO_SEQ", allocationSize = 1, name = "DEPARTAMENTOS_SEQ")
 	@Column(name="Id")
 	private Integer IdDepartamento;
 	

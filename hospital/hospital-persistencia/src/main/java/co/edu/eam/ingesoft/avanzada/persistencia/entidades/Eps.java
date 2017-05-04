@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +21,8 @@ public class Eps implements Serializable {
 	public static final String LISTAR_EPS = "Eps.listar";
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EPSP_SEQ")
+    @SequenceGenerator(sequenceName = "EPS_SEQ", allocationSize = 1, name = "EPSP_SEQ")
 	@Column(name = "Id")
 	private Integer idEps;
 
