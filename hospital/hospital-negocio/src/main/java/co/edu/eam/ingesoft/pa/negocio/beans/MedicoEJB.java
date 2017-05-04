@@ -25,9 +25,9 @@ public class MedicoEJB {
 	 */
 	public void crearMedico(Medico medico){
 		
-		Persona buscar = buscarMedico(medico.getIdPersona());
+		Medico buscar = buscarMedico(medico.getIdPersona());
 		
-		if(buscar != null){
+		if(buscar == null){
 			em.persist(medico);
 		}else{
 			throw new ExcepcionNegocio("El medico ya se encuentra en el sistema");

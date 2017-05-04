@@ -5,11 +5,15 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="TIPO_CIRUGIAS")
+@NamedQuery(name=TipoCirugia.LISTAR_TIPO_CIRUGIAS,query="SELECT t FROM TipoCirugia t")
 public class TipoCirugia implements Serializable{
+	
+	public static final String LISTAR_TIPO_CIRUGIAS ="TipoCirugia.listarC";
 	
 	@Id
 	@Column(name="Id")

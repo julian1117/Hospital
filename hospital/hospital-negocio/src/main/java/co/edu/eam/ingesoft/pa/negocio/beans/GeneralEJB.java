@@ -14,6 +14,8 @@ import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Especializacione;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.HoraCita;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Patologia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Sintoma;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoCirugia;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoExamen;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Tratamiento;
 
 @Stateless
@@ -154,5 +156,39 @@ public class GeneralEJB {
 	 */
 	public List<Especializacione> listarEspecializacione(){
 		return em.createNamedQuery(Especializacione.LISTAR_CIUDAD).getResultList();
+	}
+	
+	/**
+	 * busca los tipos de examenes del sistema
+	 * @param id identificacion del tipo de examen a buscar
+	 * @return
+	 */
+	public TipoExamen buscarTipoExamen(Integer id){
+		return em.find(TipoExamen.class, id);
+	}
+	
+	/**
+	 * lista los tipos de examenes del sistema
+	 * @return los tipos de examanes encontrados
+	 */
+	public List<TipoExamen> listarTipoExamen(){
+		return em.createNamedQuery(TipoExamen.LISTAR_TIPO_EXAMEN).getResultList();
+	}
+	
+	/**
+	 * busca los tipos de cirugias 
+	 * @param id la identificacion de las cirugias a buscar
+	 * @return las cirugias encontradas
+	 */
+	public TipoCirugia buscarTipoCirugia(Integer id){
+		return em.find(TipoCirugia.class, id);
+	}
+	
+	/**
+	 * lista los tipos de cirugias del sistema
+	 * @return los tipos de cirugias encontrados
+	 */
+	public List<TipoCirugia> listarTipoCirugias(){
+		return em.createNamedQuery(TipoCirugia.LISTAR_TIPO_CIRUGIAS).getResultList();
 	}
 }
