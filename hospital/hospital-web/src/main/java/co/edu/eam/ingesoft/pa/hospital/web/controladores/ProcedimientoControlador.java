@@ -24,7 +24,9 @@ public class ProcedimientoControlador implements Serializable{
 	
 	private String cedulaPaciente;
 	
-	private TipoExamen examen;
+	private TipoExamen tipoExamen;
+	
+	private Examen examen;
 	
 	private List<TipoExamen> listarExamen;
 	
@@ -52,17 +54,7 @@ public class ProcedimientoControlador implements Serializable{
 		listarTipoCirugias = generalEJB.listarTipoCirugias();
 	}
 	
-	
-//	
-//	public Procedimiento getProce() {
-//		return proce;
-//	}
 
-
-
-//	public void setProce(Procedimiento proce) {
-//		this.proce = proce;
-//	}
 
 
 
@@ -72,21 +64,45 @@ public class ProcedimientoControlador implements Serializable{
 
 
 
+
+
 	public void setCedulaPaciente(String cedulaPaciente) {
 		this.cedulaPaciente = cedulaPaciente;
 	}
 
 
 
-	public TipoExamen getExamen() {
+
+
+	public TipoExamen getTipoExamen() {
+		return tipoExamen;
+	}
+
+
+
+
+
+	public void setTipoExamen(TipoExamen tipoExamen) {
+		this.tipoExamen = tipoExamen;
+	}
+
+
+
+
+
+	public Examen getExamen() {
 		return examen;
 	}
 
 
 
-	public void setExamen(TipoExamen examen) {
+
+
+	public void setExamen(Examen examen) {
 		this.examen = examen;
 	}
+
+
 
 
 
@@ -96,9 +112,13 @@ public class ProcedimientoControlador implements Serializable{
 
 
 
+
+
 	public void setListarExamen(List<TipoExamen> listarExamen) {
 		this.listarExamen = listarExamen;
 	}
+
+
 
 
 
@@ -108,9 +128,13 @@ public class ProcedimientoControlador implements Serializable{
 
 
 
+
+
 	public void setDescripcionExamen(String descripcionExamen) {
 		this.descripcionExamen = descripcionExamen;
 	}
+
+
 
 
 
@@ -120,9 +144,13 @@ public class ProcedimientoControlador implements Serializable{
 
 
 
+
+
 	public void setDescripcionInicio(String descripcionInicio) {
 		this.descripcionInicio = descripcionInicio;
 	}
+
+
 
 
 
@@ -132,9 +160,13 @@ public class ProcedimientoControlador implements Serializable{
 
 
 
+
+
 	public void setDescripcionFinal(String descripcionFinal) {
 		this.descripcionFinal = descripcionFinal;
 	}
+
+
 
 
 
@@ -144,9 +176,13 @@ public class ProcedimientoControlador implements Serializable{
 
 
 
+
+
 	public void setCirugia(TipoCirugia cirugia) {
 		this.cirugia = cirugia;
 	}
+
+
 
 
 
@@ -156,9 +192,13 @@ public class ProcedimientoControlador implements Serializable{
 
 
 
+
+
 	public void setListarTipoCirugias(List<TipoCirugia> listarTipoCirugias) {
 		this.listarTipoCirugias = listarTipoCirugias;
 	}
+
+
 
 
 
@@ -168,26 +208,53 @@ public class ProcedimientoControlador implements Serializable{
 
 
 
+
+
 	public void setGeneralEJB(GeneralEJB generalEJB) {
 		this.generalEJB = generalEJB;
 	}
 
 
 
+
+
+	public ProcedmientosEJB getProcedimientosEJB() {
+		return procedimientosEJB;
+	}
+
+
+
+
+
+	public void setProcedimientosEJB(ProcedmientosEJB procedimientosEJB) {
+		this.procedimientosEJB = procedimientosEJB;
+	}
+
+
+
+
+
 	public void buscarPaciente(){		
+	}
+	
+	public void descricionExamen(){
+		Examen exam = generalEJB.buscarnExamen(examen.getIdExamen());
+		descripcionExamen = exam.getDescripcion();
 	}
 	
 	public void generarExamen(){
 		try {
-			TipoExamen tipoExamen = generalEJB.buscarTipoExamen(examen.getIdTipoExamenes());
-//			Examen exa = new Examen(1, null, tipoExamen, descripcionExamen);
-//			procedimientosEJB.crearExamen(exa);
+			TipoExamen tipoExam = generalEJB.buscarTipoExamen(tipoExamen.getIdTipoExamenes());
+			Examen ex = new Examen(tipoExam, descripcionExamen);
+			procedimientosEJB.crearExamen(ex);
+
 			Messages.addFlashGlobalInfo("Examen generado!");
 		} catch (Exception e) {
 			Messages.addFlashGlobalError(e.getMessage());
 
-		}
-		
+		}	
 		
 	}
+	
+	
 }

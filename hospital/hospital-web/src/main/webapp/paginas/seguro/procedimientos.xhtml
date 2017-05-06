@@ -47,6 +47,10 @@
 
 							<f:selectItems value="#{proceControler.listarExamen}" var="exa"
 								itemValue="#{exa}" itemLabel="#{exa.nomTipoExamen}" />
+								
+								<f:ajax event="change" execute="@this"
+										render="descripcionExamen"
+										listener="#{proceControler.descricionExamen}" />
 						</h:selectOneMenu>
 						
 						

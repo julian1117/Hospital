@@ -11,6 +11,7 @@ import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Causa;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Ciudad;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Eps;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Especializacione;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Examen;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.HoraCita;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Patologia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Sintoma;
@@ -190,5 +191,14 @@ public class GeneralEJB {
 	 */
 	public List<TipoCirugia> listarTipoCirugias(){
 		return em.createNamedQuery(TipoCirugia.LISTAR_TIPO_CIRUGIAS).getResultList();
+	}
+	
+	/**
+	 * busca un examen que se encuentre en el sistema
+	 * @param id de el examen a buscar
+	 * @return el examen encontrado
+	 */
+	public Examen buscarnExamen(Integer id){
+		return em.find(Examen.class, id);		
 	}
 }

@@ -21,8 +21,6 @@ public class Eps implements Serializable {
 	public static final String LISTAR_EPS = "Eps.listar";
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EPSP_SEQ")
-    @SequenceGenerator(sequenceName = "EPS_SEQ", allocationSize = 1, name = "EPSP_SEQ")
 	@Column(name = "Id")
 	private Integer idEps;
 
@@ -36,18 +34,18 @@ public class Eps implements Serializable {
 		super();
 	}
 
-	public Eps(int idEps, String nombre, boolean prepagada) {
+	public Eps(Integer idEps, String nombre, boolean prepagada) {
 		super();
 		this.idEps = idEps;
 		this.nombre = nombre;
 		this.prepagada = prepagada;
 	}
 
-	public int getIdEps() {
+	public Integer getIdEps() {
 		return idEps;
 	}
 
-	public void setIdEps(int idEps) {
+	public void setIdEps(Integer idEps) {
 		this.idEps = idEps;
 	}
 
@@ -65,6 +63,10 @@ public class Eps implements Serializable {
 
 	public void setPrepagada(boolean prepagada) {
 		this.prepagada = prepagada;
+	}
+
+	public static String getListarEps() {
+		return LISTAR_EPS;
 	}
 
 	@Override
@@ -91,8 +93,7 @@ public class Eps implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
+
 	
 	
 

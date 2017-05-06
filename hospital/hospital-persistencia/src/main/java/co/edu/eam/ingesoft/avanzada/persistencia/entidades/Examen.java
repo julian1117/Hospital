@@ -11,13 +11,17 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="EXAMENES")
+@NamedQuery(name=Examen.LISTA_EXAMEN,query="SELECT e FROM Examen e")
 public class Examen implements Serializable{
+	
+	public static final String LISTA_EXAMEN = "Examen.listarExamen";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EXAMENE_SEQ")
