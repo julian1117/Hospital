@@ -34,7 +34,7 @@ import javax.faces.context.FacesContext;
 public class CitaControlador implements Serializable {
 
 	@Pattern(regexp="[0-9]*",message="Solo numeros")
-	@Length(min=8,max=10,message="Longitus de 8 a 10")
+	@Length(min=5,max=10,message="Longitus de 8 a 10")
 	private String cedulaPaciente;
 
 	private Medico medico;
