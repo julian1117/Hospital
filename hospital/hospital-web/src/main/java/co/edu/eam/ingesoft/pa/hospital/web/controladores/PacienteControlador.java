@@ -27,7 +27,7 @@ import co.edu.eam.ingesoft.pa.negocio.beans.PersonaEJB;
 
 @Named("personaControler")
 @ViewScoped
-public class PersonaControlador implements Serializable {
+public class PacienteControlador implements Serializable {
 	
 //	@Pattern(regexp="[0-9]*",message="solo numeros")
 //	@Length(min=4,max=10,message="longitud entre 5 y 10")
@@ -243,7 +243,7 @@ public class PersonaControlador implements Serializable {
 
 		 			Eps epsB = generalEJB.buscarEps(eps.getIdEps());		 			
 		 				 			
-		 			Paciente paciente = new Paciente(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, "Pacienta", email, sexo, ciu, epsB);
+		 			Paciente paciente = new Paciente(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, "Paciente", email, sexo, ciu, epsB);
 		 			pacienteEJB.crearPaciente(paciente);
 		 			idPersona=null;
 			 		nombre="";

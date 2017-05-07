@@ -9,6 +9,8 @@
 
 			<p:panel id="datosPanelPrincipal" header="Registro de la Cita Medica">
 
+<p:tabView>
+<p:tab title="Atender Cita">
 				<p:accordionPanel>
 					<p:tab title="BUSCAR PACIENTES">
 						<p:panelGrid columns="4">
@@ -40,7 +42,7 @@
 
 					</p:tab>
 				</p:accordionPanel>
-
+	
 				<p:accordionPanel>
 					<p:tab title="DIAGNOSTICO">
 						<p:panelGrid columns="2" styleClass="ui-noborder">
@@ -135,7 +137,63 @@
 
 					</p:tab>
 				</p:accordionPanel>
+</p:tab>
 
+<p:tab title="Procedimeintos">
+
+<p:accordionPanel>
+				<p:tab title="EXAMENES"> 
+				<p:panel id="paneldatosExamen" >
+					<h:panelGrid columns="2">
+
+							<h:outputLabel for="tftTipoExamen" id="lblTipoExamen"
+							value="#{msj['procedimiento.tipoExamen']}" />
+						<h:selectOneMenu id="tftTipoExamen"
+							value="#{proceControler.tipoExamen}" converter="tipoExamenConver"
+							class="form-control">
+
+							<f:selectItems value="#{proceControler.listarExamen}" var="exa"
+								itemValue="#{exa}" itemLabel="#{exa.nomTipoExamen}" />
+								
+					
+						</h:selectOneMenu>
+						
+						
+						<h:outputLabel for="descripcionExamen" id="lbdescripcionExamen"
+							value="#{msj['procedimiento.descripcion']}"></h:outputLabel>
+							
+						<p:inputTextarea id="descripcionExamen"
+							value="#{proceControler.descripcionExamen}" rows="10" cols="250"
+							completeMethod="#" queryDelay="450" minQueryLength="6"></p:inputTextarea>
+							
+							<p:commandButton id="btnCrearExamen"
+							value="#{msj['procedimiento.generaExamen']}"
+							action="#{proceControler.generarExamen}"
+							process="@this paneldatosExamen"
+							></p:commandButton>
+
+					</h:panelGrid>
+					</p:panel>
+				  </p:tab>
+			</p:accordionPanel>
+
+			<p:accordionPanel>
+				<p:tab title="CIRUGIAS">
+					<p:panelGrid columns="4">
+
+					</p:panelGrid>
+				</p:tab>
+			</p:accordionPanel>
+
+			<p:accordionPanel>
+				<p:tab title="HOSPITALIZACION">
+					<p:panelGrid columns="4">
+
+					</p:panelGrid>
+				</p:tab>
+			</p:accordionPanel>
+</p:tab>
+</p:tabView>
 			</p:panel>
 
 		</h:form>

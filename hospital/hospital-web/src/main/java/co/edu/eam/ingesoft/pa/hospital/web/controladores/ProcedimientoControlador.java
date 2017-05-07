@@ -237,10 +237,7 @@ public class ProcedimientoControlador implements Serializable{
 	public void buscarPaciente(){		
 	}
 	
-	public void descricionExamen(){
-		Examen exam = generalEJB.buscarnExamen(examen.getIdExamen());
-		descripcionExamen = exam.getDescripcion();
-	}
+	
 	
 	public void generarExamen(){
 		try {
