@@ -9,13 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="CITAS")
-@NamedQuery(name=Cita.LISTA_CITAS_PACIENTE,query="SELECT c FROM Cita c WHERE c.persona.idPersona=?1 AND c.estado=false")
+@NamedNativeQuery(name=Cita.LISTA_CITAS_PACIENTE,query="SELECT * FROM CITAS c JOIN PERSONAS pac ON c.PACIENTES_PERSONA_ID = pac.PERSONAS_ID JOIN TIPOS_CITAS tp ON tp.ID = c.TIPOS_CITAS_ID JOIN AGENDAS a on c.AGENDAS_ID = a.ID JOIN CONSULTORIOS con on con.ID = a.CONSULTORIOS_ID JOIN PERSONAS pm on pm.PERSONAS_ID = a.MEDICOS_PERSONAS_ID JOIN HORAS_CITAS hr on c.HORAS_CITAS_ID=hr.ID  WHERE c.PACIENTES_PERSONA_ID=?1 AND c.ESTEADO=0")
 public class Cita implements Serializable{
 
 	public static final String LISTA_CITAS_PACIENTE = "Cita.listaCitaPaciente";

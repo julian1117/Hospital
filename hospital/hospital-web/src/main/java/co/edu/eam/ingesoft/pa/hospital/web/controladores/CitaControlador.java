@@ -75,7 +75,7 @@ public class CitaControlador implements Serializable {
 	 * Busca todas las citas del apciente que esten como no atendidas
 	 */
 	public void buscarPaciente() {
-		listaCita = citaEJB.listCitaPaciente(Long.parseLong(cedulaPaciente));
+		listaCita = citaEJB.listaCitaPaciente(Long.parseLong(cedulaPaciente));
 		if (listaCita.isEmpty()) {
 			Messages.addFlashGlobalError("El paciente no tiene citas regsitradas en el momento");
 		}

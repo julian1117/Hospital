@@ -76,10 +76,11 @@ public class CitaEJB {
 	 * @return
 	 */
 
-//	public List<Object> listaCitaPaciente(Long cedula) {
-//		return em.createNativeQuery(
-//				"SELECT * FROM ((((CITAS c LEFT JOIN PERSONAS pac ON c.PACIENTES_PERSONA_ID = pac.PERSONAS_ID ) LEFT JOIN TIPOS_CITAS tp ON tp.ID = c.TIPOS_CITAS_ID) LEFT JOIN AGENDAS a on c.AGENDAS_ID = a.ID) LEFT JOIN CONSULTORIOS con on con.ID = a.CONSULTORIOS_ID) LEFT JOIN PERSONAS pm on pm.PERSONAS_ID = a.MEDICOS_PERSONAS_ID WHERE c.PACIENTES_PERSONA_ID=?1 AND c.ESTEADO=0")..getResultList();
-//	}
+	public List<Cita> listaCitaPaciente(Long cedula) {
+		return em.createNativeQuery(
+				"SELECT * FROM CITAS c JOIN PERSONAS pac ON c.PACIENTES_PERSONA_ID = pac.PERSONAS_ID JOIN TIPOS_CITAS tp ON tp.ID = c.TIPOS_CITAS_ID JOIN AGENDAS a on c.AGENDAS_ID = a.ID JOIN CONSULTORIOS con on con.ID = a.CONSULTORIOS_ID JOIN PERSONAS pm on pm.PERSONAS_ID = a.MEDICOS_PERSONAS_ID JOIN HORAS_CITAS hr on c.HORAS_CITAS_ID=hr.ID  WHERE c.PACIENTES_PERSONA_ID=?1 AND c.ESTEADO=0",Cita.class).setParameter(1,cedula ).getResultList();
+	
+	}
 
 	public List<Cita> listCitaPaciente(Long cedula) {
 		return em.createNamedQuery(Cita.LISTA_CITAS_PACIENTE).setParameter(1, cedula).getResultList();
