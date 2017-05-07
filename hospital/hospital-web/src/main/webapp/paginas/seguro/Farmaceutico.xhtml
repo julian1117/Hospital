@@ -19,58 +19,58 @@
 
 			<p:tabView>
 				<p:tab title="Gestion Crear">
-					<p:panel id="paneldatosP" header="Datos Persona">
+					<p:panel id="paneldatosP" header="Datos Farmaceutico">
 						<h:panelGrid id="paneldatos" columns="2">
 
 							<h:outputLabel for="tftCedula" id="lblCedula"
 								value="#{msj['persona.cedula']}:"></h:outputLabel>
-							<h:inputText id="tftCedula" value="#{pacienteControler.idPersona}"></h:inputText>
+							<h:inputText id="tftCedula" value="#{farmaceuticoControler.idPersona}"></h:inputText>
 
 							<h:outputLabel for="tftNombre" id="lblNombre"
 								value="#{msj['persona.nombre']}:"></h:outputLabel>
-							<h:inputText id="tftNombre" value="#{pacienteControler.nombre}"></h:inputText>
+							<h:inputText id="tftNombre" value="#{farmaceuticoControler.nombre}"></h:inputText>
 
 							<h:outputLabel for="tftApellido" id="lblApellido"
 								value="#{msj['persona.apellido']}:"></h:outputLabel>
 							<h:inputText id="tftApellido"
-								value="#{pacienteControler.apellido}"></h:inputText>
+								value="#{farmaceuticoControler.apellido}"></h:inputText>
 
 							<p:outputLabel for="tftFecha" value="Fecha" />
-							<h:inputText id="tftFecha" value="#{pacienteControler.fechastr}"
+							<h:inputText id="tftFecha" value="#{farmaceuticoControler.fechastr}"
 								mode="inline" />
 
 							<h:outputLabel for="tftTelefono" id="lblTelefono"
 								value="#{msj['persona.telefono']}:"></h:outputLabel>
 							<h:inputText id="tftTelefono"
-								value="#{pacienteControler.telefono}"></h:inputText>
+								value="#{farmaceuticoControler.telefono}"></h:inputText>
 
 							<h:outputLabel for="tftDireccion" id="lblDireccion"
 								value="#{msj['persona.direccion']}:"></h:outputLabel>
 							<h:inputText id="tftDireccion"
-								value="#{pacienteControler.direccion}"></h:inputText>
+								value="#{farmaceuticoControler.direccion}"></h:inputText>
 
 
 
 							<h:outputLabel for="tftEmail" id="lblEmail"
 								value="#{msj['persona.email']}:"></h:outputLabel>
-							<h:inputText id="tftEmail" value="#{pacienteControler.email}"></h:inputText>
+							<h:inputText id="tftEmail" value="#{farmaceuticoControler.email}"></h:inputText>
 
 							<h:outputLabel for="tftSexo" id="lblSexo"
 								value="#{msj['persona.sexo']}:"></h:outputLabel>
-							<h:inputText id="tftSexo" value="#{pacienteControler.sexo}"></h:inputText>
+							<h:inputText id="tftSexo" value="#{farmaceuticoControler.sexo}"></h:inputText>
 
 							<h:outputLabel for="tftCiudad" id="lblCiudad" value="Ciudad" />
 							<h:selectOneMenu id="tftCiudad"
-								value="#{pacienteControler.ciudad}" converter="ciudadConver"
+								value="#{farmaceuticoControler.ciudad}" converter="ciudadConver"
 								class="form-control">
 
-								<f:selectItems value="#{pacienteControler.nombreCiudad}"
+								<f:selectItems value="#{farmaceuticoControler.nombreCiudad}"
 									var="doc" itemValue="#{doc}" itemLabel="#{doc.nombre}" />
 							</h:selectOneMenu>
 
 							<h:panelGrid id="panelbtnsCrear" columns="2">
 								<p:commandButton id="btnCrear" value="#{msj['persona.crear']}"
-									actionListener="#{pacienteControler.crearPersona()}"
+									actionListener="#{farmaceuticoControler.crearFarmaceutico}"
 									process="@this paneldatos" />
 							</h:panelGrid>
 						</h:panelGrid>
@@ -82,10 +82,10 @@
 						<h:outputLabel for="tftCedulaBuscar" id="lblCedulaBuscar"
 							value="#{msj['persona.cedula']}:"></h:outputLabel>
 						<h:inputText id="tftCedulaBuscar"
-							value="#{pacienteControler.idPersona}"></h:inputText>
+							value="#{farmaceuticoControler.idPersona}"></h:inputText>
 
 						<p:commandButton id="btnBuscar" value="#{msj['persona.buscar']}"
-							action="#{pacienteControler.buscar}" class="btn"
+							action="#{farmaceuticoControler.buscar}" class="btn"
 							process="@this tftCedulaBuscar" update="paneldatosBuscar " />
 					</h:panelGrid>
 
@@ -97,46 +97,46 @@
 							<h:outputLabel for="tftNombreBuscar" id="lblNombreBuscar"
 								value="#{msj['persona.nombre']}:"></h:outputLabel>
 							<h:inputText id="tftNombreBuscar"
-								value="#{pacienteControler.nombre}"></h:inputText>
+								value="#{farmaceuticoControler.nombre}"></h:inputText>
 
 							<h:outputLabel for="tftApellidoBuscar" id="lblApellidoBuscar"
 								value="#{msj['persona.apellido']}:"></h:outputLabel>
 							<h:inputText id="tftApellidoBuscar"
-								value="#{pacienteControler.apellido}"></h:inputText>
+								value="#{farmaceuticoControler.apellido}"></h:inputText>
 
 							<p:outputLabel for="tftFechaBuscar" value="Fecha" />
 							<h:inputText id="tftFechaBuscar"
-								value="#{pacienteControler.fechastr}" mode="inline" />
+								value="#{farmaceuticoControler.fechastr}" mode="inline" />
 
 							<h:outputLabel for="tftTelefonoBuscar" id="lblTelefonoBuscar"
 								value="#{msj['persona.telefono']}:"></h:outputLabel>
 							<h:inputText id="tftTelefonoBuscar"
-								value="#{pacienteControler.telefono}"></h:inputText>
+								value="#{farmaceuticoControler.telefono}"></h:inputText>
 
 							<h:outputLabel for="tftDireccionBuscar" id="lblDireccionBuscar"
 								value="#{msj['persona.direccion']}:"></h:outputLabel>
 							<h:inputText id="tftDireccionBuscar"
-								value="#{pacienteControler.direccion}"></h:inputText>
+								value="#{farmaceuticoControler.direccion}"></h:inputText>
 
 
 							<h:outputLabel for="tftEmailBuscar" id="lblEmailBuscar"
 								value="#{msj['persona.email']}:"></h:outputLabel>
 							<h:inputText id="tftEmailBuscar"
-								value="#{pacienteControler.email}"></h:inputText>
+								value="#{farmaceuticoControler.email}"></h:inputText>
 
 							<h:outputLabel for="tftSexoBuscar" id="lblSexoBuscar"
 								value="#{msj['persona.sexo']}:"></h:outputLabel>
-							<h:inputText id="tftSexoBuscar" value="#{pacienteControler.sexo}"></h:inputText>
+							<h:inputText id="tftSexoBuscar" value="#{farmaceuticoControler.sexo}"></h:inputText>
 
 							
 
 							<h:outputLabel for="tftCiudadBuscar" id="lblCiudadBuscar"
 								value="Ciudad" />
 							<h:selectOneMenu id="tftCiudadBuscar"
-								value="#{pacienteControler.ciudad}" converter="ciudadConver"
+								value="#{farmaceuticoControler.ciudad}" converter="ciudadConver"
 								class="form-control">
 
-								<f:selectItems value="#{pacienteControler.nombreCiudad}"
+								<f:selectItems value="#{farmaceuticoControler.nombreCiudad}"
 									var="doc" itemValue="#{doc}" itemLabel="#{doc.nombre}" />
 							</h:selectOneMenu>
 
@@ -149,13 +149,13 @@
 
 					<h:panelGrid id="panelbtns" columns="2">
 						<p:commandButton id="btnEditar" value="#{msj['persona.editar']}"
-							action="#{pacienteControler.editar}" class="btn"
+							action="#{farmaceuticoControler.editar}" class="btn"
 							process="@this paneldatosPBuscar" />
 
 
 						<p:commandButton id="btnEliminar"
 							value="#{msj['persona.eliminar']}"
-							action="#{pacienteControler.eliminar}" class="btn"
+							action="#{farmaceuticoControler.eliminar}" class="btn"
 							process="@this tftCedulaBuscar"  />
 					</h:panelGrid>
 

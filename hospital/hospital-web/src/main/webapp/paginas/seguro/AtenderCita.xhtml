@@ -9,191 +9,241 @@
 
 			<p:panel id="datosPanelPrincipal" header="Registro de la Cita Medica">
 
-<p:tabView>
-<p:tab title="Atender Cita">
-				<p:accordionPanel>
-					<p:tab title="BUSCAR PACIENTES">
-						<p:panelGrid columns="4">
+				<p:tabView>
+					<p:tab title="Atender Cita">
+						<p:accordionPanel>
+							<p:tab title="BUSCAR PACIENTES">
+								<p:panelGrid columns="4">
 
-							<h:outputLabel for="tfCedula" id="lbCedula"
-								value="#{msj['cita.numeroId']}:" />
-							<h:inputText id="tfCedula"
-								value="#{atenderCitaController.cedulaPaciente}"
-								class="form-control" />
-							<p:message for="tfCedula" />
+									<h:outputLabel for="tfCedula" id="lbCedula"
+										value="#{msj['cita.numeroId']}:" />
+									<h:inputText id="tfCedula"
+										value="#{atenderCitaController.cedulaPaciente}"
+										class="form-control" />
+									<p:message for="tfCedula" />
 
-							<p:commandButton id="btnBuscarPaciente"
-								value="#{msj['cita.buscaPaciente']}"
-								action="#{atenderCitaController.buscarPaciente}"
-								process="@this tfCedula" update="cbCitas growl"
-								icon="ui-icon-search" />
+									<p:commandButton id="btnBuscarPaciente"
+										value="#{msj['cita.buscaPaciente']}"
+										action="#{atenderCitaController.buscarPaciente}"
+										process="@this tfCedula" update="cbCitas growl"
+										icon="ui-icon-search" />
 
-						</p:panelGrid>
+								</p:panelGrid>
 
-						<h:outputLabel for="cbCitas" id="lbCitas"
-							value="#{msj['cita.lisCitas']}:" />
-						<h:selectOneMenu id="cbCitas"
-							value="#{atenderCitaController.cita}" converter="citaConver">
-							<f:selectItems value="#{atenderCitaController.listaCita}"
-								var="doc" itemValue="#{doc}" itemLabel="#{doc.idCita}" />
-						</h:selectOneMenu>
-
-
-
-					</p:tab>
-				</p:accordionPanel>
-	
-				<p:accordionPanel>
-					<p:tab title="DIAGNOSTICO">
-						<p:panelGrid columns="2" styleClass="ui-noborder">
-
-							<p:panel id="datosPatologia" border="0">
-								<h:outputLabel for="cbPatologia" id="lbPatologia"
-									value="#{msj['citaAt.patologias']}" />
-								<h:selectOneMenu id="cbPatologia"
-									value="#{atenderCitaController.patologia}"
-									converter="patologiaConver">
-									<f:selectItems value="#{atenderCitaController.listaPatolgia}"
-										var="doc" itemValue="#{doc}" itemLabel="#{doc.nombre}" />
-
-									<f:ajax event="change" execute="@this"
-										render="descripcionPatoligia"
-										listener="#{atenderCitaController.descPatologia}" />
+								<h:outputLabel for="cbCitas" id="lbCitas"
+									value="#{msj['cita.lisCitas']}:" />
+								<h:selectOneMenu id="cbCitas"
+									value="#{atenderCitaController.cita}" converter="citaConver">
+									<f:selectItems value="#{atenderCitaController.listaCita}"
+										var="doc" itemValue="#{doc}" itemLabel="#{doc.idCita}" />
 								</h:selectOneMenu>
 
 
-								<h:outputLabel for="descripcionPatoligia"
-									id="lbdescripcionPatoligia"
-									value="#{msj['clieAt.descripcionPatoligia']}" />
-								<p:inputTextarea id="descripcionPatoligia"
+
+							</p:tab>
+						</p:accordionPanel>
+
+						<p:accordionPanel>
+							<p:tab title="DIAGNOSTICO">
+								<p:panelGrid columns="2" styleClass="ui-noborder">
+
+									<p:panel id="datosPatologia" border="0">
+										<h:outputLabel for="cbPatologia" id="lbPatologia"
+											value="#{msj['citaAt.patologias']}" />
+										<h:selectOneMenu id="cbPatologia"
+											value="#{atenderCitaController.patologia}"
+											converter="patologiaConver">
+											<f:selectItems value="#{atenderCitaController.listaPatolgia}"
+												var="doc" itemValue="#{doc}" itemLabel="#{doc.nombre}" />
+
+											<f:ajax event="change" execute="@this"
+												render="descripcionPatoligia"
+												listener="#{atenderCitaController.descPatologia}" />
+										</h:selectOneMenu>
+
+
+										<h:outputLabel for="descripcionPatoligia"
+											id="lbdescripcionPatoligia"
+											value="#{msj['clieAt.descripcionPatoligia']}" />
+										<p:inputTextarea id="descripcionPatoligia"
+											value="#{atenderCitaController.textoDesPatologia}" rows="10"
+											cols="100" completeMethod="#" queryDelay="750"
+											minQueryLength="6" />
+										<br />
+										<br />
+										<p:commandButton id="btnGuardarPatologia"
+											value="#{msj['citaAT.guPatologia']}" action="#"
+											process="@this" update="growl" icon="ui-icon-plus" />
+
+									</p:panel>
+
+									<p:panel>
+										<h:outputLabel for="cbSintomas" id="lbSintomas"
+											value="#{msj['clieAt.sintoma']}" />
+										<h:selectOneMenu id="cbSintomas"
+											value="#{atenderCitaController.sintoma}"
+											converter="sintomaConver">
+											<f:selectItems value="#{atenderCitaController.listaSintomas}"
+												var="doc" itemValue="#{doc}"
+												itemLabel="#{doc.nombreSintoma}" />
+										</h:selectOneMenu>
+
+										<p:commandButton id="btnGuardarSintoma"
+											value="#{msj['citaAT.guSintoma']}" action="#" process="@this"
+											update="growl" icon="ui-icon-plus" />
+
+										<h:outputLabel for="cbCausas" id="lbCausas"
+											value="#{msj['clieAt.causa']}" />
+										<h:selectOneMenu id="cbCausas"
+											value="#{atenderCitaController.causa}"
+											converter="causaConver">
+											<f:selectItems value="#{atenderCitaController.listaCausas}"
+												var="doc" itemValue="#{doc}" itemLabel="#{doc.nombre}" />
+										</h:selectOneMenu>
+
+										<p:commandButton id="btnGuardarCausas"
+											value="#{msj['citaAT.guCausa']}" action="#" process="@this"
+											update="growl" icon="ui-icon-plus" />
+
+										<h:outputLabel for="cbTratamiento" id="lbTratamiento"
+											value="#{msj['clieAt.tratamiento']}" />
+										<h:selectOneMenu id="cbTratamiento"
+											value="#{atenderCitaController.tratamiento}"
+											converter="tratamientoConver">
+											<f:selectItems
+												value="#{atenderCitaController.listaTratamiento}" var="doc"
+												itemValue="#{doc}" itemLabel="#{doc.nombrePatologia}" />
+										</h:selectOneMenu>
+
+										<p:commandButton id="btnGuardarTratamineto"
+											value="#{msj['citaAT.guTratamiento']}" action="#"
+											process="@this" update="growl" icon="ui-icon-plus" />
+
+									</p:panel>
+
+								</p:panelGrid>
+
+
+								<br />
+								<h:outputLabel for="descripcionMedPatoligia"
+									id="lbdescripcionMedicoPatoligia"
+									value="#{msj['clieAT.descripMedico']}" />
+								<p:inputTextarea id="descripcionMedPatoligia"
 									value="#{atenderCitaController.textoDesPatologia}" rows="10"
-									cols="100" completeMethod="#" queryDelay="750"
-									minQueryLength="6" />
+									cols="100" completeMethod="#" />
 								<br />
 								<br />
-								<p:commandButton id="btnGuardarPatologia"
-									value="#{msj['citaAT.guPatologia']}" action="#" process="@this"
-									update="growl" icon="ui-icon-plus" />
-
-							</p:panel>
-
-							<p:panel>
-								<h:outputLabel for="cbSintomas" id="lbSintomas"
-									value="#{msj['clieAt.sintoma']}" />
-								<h:selectOneMenu id="cbSintomas"
-									value="#{atenderCitaController.sintoma}"
-									converter="sintomaConver">
-									<f:selectItems value="#{atenderCitaController.listaSintomas}"
-										var="doc" itemValue="#{doc}" itemLabel="#{doc.nombreSintoma}" />
-								</h:selectOneMenu>
-
-								<p:commandButton id="btnGuardarSintoma"
-									value="#{msj['citaAT.guSintoma']}" action="#" process="@this"
-									update="growl" icon="ui-icon-plus" />
-
-								<h:outputLabel for="cbCausas" id="lbCausas"
-									value="#{msj['clieAt.causa']}" />
-								<h:selectOneMenu id="cbCausas"
-									value="#{atenderCitaController.causa}" converter="causaConver">
-									<f:selectItems value="#{atenderCitaController.listaCausas}"
-										var="doc" itemValue="#{doc}" itemLabel="#{doc.nombre}" />
-								</h:selectOneMenu>
-
-								<p:commandButton id="btnGuardarCausas"
-									value="#{msj['citaAT.guCausa']}" action="#" process="@this"
-									update="growl" icon="ui-icon-plus" />
-
-								<h:outputLabel for="cbTratamiento" id="lbTratamiento"
-									value="#{msj['clieAt.tratamiento']}" />
-								<h:selectOneMenu id="cbTratamiento"
-									value="#{atenderCitaController.tratamiento}"
-									converter="tratamientoConver">
-									<f:selectItems
-										value="#{atenderCitaController.listaTratamiento}" var="doc"
-										itemValue="#{doc}" itemLabel="#{doc.nombrePatologia}" />
-								</h:selectOneMenu>
-
-								<p:commandButton id="btnGuardarTratamineto"
-									value="#{msj['citaAT.guTratamiento']}" action="#"
-									process="@this" update="growl" icon="ui-icon-plus" />
-
-							</p:panel>
-
-						</p:panelGrid>
+								<p:commandButton id="btnGuardar"
+									value="#{msj['citaAT.guardar']}" action="#" process="@this"
+									update="growl" icon="ui-icon-disk" />
 
 
-						<br />
-						<h:outputLabel for="descripcionMedPatoligia"
-							id="lbdescripcionMedicoPatoligia"
-							value="#{msj['clieAT.descripMedico']}" />
-						<p:inputTextarea id="descripcionMedPatoligia"
-							value="#{atenderCitaController.textoDesPatologia}" rows="10"
-							cols="100" completeMethod="#" />
-						<br />
-						<br />
-						<p:commandButton id="btnGuardar" value="#{msj['citaAT.guardar']}"
-							action="#" process="@this" update="growl" icon="ui-icon-disk" />
-
-
+							</p:tab>
+						</p:accordionPanel>
 					</p:tab>
-				</p:accordionPanel>
-</p:tab>
 
-<p:tab title="Procedimeintos">
+					<p:tab title="Procedimeintos">
 
-<p:accordionPanel>
-				<p:tab title="EXAMENES"> 
-				<p:panel id="paneldatosExamen" >
-					<h:panelGrid columns="2">
+						<p:accordionPanel>
+							<p:tab title="EXAMENES">
+								<p:panel id="paneldatosExamen">
+									<h:panelGrid columns="2">
 
-							<h:outputLabel for="tftTipoExamen" id="lblTipoExamen"
-							value="#{msj['procedimiento.tipoExamen']}" />
-						<h:selectOneMenu id="tftTipoExamen"
-							value="#{proceControler.tipoExamen}" converter="tipoExamenConver"
-							class="form-control">
+										<h:outputLabel for="tftTipoExamen" id="lblTipoExamen"
+											value="#{msj['procedimiento.tipoExamen']}" />
+										<h:selectOneMenu id="tftTipoExamen"
+											value="#{proceControler.tipoExamen}"
+											converter="tipoExamenConver" class="form-control">
 
-							<f:selectItems value="#{proceControler.listarExamen}" var="exa"
-								itemValue="#{exa}" itemLabel="#{exa.nomTipoExamen}" />
-								
-					
-						</h:selectOneMenu>
-						
-						
-						<h:outputLabel for="descripcionExamen" id="lbdescripcionExamen"
-							value="#{msj['procedimiento.descripcion']}"></h:outputLabel>
-							
-						<p:inputTextarea id="descripcionExamen"
-							value="#{proceControler.descripcionExamen}" rows="10" cols="250"
-							completeMethod="#" queryDelay="450" minQueryLength="6"></p:inputTextarea>
-							
-							<p:commandButton id="btnCrearExamen"
-							value="#{msj['procedimiento.generaExamen']}"
-							action="#{proceControler.generarExamen}"
-							process="@this paneldatosExamen"
-							></p:commandButton>
+											<f:selectItems value="#{proceControler.listarExamen}"
+												var="exa" itemValue="#{exa}"
+												itemLabel="#{exa.nomTipoExamen}" />
 
-					</h:panelGrid>
-					</p:panel>
-				  </p:tab>
-			</p:accordionPanel>
 
-			<p:accordionPanel>
-				<p:tab title="CIRUGIAS">
-					<p:panelGrid columns="4">
+										</h:selectOneMenu>
 
-					</p:panelGrid>
-				</p:tab>
-			</p:accordionPanel>
 
-			<p:accordionPanel>
-				<p:tab title="HOSPITALIZACION">
-					<p:panelGrid columns="4">
+										<h:outputLabel for="descripcionExamen"
+											id="lbdescripcionExamen"
+											value="#{msj['procedimiento.descripcion']}"></h:outputLabel>
 
-					</p:panelGrid>
-				</p:tab>
-			</p:accordionPanel>
-</p:tab>
-</p:tabView>
+										<p:inputTextarea id="descripcionExamen"
+											value="#{proceControler.descripcionExamen}" rows="10"
+											cols="250" completeMethod="#" queryDelay="450"
+											minQueryLength="6"></p:inputTextarea>
+
+										<p:commandButton id="btnCrearExamen"
+											value="#{msj['procedimiento.generaExamen']}"
+											action="#{proceControler.generarExamen}"
+											process="@this paneldatosExamen"></p:commandButton>
+
+									</h:panelGrid>
+								</p:panel>
+							</p:tab>
+						</p:accordionPanel>
+
+						<p:accordionPanel>
+							<p:tab title="CIRUGIAS">
+							<p:panel id="paneldatosCirugia">
+								<h:panelGrid  columns="2">
+
+									<h:outputLabel for="tftTipoCirugia" id="lblTipoCirugia"
+										value="Tipo Cirugia" />
+									<h:selectOneMenu id="tftTipoCirugia"
+										value="#{proceControler.tipoCirugia}"
+										converter="tipoCirugiasConver" class="form-control">
+
+										<f:selectItems value="#{proceControler.listarTipoCirugias}"
+											var="tipo" itemValue="#{tipo}"
+											itemLabel="#{tipo.tipoCirugia}" />
+									</h:selectOneMenu>
+
+									<h:outputLabel for="tftQuirofano" id="lblQuirofano"
+										value="Quirofano" />
+									<h:selectOneMenu id="tftQuirofano"
+										value="#{proceControler.quirofano}"
+										converter="quirofanoConver" class="form-control">
+
+										<f:selectItems value="#{proceControler.listarQuirofanos}"
+											var="quiro" itemValue="#{quiro}"
+											itemLabel="#{quiro.nombreQuirofano}" />
+									</h:selectOneMenu>
+
+									<h:outputLabel for="descripcionInicio" id="lbdescripcionInicio"
+										value="#{msj['procedimiento.DetalleIn']}"></h:outputLabel>
+
+									<p:inputTextarea id="descripcionInicio"
+										value="#{proceControler.descripcionInicio}" rows="10"
+										cols="250" completeMethod="#" queryDelay="450"
+										minQueryLength="6"></p:inputTextarea>
+										
+										<h:outputLabel for="descripcionFinal" id="lbdescripcionFinal"
+										value="#{msj['procedimiento.DetalleFin']}"></h:outputLabel>
+
+									<p:inputTextarea id="descripcionFinal"
+										value="#{proceControler.descripcionFinal}" rows="10"
+										cols="250" completeMethod="#" queryDelay="450"
+										minQueryLength="6"></p:inputTextarea>
+
+									<p:commandButton id="btnCrearExamen"
+										value="#{msj['procedimiento.generaCirugia']}"
+										action="#{proceControler.generarCirugia}"
+										process="@this paneldatosCirugia"></p:commandButton>
+
+								</h:panelGrid>
+								</p:panel>
+							</p:tab>
+						</p:accordionPanel>
+
+						<p:accordionPanel>
+							<p:tab title="HOSPITALIZACION">
+								<p:panelGrid columns="4">
+
+								</p:panelGrid>
+							</p:tab>
+						</p:accordionPanel>
+					</p:tab>
+				</p:tabView>
 			</p:panel>
 
 		</h:form>

@@ -1,0 +1,144 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+
+	<ui:define name="cuerpo">
+		<h:form prependId="false">
+			<p:tabView>
+				<p:tab title="Gestion Crear Quirofano">
+					<p:panel id="datosPanelPrincipal" header="Registro Quirofano">
+						<h:panelGrid id="paneldatos" columns="2">
+
+							<h:outputLabel for="tftId" id="lblId"
+								value="#{msj['quiromafo.id']}:"></h:outputLabel>
+							<h:inputText id="tftId" value="#{quirofanoControler.idQuirofano}"></h:inputText>
+
+							<h:outputLabel for="tftNombre" id="lblNombre"
+								value="#{msj['quiromafo.nombre']}:"></h:outputLabel>
+							<h:inputText id="tftNombre"
+								value="#{quirofanoControler.nombreQui}"></h:inputText>
+
+							<h:outputLabel for="descripcionImplementos"
+								id="lbdescripcionImplementos"
+								value="#{msj['quiromafo.detalleIm']}"></h:outputLabel>
+
+							<p:inputTextarea id="descripcionImplementos"
+								value="#{quirofanoControler.detalleImplementos}" rows="10"
+								cols="250" completeMethod="#" queryDelay="450"
+								minQueryLength="6"></p:inputTextarea>
+
+							<p:commandButton id="btnCrearQuirofano"
+								value="#{msj['persona.crear']}"
+								action="#{quirofanoControler.crearQuirofano}"
+								process="@this paneldatos">
+							</p:commandButton>
+
+
+						</h:panelGrid>
+					</p:panel>
+				</p:tab>
+				<p:tab title="Buscar-Editar(Quirofano)">
+					<h:panelGrid id="panelBuscar" columns="3">
+						<h:outputLabel for="tftIdBuscar" id="lblIdBuscar"
+							value="#{msj['quiromafo.id']}:"></h:outputLabel>
+						<h:inputText id="tftIdBuscar"
+							value="#{quirofanoControler.idQuirofano}"></h:inputText>
+
+						<p:commandButton id="btnBuscar" value="#{msj['persona.buscar']}"
+							action="#{quirofanoControler.buscar}" class="btn"
+							process="@this tftIdBuscar" update="paneldatosBuscar " />
+
+					</h:panelGrid>
+
+					<p:panel id="paneldatosPBuscar" header="Datos">
+						<h:panelGrid id="paneldatosBuscar" columns="2">
+							<h:outputLabel for="tftNombreBuscar" id="lblNombreBuscar"
+								value="#{msj['quiromafo.nombre']}:"></h:outputLabel>
+							<h:inputText id="tftNombreBuscar"
+								value="#{quirofanoControler.nombreQui}"></h:inputText>
+
+							<h:outputLabel for="descripcionImplementosBuscar"
+								id="lbdescripcionImplementosBuscar"
+								value="#{msj['quiromafo.detalleIm']}"></h:outputLabel>
+
+							<p:inputTextarea id="descripcionImplementosBuscar"
+								value="#{quirofanoControler.detalleImplementos}" rows="10"
+								cols="250" completeMethod="#" queryDelay="450"
+								minQueryLength="6"></p:inputTextarea>
+								
+								<p:commandButton id="btnEditar" value="#{msj['persona.editar']}"
+							action="#{quirofanoControler.editar}" class="btn"
+							process="@this paneldatosPBuscar" />
+								
+								
+						</h:panelGrid>
+					</p:panel>
+				</p:tab>
+				
+				<p:tab title="Gestion Crear Camas">
+					<p:panel id="datosPanelPrincipalCamas" header="Registro Camas">
+						<h:panelGrid id="paneldatosCamas" columns="2">
+
+							<h:outputLabel for="tftIdCamas" id="lblIdCamas"
+								value="#{msj['quiromafo.idCamas']}:"></h:outputLabel>
+							<h:inputText id="tftIdCamas" value="#{quirofanoControler.idCamas}"></h:inputText>
+
+							<h:outputLabel for="descripcionCamas"
+								id="lbdescripcioncamas"
+								value="#{msj['quiromafo.detalleCama']}"></h:outputLabel>
+
+							<p:inputTextarea id="descripcionCamas"
+								value="#{quirofanoControler.detalleCama}" rows="10"
+								cols="250" completeMethod="#" queryDelay="450"
+								minQueryLength="6"></p:inputTextarea>
+
+							<p:commandButton id="btnCrearCama"
+								value="#{msj['persona.crear']}"
+								action="#{quirofanoControler.crearCamas}"
+								process="@this paneldatosCamas">
+							</p:commandButton>
+
+
+						</h:panelGrid>
+					</p:panel>
+				</p:tab>
+				
+					<p:tab title="Buscar-Editar(Camas)">
+					<h:panelGrid id="panelBuscarCamas" columns="3">
+								<h:outputLabel for="tftIdCamasBuscar" id="lblIdCamasBuscar"
+								value="#{msj['quiromafo.idCamas']}:"></h:outputLabel>
+							<h:inputText id="tftIdCamasBuscar" value="#{quirofanoControler.idCamas}"></h:inputText>
+
+						<p:commandButton id="btnBuscarCamas" value="#{msj['persona.buscar']}"
+							action="#{quirofanoControler.buscarCamas}" class="btn"
+							process="@this tftIdCamasBuscar" update="panelBuscarCamas " />
+
+					</h:panelGrid>
+
+					<p:panel id="paneldatosPBuscarCamas" header="Datos">
+						<h:panelGrid id="paneldatosBuscarCamas" columns="2">
+							<h:outputLabel for="descripcionCamasBuscar"
+								id="lbdescripcioncamasBuscar"
+								value="#{msj['quiromafo.detalleCama']}"></h:outputLabel>
+
+							<p:inputTextarea id="descripcionCamasBuscar"
+								value="#{quirofanoControler.detalleCama}" rows="10"
+								cols="250" completeMethod="#" queryDelay="450"
+								minQueryLength="6"></p:inputTextarea>
+								
+								<p:commandButton id="btnEditarCamas" value="#{msj['persona.editar']}"
+							action="#{quirofanoControler.editarCamas}" class="btn"
+							process="@this paneldatosPBuscarCamas" />
+								
+								
+						</h:panelGrid>
+					</p:panel>
+				</p:tab>
+			</p:tabView>
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>

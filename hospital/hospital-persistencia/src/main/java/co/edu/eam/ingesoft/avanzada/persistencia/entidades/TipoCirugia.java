@@ -54,6 +54,39 @@ public class TipoCirugia implements Serializable{
 		this.tipoCirugia = tipoCirugia;
 	}
 
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((idTipoCirugia == null) ? 0 : idTipoCirugia.hashCode());
+		result = prime * result + ((tipoCirugia == null) ? 0 : tipoCirugia.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TipoCirugia other = (TipoCirugia) obj;
+		if (idTipoCirugia == null) {
+			if (other.idTipoCirugia != null)
+				return false;
+		} else if (!idTipoCirugia.equals(other.idTipoCirugia))
+			return false;
+		if (tipoCirugia == null) {
+			if (other.tipoCirugia != null)
+				return false;
+		} else if (!tipoCirugia.equals(other.tipoCirugia))
+			return false;
+		return true;
+	}
+
 	
 	
 

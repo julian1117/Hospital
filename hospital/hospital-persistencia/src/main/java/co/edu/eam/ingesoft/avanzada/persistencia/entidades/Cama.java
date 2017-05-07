@@ -20,28 +20,26 @@ public class Cama implements Serializable{
 	
 	@Column(name="Disponibilidad",nullable=false)
 	private boolean disponibilidad;
-	
-	
-	@OneToOne
-	@JoinColumn(name="HOSPNES_PROCEDIMIENTOS_Id",unique=true,nullable=false)
-	private Hospitalizacion hospitalizacion;
+		
+	@Column(name="descripcion",nullable=false)
+	private String descripcion;
 
 	public Cama() {
 		super();
 	}
 
-	public Cama(int idCama, boolean disponibilidad, Hospitalizacion hospitalizacion) {
+	public Cama(Integer idCama, boolean disponibilidad, String descripcion) {
 		super();
 		this.idCama = idCama;
 		this.disponibilidad = disponibilidad;
-		this.hospitalizacion = hospitalizacion;
+		this.descripcion = descripcion;
 	}
 
-	public int getIdCama() {
+	public Integer getIdCama() {
 		return idCama;
 	}
 
-	public void setIdCama(int idCama) {
+	public void setIdCama(Integer idCama) {
 		this.idCama = idCama;
 	}
 
@@ -53,15 +51,15 @@ public class Cama implements Serializable{
 		this.disponibilidad = disponibilidad;
 	}
 
-	public Hospitalizacion getHospitalizacion() {
-		return hospitalizacion;
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-	public void setHospitalizacion(Hospitalizacion hospitalizacion) {
-		this.hospitalizacion = hospitalizacion;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
+
 	
-	
-	
+
 	
 }

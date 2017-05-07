@@ -25,7 +25,7 @@ import co.edu.eam.ingesoft.pa.negocio.beans.GeneralEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.PacienteEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.PersonaEJB;
 
-@Named("personaControler")
+@Named("pacienteControler")
 @ViewScoped
 public class PacienteControlador implements Serializable {
 	
@@ -290,27 +290,6 @@ public class PacienteControlador implements Serializable {
 		 	public void editar(){
 		 		try {
 		 			
-//		 			Persona persona = personaEJB.buscarPersona(idPersona);
-//			 		Ciudad ciu = generalEJB.buscarCiudad(ciudad.getIdCiuad());
-//			 		fechaNacimiento=new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
-//			 
-//			 		if(persona != null){
-//			 			Persona per = new Persona(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, tipoUsu, email, sexo, ciu);
-//			 			personaEJB.editar(per);
-//			 			Messages.addFlashGlobalInfo("Editado con exito!!");
-//			 			
-//			 			idPersona=null;
-//				 		nombre="";
-//				 		apellido="";
-//				 		fechaNacimiento=null;
-//				 		telefono="";
-//				 		tipoUsu=null;
-//				 	email="";
-//				 		sexo="";
-//				 		ciudad=null;
-//			 		}
-//			 		
-			 		
 			 		Paciente paciente = pacienteEJB.buscarPaciente(idPersona);
 			 		Ciudad ciud = generalEJB.buscarCiudad(ciudad.getIdCiuad());
 			 		fechaNacimiento=new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);

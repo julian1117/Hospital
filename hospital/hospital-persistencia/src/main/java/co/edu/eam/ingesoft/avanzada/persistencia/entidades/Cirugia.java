@@ -25,9 +25,6 @@ public class Cirugia  implements Serializable {
 	@Column(name="ID_CIRUGIA",nullable=false)
 	private Integer id;
 	
-	@Column(name="Tiempo_Porcedimiento",nullable=false)
-	private String tiempoProcedimiento;
-	
 	@ManyToOne
 	@JoinColumn(name="TIPO_CIRUGIAS_Id",nullable=false)
 	private TipoCirugia tipoCirugia;
@@ -39,8 +36,8 @@ public class Cirugia  implements Serializable {
 	private String descripcionPacienteFinal;
 	
 	@ManyToOne
-	@JoinColumn(name="PROGRAMACION_CIRUGIAS_Id",nullable=false,unique=true)
-	private ProgramacionCirugia programacionCirugia;
+	@JoinColumn(name="QUIROFANOS_Id",nullable=false,unique=true)
+	private Quirofano quirofano;
 	
 	
 
@@ -50,15 +47,25 @@ public class Cirugia  implements Serializable {
 
 
 
-	public Cirugia(Integer id, String tiempoProcedimiento, TipoCirugia tipoCirugia, String descripcionPacienteInicio,
-			String descripcionPacienteFinal, ProgramacionCirugia programacionCirugia) {
+	public Cirugia(TipoCirugia tipoCirugia, String descripcionPacienteInicio, String descripcionPacienteFinal,
+			Quirofano quirofano) {
 		super();
-		this.id = id;
-		this.tiempoProcedimiento = tiempoProcedimiento;
 		this.tipoCirugia = tipoCirugia;
 		this.descripcionPacienteInicio = descripcionPacienteInicio;
 		this.descripcionPacienteFinal = descripcionPacienteFinal;
-		this.programacionCirugia = programacionCirugia;
+		this.quirofano = quirofano;
+	}
+
+
+
+	public Cirugia(Integer id, TipoCirugia tipoCirugia, String descripcionPacienteInicio,
+			String descripcionPacienteFinal, Quirofano quirofano) {
+		super();
+		this.id = id;
+		this.tipoCirugia = tipoCirugia;
+		this.descripcionPacienteInicio = descripcionPacienteInicio;
+		this.descripcionPacienteFinal = descripcionPacienteFinal;
+		this.quirofano = quirofano;
 	}
 
 
@@ -71,18 +78,6 @@ public class Cirugia  implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-
-
-	public String getTiempoProcedimiento() {
-		return tiempoProcedimiento;
-	}
-
-
-
-	public void setTiempoProcedimiento(String tiempoProcedimiento) {
-		this.tiempoProcedimiento = tiempoProcedimiento;
 	}
 
 
@@ -123,15 +118,19 @@ public class Cirugia  implements Serializable {
 
 
 
-	public ProgramacionCirugia getProgramacionCirugia() {
-		return programacionCirugia;
+	public Quirofano getQuirofano() {
+		return quirofano;
 	}
 
 
 
-	public void setProgramacionCirugia(ProgramacionCirugia programacionCirugia) {
-		this.programacionCirugia = programacionCirugia;
+	public void setQuirofano(Quirofano quirofano) {
+		this.quirofano = quirofano;
 	}
+	
+	
+
+
 
 	
 

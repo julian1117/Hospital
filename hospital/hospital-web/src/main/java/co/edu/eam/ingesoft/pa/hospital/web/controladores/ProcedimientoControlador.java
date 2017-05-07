@@ -11,11 +11,14 @@ import javax.inject.Named;
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Messages;
 
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Examen;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Quirofano;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoCirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoExamen;
 import co.edu.eam.ingesoft.pa.negocio.beans.GeneralEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.ProcedmientosEJB;
+import co.edu.eam.ingesoft.pa.negocio.beans.QuirofanoEJB;
 
 
 @Named("proceControler")
@@ -36,11 +39,17 @@ public class ProcedimientoControlador implements Serializable{
 
 	private String descripcionFinal;
 	
-	private TipoCirugia cirugia;
+	private TipoCirugia tipoCirugia;
 	
-	private List<TipoCirugia> listarTipoCirugias;
+	private List<TipoCirugia> listarTipoCirugias;	
 	
-	//private Procedimiento proce;
+	private String idCirugia;
+	
+	private Quirofano quirofano;
+	
+	private List<Quirofano> listarQuirofanos;
+	
+	
 	
 	@EJB
 	private GeneralEJB generalEJB;
@@ -48,14 +57,25 @@ public class ProcedimientoControlador implements Serializable{
 	@EJB
 	private ProcedmientosEJB procedimientosEJB;
 	
+	@EJB
+	private QuirofanoEJB quirofanoEJB;
+	
 	@PostConstruct
 	public void inicializar() {
 		listarExamen = generalEJB.listarTipoExamen();
 		listarTipoCirugias = generalEJB.listarTipoCirugias();
+		listarQuirofanos = quirofanoEJB.listarQuirofano();
 	}
 	
 
+	public List<Quirofano> getListarQuirofanos() {
+		return listarQuirofanos;
+	}
 
+
+	public void setListarQuirofanos(List<Quirofano> listarQuirofanos) {
+		this.listarQuirofanos = listarQuirofanos;
+	}
 
 
 	public String getCedulaPaciente() {
@@ -63,15 +83,9 @@ public class ProcedimientoControlador implements Serializable{
 	}
 
 
-
-
-
 	public void setCedulaPaciente(String cedulaPaciente) {
 		this.cedulaPaciente = cedulaPaciente;
 	}
-
-
-
 
 
 	public TipoExamen getTipoExamen() {
@@ -79,15 +93,9 @@ public class ProcedimientoControlador implements Serializable{
 	}
 
 
-
-
-
 	public void setTipoExamen(TipoExamen tipoExamen) {
 		this.tipoExamen = tipoExamen;
 	}
-
-
-
 
 
 	public Examen getExamen() {
@@ -95,15 +103,9 @@ public class ProcedimientoControlador implements Serializable{
 	}
 
 
-
-
-
 	public void setExamen(Examen examen) {
 		this.examen = examen;
 	}
-
-
-
 
 
 	public List<TipoExamen> getListarExamen() {
@@ -111,15 +113,9 @@ public class ProcedimientoControlador implements Serializable{
 	}
 
 
-
-
-
 	public void setListarExamen(List<TipoExamen> listarExamen) {
 		this.listarExamen = listarExamen;
 	}
-
-
-
 
 
 	public String getDescripcionExamen() {
@@ -127,15 +123,9 @@ public class ProcedimientoControlador implements Serializable{
 	}
 
 
-
-
-
 	public void setDescripcionExamen(String descripcionExamen) {
 		this.descripcionExamen = descripcionExamen;
 	}
-
-
-
 
 
 	public String getDescripcionInicio() {
@@ -143,15 +133,9 @@ public class ProcedimientoControlador implements Serializable{
 	}
 
 
-
-
-
 	public void setDescripcionInicio(String descripcionInicio) {
 		this.descripcionInicio = descripcionInicio;
 	}
-
-
-
 
 
 	public String getDescripcionFinal() {
@@ -159,31 +143,19 @@ public class ProcedimientoControlador implements Serializable{
 	}
 
 
-
-
-
 	public void setDescripcionFinal(String descripcionFinal) {
 		this.descripcionFinal = descripcionFinal;
 	}
 
 
-
-
-
-	public TipoCirugia getCirugia() {
-		return cirugia;
+	public TipoCirugia getTipoCirugia() {
+		return tipoCirugia;
 	}
 
 
-
-
-
-	public void setCirugia(TipoCirugia cirugia) {
-		this.cirugia = cirugia;
+	public void setTipoCirugia(TipoCirugia tipoCirugia) {
+		this.tipoCirugia = tipoCirugia;
 	}
-
-
-
 
 
 	public List<TipoCirugia> getListarTipoCirugias() {
@@ -191,15 +163,29 @@ public class ProcedimientoControlador implements Serializable{
 	}
 
 
-
-
-
 	public void setListarTipoCirugias(List<TipoCirugia> listarTipoCirugias) {
 		this.listarTipoCirugias = listarTipoCirugias;
 	}
 
 
+	public String getIdCirugia() {
+		return idCirugia;
+	}
 
+
+	public void setIdCirugia(String idCirugia) {
+		this.idCirugia = idCirugia;
+	}
+
+
+	public Quirofano getQuirofano() {
+		return quirofano;
+	}
+
+
+	public void setQuirofano(Quirofano quirofano) {
+		this.quirofano = quirofano;
+	}
 
 
 	public GeneralEJB getGeneralEJB() {
@@ -207,15 +193,9 @@ public class ProcedimientoControlador implements Serializable{
 	}
 
 
-
-
-
 	public void setGeneralEJB(GeneralEJB generalEJB) {
 		this.generalEJB = generalEJB;
 	}
-
-
-
 
 
 	public ProcedmientosEJB getProcedimientosEJB() {
@@ -223,15 +203,9 @@ public class ProcedimientoControlador implements Serializable{
 	}
 
 
-
-
-
 	public void setProcedimientosEJB(ProcedmientosEJB procedimientosEJB) {
 		this.procedimientosEJB = procedimientosEJB;
 	}
-
-
-
 
 
 	public void buscarPaciente(){		
@@ -251,6 +225,21 @@ public class ProcedimientoControlador implements Serializable{
 
 		}	
 		
+	}
+	
+	public void generarCirugia(){
+		try {
+			TipoCirugia tipoC = generalEJB.buscarTipoCirugia(tipoCirugia.getIdTipoCirugia());
+			Quirofano qui = quirofanoEJB.buscarQuirofano(quirofano.getId());
+			
+			Cirugia ciru = new Cirugia(tipoC, descripcionInicio, descripcionFinal, qui);
+			procedimientosEJB.crearCirugia(ciru);
+ 			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
+
+		} catch (Exception e) {
+			Messages.addFlashGlobalError(e.getMessage());
+
+		}
 	}
 	
 	
