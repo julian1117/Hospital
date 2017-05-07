@@ -42,15 +42,13 @@
 							<h:outputLabel for="tftTipoExamen" id="lblTipoExamen"
 							value="#{msj['procedimiento.tipoExamen']}" />
 						<h:selectOneMenu id="tftTipoExamen"
-							value="#{proceControler.examen}" converter="tipoExamenConver"
+							value="#{proceControler.tipoExamen}" converter="tipoExamenConver"
 							class="form-control">
 
 							<f:selectItems value="#{proceControler.listarExamen}" var="exa"
 								itemValue="#{exa}" itemLabel="#{exa.nomTipoExamen}" />
 								
-								<f:ajax event="change" execute="@this"
-										render="descripcionExamen"
-										listener="#{proceControler.descricionExamen}" />
+					
 						</h:selectOneMenu>
 						
 						
@@ -58,7 +56,7 @@
 							value="#{msj['procedimiento.descripcion']}"></h:outputLabel>
 							
 						<p:inputTextarea id="descripcionExamen"
-							value="#{proceControler.cedulaPaciente}" rows="10" cols="250"
+							value="#{proceControler.descripcionExamen}" rows="10" cols="250"
 							completeMethod="#" queryDelay="450" minQueryLength="6"></p:inputTextarea>
 							
 							<p:commandButton id="btnCrearExamen"

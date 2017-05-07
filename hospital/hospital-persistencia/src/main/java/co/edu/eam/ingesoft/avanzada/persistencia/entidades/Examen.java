@@ -40,12 +40,15 @@ public class Examen implements Serializable{
 		super();
 	}
 
+	
+
 	public Examen(TipoExamen tipoExamen, String descripcion) {
 		super();
-		this.idExamen = idExamen;
 		this.tipoExamen = tipoExamen;
 		this.descripcion = descripcion;
 	}
+
+
 
 	public Integer getIdExamen() {
 		return idExamen;
@@ -69,6 +72,10 @@ public class Examen implements Serializable{
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public static String getListaExamen() {
+		return LISTA_EXAMEN;
 	}
 
 
