@@ -14,6 +14,8 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Messages;
+import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
 
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Agenda;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cita;
@@ -55,6 +57,8 @@ public class CitaControlador implements Serializable {
 
 	private Date fechaCita;
 
+		
+	
 	@EJB
 	private MedicoEJB medicoEJB;
 
