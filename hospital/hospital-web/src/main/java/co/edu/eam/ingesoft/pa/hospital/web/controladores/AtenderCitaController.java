@@ -78,7 +78,7 @@ public class AtenderCitaController implements Serializable {
 	 */
 	public void buscarPaciente() {
 
-		listaCita = citaEJB.listCitaPaciente(Long.parseLong(cedulaPaciente));
+		listaCita = citaEJB.listaCitaPaciente(Long.parseLong(cedulaPaciente));
 		if (listaCita.isEmpty()) {
 			Messages.addFlashGlobalError("ERROR /nEl paciente no tiene citas regsitradas en el momento");
 		}

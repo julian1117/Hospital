@@ -13,10 +13,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="ESPECIALIZACIONES")
-@NamedQuery(name=Especializacione.LISTAR_CIUDAD,query="SELECT e FROM Especializacione e")
+@NamedQuery(name=Especializacione.LISTAR_ESPECIALIZACIONES,query="SELECT e FROM Especializacione e")
 public class Especializacione implements Serializable{
 	
-	public static final String LISTAR_CIUDAD="Especializacione.listar";
+	public static final String LISTAR_ESPECIALIZACIONES="Especializacione.listar";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ESPECIALIZACIONE_SEQ")

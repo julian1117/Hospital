@@ -43,8 +43,7 @@ public class MedicoEJB {
 	 * @return
 	 */
 	public Medico buscarMedico(Long id){
-		Medico med = em.find(Medico.class, id);
-		return med;
+		return em.find(Medico.class, id);		
 	}
 		
 	/**
@@ -55,6 +54,16 @@ public class MedicoEJB {
 		return em.createNamedQuery(Medico.LISTA_MEDICOS).getResultList();		
 		 
 	}
+	
+	/**
+	 * list medico por especialidad
+	 * @param idEsp
+	 * @return
+	 */
+	public List<Medico> listaMedicosEspe(Integer idEsp){
+		return em.createNamedQuery(Medico.LISTA_MEDICOS_ESP).setParameter(1, idEsp).getResultList();		
+	}
+	
 	
 	public void editarMedico(Medico medico){
 		em.merge(medico);

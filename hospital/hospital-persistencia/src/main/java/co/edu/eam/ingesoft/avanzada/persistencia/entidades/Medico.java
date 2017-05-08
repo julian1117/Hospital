@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -20,11 +21,15 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="MEDICOS")
-//@AssociationOverride(name="idPersona", joinColumns=@JoinColumn(name="PERSONAS_id"))
-@NamedQuery(name=Medico.LISTA_MEDICOS,query="SELECT m FROM Medico m")
+@NamedQueries({
+	@NamedQuery(name=Medico.LISTA_MEDICOS,query="SELECT m FROM Medico m"),
+	@NamedQuery(name=Medico.LISTA_MEDICOS_ESP,query="SELECT m FROM Medico m WHERE m.especializaciones.idEspecializacion=?1")
+})
 public class Medico  extends Persona implements Serializable{
 	
 	public static final String LISTA_MEDICOS = "Medico.listaMed";
+	
+	public static final String LISTA_MEDICOS_ESP = "Medico.listaMedEsp";
 	
 	@ManyToOne
 	@JoinColumn(name="ESPECIALIZACIONES_Id",nullable=true)

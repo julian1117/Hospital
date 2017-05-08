@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -18,6 +20,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name="AGENDAS")
 public class Agenda implements Serializable{
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "AGENDA_SEQ")
@@ -28,6 +31,9 @@ public class Agenda implements Serializable{
 	@Column(name="Hora_inicio",nullable=false)
 	private String horaInicio;
 	
+	@Column(name="Fecha",nullable= false)
+	@Temporal(TemporalType.DATE)
+	private Date fecha;
 	
 	@Column(name="Hora_final",nullable=false)
 	private String horaFinal;
@@ -45,9 +51,23 @@ public class Agenda implements Serializable{
 	}
 
 	
+
+	public Agenda(Integer id, String horaInicio, Date fecha, String horaFinal, Medico medico, Consultorio consultorio) {
+		super();
+		this.id = id;
+		this.horaInicio = horaInicio;
+		this.fecha = fecha;
+		this.horaFinal = horaFinal;
+		this.medico = medico;
+		this.consultorio = consultorio;
+	}
+
+
+
 	public Integer getId() {
 		return id;
 	}
+
 
 
 	public void setId(Integer id) {
@@ -55,9 +75,11 @@ public class Agenda implements Serializable{
 	}
 
 
+
 	public String getHoraInicio() {
 		return horaInicio;
 	}
+
 
 
 	public void setHoraInicio(String horaInicio) {
@@ -65,9 +87,23 @@ public class Agenda implements Serializable{
 	}
 
 
+
+	public Date getFecha() {
+		return fecha;
+	}
+
+
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
+
+
+
 	public String getHoraFinal() {
 		return horaFinal;
 	}
+
 
 
 	public void setHoraFinal(String horaFinal) {
@@ -75,9 +111,11 @@ public class Agenda implements Serializable{
 	}
 
 
+
 	public Medico getMedico() {
 		return medico;
 	}
+
 
 
 	public void setMedico(Medico medico) {
@@ -85,24 +123,17 @@ public class Agenda implements Serializable{
 	}
 
 
+
 	public Consultorio getConsultorio() {
 		return consultorio;
 	}
+
 
 
 	public void setConsultorio(Consultorio consultorio) {
 		this.consultorio = consultorio;
 	}
 
-
-	public Agenda(Integer id, String horaInicio, String horaFinal, Medico medico, Consultorio consultorio) {
-		super();
-		this.id = id;
-		this.horaInicio = horaInicio;
-		this.horaFinal = horaFinal;
-		this.medico = medico;
-		this.consultorio = consultorio;
-	}
 
 
 	@Override

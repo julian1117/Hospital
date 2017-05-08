@@ -16,10 +16,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="CITAS")
-@NamedNativeQuery(name=Cita.LISTA_CITAS_PACIENTE,query="SELECT * FROM CITAS c JOIN PERSONAS pac ON c.PACIENTES_PERSONA_ID = pac.PERSONAS_ID JOIN TIPOS_CITAS tp ON tp.ID = c.TIPOS_CITAS_ID JOIN AGENDAS a on c.AGENDAS_ID = a.ID JOIN CONSULTORIOS con on con.ID = a.CONSULTORIOS_ID JOIN PERSONAS pm on pm.PERSONAS_ID = a.MEDICOS_PERSONAS_ID JOIN HORAS_CITAS hr on c.HORAS_CITAS_ID=hr.ID  WHERE c.PACIENTES_PERSONA_ID=?1 AND c.ESTEADO=0")
+@NamedQuery(name=Cita.LISTA_CITA,query="SELECT c FROM Cita c WHERE c.persona.idPersona =?1")
 public class Cita implements Serializable{
-
-	public static final String LISTA_CITAS_PACIENTE = "Cita.listaCitaPaciente";
+	
+	public static final  String LISTA_CITA = "Cita.listaCita";
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CIT_SEQ")
@@ -54,6 +54,17 @@ public class Cita implements Serializable{
 		super();
 	}
 
+	public Cita(Integer idCita, Agenda agenda, TipoCita tipoCita, Cita cita, Paciente persona, boolean estado,
+			HoraCita horaCita) {
+		super();
+		this.idCita = idCita;
+		this.agenda = agenda;
+		this.tipoCita = tipoCita;
+		this.cita = cita;
+		this.persona = persona;
+		this.estado = estado;
+		this.horaCita = horaCita;
+	}
 	
 
 	public Integer getIdCita() {
@@ -140,23 +151,6 @@ public class Cita implements Serializable{
 
 
 
-	public static String getListaCitasPaciente() {
-		return LISTA_CITAS_PACIENTE;
-	}
-
-
-
-	public Cita(Integer idCita, Agenda agenda, TipoCita tipoCita, Cita cita, Paciente persona, boolean estado,
-			HoraCita horaCita) {
-		super();
-		this.idCita = idCita;
-		this.agenda = agenda;
-		this.tipoCita = tipoCita;
-		this.cita = cita;
-		this.persona = persona;
-		this.estado = estado;
-		this.horaCita = horaCita;
-	}
 
 
 

@@ -19,6 +19,7 @@ import org.primefaces.event.SelectEvent;
 
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Agenda;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cita;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Especializacione;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.HoraCita;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Medico;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Paciente;
@@ -35,8 +36,12 @@ import javax.faces.context.FacesContext;
 @ViewScoped
 public class CitaControlador implements Serializable {
 
-	@Pattern(regexp="[0-9]*",message="Solo numeros")
-	@Length(min=5,max=10,message="Longitus de 8 a 10")
+	@Pattern(regexp = "[0-9]*", message = "Solo numeros")
+	@Length(min = 5, max = 10, message = "Longitus de 8 a 10")
+	private String cedulaPacienteLis;
+
+	@Pattern(regexp = "[0-9]*", message = "Solo numeros")
+	@Length(min = 5, max = 10, message = "Longitus de 8 a 10")
 	private String cedulaPaciente;
 
 	private Medico medico;
@@ -57,8 +62,14 @@ public class CitaControlador implements Serializable {
 
 	private Date fechaCita;
 
-		
+	private Agenda agenda;
+
+	private List<Agenda> listaAgenda;
 	
+	private  Especializacione especializacion;
+	
+	private List<Especializacione> listaEspecializacion;	
+
 	@EJB
 	private MedicoEJB medicoEJB;
 
@@ -70,21 +81,25 @@ public class CitaControlador implements Serializable {
 
 	@PostConstruct
 	public void inicializar() {
-		listaMedicos = medicoEJB.listaMedicos();
 		listTipoCita = citaEJB.listaTipoCita();
 		listaHorasAgenda = generalEJB.listaHora();
+		listaEspecializacion = generalEJB.listarEspecializacione();
 	}
 
 	/**
 	 * Busca todas las citas del apciente que esten como no atendidas
 	 */
 	public void buscarPaciente() {
-		listaCita = citaEJB.listaCitaPaciente(Long.parseLong(cedulaPaciente));
+		listaCita = citaEJB.listaCitaPaciente(Long.parseLong(cedulaPacienteLis));
 		if (listaCita.isEmpty()) {
 			Messages.addFlashGlobalError("El paciente no tiene citas regsitradas en el momento");
 		}
 	}
 
+	public void medicoEspe(){
+		listaMedicos = medicoEJB.listaMedicosEspe(especializacion.getIdEspecializacion());
+	}
+	
 	/**
 	 * Registrar cita del paciente
 	 * 
@@ -92,26 +107,31 @@ public class CitaControlador implements Serializable {
 	 */
 	public void asignarCita() {
 		try {
-			fechaCita = new SimpleDateFormat("dd-MM-yyyy").parse(fecha);
-			
-			Paciente paciente = citaEJB.buscarPaciente(Long.parseLong(cedulaPaciente));
-			
-//			Agenda agenda = new Agenda();
-//			agenda.setMedico(medico);
-//			agenda.setFechaCita(fechaCita);
-//			agenda.setConsultorio(null);
-//			agenda.setHora(horaCita);
-//			
-//			Cita cita = new Cita();
-//			cita.setPersona(paciente);
-//			cita.setTipoCita(tipoCita);
-//			cita.setAgenda(agenda);
-//			
-//			citaEJB.crearCita(agenda,cita);
-//			listaCita = citaEJB.listCitaPaciente(Long.parseLong(cedulaPaciente));
+			// fechaCita = new SimpleDateFormat("dd-MM-yyyy").parse(fecha);
 
-			Messages.addFlashGlobalInfo("Se agendo la cita con exito");
-			
+			Paciente paciente = citaEJB.buscarPaciente(Long.parseLong(cedulaPaciente));
+			if (paciente != null) {
+				Agenda agendaM = citaEJB.buscarAgenda(agenda.getId());
+
+				TipoCita tipoCi = citaEJB.buscarTipoDeCita(tipoCita.getIdTipoCita());
+
+				HoraCita hC = generalEJB.buscarHoraCita(horaCita.getId());
+
+				Cita cita = new Cita();
+				cita.setPersona(paciente);
+				cita.setTipoCita(tipoCi);
+				cita.setAgenda(agendaM);
+				cita.setHoraCita(hC);
+				cita.setEstado(false);
+
+				citaEJB.crearCita(cita);
+
+				listaCita = citaEJB.listaCitaPaciente(Long.parseLong(cedulaPaciente));
+
+				Messages.addFlashGlobalInfo("Se agendo la cita con exito");
+			} else {
+				Messages.addFlashGlobalError("La cedula ingresa no corresponde a un usuario registrado");
+			}
 		} catch (Exception e) {
 			Messages.addFlashGlobalError(e.getMessage());
 		}
@@ -125,12 +145,19 @@ public class CitaControlador implements Serializable {
 	public void eliminarCita(Cita cita) {
 		try {
 			citaEJB.eliminarCitaPaciente(cita);
-			listaCita = citaEJB.listCitaPaciente(Long.parseLong(cedulaPaciente));
+			listaCita = citaEJB.listaCitaPaciente(cita.getPersona().getIdPersona());
 
 			Messages.addFlashGlobalInfo("La cita fue eliminada con exito");
 		} catch (Exception e) {
 			Messages.addFlashGlobalError(e.getMessage());
 		}
+	}
+
+	/**
+	 * Lista de agendas de un medico expecifico
+	 */
+	public void agendaMedico() {
+		listaAgenda = citaEJB.listaAgendaMedico(medico.getIdPersona());
 	}
 
 	public Medico getMedico() {
@@ -213,4 +240,45 @@ public class CitaControlador implements Serializable {
 		this.listaHorasAgenda = listaHorasAgenda;
 	}
 
+	public List<Agenda> getListaAgenda() {
+		return listaAgenda;
+	}
+
+	public void setListaAgenda(List<Agenda> listaAgenda) {
+		this.listaAgenda = listaAgenda;
+	}
+
+	public Agenda getAgenda() {
+		return agenda;
+	}
+
+	public void setAgenda(Agenda agenda) {
+		this.agenda = agenda;
+	}
+
+	public String getCedulaPacienteLis() {
+		return cedulaPacienteLis;
+	}
+
+	public void setCedulaPacienteLis(String cedulaPacienteLis) {
+		this.cedulaPacienteLis = cedulaPacienteLis;
+	}
+
+	public Especializacione getEspecializacion() {
+		return especializacion;
+	}
+
+	public void setEspecializacion(Especializacione especializacion) {
+		this.especializacion = especializacion;
+	}
+
+	public List<Especializacione> getListaEspecializacion() {
+		return listaEspecializacion;
+	}
+
+	public void setListaEspecializacion(List<Especializacione> listaEspecializacion) {
+		this.listaEspecializacion = listaEspecializacion;
+	}
+
+	
 }
