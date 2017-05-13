@@ -109,4 +109,23 @@ public class SessionController implements Serializable {
 		return use!=null;
 	}
 
+	public List<Acceso> getAccesos() {
+		return accesos;
+	}
+
+	public void setAccesos(List<Acceso> accesos) {
+		this.accesos = accesos;
+	}
+
+	public List<Roll> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Roll> roles) {
+		this.roles = roles;
+	}
+	
+	
+	
+
 }
