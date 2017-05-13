@@ -40,7 +40,14 @@ public class Medico  extends Persona implements Serializable{
 		super();
 	}
 	
-	
+
+	public Medico(Long idPersona, String nombre, String apellido, Date fechaNacimiento, String telefono,
+			String direccion, Roll roll, String email, String sexo, Ciudad ciudad,Especializacione especializaciones) {
+		super();
+		this.especializaciones=especializaciones;
+	}
+
+
 
 	public Medico(Especializacione especializaciones) {
 		super();
@@ -48,15 +55,6 @@ public class Medico  extends Persona implements Serializable{
 	}
 	
 	
-	public Medico(Long idPersona, String nombre, String apellido, Date fechaNacimiento, String telefono,
-			String direccion, String tipoUsuario, String email, String sexo, Ciudad ciudad,
-			Especializacione especializaciones) {
-		super(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, tipoUsuario, email, sexo, ciudad);
-		this.especializaciones = especializaciones;
-	}
-
-
-
 	public Especializacione getEspecializaciones() {
 		return especializaciones;
 	}

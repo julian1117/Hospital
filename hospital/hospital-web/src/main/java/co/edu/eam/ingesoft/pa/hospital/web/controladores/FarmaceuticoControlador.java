@@ -218,9 +218,9 @@ public class FarmaceuticoControlador implements Serializable{
 				Ciudad ciu = generalEJB.buscarCiudad(ciudad.getIdCiuad());
 				fechaNacimiento = new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
 
-				Persona persona = new Persona(Long.parseLong(idPersona), nombre, apellido, fechaNacimiento, telefono,
-						direccion, "Farmaceutico", email, sexo, ciu);
-				personaEJB.crearPersona(persona);
+//				Persona persona = new Persona(Long.parseLong(idPersona), nombre, apellido, fechaNacimiento, telefono,
+//						direccion, "Farmaceutico", email, sexo, ciu);
+//				personaEJB.crearPersona(persona);
 				Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
 				idPersona = null;
 				nombre = "";
@@ -271,9 +271,9 @@ public class FarmaceuticoControlador implements Serializable{
 				fechaNacimiento = new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
 
 				if (persona != null) {
-					Persona per = new Persona(Long.parseLong(idPersona), nombre, apellido, fechaNacimiento, telefono,
-							direccion, "Farmaceutico", email, sexo, ciu);
-					personaEJB.editar(per);
+//					Persona per = new Persona(Long.parseLong(idPersona), nombre, apellido, fechaNacimiento, telefono,
+//							direccion, "Farmaceutico", email, sexo, ciu);
+//					personaEJB.editar(per);
 					Messages.addFlashGlobalInfo("Editado con exito!!");
 
 					idPersona = null;

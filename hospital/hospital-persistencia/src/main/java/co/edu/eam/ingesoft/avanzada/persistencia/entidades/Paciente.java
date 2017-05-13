@@ -31,7 +31,7 @@ public class Paciente extends Persona  implements Serializable {
 	
 	public Paciente(Long idPersona, String nombre, String apellido, Date fechaNacimiento, String telefono,
 			String direccion, String tipoUsuario, String email, String sexo, Ciudad ciudad, Eps eps) {
-		super(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, tipoUsuario, email, sexo, ciudad);
+		super();
 		this.eps = eps;
 	}
 

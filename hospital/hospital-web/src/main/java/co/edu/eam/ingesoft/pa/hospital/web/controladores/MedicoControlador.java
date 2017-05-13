@@ -204,8 +204,8 @@ public class MedicoControlador implements Serializable {
  			fechaNacimiento=new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
 			Especializacione especi = generalEJB.buscarEspecializacione(especializacion.getIdEspecializacion());
  			
- 			Medico medico = new Medico(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, "Medico", email, sexo, ciu, especi);
- 			medicoEJB.crearMedico(medico);
+// 			Medico medico = new Medico(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, "Medico", email, sexo, ciu, especi);
+// 			medicoEJB.crearMedico(medico);
  			
  			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
 
@@ -224,7 +224,7 @@ public class MedicoControlador implements Serializable {
  			fechaNacimiento=me.getFechaNacimiento();
  			telefono=me.getTelefono();
  			direccion=me.getDireccion();
- 			tipoUsu=me.getTipoUsuario();
+ 		//	tipoUsu=me.getTipoUsuario();
  			email=me.getEmail();
  			sexo=me.getSexo();
  			especializacion = me.getEspecializaciones();
@@ -240,8 +240,8 @@ public class MedicoControlador implements Serializable {
 	 		fechaNacimiento=new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
 	 		
 	 		if(medico!=null){
-	 			Medico medi = new Medico(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, "Medico", email, sexo, ciud, especializacion);
-	 			medicoEJB.editarMedico(medi);
+//	 			Medico medi = new Medico(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, "Medico", email, sexo, ciud, especializacion);
+//	 			medicoEJB.editarMedico(medi);
 	 			Messages.addFlashGlobalInfo("Editado con exito!!");
 	 			
 	 			idPersona=null;

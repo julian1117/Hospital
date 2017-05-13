@@ -7,6 +7,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Acceso;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Roll;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Usuario;
 
 @Stateless
@@ -32,5 +34,13 @@ public class SeguridadEJB {
 		return em.find(Usuario.class, nombreUs);		
 	}
 	
-
+	public List<Roll> listaRoles(Integer idRoll){
+		return em.createNamedQuery(Roll.listaRoles).setParameter(1, idRoll).getResultList();
+	}
+	
+	public List<Acceso> listaAcc(Integer idRoll){
+		return em.createNamedQuery(Acceso.LISTA_ACCESO).setParameter(1, idRoll).getResultList();
+	}
+	
+	
 }

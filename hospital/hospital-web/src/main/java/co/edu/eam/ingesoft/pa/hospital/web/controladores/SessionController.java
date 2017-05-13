@@ -1,6 +1,7 @@
 package co.edu.eam.ingesoft.pa.hospital.web.controladores;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Acceso;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Roll;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Usuario;
 import co.edu.eam.ingesoft.pa.negocio.beans.SeguridadEJB;
 
@@ -47,6 +50,12 @@ public class SessionController implements Serializable {
 	public void setUse(Usuario use) {
 		this.use = use;
 	}
+	
+	private List<Acceso> accesos;
+
+	private List<Roll> roles;
+
+	
 
 	@EJB
 	private SeguridadEJB seguridadEjb;
@@ -64,6 +73,12 @@ public class SessionController implements Serializable {
 			if (useBuscar.getContrasenia().equals(contrasena)) {
 				use=useBuscar;
 				Faces.setSessionAttribute("usuario",use);
+				
+				
+				
+				roles = seguridadEjb.listaRoles(use.getIdPersona().getRoll().getId());
+				accesos = seguridadEjb.listaAcc(use.getIdPersona().getRoll().getId());
+				
 				Messages.addGlobalInfo("Usuario existe");
 				return "/paginas/seguro/Citas.xhtml?faces-redirect=true";
 			} else {

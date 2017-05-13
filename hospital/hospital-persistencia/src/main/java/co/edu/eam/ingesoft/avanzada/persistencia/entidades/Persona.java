@@ -48,8 +48,9 @@ public class Persona implements Serializable {
 	private String direccion;
 	
 //	@Enumerated(EnumType.STRING)
-	@Column(name="Tipo_us",nullable=false,length=30)
-	private String tipoUsuario;
+	@ManyToOne
+	@JoinColumn(name="rol_id",nullable=false)
+	private Roll roll;
 	
 	@Column(name="Email", unique=true,nullable=false,length=50)
 	private String email;
@@ -66,8 +67,9 @@ public class Persona implements Serializable {
 		super();
 	}
 
+	
 	public Persona(Long idPersona, String nombre, String apellido, Date fechaNacimiento, String telefono,
-			String direccion, String tipoUsuario, String email, String sexo, Ciudad ciudad) {
+			String direccion, Roll roll, String email, String sexo, Ciudad ciudad) {
 		super();
 		this.idPersona = idPersona;
 		this.nombre = nombre;
@@ -75,7 +77,7 @@ public class Persona implements Serializable {
 		this.fechaNacimiento = fechaNacimiento;
 		this.telefono = telefono;
 		this.direccion = direccion;
-		this.tipoUsuario = tipoUsuario;
+		this.roll = roll;
 		this.email = email;
 		this.sexo = sexo;
 		this.ciudad = ciudad;
@@ -87,13 +89,9 @@ public class Persona implements Serializable {
 	}
 
 
-
-
 	public void setIdPersona(Long idPersona) {
 		this.idPersona = idPersona;
 	}
-
-
 
 
 	public String getNombre() {
@@ -101,13 +99,9 @@ public class Persona implements Serializable {
 	}
 
 
-
-
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-
 
 
 	public String getApellido() {
@@ -115,13 +109,9 @@ public class Persona implements Serializable {
 	}
 
 
-
-
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
-
-
 
 
 	public Date getFechaNacimiento() {
@@ -129,13 +119,9 @@ public class Persona implements Serializable {
 	}
 
 
-
-
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
-
-
 
 
 	public String getTelefono() {
@@ -143,13 +129,9 @@ public class Persona implements Serializable {
 	}
 
 
-
-
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-
-
 
 
 	public String getDireccion() {
@@ -157,42 +139,50 @@ public class Persona implements Serializable {
 	}
 
 
-
-
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
 
-	public String getTipoUsuario() {
-		return tipoUsuario;
+
+	public Roll getRoll() {
+		return roll;
 	}
 
-	public void setTipoUsuario(String tipoUsuario) {
-		this.tipoUsuario = tipoUsuario;
+
+	public void setRoll(Roll roll) {
+		this.roll = roll;
 	}
+
+
 	public String getEmail() {
 		return email;
 	}
+
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+
 	public String getSexo() {
 		return sexo;
 	}
+
 
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
 
+
 	public Ciudad getCiudad() {
 		return ciudad;
 	}
 
+
 	public void setCiudad(Ciudad ciudad) {
 		this.ciudad = ciudad;
 	}
+
 
 	@Override
 	public int hashCode() {
