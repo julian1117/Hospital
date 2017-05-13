@@ -10,7 +10,9 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.Length;
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Messages;
 
@@ -25,22 +27,22 @@ import co.edu.eam.ingesoft.pa.negocio.beans.PersonaEJB;
 @ViewScoped
 public class AdministradorControlador implements Serializable {
 
-	// @Pattern(regexp="[0-9]*",message="solo numeros")
-	// @Length(min=4,max=10,message="longitud entre 5 y 10")
+	 @Pattern(regexp="[0-9]*",message="solo permite numeros")
+	 @Length(min=4,max=10,message="longitud entre 4 y 10")
 	private String idPersona;
 
-	// @Pattern(regexp="[A-Za-z ]*",message="solo Letras")
-	// @Length(min=4,max=10,message="longitud entre 5 y 50")
+	 @Pattern(regexp="[A-Za-z ]*",message="solo Letras")
+	 @Length(min=2,max=20,message="longitud entre 2 y 20")
 	private String nombre;
 
-	// @Pattern(regexp="[A-Za-z ]*",message="solo Letras")
-	// @Length(min=4,max=10,message="longitud entre 5 y 50")
+	 @Pattern(regexp="[A-Za-z ]*",message="solo Letras")
+	 @Length(min=2,max=20,message="longitud entre 2 y 20")
 	private String apellido;
 
 	private Date fechaNacimiento;
 
-	// @Pattern(regexp="[0-9]*",message="solo numeros")
-	// @Length(min=10,max=10,message="longitud entre 10 y 15")
+	@Pattern(regexp="[0-9]*",message="solo numeros")
+	@Length(min=10,max=10,message="longitud de 10 ")
 	private String telefono;
 
 	private String direccion;
@@ -49,6 +51,8 @@ public class AdministradorControlador implements Serializable {
 
 	private String email;
 
+	@Pattern(regexp="[F-fm-M]", message="solo F o M")
+	@Length(min=1,max=1,message="longitud de 10 ")
 	private String sexo;
 
 	private Ciudad ciudad;
@@ -216,7 +220,7 @@ public class AdministradorControlador implements Serializable {
 		try {
 
 			Ciudad ciu = generalEJB.buscarCiudad(ciudad.getIdCiuad());
-			fechaNacimiento = new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
+//		<	fechaNacimiento = new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
 
 			Persona persona = new Persona(Long.parseLong(idPersona), nombre, apellido, fechaNacimiento, telefono,
 					direccion, "Administrador", email, sexo, ciu);

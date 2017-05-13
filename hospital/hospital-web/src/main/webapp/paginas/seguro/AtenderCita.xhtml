@@ -11,37 +11,7 @@
 
 				<p:tabView>
 					<p:tab title="Atender Cita">
-						<p:accordionPanel>
-							<p:tab title="BUSCAR PACIENTES">
-								<p:panelGrid columns="4">
-
-									<h:outputLabel for="tfCedula" id="lbCedula"
-										value="#{msj['cita.numeroId']}:" />
-									<h:inputText id="tfCedula"
-										value="#{atenderCitaController.cedulaPaciente}"
-										class="form-control" />
-									<p:message for="tfCedula" />
-
-									<p:commandButton id="btnBuscarPaciente"
-										value="#{msj['cita.buscaPaciente']}"
-										action="#{atenderCitaController.buscarPaciente}"
-										process="@this tfCedula" update="cbCitas growl"
-										icon="ui-icon-search" />
-
-								</p:panelGrid>
-
-								<h:outputLabel for="cbCitas" id="lbCitas"
-									value="#{msj['cita.lisCitas']}:" />
-								<h:selectOneMenu id="cbCitas"
-									value="#{atenderCitaController.cita}" converter="citaConver">
-									<f:selectItems value="#{atenderCitaController.listaCita}"
-										var="doc" itemValue="#{doc}" itemLabel="#{doc.idCita}" />
-								</h:selectOneMenu>
-
-
-
-							</p:tab>
-						</p:accordionPanel>
+						
 
 						<p:accordionPanel>
 							<p:tab title="DIAGNOSTICO">
@@ -143,6 +113,38 @@
 					</p:tab>
 
 					<p:tab title="Procedimeintos">
+					
+					<p:accordionPanel>
+							<p:tab title="BUSCAR PACIENTES">
+								<p:panelGrid columns="4">
+
+									<h:outputLabel for="tfCedula" id="lbCedula"
+										value="#{msj['cita.numeroId']}:" />
+									<h:inputText id="tfCedula"
+										value="#{atenderCitaController.cedulaPaciente}"
+										class="form-control" />
+									<p:message for="tfCedula" />
+
+									<p:commandButton id="btnBuscarPaciente"
+										value="#{msj['cita.buscaPaciente']}"
+										action="#{atenderCitaController.buscarPaciente}"
+										process="@this tfCedula" update="cbCitas growl"
+										icon="ui-icon-search" />
+
+								</p:panelGrid>
+
+								<h:outputLabel for="cbCitas" id="lbCitas"
+									value="#{msj['cita.lisCitas']}:" />
+								<h:selectOneMenu id="cbCitas"
+									value="#{atenderCitaController.cita}" converter="citaConver">
+									<f:selectItems value="#{atenderCitaController.listaCita}"
+										var="doc" itemValue="#{doc}" itemLabel="#{doc.idCita}" />
+								</h:selectOneMenu>
+
+
+
+							</p:tab>
+						</p:accordionPanel>
 
 						<p:accordionPanel>
 							<p:tab title="EXAMENES">
@@ -184,62 +186,96 @@
 
 						<p:accordionPanel>
 							<p:tab title="CIRUGIAS">
-							<p:panel id="paneldatosCirugia">
-								<h:panelGrid  columns="2">
+								<p:panel id="paneldatosCirugia">
+									<h:panelGrid columns="2">
 
-									<h:outputLabel for="tftTipoCirugia" id="lblTipoCirugia"
-										value="Tipo Cirugia" />
-									<h:selectOneMenu id="tftTipoCirugia"
-										value="#{proceControler.tipoCirugia}"
-										converter="tipoCirugiasConver" class="form-control">
+										<h:outputLabel for="tftTipoCirugia" id="lblTipoCirugia"
+											value="Tipo Cirugia" />
+										<h:selectOneMenu id="tftTipoCirugia"
+											value="#{proceControler.tipoCirugia}"
+											converter="tipoCirugiasConver" class="form-control">
 
-										<f:selectItems value="#{proceControler.listarTipoCirugias}"
-											var="tipo" itemValue="#{tipo}"
-											itemLabel="#{tipo.tipoCirugia}" />
-									</h:selectOneMenu>
+											<f:selectItems value="#{proceControler.listarTipoCirugias}"
+												var="tipo" itemValue="#{tipo}"
+												itemLabel="#{tipo.tipoCirugia}" />
+										</h:selectOneMenu>
 
-									<h:outputLabel for="tftQuirofano" id="lblQuirofano"
-										value="Quirofano" />
-									<h:selectOneMenu id="tftQuirofano"
-										value="#{proceControler.quirofano}"
-										converter="quirofanoConver" class="form-control">
+										<h:outputLabel for="tftQuirofano" id="lblQuirofano"
+											value="Quirofano" />
+										<h:selectOneMenu id="tftQuirofano"
+											value="#{proceControler.quirofano}"
+											converter="quirofanoConver" class="form-control">
 
-										<f:selectItems value="#{proceControler.listarQuirofanos}"
-											var="quiro" itemValue="#{quiro}"
-											itemLabel="#{quiro.nombreQuirofano}" />
-									</h:selectOneMenu>
+											<f:selectItems value="#{proceControler.listarQuirofanos}"
+												var="quiro" itemValue="#{quiro}"
+												itemLabel="#{quiro.nombreQuirofano}" />
+										</h:selectOneMenu>
 
-									<h:outputLabel for="descripcionInicio" id="lbdescripcionInicio"
-										value="#{msj['procedimiento.DetalleIn']}"></h:outputLabel>
+										<h:outputLabel for="descripcionInicio"
+											id="lbdescripcionInicio"
+											value="#{msj['procedimiento.DetalleIn']}"></h:outputLabel>
 
-									<p:inputTextarea id="descripcionInicio"
-										value="#{proceControler.descripcionInicio}" rows="10"
-										cols="250" completeMethod="#" queryDelay="450"
-										minQueryLength="6"></p:inputTextarea>
-										
+										<p:inputTextarea id="descripcionInicio"
+											value="#{proceControler.descripcionInicio}" rows="10"
+											cols="250" completeMethod="#" queryDelay="450"
+											minQueryLength="6"></p:inputTextarea>
+
 										<h:outputLabel for="descripcionFinal" id="lbdescripcionFinal"
-										value="#{msj['procedimiento.DetalleFin']}"></h:outputLabel>
+											value="#{msj['procedimiento.DetalleFin']}"></h:outputLabel>
 
-									<p:inputTextarea id="descripcionFinal"
-										value="#{proceControler.descripcionFinal}" rows="10"
-										cols="250" completeMethod="#" queryDelay="450"
-										minQueryLength="6"></p:inputTextarea>
+										<p:inputTextarea id="descripcionFinal"
+											value="#{proceControler.descripcionFinal}" rows="10"
+											cols="250" completeMethod="#" queryDelay="450"
+											minQueryLength="6"></p:inputTextarea>
 
-									<p:commandButton id="btnCrearExamen"
-										value="#{msj['procedimiento.generaCirugia']}"
-										action="#{proceControler.generarCirugia}"
-										process="@this paneldatosCirugia"></p:commandButton>
+										<p:commandButton id="btnCrearExamen"
+											value="#{msj['procedimiento.generaCirugia']}"
+											action="#{proceControler.generarCirugia}"
+											process="@this paneldatosCirugia"></p:commandButton>
 
-								</h:panelGrid>
+									</h:panelGrid>
 								</p:panel>
 							</p:tab>
 						</p:accordionPanel>
 
 						<p:accordionPanel>
 							<p:tab title="HOSPITALIZACION">
-								<p:panelGrid columns="4">
+								<p:panel id="panelDatosHosp">
+									<h:panelGrid columns="2">
+									
+										<h:outputLabel for="tftdetalleHosp"
+											id="lbdetalleHosp"
+											value="#{msj['procedimiento.detalleHos']}"></h:outputLabel>
 
-								</p:panelGrid>
+										<p:inputTextarea id="tftdetalleHosp"
+											value="#{proceControler.detalleHospi}" rows="10"
+											cols="250" completeMethod="#" queryDelay="450"
+											minQueryLength="6"></p:inputTextarea>
+											
+											<h:outputLabel for="tftmotivo"
+											id="lblmotivo"
+											value="#{msj['procedimiento.motivoHos']}"></h:outputLabel>
+
+										<p:inputTextarea id="tftmotivo"
+											value="#{proceControler.motivo}" rows="10"
+											cols="250" completeMethod="#" queryDelay="450"
+											minQueryLength="6"></p:inputTextarea>
+
+										<h:outputLabel for="tftCama" id="lblTipoCama"
+											value="#{msj['procedimiento.numCama']}" />
+										<h:selectOneMenu id="tftCama" value="#{proceControler.cama}"
+											converter="camaControler" class="form-control">
+
+											<f:selectItems value="#{proceControler.listaCamas}" var="ca"
+												itemValue="#{ca}" itemLabel="#{ca.idCama}" />
+										</h:selectOneMenu>
+										
+										<p:commandButton id="btnCrearHosp"
+											value="#{msj['procedimiento.generaHosp']}"
+											action="#{proceControler.generarHospitalizacion}"
+											process="@this panelDatosHosp"></p:commandButton>
+									</h:panelGrid>
+								</p:panel>
 							</p:tab>
 						</p:accordionPanel>
 					</p:tab>

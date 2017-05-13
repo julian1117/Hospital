@@ -201,7 +201,7 @@ public class MedicoControlador implements Serializable {
 	public void crarMedico(){
 		try {
 			Ciudad ciu = generalEJB.buscarCiudad(ciudad.getIdCiuad());
- 			fechaNacimiento=new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
+// 			fechaNacimiento=new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
 			Especializacione especi = generalEJB.buscarEspecializacione(especializacion.getIdEspecializacion());
  			
  			Medico medico = new Medico(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, "Medico", email, sexo, ciu, especi);

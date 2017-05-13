@@ -24,8 +24,8 @@ import co.edu.eam.ingesoft.pa.negocio.beans.GeneralEJB;
 @ViewScoped
 public class AtenderCitaController implements Serializable {
 
-	@Pattern(regexp = "[0-9]*", message = "Solo numeros")
-	@Length(min = 8, max = 11, message = "La longitud debe ser de 8 a 11 numer")
+//	@Pattern(regexp = "[0-9]*", message = "Solo numeros")
+//	@Length(min = 8, max = 11, message = "La longitud debe ser de 8 a 11 numer")
 	private String cedulaPaciente;
 
 	private String textoDesPatologia;
@@ -83,6 +83,7 @@ public class AtenderCitaController implements Serializable {
 			Messages.addFlashGlobalError("ERROR /nEl paciente no tiene citas regsitradas en el momento");
 		}
 
+//		listaCita.get(0).getIdCita();
 	}
 
 	public String getCedulaPaciente() {

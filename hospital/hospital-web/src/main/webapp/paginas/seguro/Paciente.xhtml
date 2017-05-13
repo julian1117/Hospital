@@ -15,7 +15,7 @@
 
 
 			<!--<p:growl id="growl" showDetail="true" sticky="true" />-->
-			 <p:growl id="msgs" showDetail="true" /> 
+			<p:growl id="msgs" showDetail="true" />
 
 			<p:tabView>
 				<p:tab title="Gestion Crear">
@@ -24,7 +24,8 @@
 
 							<h:outputLabel for="tftCedula" id="lblCedula"
 								value="#{msj['persona.cedula']}:"></h:outputLabel>
-							<h:inputText id="tftCedula" value="#{pacienteControler.idPersona}"></h:inputText>
+							<h:inputText id="tftCedula"
+								value="#{pacienteControler.idPersona}"></h:inputText>
 
 							<h:outputLabel for="tftNombre" id="lblNombre"
 								value="#{msj['persona.nombre']}:"></h:outputLabel>
@@ -36,8 +37,11 @@
 								value="#{pacienteControler.apellido}"></h:inputText>
 
 							<p:outputLabel for="tftFecha" value="Fecha" />
-							<h:inputText id="tftFecha" value="#{pacienteControler.fechastr}"
-								mode="inline" />
+							<h:inputText id="tftFecha"
+								value="#{pacienteControler.fechaNacimiento}" mode="inline">
+
+								<f:convertDateTime pattern="dd-MM-yyyy" />
+							</h:inputText>
 
 							<h:outputLabel for="tftTelefono" id="lblTelefono"
 								value="#{msj['persona.telefono']}:"></h:outputLabel>
@@ -114,9 +118,13 @@
 								value="#{pacienteControler.apellido}"></h:inputText>
 
 							<p:outputLabel for="tftFechaBuscar" value="Fecha" />
-							<h:inputText id="tftFechaBuscar"
-								value="#{pacienteControler.fechastr}" mode="inline" />
-
+							<h:inputText id="tftFechaBuscar" 
+								value="#{pacienteControler.fechaNacimiento}" mode="inline">
+							
+								<f:convertDateTime pattern="dd-MM-yyyy" />
+							</h:inputText>
+							
+							
 							<h:outputLabel for="tftTelefonoBuscar" id="lblTelefonoBuscar"
 								value="#{msj['persona.telefono']}:"></h:outputLabel>
 							<h:inputText id="tftTelefonoBuscar"
@@ -172,7 +180,7 @@
 						<p:commandButton id="btnEliminar"
 							value="#{msj['persona.eliminar']}"
 							action="#{pacienteControler.eliminar}" class="btn"
-							process="@this tftCedulaBuscar"  />
+							process="@this tftCedulaBuscar" />
 					</h:panelGrid>
 
 				</p:tab>

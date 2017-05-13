@@ -31,7 +31,9 @@
 
 							<p:outputLabel for="tftFecha" value="Fecha" />
 							<h:inputText id="tftFecha" value="#{MedicoControler.fechastr}"
-								mode="inline" />
+								mode="inline" >
+								<f:convertDateTime pattern="dd-MM-yyyy" />
+								</h:inputText>
 
 							<h:outputLabel for="tftTelefono" id="lblTelefono"
 								value="#{msj['persona.telefono']}:"></h:outputLabel>
@@ -111,7 +113,9 @@
 
 							<p:outputLabel for="tftFechaBuscar" value="Fecha" />
 							<h:inputText id="tftFechaBuscar"
-								value="#{MedicoControler.fechastr}" mode="inline" />
+								value="#{MedicoControler.fechastr}" mode="inline" >
+								<f:convertDateTime pattern="dd-MM-yyyy" />
+								</h:inputText>
 
 							<h:outputLabel for="tftTelefonoBuscar" id="lblTelefonoBuscar"
 								value="#{msj['persona.telefono']}:"></h:outputLabel>

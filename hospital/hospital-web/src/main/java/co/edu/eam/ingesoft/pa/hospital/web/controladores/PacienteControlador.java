@@ -239,7 +239,7 @@ public class PacienteControlador implements Serializable {
 		 
 		 		try {
 		 			Ciudad ciu = generalEJB.buscarCiudad(ciudad.getIdCiuad());
-		 			fechaNacimiento=new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
+		 			//fechaNacimiento=new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
 
 		 			Eps epsB = generalEJB.buscarEps(eps.getIdEps());		 			
 		 				 			

@@ -12,6 +12,7 @@ import javax.inject.Named;
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Messages;
 
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cama;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Quirofano;
 import co.edu.eam.ingesoft.pa.negocio.beans.QuirofanoEJB;
 
@@ -36,13 +37,11 @@ public class QuirofanoControler implements Serializable {
 	private String idCamas;
 
 	private String disponibilidad;
-	
+
 	private String detalleCama;
 
 	@EJB
 	private QuirofanoEJB quirofanoEJB;
-	
-	
 
 	public String getDetalleCama() {
 		return detalleCama;
@@ -178,8 +177,11 @@ public class QuirofanoControler implements Serializable {
 	}
 
 	public void crearCamas() {
-
 		try {
+
+			Cama ca = new Cama(Integer.parseInt(idCamas), true, detalleCama);
+			quirofanoEJB.crearCama(ca);
+			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -192,6 +194,14 @@ public class QuirofanoControler implements Serializable {
 
 	public void buscarCamas() {
 		try {
+			
+			Cama ca = quirofanoEJB.buscarCama(Integer.parseInt(idCamas));
+			if (ca != null) {
+				detalleCama = ca.getDescripcion();
+				} else {
+				Messages.addFlashGlobalInfo("La cama no se encuentra registardo");
+
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
