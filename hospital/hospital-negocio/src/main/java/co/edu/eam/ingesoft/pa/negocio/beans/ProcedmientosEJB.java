@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Examen;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Hospitalizacion;
 import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
 @Stateless
@@ -55,6 +56,15 @@ public class ProcedmientosEJB {
 	
 	public Cirugia buscarCirugia(Integer id){
 		return em.find(Cirugia.class, id);
+	}
+	
+	
+	public void crearHospitalizacion(Hospitalizacion hos){
+		em.persist(hos);
+	}
+	
+	public Hospitalizacion buscarHospi(Integer id){
+		return em.find(Hospitalizacion.class, id);
 	}
 	
 

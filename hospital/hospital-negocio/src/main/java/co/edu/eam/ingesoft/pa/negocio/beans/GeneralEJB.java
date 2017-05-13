@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cama;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Causa;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Ciudad;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Eps;
@@ -200,5 +201,22 @@ public class GeneralEJB {
 	 */
 	public Examen buscarnExamen(Integer id){
 		return em.find(Examen.class, id);		
+	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public Cama buscarCama(Integer id){
+		return em.find(Cama.class, id);
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<Cama> listarCama(){
+		return em.createNamedQuery(Cama.LISTAR_CAMA).getResultList();
 	}
 }

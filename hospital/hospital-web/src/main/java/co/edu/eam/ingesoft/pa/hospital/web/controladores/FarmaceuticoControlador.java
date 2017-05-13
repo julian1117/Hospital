@@ -216,7 +216,7 @@ public class FarmaceuticoControlador implements Serializable{
 			try {
 
 				Ciudad ciu = generalEJB.buscarCiudad(ciudad.getIdCiuad());
-				fechaNacimiento = new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
+//				fechaNacimiento = new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
 
 //				Persona persona = new Persona(Long.parseLong(idPersona), nombre, apellido, fechaNacimiento, telefono,
 //						direccion, "Farmaceutico", email, sexo, ciu);

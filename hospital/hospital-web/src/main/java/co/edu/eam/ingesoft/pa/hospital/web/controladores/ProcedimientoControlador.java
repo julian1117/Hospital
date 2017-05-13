@@ -11,8 +11,10 @@ import javax.inject.Named;
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Messages;
 
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cama;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Examen;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Hospitalizacion;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Quirofano;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoCirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoExamen;
@@ -49,6 +51,13 @@ public class ProcedimientoControlador implements Serializable{
 	
 	private List<Quirofano> listarQuirofanos;
 	
+	private Cama cama;
+	
+	private List<Cama> listaCamas;
+	
+	private String motivo;
+	
+	private String detalleHospi;
 	
 	
 	@EJB
@@ -65,8 +74,75 @@ public class ProcedimientoControlador implements Serializable{
 		listarExamen = generalEJB.listarTipoExamen();
 		listarTipoCirugias = generalEJB.listarTipoCirugias();
 		listarQuirofanos = quirofanoEJB.listarQuirofano();
+		listaCamas = generalEJB.listarCama();
 	}
 	
+	
+	
+
+	public String getMotivo() {
+		return motivo;
+	}
+
+
+
+
+	public void setMotivo(String motivo) {
+		this.motivo = motivo;
+	}
+
+
+
+
+	public String getDetalleHospi() {
+		return detalleHospi;
+	}
+
+
+
+
+	public void setDetalleHospi(String detalleHospi) {
+		this.detalleHospi = detalleHospi;
+	}
+
+
+
+
+	public Cama getCama() {
+		return cama;
+	}
+
+
+
+	public void setCama(Cama cama) {
+		this.cama = cama;
+	}
+
+
+
+	public List<Cama> getListaCamas() {
+		return listaCamas;
+	}
+
+
+
+	public void setListaCamas(List<Cama> listaCamas) {
+		this.listaCamas = listaCamas;
+	}
+
+
+
+	public QuirofanoEJB getQuirofanoEJB() {
+		return quirofanoEJB;
+	}
+
+
+
+	public void setQuirofanoEJB(QuirofanoEJB quirofanoEJB) {
+		this.quirofanoEJB = quirofanoEJB;
+	}
+
+
 
 	public List<Quirofano> getListarQuirofanos() {
 		return listarQuirofanos;
@@ -236,6 +312,22 @@ public class ProcedimientoControlador implements Serializable{
 			procedimientosEJB.crearCirugia(ciru);
  			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
 
+		} catch (Exception e) {
+			Messages.addFlashGlobalError(e.getMessage());
+
+		}
+	}
+	
+	public void generarHospitalizacion(){
+		try {
+			
+			Cama ca = generalEJB.buscarCama(cama.getIdCama());
+			
+			Hospitalizacion hos = new Hospitalizacion(detalleHospi, motivo, ca);
+			procedimientosEJB.crearHospitalizacion(hos);
+ 			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
+
+			
 		} catch (Exception e) {
 			Messages.addFlashGlobalError(e.getMessage());
 

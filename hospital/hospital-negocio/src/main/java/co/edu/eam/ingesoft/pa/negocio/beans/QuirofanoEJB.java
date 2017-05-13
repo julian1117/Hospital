@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cama;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Quirofano;
 import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
@@ -62,4 +63,22 @@ public class QuirofanoEJB {
 		return em.createNamedQuery(Quirofano.LISTAR_QUIROFANO).getResultList();
 	}
 
+	public void crearCama(Cama cama){
+		Cama ca = buscarCama(cama.getIdCama());
+		if(ca==null){
+			em.persist(cama);
+		}else{
+			throw new ExcepcionNegocio("la cama no se encuentra en el sistema");
+
+		}
+	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public Cama buscarCama(Integer id){
+		return em.find(Cama.class, id);
+	}
 }

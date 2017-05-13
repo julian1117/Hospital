@@ -21,7 +21,7 @@ public class Hospitalizacion  implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "HOSPITALIZACION_SEQ")
     @SequenceGenerator(sequenceName = "HOSPITALIZACIONES_SEQ", allocationSize = 1, name = "HOSPITALIZACION_SEQ")
-	@Column(name="ID_CIRUGIA",nullable=false)
+	@Column(name="ID_HOSPITALIZACION",nullable=false)
 	private Integer id;
 	
 	@Column(name="Detalle_hospitalizacion",length=2000)
@@ -29,16 +29,28 @@ public class Hospitalizacion  implements Serializable{
 	
 	@Column(name="Motivo",length=50)
 	private String motivo;
+	
+	@ManyToOne
+	@JoinColumn(name="CAMAS_Id",nullable=false)
+	private Cama camaId;
 
 	public Hospitalizacion() {
 		super();
 	}
 
-	public Hospitalizacion(Integer id, String detalleHospi, String motivo) {
+	public Hospitalizacion(Integer id, String detalleHospi, String motivo, Cama camaId) {
 		super();
 		this.id = id;
 		this.detalleHospi = detalleHospi;
 		this.motivo = motivo;
+		this.camaId = camaId;
+	}
+
+	public Hospitalizacion(String detalleHospi, String motivo, Cama camaId) {
+		super();
+		this.detalleHospi = detalleHospi;
+		this.motivo = motivo;
+		this.camaId = camaId;
 	}
 
 	public Integer getId() {
@@ -65,7 +77,14 @@ public class Hospitalizacion  implements Serializable{
 		this.motivo = motivo;
 	}
 
-	
+	public Cama getCamaId() {
+		return camaId;
+	}
+
+	public void setCamaId(Cama camaId) {
+		this.camaId = camaId;
+	}
+
 	
 	
 

@@ -10,7 +10,9 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.Length;
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Messages;
 
@@ -218,7 +220,7 @@ public class AdministradorControlador implements Serializable {
 		try {
 
 			Ciudad ciu = generalEJB.buscarCiudad(ciudad.getIdCiuad());
-			fechaNacimiento = new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
+//		<	fechaNacimiento = new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
 
 //			Persona persona = new Persona(Long.parseLong(idPersona), nombre, apellido, fechaNacimiento, telefono,
 //					direccion, "Administrador", email, sexo, ciu);

@@ -228,6 +228,7 @@ public class PacienteControlador implements Serializable {
 		this.pacienteEJB = pacienteEJB;
 	}
 
+
 	public void crearPersona() {
 
 		try {

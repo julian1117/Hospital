@@ -20,44 +20,54 @@
 			<p:tabView>
 				<p:tab title="Gestion Crear">
 					<p:panel id="paneldatosP" header="Datos Administrador">
-						<h:panelGrid id="paneldatos" columns="2">
+						<h:panelGrid id="paneldatos" columns="3">
 
 							<h:outputLabel for="tftCedula" id="lblCedula"
 								value="#{msj['persona.cedula']}:"></h:outputLabel>
 							<h:inputText id="tftCedula" value="#{administradorControler.idPersona}"></h:inputText>
+							<p:message for="tftCedula" />
 
 							<h:outputLabel for="tftNombre" id="lblNombre"
 								value="#{msj['persona.nombre']}:"></h:outputLabel>
 							<h:inputText id="tftNombre" value="#{administradorControler.nombre}"></h:inputText>
+							<p:message for="tftNombre" />
 
 							<h:outputLabel for="tftApellido" id="lblApellido"
 								value="#{msj['persona.apellido']}:"></h:outputLabel>
 							<h:inputText id="tftApellido"
 								value="#{administradorControler.apellido}"></h:inputText>
+								<p:message for="tftApellido" />
 
 							<p:outputLabel for="tftFecha" value="Fecha" />
 							<h:inputText id="tftFecha" value="#{administradorControler.fechastr}"
-								mode="inline" />
+								mode="inline" >
+								<f:convertDateTime pattern="dd-MM-yyyy" />
+								</h:inputText>
+								<p:message for="tftFecha" />
 
 							<h:outputLabel for="tftTelefono" id="lblTelefono"
 								value="#{msj['persona.telefono']}:"></h:outputLabel>
 							<h:inputText id="tftTelefono"
 								value="#{administradorControler.telefono}"></h:inputText>
+								<p:message for="tftTelefono" />
 
 							<h:outputLabel for="tftDireccion" id="lblDireccion"
 								value="#{msj['persona.direccion']}:"></h:outputLabel>
 							<h:inputText id="tftDireccion"
 								value="#{administradorControler.direccion}"></h:inputText>
+								<p:message for="tftDireccion" />
 
 
 
 							<h:outputLabel for="tftEmail" id="lblEmail"
 								value="#{msj['persona.email']}:"></h:outputLabel>
 							<h:inputText id="tftEmail" value="#{administradorControler.email}"></h:inputText>
+							<p:message for="tftEmail" />
 
 							<h:outputLabel for="tftSexo" id="lblSexo"
 								value="#{msj['persona.sexo']}:"></h:outputLabel>
 							<h:inputText id="tftSexo" value="#{administradorControler.sexo}"></h:inputText>
+							<p:message for="tftSexo" />
 
 							<h:outputLabel for="tftCiudad" id="lblCiudad" value="Ciudad" />
 							<h:selectOneMenu id="tftCiudad"
@@ -67,6 +77,7 @@
 								<f:selectItems value="#{administradorControler.nombreCiudad}"
 									var="doc" itemValue="#{doc}" itemLabel="#{doc.nombre}" />
 							</h:selectOneMenu>
+							<h1></h1>
 
 							<h:panelGrid id="panelbtnsCrear" columns="2">
 								<p:commandButton id="btnCrear" value="#{msj['persona.crear']}"
@@ -106,7 +117,9 @@
 
 							<p:outputLabel for="tftFechaBuscar" value="Fecha" />
 							<h:inputText id="tftFechaBuscar"
-								value="#{administradorControler.fechastr}" mode="inline" />
+								value="#{administradorControler.fechastr}" mode="inline" >
+								<f:convertDateTime pattern="dd-MM-yyyy" />
+								</h:inputText>
 
 							<h:outputLabel for="tftTelefonoBuscar" id="lblTelefonoBuscar"
 								value="#{msj['persona.telefono']}:"></h:outputLabel>
