@@ -1,0 +1,188 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+
+
+	<ui:define name="cuerpo">
+
+		<h:form prependId="false">
+
+
+			<br></br>
+
+
+
+			<!--<p:growl id="growl" showDetail="true" sticky="true" />-->
+			 <p:growl id="msgs" showDetail="true" /> 
+
+			<p:tabView>
+				<p:tab title="Gestion Crear">
+					<p:panel id="paneldatosP" header="Datos Administrador">
+						<h:panelGrid id="paneldatos" columns="3">
+
+							<h:outputLabel for="tftCedula" id="lblCedula"
+								value="#{msj['persona.cedula']}:"></h:outputLabel>
+							<h:inputText id="tftCedula" value="#{administradorControler.idPersona}"></h:inputText>
+							<p:message for="tftCedula" />
+
+							<h:outputLabel for="tftNombre" id="lblNombre"
+								value="#{msj['persona.nombre']}:"></h:outputLabel>
+							<h:inputText id="tftNombre" value="#{administradorControler.nombre}"></h:inputText>
+							<p:message for="tftNombre" />
+
+							<h:outputLabel for="tftApellido" id="lblApellido"
+								value="#{msj['persona.apellido']}:"></h:outputLabel>
+							<h:inputText id="tftApellido"
+								value="#{administradorControler.apellido}"></h:inputText>
+								<p:message for="tftApellido" />
+
+							<p:outputLabel for="tftFecha" value="Fecha" />
+							<h:inputText id="tftFecha" value="#{administradorControler.fechastr}"
+								mode="inline" >
+								<f:convertDateTime pattern="dd-MM-yyyy" />
+								</h:inputText>
+								<p:message for="tftFecha" />
+
+							<h:outputLabel for="tftTelefono" id="lblTelefono"
+								value="#{msj['persona.telefono']}:"></h:outputLabel>
+							<h:inputText id="tftTelefono"
+								value="#{administradorControler.telefono}"></h:inputText>
+								<p:message for="tftTelefono" />
+
+							<h:outputLabel for="tftDireccion" id="lblDireccion"
+								value="#{msj['persona.direccion']}:"></h:outputLabel>
+							<h:inputText id="tftDireccion"
+								value="#{administradorControler.direccion}"></h:inputText>
+								<p:message for="tftDireccion" />
+
+
+
+							<h:outputLabel for="tftEmail" id="lblEmail"
+								value="#{msj['persona.email']}:"></h:outputLabel>
+							<h:inputText id="tftEmail" value="#{administradorControler.email}"></h:inputText>
+							<p:message for="tftEmail" />
+
+							<h:outputLabel for="tftSexo" id="lblSexo"
+								value="#{msj['persona.sexo']}:"></h:outputLabel>
+							<h:inputText id="tftSexo" value="#{administradorControler.sexo}"></h:inputText>
+							<p:message for="tftSexo" />
+
+							<h:outputLabel for="tftCiudad" id="lblCiudad" value="Ciudad" />
+							<h:selectOneMenu id="tftCiudad"
+								value="#{administradorControler.ciudad}" converter="ciudadConver"
+								class="form-control">
+
+								<f:selectItems value="#{administradorControler.nombreCiudad}"
+									var="doc" itemValue="#{doc}" itemLabel="#{doc.nombre}" />
+							</h:selectOneMenu>
+							<h1></h1>
+
+							<h:panelGrid id="panelbtnsCrear" columns="2">
+								<p:commandButton id="btnCrear" value="#{msj['persona.crear']}"
+									actionListener="#{administradorControler.crearAdministrador}"
+									process="@this paneldatos" />
+							</h:panelGrid>
+						</h:panelGrid>
+					</p:panel>
+				</p:tab>
+				<p:tab title="Buscar-Editar-Eliminar">
+
+					<h:panelGrid id="panelBuscar" columns="3">
+						<h:outputLabel for="tftCedulaBuscar" id="lblCedulaBuscar"
+							value="#{msj['persona.cedula']}:"></h:outputLabel>
+						<h:inputText id="tftCedulaBuscar"
+							value="#{administradorControler.idPersona}"></h:inputText>
+
+						<p:commandButton id="btnBuscar" value="#{msj['persona.buscar']}"
+							action="#{administradorControler.buscar}" class="btn"
+							process="@this tftCedulaBuscar" update="paneldatosBuscar " />
+					</h:panelGrid>
+
+
+					<p:panel id="paneldatosPBuscar" header="Datos">
+						<h:panelGrid id="paneldatosBuscar" columns="2">
+
+
+							<h:outputLabel for="tftNombreBuscar" id="lblNombreBuscar"
+								value="#{msj['persona.nombre']}:"></h:outputLabel>
+							<h:inputText id="tftNombreBuscar"
+								value="#{administradorControler.nombre}"></h:inputText>
+
+							<h:outputLabel for="tftApellidoBuscar" id="lblApellidoBuscar"
+								value="#{msj['persona.apellido']}:"></h:outputLabel>
+							<h:inputText id="tftApellidoBuscar"
+								value="#{administradorControler.apellido}"></h:inputText>
+
+							<p:outputLabel for="tftFechaBuscar" value="Fecha" />
+							<h:inputText id="tftFechaBuscar"
+								value="#{administradorControler.fechastr}" mode="inline" >
+								<f:convertDateTime pattern="dd-MM-yyyy" />
+								</h:inputText>
+
+							<h:outputLabel for="tftTelefonoBuscar" id="lblTelefonoBuscar"
+								value="#{msj['persona.telefono']}:"></h:outputLabel>
+							<h:inputText id="tftTelefonoBuscar"
+								value="#{administradorControler.telefono}"></h:inputText>
+
+							<h:outputLabel for="tftDireccionBuscar" id="lblDireccionBuscar"
+								value="#{msj['persona.direccion']}:"></h:outputLabel>
+							<h:inputText id="tftDireccionBuscar"
+								value="#{administradorControler.direccion}"></h:inputText>
+
+
+							<h:outputLabel for="tftEmailBuscar" id="lblEmailBuscar"
+								value="#{msj['persona.email']}:"></h:outputLabel>
+							<h:inputText id="tftEmailBuscar"
+								value="#{administradorControler.email}"></h:inputText>
+
+							<h:outputLabel for="tftSexoBuscar" id="lblSexoBuscar"
+								value="#{msj['persona.sexo']}:"></h:outputLabel>
+							<h:inputText id="tftSexoBuscar" value="#{administradorControler.sexo}"></h:inputText>
+
+							
+
+							<h:outputLabel for="tftCiudadBuscar" id="lblCiudadBuscar"
+								value="Ciudad" />
+							<h:selectOneMenu id="tftCiudadBuscar"
+								value="#{administradorControler.ciudad}" converter="ciudadConver"
+								class="form-control">
+
+								<f:selectItems value="#{administradorControler.nombreCiudad}"
+									var="doc" itemValue="#{doc}" itemLabel="#{doc.nombre}" />
+							</h:selectOneMenu>
+
+						</h:panelGrid>
+					</p:panel>
+					<br></br>
+					<br></br>
+
+					<h2>Otras Opciones</h2>
+
+					<h:panelGrid id="panelbtns" columns="2">
+						<p:commandButton id="btnEditar" value="#{msj['persona.editar']}"
+							action="#{administradorControler.editar}" class="btn"
+							process="@this paneldatosPBuscar" />
+
+
+						<p:commandButton id="btnEliminar"
+							value="#{msj['persona.eliminar']}"
+							action="#{administradorControler.eliminar}" class="btn"
+							process="@this tftCedulaBuscar"  />
+					</h:panelGrid>
+
+				</p:tab>
+				<p:tab title="Godfather Part III">
+					<h:panelGrid columns="2" cellpadding="10">
+						<p:graphicImage name="demo/images/godfather/godfather3.jpg" />
+						<h:outputText value="After a break of more than 15 years..." />
+					</h:panelGrid>
+				</p:tab>
+			</p:tabView>
+
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>

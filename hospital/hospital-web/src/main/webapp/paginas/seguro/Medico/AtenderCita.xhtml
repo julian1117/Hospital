@@ -114,37 +114,6 @@
 
 					<p:tab title="Procedimeintos">
 					
-					<p:accordionPanel>
-							<p:tab title="BUSCAR PACIENTES">
-								<p:panelGrid columns="4">
-
-									<h:outputLabel for="tfCedula" id="lbCedula"
-										value="#{msj['cita.numeroId']}:" />
-									<h:inputText id="tfCedula"
-										value="#{atenderCitaController.cedulaPaciente}"
-										class="form-control" />
-									<p:message for="tfCedula" />
-
-									<p:commandButton id="btnBuscarPaciente"
-										value="#{msj['cita.buscaPaciente']}"
-										action="#{atenderCitaController.buscarPaciente}"
-										process="@this tfCedula" update="cbCitas growl"
-										icon="ui-icon-search" />
-
-								</p:panelGrid>
-
-								<h:outputLabel for="cbCitas" id="lbCitas"
-									value="#{msj['cita.lisCitas']}:" />
-								<h:selectOneMenu id="cbCitas"
-									value="#{atenderCitaController.cita}" converter="citaConver">
-									<f:selectItems value="#{atenderCitaController.listaCita}"
-										var="doc" itemValue="#{doc}" itemLabel="#{doc.idCita}" />
-								</h:selectOneMenu>
-
-
-
-							</p:tab>
-						</p:accordionPanel>
 
 						<p:accordionPanel>
 							<p:tab title="EXAMENES">
@@ -182,9 +151,7 @@
 									</h:panelGrid>
 								</p:panel>
 							</p:tab>
-						</p:accordionPanel>
-
-						<p:accordionPanel>
+						
 							<p:tab title="CIRUGIAS">
 								<p:panel id="paneldatosCirugia">
 									<h:panelGrid columns="2">
@@ -228,7 +195,7 @@
 											cols="250" completeMethod="#" queryDelay="450"
 											minQueryLength="6"></p:inputTextarea>
 
-										<p:commandButton id="btnCrearExamen"
+										<p:commandButton id="btnCrearCirugia"
 											value="#{msj['procedimiento.generaCirugia']}"
 											action="#{proceControler.generarCirugia}"
 											process="@this paneldatosCirugia"></p:commandButton>
@@ -236,9 +203,7 @@
 									</h:panelGrid>
 								</p:panel>
 							</p:tab>
-						</p:accordionPanel>
-
-						<p:accordionPanel>
+						
 							<p:tab title="HOSPITALIZACION">
 								<p:panel id="panelDatosHosp">
 									<h:panelGrid columns="2">

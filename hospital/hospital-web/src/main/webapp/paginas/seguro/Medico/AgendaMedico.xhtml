@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+
+	<ui:define name="cuerpo">
+		<h:form prependId="false">
+
+			<p:panel header="Agenda de Citas" id="panelTab">
+				<p:dataTable id="panelTablas" value="#{atenderCitaController.listaCitasMedico}"
+					var="doc" border="1" class="table table-striped">
+					<p:column headerText="Orden">
+						<h:outputLabel value="#{doc.idCita}" />
+					</p:column>
+					<p:column headerText="Nombre Paciente">
+						<h:outputLabel
+							value="#{doc.persona.nombre} #{doc.persona.apellido}" />
+					</p:column>
+					<p:column headerText="Fecha de la cita">
+						<h:outputLabel value="#{doc.agenda.fecha} - #{doc.horaCita.hora}" />
+					</p:column>
+					<p:column headerText="Tipo de cita">
+						<h:outputLabel value="#{doc.tipoCita.nombre}" />
+					</p:column>
+					
+					<p:column headerText="Opciones">
+						<p:commandButton action="#{atenderCitaController.AtenderCita(doc)}"
+							styleClass="ui-priority-primary" process="@this panelTablas"
+							value="Atender Cita" update="panelTablas growl" />
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>
