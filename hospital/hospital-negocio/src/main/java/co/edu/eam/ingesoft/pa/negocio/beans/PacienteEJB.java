@@ -26,7 +26,7 @@ public class PacienteEJB {
 		if(buscarPer==null){
 					em.persist(paciente);
 		}else{
-			throw new ExcepcionNegocio("La persona no se encuentra en el sistema");
+			throw new ExcepcionNegocio("La persona ya se encuentra en el sistema");
 		}
 	}
 	

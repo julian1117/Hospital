@@ -19,6 +19,7 @@ import org.omnifaces.util.Messages;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Ciudad;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Eps;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Persona;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Roll;
 import co.edu.eam.ingesoft.pa.negocio.beans.GeneralEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.PacienteEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.PersonaEJB;
@@ -51,8 +52,6 @@ public class AdministradorControlador implements Serializable {
 
 	private String email;
 
-	@Pattern(regexp="[F-fm-M]", message="solo F o M")
-	@Length(min=1,max=1,message="longitud de 10 ")
 	private String sexo;
 
 	private Ciudad ciudad;
@@ -62,6 +61,8 @@ public class AdministradorControlador implements Serializable {
 	private String fechastr;
 
 	private Eps eps;
+	
+	private Roll roles;
 
 	private List<Eps> listaEps;
 
@@ -79,6 +80,20 @@ public class AdministradorControlador implements Serializable {
 		nombreCiudad = generalEJB.listarCiudad();
 		listaEps = generalEJB.listarEps();
 	}
+
+	
+	
+	public Roll getRoles() {
+		return roles;
+	}
+
+
+
+	public void setRoles(Roll roles) {
+		this.roles = roles;
+	}
+
+
 
 	public String getIdPersona() {
 		return idPersona;
@@ -221,10 +236,9 @@ public class AdministradorControlador implements Serializable {
 
 			Ciudad ciu = generalEJB.buscarCiudad(ciudad.getIdCiuad());
 //		<	fechaNacimiento = new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
-
-//			Persona persona = new Persona(Long.parseLong(idPersona), nombre, apellido, fechaNacimiento, telefono,
-//					direccion, "Administrador", email, sexo, ciu);
-//			personaEJB.crearPersona(persona);
+			Roll roll = generalEJB.buscarRol(1);
+			Persona persona = new Persona(Long.parseLong(idPersona), nombre, apellido, fechaNacimiento, telefono, direccion, roll, email, sexo, ciu);
+			personaEJB.crearPersona(persona);
 			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
 			idPersona = null;
 			nombre = "";

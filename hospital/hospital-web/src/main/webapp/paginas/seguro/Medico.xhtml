@@ -53,7 +53,11 @@
 
 							<h:outputLabel for="tftSexo" id="lblSexo"
 								value="#{msj['persona.sexo']}:"></h:outputLabel>
-							<h:inputText id="tftSexo" value="#{MedicoControler.sexo}"></h:inputText>
+							<h:selectOneMenu id="tftSexo" value="#{MedicoControler.sexo}"
+								class="form-control">
+								<f:selectItem itemValue="F" itemLabel="Femenino" />
+								<f:selectItem itemValue="M" itemLabel="Masculino" />
+							</h:selectOneMenu>
 
 							<h:outputLabel for="tftEspecialidad" id="lblEspecialidad"
 								value="Espe" />

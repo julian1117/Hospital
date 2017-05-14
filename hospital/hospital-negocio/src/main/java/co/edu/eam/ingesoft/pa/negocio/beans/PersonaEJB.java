@@ -70,6 +70,13 @@ public class PersonaEJB {
 		em.merge(persona);
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<String> emailPersona(){
+		return em.createNativeQuery("SELECT per.EMAIL FROM PERSONAS per;", String.class).getResultList();
+	}
 	
 
 }

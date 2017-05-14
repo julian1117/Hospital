@@ -15,6 +15,7 @@ import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Especializacione;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Examen;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.HoraCita;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Patologia;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Roll;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Sintoma;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoCirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoExamen;
@@ -218,5 +219,9 @@ public class GeneralEJB {
 	 */
 	public List<Cama> listarCama(){
 		return em.createNamedQuery(Cama.LISTAR_CAMA).getResultList();
+	}
+	
+	public Roll buscarRol(Integer roles){
+		return em.find(Roll.class, roles);
 	}
 }

@@ -18,6 +18,7 @@ import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Ciudad;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Especializacione;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Medico;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Persona;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Roll;
 import co.edu.eam.ingesoft.pa.negocio.beans.GeneralEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.MedicoEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.PersonaEJB;
@@ -28,7 +29,7 @@ public class MedicoControlador implements Serializable {
 
 //	@Pattern(regexp="[0-9]*",message="solo numeros")
 //	@Length(min=4,max=10,message="longitud entre 5 y 10")
-	private Long idPersona;
+	private String idPersona;
 	
 //	@Pattern(regexp="[A-Za-z ]*",message="solo Letras")
 //	@Length(min=4,max=10,message="longitud entre 5 y 50")
@@ -63,6 +64,18 @@ public class MedicoControlador implements Serializable {
 	
 	private List<Especializacione> listarEspecializaciones;
 	
+	private Roll roles;
+
+	
+	
+	public Roll getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Roll roles) {
+		this.roles = roles;
+	}
+
 	@EJB
 	private GeneralEJB generalEJB;
 	
@@ -78,11 +91,11 @@ public class MedicoControlador implements Serializable {
 		listarCiudad = generalEJB.listarCiudad();
 	}
 
-	public Long getIdPersona() {
+	public String getIdPersona() {
 		return idPersona;
 	}
 
-	public void setIdPersona(Long idPersona) {
+	public void setIdPersona(String idPersona) {
 		this.idPersona = idPersona;
 	}
 
@@ -198,14 +211,40 @@ public class MedicoControlador implements Serializable {
 		this.generalEJB = generalEJB;
 	}
 	
+	
+	
+	public List<Ciudad> getListarCiudad() {
+		return listarCiudad;
+	}
+
+	public void setListarCiudad(List<Ciudad> listarCiudad) {
+		this.listarCiudad = listarCiudad;
+	}
+
+	public PersonaEJB getPersonaEJB() {
+		return personaEJB;
+	}
+
+	public void setPersonaEJB(PersonaEJB personaEJB) {
+		this.personaEJB = personaEJB;
+	}
+
+	public MedicoEJB getMedicoEJB() {
+		return medicoEJB;
+	}
+
+	public void setMedicoEJB(MedicoEJB medicoEJB) {
+		this.medicoEJB = medicoEJB;
+	}
+
 	public void crarMedico(){
 		try {
 			Ciudad ciu = generalEJB.buscarCiudad(ciudad.getIdCiuad());
 // 			fechaNacimiento=new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
 			Especializacione especi = generalEJB.buscarEspecializacione(especializacion.getIdEspecializacion());
+			Roll roll = generalEJB.buscarRol(3);
  			
-// 			Medico medico = new Medico(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, "Medico", email, sexo, ciu, especi);
-// 			medicoEJB.crearMedico(medico);
+ 			Medico medico = new Medico(Long.parseLong(idPersona), nombre, apellido, fechaNacimiento, telefono, direccion, roll, email, sexo, ciu, especi);
  			
  			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
 
@@ -217,7 +256,7 @@ public class MedicoControlador implements Serializable {
 	}
 	
 	public void buscar(){
-		Medico me = medicoEJB.buscarMedico(idPersona);
+		Medico me = medicoEJB.buscarMedico(Long.parseLong(idPersona));
 		if(me != null){
 			nombre=me.getNombre();
  			apellido= me.getApellido();
@@ -235,13 +274,16 @@ public class MedicoControlador implements Serializable {
 	public void editarMedico(){
 		try {
 			
-			Medico medico = medicoEJB.buscarMedico(idPersona);
+			Medico medico = medicoEJB.buscarMedico(Long.parseLong(idPersona));
 			Ciudad ciud = generalEJB.buscarCiudad(ciudad.getIdCiuad());
 	 		fechaNacimiento=new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
+			Especializacione especi = generalEJB.buscarEspecializacione(especializacion.getIdEspecializacion());
+
+			Roll roll = generalEJB.buscarRol(3);
+
 	 		
 	 		if(medico!=null){
-//	 			Medico medi = new Medico(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, "Medico", email, sexo, ciud, especializacion);
-//	 			medicoEJB.editarMedico(medi);
+	 			Medico medi = new Medico(Long.parseLong(idPersona), nombre, apellido, fechaNacimiento, telefono, direccion, roll, email, sexo, ciud, especi);
 	 			Messages.addFlashGlobalInfo("Editado con exito!!");
 	 			
 	 			idPersona=null;
@@ -261,7 +303,7 @@ public class MedicoControlador implements Serializable {
 	}
 	
 	public void eliminar(){
- 		Persona per = personaEJB.buscarPersona(idPersona);
+ 		Persona per = personaEJB.buscarPersona(Long.parseLong(idPersona));
  		personaEJB.eliminar(per);
  		Messages.addFlashGlobalInfo("eliminado con exito!!");
  	}

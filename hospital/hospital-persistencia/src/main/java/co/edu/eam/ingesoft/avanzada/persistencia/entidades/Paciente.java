@@ -26,12 +26,12 @@ public class Paciente extends Persona  implements Serializable {
 		super();
 	}
 
+	
+	
 
-	
-	
 	public Paciente(Long idPersona, String nombre, String apellido, Date fechaNacimiento, String telefono,
-			String direccion, String tipoUsuario, String email, String sexo, Ciudad ciudad, Eps eps) {
-		super();
+			String direccion, Roll roll, String email, String sexo, Ciudad ciudad, Eps eps) {
+		super(idPersona, nombre, apellido, fechaNacimiento, telefono, direccion, roll, email, sexo, ciudad);
 		this.eps = eps;
 	}
 
