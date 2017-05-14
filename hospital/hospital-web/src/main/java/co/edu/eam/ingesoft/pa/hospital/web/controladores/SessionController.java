@@ -99,7 +99,7 @@ public class SessionController implements Serializable {
 					roles = seguridadEjb.listaRoles(useBuscar.getIdPersona().getRoll().getId());
 					accesos = seguridadEjb.listaAcc(useBuscar.getIdPersona().getRoll().getId());
 
-					return "/paginas/seguro/paciente/#.xhtml?faces-redirect=true";
+					return "/paginas/seguro/paciente/CitasPaciente.xhtml?faces-redirect=true";
 				}else if (use.getIdPersona().getRoll().getId() == 3) {
 					Faces.setSessionAttribute("usuario", use);
 					Messages.addGlobalInfo("Usuario existe");

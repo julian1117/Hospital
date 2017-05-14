@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.Pattern;
 
@@ -19,6 +20,7 @@ import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Sintoma;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Tratamiento;
 import co.edu.eam.ingesoft.pa.negocio.beans.CitaEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.GeneralEJB;
+import co.edu.eam.ingesoft.pa.negocio.beans.GestionMedicoEJB;
 
 @Named(value = "atenderCitaController")
 @ViewScoped
@@ -40,8 +42,6 @@ public class AtenderCitaController implements Serializable {
 
 	private Tratamiento tratamiento;
 
-	private List<Cita> listaCita;
-
 	private List<Patologia> listaPatolgia;
 
 	private List<Causa> listaCausas;
@@ -49,7 +49,15 @@ public class AtenderCitaController implements Serializable {
 	private List<Sintoma> listaSintomas;
 
 	private List<Tratamiento> listaTratamiento;
+	
+	private List<Cita> listaCitasMedico;
+	
 
+	@Inject
+	private SessionController usuarioSesion;
+
+	@EJB
+	private GestionMedicoEJB medicoGestionEJB;
 	
 	
 	@EJB
@@ -64,7 +72,15 @@ public class AtenderCitaController implements Serializable {
 		listaCausas = generalEJB.listaCausa();
 		listaSintomas = generalEJB.listaSintoma();
 		listaTratamiento = generalEJB.listaTratamiento();
+		listaCitasMedico = medicoGestionEJB.listaCitaMedico(
+				usuarioSesion.getUse().getIdPersona().getIdPersona());
 	 }
+	
+	
+	public String AtenderCita(Cita citaAt){	
+		cita = citaAt;		
+		return "/paginas/seguro/Medico/AtenderCita.xhtml?faces-redirect=true";
+	}
 	
 	public void descPatologia(){
 		
@@ -73,18 +89,7 @@ public class AtenderCitaController implements Serializable {
 		textoDesPatologia = patolo.getDescripcion();
 	}
 
-	/**
-	 * Busca todas las citas del apciente que esten como no atendidas
-	 */
-	public void buscarPaciente() {
 
-		listaCita = citaEJB.listaCitaPaciente(Long.parseLong(cedulaPaciente));
-		if (listaCita.isEmpty()) {
-			Messages.addFlashGlobalError("ERROR /nEl paciente no tiene citas regsitradas en el momento");
-		}
-
-//		listaCita.get(0).getIdCita();
-	}
 
 	public String getCedulaPaciente() {
 		return cedulaPaciente;
@@ -134,14 +139,6 @@ public class AtenderCitaController implements Serializable {
 		this.tratamiento = tratamiento;
 	}
 
-	public List<Cita> getListaCita() {
-		return listaCita;
-	}
-
-	public void setListaCita(List<Cita> listaCita) {
-		this.listaCita = listaCita;
-	}
-
 	public List<Patologia> getListaPatolgia() {
 		return listaPatolgia;
 	}
@@ -180,6 +177,14 @@ public class AtenderCitaController implements Serializable {
 
 	public void setTextoDesPatologia(String textoDesPatologia) {
 		this.textoDesPatologia = textoDesPatologia;
+	}
+	
+	public List<Cita> getListaCitasMedico() {
+		return listaCitasMedico;
+	}
+
+	public void setListaCitasMedico(List<Cita> listaCitasMedico) {
+		this.listaCitasMedico = listaCitasMedico;
 	}
 	
 

@@ -10,29 +10,7 @@
 
 			<!-- <p:growl id="growl" showDetail="true" sticky="true" /> -->
 	<!-- <p:panel id="panelPrincipal" header="Registro de la Cita Medica"> -->
-			<p:accordionPanel>
-				<p:tab title="BUSCAR PACIENTES">
-					<p:panelGrid columns="4">
-
-						<h:outputLabel for="tfCedula" id="lbCedula"
-							value="#{msj['cita.numeroId']}:" />
-						<h:inputText id="tfCedula"
-							value="#{ProceControler.cedulaPaciente}" class="form-control" />
-						<p:message for="tfCedula" />
-
-						<p:commandButton id="btnBuscarPaciente"
-							value="#{msj['cita.buscaPaciente']}"
-							action="#{procedimientosControler.buscarPaciente}"
-							process="@this tfCedula" update="growl" icon="ui-icon-search" />
-
-					</p:panelGrid>
-
-
-
-
-
-				</p:tab>
-			</p:accordionPanel>
+			
 
 			<p:accordionPanel>
 				<p:tab title="EXAMENES"> 

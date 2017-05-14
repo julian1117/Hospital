@@ -6,9 +6,8 @@
 
 	<ui:define name="cuerpo">
 		<h:form prependId="false">
-
-			<p:panel header="Agenda de Citas" id="panelTab">
-				<p:dataTable id="panelTablas" value="#{atenderCitaController.listaCitasMedico}"
+			<p:panel header="Citas pendientes del paciente" id="panelTab">
+				<p:dataTable id="panelTablas" value="#{citaController.listaCita}"
 					var="doc" border="1" class="table table-striped">
 					<p:column headerText="Orden">
 						<h:outputLabel value="#{doc.idCita}" />
@@ -17,23 +16,26 @@
 						<h:outputLabel
 							value="#{doc.persona.nombre} #{doc.persona.apellido}" />
 					</p:column>
+					<p:column headerText="Doctor">
+						<h:outputLabel
+							value="#{doc.agenda.medico.nombre} #{doc.agenda.medico.apellido}" />
+					</p:column>
 					<p:column headerText="Fecha de la cita">
 						<h:outputLabel value="#{doc.agenda.fecha} - #{doc.horaCita.hora}" />
 					</p:column>
 					<p:column headerText="Tipo de cita">
 						<h:outputLabel value="#{doc.tipoCita.nombre}" />
 					</p:column>
-					
+					<p:column headerText="Consultroio">
+						<h:outputLabel value="#{doc.agenda.consultorio.ubicacion}" />
+					</p:column>
 					<p:column headerText="Opciones">
-						<p:commandButton action="#{atenderCitaController.AtenderCita(doc)}"
+						<p:commandButton action="#{citaController.eliminarCita(doc)}"
 							styleClass="ui-priority-primary" process="@this panelTablas"
-							value="Atender Cita" update="panelTablas growl" />
+							value="Cancelar Cita" update="panelTablas growl" />
 					</p:column>
 				</p:dataTable>
 			</p:panel>
-
-
-
 		</h:form>
 	</ui:define>
 </ui:composition>
