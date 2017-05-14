@@ -2,7 +2,9 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+	
 
 
 	<ui:define name="cuerpo">
@@ -36,8 +38,8 @@
 								value="#{farmaceuticoControler.apellido}"></h:inputText>
 
 							<p:outputLabel for="tftFecha" value="Fecha" />
-							<h:inputText id="tftFecha" value="#{farmaceuticoControler.fechastr}"
-								mode="inline" >
+							<h:inputText id="tftFecha" value="#{farmaceuticoControler.fechaNacimiento}"
+								mode="inline" a:placeholder="dia-mes-anio">
 								<f:convertDateTime pattern="dd-MM-yyyy" />
 								</h:inputText>
 
@@ -59,8 +61,12 @@
 
 							<h:outputLabel for="tftSexo" id="lblSexo"
 								value="#{msj['persona.sexo']}:"></h:outputLabel>
-							<h:inputText id="tftSexo" value="#{farmaceuticoControler.sexo}"></h:inputText>
-
+							<h:selectOneMenu id="tftSexo" value="#{farmaceuticoControler.sexo}"
+								class="form-control">
+								<f:selectItem itemValue="F" itemLabel="Femenino" />
+								<f:selectItem itemValue="M" itemLabel="Masculino" />
+							</h:selectOneMenu>
+							
 							<h:outputLabel for="tftCiudad" id="lblCiudad" value="Ciudad" />
 							<h:selectOneMenu id="tftCiudad"
 								value="#{farmaceuticoControler.ciudad}" converter="ciudadConver"
@@ -108,7 +114,8 @@
 
 							<p:outputLabel for="tftFechaBuscar" value="Fecha" />
 							<h:inputText id="tftFechaBuscar"
-								value="#{farmaceuticoControler.fechastr}" mode="inline" >
+								value="#{farmaceuticoControler.fechaNacimiento}" mode="inline" 
+								a:placeholder="dia-mes-anio">
 								<f:convertDateTime pattern="dd-MM-yyyy" />
 								
 								</h:inputText>
@@ -131,8 +138,11 @@
 
 							<h:outputLabel for="tftSexoBuscar" id="lblSexoBuscar"
 								value="#{msj['persona.sexo']}:"></h:outputLabel>
-							<h:inputText id="tftSexoBuscar" value="#{farmaceuticoControler.sexo}"></h:inputText>
-
+							<h:selectOneMenu id="tftSexoBuscar" value="#{farmaceuticoControler.sexo}"
+								class="form-control">
+								<f:selectItem itemValue="F" itemLabel="Femenino" />
+								<f:selectItem itemValue="M" itemLabel="Masculino" />
+							</h:selectOneMenu>
 							
 
 							<h:outputLabel for="tftCiudadBuscar" id="lblCiudadBuscar"

@@ -286,12 +286,11 @@ public class AdministradorControlador implements Serializable {
 		try {
 			Persona persona = personaEJB.buscarPersona(Long.parseLong(idPersona));
 			Ciudad ciu = generalEJB.buscarCiudad(ciudad.getIdCiuad());
-			fechaNacimiento = new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
-
+//			fechaNacimiento = new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
+			Roll roll = generalEJB.buscarRol(1);
 			if (persona != null) {
-//				Persona per = new Persona(Long.parseLong(idPersona), nombre, apellido, fechaNacimiento, telefono,
-//						direccion, "Administrador", email, sexo, ciu);
-//				personaEJB.editar(per);
+				Persona per = new Persona(Long.parseLong(idPersona), nombre, apellido, fechaNacimiento, telefono, direccion, roll, email, sexo, ciu);
+				personaEJB.editar(per);
 				Messages.addFlashGlobalInfo("Editado con exito!!");
 
 				idPersona = null;

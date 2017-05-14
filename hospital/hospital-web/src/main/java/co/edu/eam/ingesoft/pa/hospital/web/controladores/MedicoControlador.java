@@ -10,6 +10,7 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Messages;
@@ -27,22 +28,22 @@ import co.edu.eam.ingesoft.pa.negocio.beans.PersonaEJB;
 @ViewScoped
 public class MedicoControlador implements Serializable {
 
-//	@Pattern(regexp="[0-9]*",message="solo numeros")
-//	@Length(min=4,max=10,message="longitud entre 5 y 10")
+	@Pattern(regexp = "[0-9]*", message = "El numero de  identificacion solo puede llevar caracteres numericos")
+	@Length(min = 4, max = 10, message = "longitud entre 5 y 10")
 	private String idPersona;
 	
-//	@Pattern(regexp="[A-Za-z ]*",message="solo Letras")
-//	@Length(min=4,max=10,message="longitud entre 5 y 50")
+    @Pattern(regexp = "[A-Za-z ]*", message = "nomre solo permites caracteres alfabetico")
+	@Length(min = 4, max = 10, message = "longitud entre 5 y 50")
 	private String nombre;
 	
-//	@Pattern(regexp="[A-Za-z ]*",message="solo Letras")
-//	@Length(min=4,max=10,message="longitud entre 5 y 50")
+	@Pattern(regexp="[A-Za-z ]*",message="solo Letras")
+	@Length(min=4,max=10,message="longitud entre 5 y 50")
 	private String apellido;
 	
 	private Date fechaNacimiento;
 	
-//	@Pattern(regexp="[0-9]*",message="solo numeros")
-//	@Length(min=10,max=10,message="longitud entre 10 y 15")
+	@Pattern(regexp="[0-9]*",message="solo numeros")
+	@Length(min=10,max=10,message="longitud entre 10 y 15")
 	private String telefono;
 	
 	
@@ -50,6 +51,7 @@ public class MedicoControlador implements Serializable {
 	
 	private String tipoUsu;
 	
+	@Email
 	private String email;
 	
 	private String sexo;
@@ -245,7 +247,7 @@ public class MedicoControlador implements Serializable {
 			Roll roll = generalEJB.buscarRol(3);
  			
  			Medico medico = new Medico(Long.parseLong(idPersona), nombre, apellido, fechaNacimiento, telefono, direccion, roll, email, sexo, ciu, especi);
- 			
+ 			medicoEJB.crearMedico(medico);
  			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
 
  			
@@ -268,6 +270,9 @@ public class MedicoControlador implements Serializable {
  			sexo=me.getSexo();
  			especializacion = me.getEspecializaciones();
  			ciudad=me.getCiudad();
+		}else{
+			Messages.addFlashGlobalInfo("El medico no se encuentra registardo");
+
 		}
 	}
 	
@@ -276,7 +281,7 @@ public class MedicoControlador implements Serializable {
 			
 			Medico medico = medicoEJB.buscarMedico(Long.parseLong(idPersona));
 			Ciudad ciud = generalEJB.buscarCiudad(ciudad.getIdCiuad());
-	 		fechaNacimiento=new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
+//	 		fechaNacimiento=new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
 			Especializacione especi = generalEJB.buscarEspecializacione(especializacion.getIdEspecializacion());
 
 			Roll roll = generalEJB.buscarRol(3);
@@ -284,6 +289,7 @@ public class MedicoControlador implements Serializable {
 	 		
 	 		if(medico!=null){
 	 			Medico medi = new Medico(Long.parseLong(idPersona), nombre, apellido, fechaNacimiento, telefono, direccion, roll, email, sexo, ciud, especi);
+	 			medicoEJB.editarMedico(medi);
 	 			Messages.addFlashGlobalInfo("Editado con exito!!");
 	 			
 	 			idPersona=null;

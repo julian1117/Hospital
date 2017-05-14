@@ -2,7 +2,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 	<ui:define name="cuerpo">
 
@@ -30,8 +31,8 @@
 								value="#{MedicoControler.apellido}"></h:inputText>
 
 							<p:outputLabel for="tftFecha" value="Fecha" />
-							<h:inputText id="tftFecha" value="#{MedicoControler.fechastr}"
-								mode="inline" >
+							<h:inputText id="tftFecha" value="#{MedicoControler.fechaNacimiento}"
+								mode="inline" a:placeholder="dia-mes-anio">
 								<f:convertDateTime pattern="dd-MM-yyyy" />
 								</h:inputText>
 
@@ -117,7 +118,8 @@
 
 							<p:outputLabel for="tftFechaBuscar" value="Fecha" />
 							<h:inputText id="tftFechaBuscar"
-								value="#{MedicoControler.fechastr}" mode="inline" >
+								value="#{MedicoControler.fechaNacimiento}" mode="inline" 
+								a:placeholder="dia-mes-anio">
 								<f:convertDateTime pattern="dd-MM-yyyy" />
 								</h:inputText>
 
@@ -171,13 +173,13 @@
 					<h:panelGrid id="panelbtns" columns="2">
 						<p:commandButton id="btnEditar" value="#{msj['persona.editar']}"
 							action="#{MedicoControler.editarMedico}" class="btn"
-							process="@this paneldatosPBuscar" update="growl" />
+							process="@this paneldatosPBuscar" />
 
 
 						<p:commandButton id="btnEliminar"
 							value="#{msj['persona.eliminar']}"
 							action="#{MedicoControler.eliminar}" class="btn"
-							process="@this tftCedulaBuscar" update="growl" />
+							process="@this tftCedulaBuscar"  />
 					</h:panelGrid>
 
 				</p:tab>

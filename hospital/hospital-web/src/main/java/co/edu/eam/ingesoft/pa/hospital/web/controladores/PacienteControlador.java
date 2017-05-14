@@ -31,11 +31,11 @@ import co.edu.eam.ingesoft.pa.negocio.beans.PersonaEJB;
 @ViewScoped
 public class PacienteControlador implements Serializable {
 
-	@Pattern(regexp = "[0-9]*", message = "solo numeros")
+	@Pattern(regexp = "[0-9]*", message = "El numero de  identificacion solo puede llevar caracteres numericos")
 	@Length(min = 4, max = 10, message = "longitud entre 5 y 10")
 	private String idPersona;
 
-	@Pattern(regexp = "[A-Za-z ]*", message = "solo Letras")
+	@Pattern(regexp = "[A-Za-z ]*", message = "nomre solo permites caracteres alfabetico")
 	@Length(min = 4, max = 10, message = "longitud entre 5 y 50")
 	private String nombre;
 

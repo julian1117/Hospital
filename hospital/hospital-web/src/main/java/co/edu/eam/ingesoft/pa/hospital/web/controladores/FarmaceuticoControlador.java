@@ -10,13 +10,16 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.Length;
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Messages;
 
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Ciudad;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Eps;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Persona;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Roll;
 import co.edu.eam.ingesoft.pa.negocio.beans.GeneralEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.PacienteEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.PersonaEJB;
@@ -25,22 +28,22 @@ import co.edu.eam.ingesoft.pa.negocio.beans.PersonaEJB;
 @ViewScoped
 public class FarmaceuticoControlador implements Serializable{
 	
-	// @Pattern(regexp="[0-9]*",message="solo numeros")
-		// @Length(min=4,max=10,message="longitud entre 5 y 10")
+	 @Pattern(regexp="[0-9]*",message="solo numeros")
+		 @Length(min=4,max=10,message="longitud entre 5 y 10")
 		private String idPersona;
 
-		// @Pattern(regexp="[A-Za-z ]*",message="solo Letras")
-		// @Length(min=4,max=10,message="longitud entre 5 y 50")
+		 @Pattern(regexp="[A-Za-z ]*",message="solo Letras")
+		 @Length(min=4,max=10,message="longitud entre 5 y 50")
 		private String nombre;
 
-		// @Pattern(regexp="[A-Za-z ]*",message="solo Letras")
-		// @Length(min=4,max=10,message="longitud entre 5 y 50")
+		 @Pattern(regexp="[A-Za-z ]*",message="solo Letras")
+		 @Length(min=4,max=10,message="longitud entre 5 y 50")
 		private String apellido;
 
 		private Date fechaNacimiento;
 
-		// @Pattern(regexp="[0-9]*",message="solo numeros")
-		// @Length(min=10,max=10,message="longitud entre 10 y 15")
+		 @Pattern(regexp="[0-9]*",message="solo numeros")
+		 @Length(min=10,max=10,message="longitud entre 10 y 15")
 		private String telefono;
 
 		private String direccion;
@@ -60,6 +63,8 @@ public class FarmaceuticoControlador implements Serializable{
 		private Eps eps;
 
 		private List<Eps> listaEps;
+		
+		private Roll roll;
 
 		@EJB
 		private GeneralEJB generalEJB;
@@ -211,16 +216,24 @@ public class FarmaceuticoControlador implements Serializable{
 		public void setPacienteEJB(PacienteEJB pacienteEJB) {
 			this.pacienteEJB = pacienteEJB;
 		}
+		
+
+		public Roll getRoll() {
+			return roll;
+		}
+
+		public void setRoll(Roll roll) {
+			this.roll = roll;
+		}
 
 		public void crearFarmaceutico() {
 			try {
 
 				Ciudad ciu = generalEJB.buscarCiudad(ciudad.getIdCiuad());
 //				fechaNacimiento = new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
-
-//				Persona persona = new Persona(Long.parseLong(idPersona), nombre, apellido, fechaNacimiento, telefono,
-//						direccion, "Farmaceutico", email, sexo, ciu);
-//				personaEJB.crearPersona(persona);
+				Roll roll = generalEJB.buscarRol(4);
+				Persona persona = new Persona(Long.parseLong(idPersona), nombre, apellido, fechaNacimiento, telefono, direccion, roll, email, sexo, ciu);
+				personaEJB.crearPersona(persona);
 				Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
 				idPersona = null;
 				nombre = "";
@@ -268,12 +281,12 @@ public class FarmaceuticoControlador implements Serializable{
 			try {
 				Persona persona = personaEJB.buscarPersona(Long.parseLong(idPersona));
 				Ciudad ciu = generalEJB.buscarCiudad(ciudad.getIdCiuad());
-				fechaNacimiento = new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
+//				fechaNacimiento = new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
+				Roll roll = generalEJB.buscarRol(4);
 
 				if (persona != null) {
-//					Persona per = new Persona(Long.parseLong(idPersona), nombre, apellido, fechaNacimiento, telefono,
-//							direccion, "Farmaceutico", email, sexo, ciu);
-//					personaEJB.editar(per);
+					Persona per = new Persona(Long.parseLong(idPersona), nombre, apellido, fechaNacimiento, telefono, direccion, roll, email, sexo, ciu);
+					personaEJB.editar(per);
 					Messages.addFlashGlobalInfo("Editado con exito!!");
 
 					idPersona = null;
