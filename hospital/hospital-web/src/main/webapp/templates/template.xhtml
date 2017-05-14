@@ -49,55 +49,67 @@
 <h:body>
 	<!--start: Header -->
 	<header>
+		<h:form prependId="false">
+			<!--start: Container -->
+			<div class="container">
 
-		<!--start: Container -->
-		<div class="container">
+				<!--start: Row -->
+				<div class="row">
 
-			<!--start: Row -->
-			<div class="row">
+					<!--start: Logo -->
+					<div class="logo span3">
 
-				<!--start: Logo -->
-				<div class="logo span3">
-
-					<a class="brand" href="#"><img
-						src="#{request.contextPath}/img/logo.jpg" alt="Logo" /></a>
+						<a class="brand" href="#"><img
+							src="#{request.contextPath}/img/logo.jpg" alt="Logo" /></a>
 
 
-				</div>
-				<!--end: Logo -->
+					</div>
+					<!--end: Logo -->
 
-				<!--start: Navigation -->
-				<div class="span9">
+					<!--start: Navigation -->
+					<div class="span9">
 
-					<div class="navbar navbar-inverse">
-						<div class="navbar-inner">
-							<a class="btn btn-navbar" data-toggle="collapse"
-								data-target=".nav-collapse"> <span class="icon-bar"></span>
-								<span class="icon-bar"></span> <span class="icon-bar"></span>
-							</a>
-							<div class="nav-collapse collapse">
-								<ul class="nav">
-									<li class="active">
-									<ui:repeat var="pag"
-											value="#{sessionController.accesos}">
-											<li><h:commandLink action="#{pag.getLinks()}"
-													value="#{pag.nombre}" /></li>
+						<div class="navbar navbar-inverse">
+							<div class="navbar-inner">
+								<a class="btn btn-navbar" data-toggle="collapse"
+									data-target=".nav-collapse"> <span class="icon-bar"></span>
+									<span class="icon-bar"></span> <span class="icon-bar"></span>
+								</a>
+								<div class="nav-collapse collapse">
+									<ul class="nav">
 
-										</ui:repeat></li>
-								</ul>
+										<li class="active"><ui:repeat var="pag"
+												value="#{sessionController.accesos}">
+												<li><h:commandLink action="#{pag.getLinks()}"
+														value="#{pag.nombre}" /></li>
+
+											</ui:repeat></li>
+										<li><h:commandLink
+												action="#{sessionController.cerrarSession()}"
+												value="Cerrar Sesion"
+												rendered="#{sessionController.isSesion()}" /></li>
+									</ul>
+								</div>
 							</div>
 						</div>
-					</div>
 
+					</div>
+					<!--end: Navigation -->
+
+					<div class='box' align="center">						
+						<ul>
+							<li><h:outputLabel
+									value="Usuario en sesion: #{sessionController.usuario}"
+									rendered="#{sessionController.isSesion()}" /></li>
+						</ul>
+					
+					</div>
 				</div>
-				<!--end: Navigation -->
+				<!--end: Row -->
 
 			</div>
-			<!--end: Row -->
-
-		</div>
-		<!--end: Container-->
-
+			<!--end: Container-->
+		</h:form>
 	</header>
 	<!--end: Header-->
 
@@ -164,6 +176,8 @@
 
 
 	<!-- /DIV PRINCIPAL PARA TRABAJAR-->
+	<br />
+	<br />
 	<section class='aboutus center' id='portafolio'>
 		<div class='container' align="center">
 			<div class="box">

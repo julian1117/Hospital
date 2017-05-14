@@ -38,8 +38,8 @@ public class SeguridadEJB {
 		return em.createNamedQuery(Roll.listaRoles).setParameter(1, idRoll).getResultList();
 	}
 	
-	public List<Acceso> listaAcc(Integer idRoll){
-		return em.createNamedQuery(Acceso.LISTA_ACCESO).setParameter(1, idRoll).getResultList();
+	public List<Acceso> listaAcc(Integer Roll){
+		return em.createNamedQuery(Acceso.LISTA_ACCESO).setParameter(1, Roll).getResultList();
 	}
 	
 	

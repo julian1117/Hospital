@@ -24,6 +24,10 @@ public class SessionController implements Serializable {
 
 	private String usuario;
 	private String contrasena;
+	
+	private List<Acceso> accesos;
+
+	private List<Roll> roles;
 
 	private Usuario use;
 
@@ -51,11 +55,25 @@ public class SessionController implements Serializable {
 		this.use = use;
 	}
 	
-	private List<Acceso> accesos;
-
-	private List<Roll> roles;
-
 	
+
+	public List<Acceso> getAccesos() {
+		return accesos;
+	}
+
+	public void setAccesos(List<Acceso> accesos) {
+		this.accesos = accesos;
+	}
+
+	public List<Roll> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Roll> roles) {
+		this.roles = roles;
+	}
+
+
 
 	@EJB
 	private SeguridadEJB seguridadEjb;
@@ -72,14 +90,14 @@ public class SessionController implements Serializable {
 			
 			if (useBuscar.getContrasenia().equals(contrasena)) {
 				use=useBuscar;
+				
 				Faces.setSessionAttribute("usuario",use);
-				
-				
-				
-				roles = seguridadEjb.listaRoles(use.getIdPersona().getRoll().getId());
-				accesos = seguridadEjb.listaAcc(use.getIdPersona().getRoll().getId());
-				
 				Messages.addGlobalInfo("Usuario existe");
+				
+				roles = seguridadEjb.listaRoles(useBuscar.getIdPersona().getRoll().getId());
+				accesos = seguridadEjb.listaAcc(useBuscar.getIdPersona().getRoll().getId());
+				
+				
 				return "/paginas/seguro/Citas.xhtml?faces-redirect=true";
 			} else {
 				Messages.addGlobalError("contrasena incorrecta");
@@ -109,23 +127,6 @@ public class SessionController implements Serializable {
 		return use!=null;
 	}
 
-	public List<Acceso> getAccesos() {
-		return accesos;
-	}
 
-	public void setAccesos(List<Acceso> accesos) {
-		this.accesos = accesos;
-	}
-
-	public List<Roll> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<Roll> roles) {
-		this.roles = roles;
-	}
-	
-	
-	
 
 }
