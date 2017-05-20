@@ -19,6 +19,7 @@ import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cita;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Examen;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Hospitalizacion;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenExamen;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Patologia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Quirofano;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Sintoma;
@@ -427,9 +428,15 @@ public class AtenderCitaController implements Serializable {
 			Examen idExa = generalEJB.buscarIdExamen(ex.getIdExamen());
 			Integer exa = idExa.getIdExamen();
 			//
-			// Cita citaa = generalEJB.buscarIdCita(cita.getIdCita());
-			Integer cit = cita.getIdCita();
-			Messages.addFlashGlobalInfo("Examen generado!"+ cit);
+			//Cita citaa = generalEJB.buscarIdCita(cita.getIdCita());
+			//Integer cit = cita.getIdCita();
+			
+			OrdenExamen ordenema= new OrdenExamen();
+			ordenema.setCitaId(cita.getCita());
+			ordenema.setIdExamen(ex);
+			procedimientosEJB.crearOrdenExamen(ordenema);
+			
+			Messages.addFlashGlobalInfo("Examen generado!");
 			
 		} catch (Exception e) {
 
