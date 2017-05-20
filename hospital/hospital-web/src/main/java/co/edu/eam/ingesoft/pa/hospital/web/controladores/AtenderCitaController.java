@@ -13,25 +13,35 @@ import org.hibernate.validator.constraints.Length;
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Messages;
 
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cama;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Causa;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cita;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Examen;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Hospitalizacion;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Patologia;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Quirofano;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Sintoma;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoCirugia;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoExamen;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Tratamiento;
 import co.edu.eam.ingesoft.pa.negocio.beans.CitaEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.GeneralEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.GestionMedicoEJB;
+import co.edu.eam.ingesoft.pa.negocio.beans.ProcedmientosEJB;
+import co.edu.eam.ingesoft.pa.negocio.beans.QuirofanoEJB;
 
-@Named(value = "atenderCitaController")
+@Named("atenderCitaController")
 @ViewScoped
 public class AtenderCitaController implements Serializable {
 
-//	@Pattern(regexp = "[0-9]*", message = "Solo numeros")
-//	@Length(min = 8, max = 11, message = "La longitud debe ser de 8 a 11 numer")
+	// @Pattern(regexp = "[0-9]*", message = "Solo numeros")
+	// @Length(min = 8, max = 11, message = "La longitud debe ser de 8 a 11
+	// numer")
 	private String cedulaPaciente;
 
 	private String textoDesPatologia;
-	
+
 	private static Cita cita;
 
 	private Patologia patologia;
@@ -49,17 +59,51 @@ public class AtenderCitaController implements Serializable {
 	private List<Sintoma> listaSintomas;
 
 	private List<Tratamiento> listaTratamiento;
-	
+
 	private List<Cita> listaCitasMedico;
-	
+
+	private TipoExamen tipoExamen;
+
+	private Examen examen;
+
+	private List<TipoExamen> listarExamen;
+
+	private String descripcionExamen;
+
+	private String descripcionInicio;
+
+	private String descripcionFinal;
+
+	private TipoCirugia tipoCirugia;
+
+	private List<TipoCirugia> listarTipoCirugias;
+
+	private String idCirugia;
+
+	private Quirofano quirofano;
+
+	private List<Quirofano> listarQuirofanos;
+
+	private Cama cama;
+
+	private List<Cama> listaCamas;
+
+	private String motivo;
+
+	private String detalleHospi;
+
+	@EJB
+	private ProcedmientosEJB procedimientosEJB;
+
+	@EJB
+	private QuirofanoEJB quirofanoEJB;
 
 	@Inject
 	private SessionController usuarioSesion;
 
 	@EJB
 	private GestionMedicoEJB medicoGestionEJB;
-	
-	
+
 	@EJB
 	private CitaEJB citaEJB;
 
@@ -72,25 +116,54 @@ public class AtenderCitaController implements Serializable {
 		listaCausas = generalEJB.listaCausa();
 		listaSintomas = generalEJB.listaSintoma();
 		listaTratamiento = generalEJB.listaTratamiento();
-		listaCitasMedico = medicoGestionEJB.listaCitaMedico(
-				usuarioSesion.getUse().getIdPersona().getIdPersona());
-	 }
-	
-	
-	public String AtenderCita(Cita citaAt){	
-		cita = citaAt;		
+		listaCitasMedico = medicoGestionEJB.listaCitaMedico(usuarioSesion.getUse().getIdPersona().getIdPersona());
+		listarExamen = generalEJB.listarTipoExamen();
+		listarTipoCirugias = generalEJB.listarTipoCirugias();
+		listarQuirofanos = quirofanoEJB.listarQuirofano();
+		listaCamas = generalEJB.listarCama();
+	}
+
+	public String AtenderCita(Cita doc) {
+		cita = doc;
 		return "/paginas/seguro/Medico/AtenderCita.xhtml?faces-redirect=true";
 	}
-	
-	public void descPatologia(){
-		
+
+	public void descPatologia() {
+
 		Patologia patolo = generalEJB.buscarPatologia(patologia.getIdPatologia());
-		
+
 		textoDesPatologia = patolo.getDescripcion();
 	}
 
-	
+	public void generarCirugia() {
+		try {
+			TipoCirugia tipoC = generalEJB.buscarTipoCirugia(tipoCirugia.getIdTipoCirugia());
+			Quirofano qui = quirofanoEJB.buscarQuirofano(quirofano.getId());
 
+			Cirugia ciru = new Cirugia(tipoC, descripcionInicio, descripcionFinal, qui);
+			procedimientosEJB.crearCirugia(ciru);
+			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
+
+		} catch (Exception e) {
+			Messages.addFlashGlobalError(e.getMessage());
+
+		}
+	}
+
+	public void generarHospitalizacion() {
+		try {
+
+			Cama ca = generalEJB.buscarCama(cama.getIdCama());
+
+			Hospitalizacion hos = new Hospitalizacion(detalleHospi, motivo, ca);
+			procedimientosEJB.crearHospitalizacion(hos);
+			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
+
+		} catch (Exception e) {
+			Messages.addFlashGlobalError(e.getMessage());
+
+		}
+	}
 
 	public String getCedulaPaciente() {
 		return cedulaPaciente;
@@ -179,7 +252,7 @@ public class AtenderCitaController implements Serializable {
 	public void setTextoDesPatologia(String textoDesPatologia) {
 		this.textoDesPatologia = textoDesPatologia;
 	}
-	
+
 	public List<Cita> getListaCitasMedico() {
 		return listaCitasMedico;
 	}
@@ -187,6 +260,170 @@ public class AtenderCitaController implements Serializable {
 	public void setListaCitasMedico(List<Cita> listaCitasMedico) {
 		this.listaCitasMedico = listaCitasMedico;
 	}
-	
 
+	public TipoExamen getTipoExamen() {
+		return tipoExamen;
+	}
+
+	public void setTipoExamen(TipoExamen tipoExamen) {
+		this.tipoExamen = tipoExamen;
+	}
+
+	public Examen getExamen() {
+		return examen;
+	}
+
+	public void setExamen(Examen examen) {
+		this.examen = examen;
+	}
+
+	public List<TipoExamen> getListarExamen() {
+		return listarExamen;
+	}
+
+	public void setListarExamen(List<TipoExamen> listarExamen) {
+		this.listarExamen = listarExamen;
+	}
+
+	public String getDescripcionExamen() {
+		return descripcionExamen;
+	}
+
+	public void setDescripcionExamen(String descripcionExamen) {
+		this.descripcionExamen = descripcionExamen;
+	}
+
+	public String getDescripcionInicio() {
+		return descripcionInicio;
+	}
+
+	public void setDescripcionInicio(String descripcionInicio) {
+		this.descripcionInicio = descripcionInicio;
+	}
+
+	public String getDescripcionFinal() {
+		return descripcionFinal;
+	}
+
+	public void setDescripcionFinal(String descripcionFinal) {
+		this.descripcionFinal = descripcionFinal;
+	}
+
+	public TipoCirugia getTipoCirugia() {
+		return tipoCirugia;
+	}
+
+	public void setTipoCirugia(TipoCirugia tipoCirugia) {
+		this.tipoCirugia = tipoCirugia;
+	}
+
+	public List<TipoCirugia> getListarTipoCirugias() {
+		return listarTipoCirugias;
+	}
+
+	public void setListarTipoCirugias(List<TipoCirugia> listarTipoCirugias) {
+		this.listarTipoCirugias = listarTipoCirugias;
+	}
+
+	public String getIdCirugia() {
+		return idCirugia;
+	}
+
+	public void setIdCirugia(String idCirugia) {
+		this.idCirugia = idCirugia;
+	}
+
+	public Quirofano getQuirofano() {
+		return quirofano;
+	}
+
+	public void setQuirofano(Quirofano quirofano) {
+		this.quirofano = quirofano;
+	}
+
+	public GeneralEJB getGeneralEJB() {
+		return generalEJB;
+	}
+
+	public void setGeneralEJB(GeneralEJB generalEJB) {
+		this.generalEJB = generalEJB;
+	}
+
+	public ProcedmientosEJB getProcedimientosEJB() {
+		return procedimientosEJB;
+	}
+
+	public void setProcedimientosEJB(ProcedmientosEJB procedimientosEJB) {
+		this.procedimientosEJB = procedimientosEJB;
+	}
+
+	public String getMotivo() {
+		return motivo;
+	}
+
+	public void setMotivo(String motivo) {
+		this.motivo = motivo;
+	}
+
+	public String getDetalleHospi() {
+		return detalleHospi;
+	}
+
+	public void setDetalleHospi(String detalleHospi) {
+		this.detalleHospi = detalleHospi;
+	}
+
+	public Cama getCama() {
+		return cama;
+	}
+
+	public void setCama(Cama cama) {
+		this.cama = cama;
+	}
+
+	public List<Cama> getListaCamas() {
+		return listaCamas;
+	}
+
+	public void setListaCamas(List<Cama> listaCamas) {
+		this.listaCamas = listaCamas;
+	}
+
+	public QuirofanoEJB getQuirofanoEJB() {
+		return quirofanoEJB;
+	}
+
+	public void setQuirofanoEJB(QuirofanoEJB quirofanoEJB) {
+		this.quirofanoEJB = quirofanoEJB;
+	}
+
+	public List<Quirofano> getListarQuirofanos() {
+		return listarQuirofanos;
+	}
+
+	public void setListarQuirofanos(List<Quirofano> listarQuirofanos) {
+		this.listarQuirofanos = listarQuirofanos;
+	}
+	
+	public void generarExamen() {
+		try {
+			
+			TipoExamen tipoExam = generalEJB.buscarTipoExamen(tipoExamen.getIdTipoExamenes());
+			Examen ex = new Examen(tipoExam, descripcionExamen);
+			procedimientosEJB.crearExamen(ex);
+
+			Examen idExa = generalEJB.buscarIdExamen(ex.getIdExamen());
+			Integer exa = idExa.getIdExamen();
+			//
+			// Cita citaa = generalEJB.buscarIdCita(cita.getIdCita());
+			Integer cit = cita.getIdCita();
+			Messages.addFlashGlobalInfo("Examen generado!"+ cit);
+			
+		} catch (Exception e) {
+
+		}
+
+	}
+	
+	
 }

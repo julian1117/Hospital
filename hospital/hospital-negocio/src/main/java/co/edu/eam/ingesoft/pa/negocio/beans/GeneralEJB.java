@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cama;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Causa;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cita;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Ciudad;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Eps;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Especializacione;
@@ -223,5 +224,13 @@ public class GeneralEJB {
 	
 	public Roll buscarRol(Integer roles){
 		return em.find(Roll.class, roles);
+	}
+	
+	public Examen buscarIdExamen(Integer id){
+		return em.find(Examen.class, id);
+	}
+	
+	public Cita buscarIdCita(Integer id){
+		return em.find(Cita.class, id);
 	}
 }

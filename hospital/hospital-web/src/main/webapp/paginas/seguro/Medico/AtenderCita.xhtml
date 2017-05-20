@@ -123,10 +123,10 @@
 										<h:outputLabel for="tftTipoExamen" id="lblTipoExamen"
 											value="#{msj['procedimiento.tipoExamen']}" />
 										<h:selectOneMenu id="tftTipoExamen"
-											value="#{proceControler.tipoExamen}"
+											value="#{atenderCitaController.tipoExamen}"
 											converter="tipoExamenConver" class="form-control">
 
-											<f:selectItems value="#{proceControler.listarExamen}"
+											<f:selectItems value="#{atenderCitaController.listarExamen}"
 												var="exa" itemValue="#{exa}"
 												itemLabel="#{exa.nomTipoExamen}" />
 
@@ -139,14 +139,15 @@
 											value="#{msj['procedimiento.descripcion']}"></h:outputLabel>
 
 										<p:inputTextarea id="descripcionExamen"
-											value="#{proceControler.descripcionExamen}" rows="10"
+											value="#{atenderCitaController.descripcionExamen}" rows="10"
 											cols="250" completeMethod="#" queryDelay="450"
 											minQueryLength="6"></p:inputTextarea>
 
 										<p:commandButton id="btnCrearExamen"
 											value="#{msj['procedimiento.generaExamen']}"
-											action="#{atenderCitaController.generarExamen}"
-											process="@this paneldatosExamen"></p:commandButton>
+											action="#{atenderCitaController.generarExamen}">
+											</p:commandButton>
+
 
 									</h:panelGrid>
 								</p:panel>
@@ -159,10 +160,10 @@
 										<h:outputLabel for="tftTipoCirugia" id="lblTipoCirugia"
 											value="Tipo Cirugia" />
 										<h:selectOneMenu id="tftTipoCirugia"
-											value="#{proceControler.tipoCirugia}"
+											value="#{atenderCitaController.tipoCirugia}"
 											converter="tipoCirugiasConver" class="form-control">
 
-											<f:selectItems value="#{proceControler.listarTipoCirugias}"
+											<f:selectItems value="#{atenderCitaController.listarTipoCirugias}"
 												var="tipo" itemValue="#{tipo}"
 												itemLabel="#{tipo.tipoCirugia}" />
 										</h:selectOneMenu>
@@ -170,10 +171,10 @@
 										<h:outputLabel for="tftQuirofano" id="lblQuirofano"
 											value="Quirofano" />
 										<h:selectOneMenu id="tftQuirofano"
-											value="#{proceControler.quirofano}"
+											value="#{atenderCitaController.quirofano}"
 											converter="quirofanoConver" class="form-control">
 
-											<f:selectItems value="#{proceControler.listarQuirofanos}"
+											<f:selectItems value="#{atenderCitaController.listarQuirofanos}"
 												var="quiro" itemValue="#{quiro}"
 												itemLabel="#{quiro.nombreQuirofano}" />
 										</h:selectOneMenu>
@@ -183,7 +184,7 @@
 											value="#{msj['procedimiento.DetalleIn']}"></h:outputLabel>
 
 										<p:inputTextarea id="descripcionInicio"
-											value="#{proceControler.descripcionInicio}" rows="10"
+											value="#{atenderCitaController.descripcionInicio}" rows="10"
 											cols="250" completeMethod="#" queryDelay="450"
 											minQueryLength="6"></p:inputTextarea>
 
@@ -191,13 +192,13 @@
 											value="#{msj['procedimiento.DetalleFin']}"></h:outputLabel>
 
 										<p:inputTextarea id="descripcionFinal"
-											value="#{proceControler.descripcionFinal}" rows="10"
+											value="#{atenderCitaController.descripcionFinal}" rows="10"
 											cols="250" completeMethod="#" queryDelay="450"
 											minQueryLength="6"></p:inputTextarea>
 
 										<p:commandButton id="btnCrearCirugia"
 											value="#{msj['procedimiento.generaCirugia']}"
-											action="#{proceControler.generarCirugia}"
+											action="#{atenderCitaController.generarCirugia}"
 											process="@this paneldatosCirugia"></p:commandButton>
 
 									</h:panelGrid>
@@ -213,7 +214,7 @@
 											value="#{msj['procedimiento.detalleHos']}"></h:outputLabel>
 
 										<p:inputTextarea id="tftdetalleHosp"
-											value="#{proceControler.detalleHospi}" rows="10"
+											value="#{atenderCitaController.detalleHospi}" rows="10"
 											cols="250" completeMethod="#" queryDelay="450"
 											minQueryLength="6"></p:inputTextarea>
 											
@@ -222,22 +223,22 @@
 											value="#{msj['procedimiento.motivoHos']}"></h:outputLabel>
 
 										<p:inputTextarea id="tftmotivo"
-											value="#{proceControler.motivo}" rows="10"
+											value="#{atenderCitaController.motivo}" rows="10"
 											cols="250" completeMethod="#" queryDelay="450"
 											minQueryLength="6"></p:inputTextarea>
 
 										<h:outputLabel for="tftCama" id="lblTipoCama"
 											value="#{msj['procedimiento.numCama']}" />
-										<h:selectOneMenu id="tftCama" value="#{proceControler.cama}"
+										<h:selectOneMenu id="tftCama" value="#{atenderCitaController.cama}"
 											converter="camaControler" class="form-control">
 
-											<f:selectItems value="#{proceControler.listaCamas}" var="ca"
+											<f:selectItems value="#{atenderCitaController.listaCamas}" var="ca"
 												itemValue="#{ca}" itemLabel="#{ca.idCama}" />
 										</h:selectOneMenu>
 										
 										<p:commandButton id="btnCrearHosp"
 											value="#{msj['procedimiento.generaHosp']}"
-											action="#{proceControler.generarHospitalizacion}"
+											action="#{atenderCitaController.generarHospitalizacion}"
 											process="@this panelDatosHosp"></p:commandButton>
 									</h:panelGrid>
 								</p:panel>

@@ -139,7 +139,11 @@ public class SessionController implements Serializable {
 		sesion = (HttpSession) Faces.getSession();
 		sesion.invalidate();
 		return "/paginas/publico/login.xhtml?faces-redirect=true";
-
+		/**
+		 * con q no entendipor que se logio dos veces
+		 * solo fue una
+		 * de ahi captura el id de la cita?sii vea ps le  esplico
+		 */
 	}
 
 	public boolean isSesion() {
