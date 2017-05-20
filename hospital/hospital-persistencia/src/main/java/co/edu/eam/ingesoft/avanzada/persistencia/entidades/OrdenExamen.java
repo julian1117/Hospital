@@ -24,7 +24,7 @@ public class OrdenExamen implements Serializable{
 	
 	
 	@ManyToOne
-	@JoinColumn(name="CITAS_Id",nullable=false)
+	@JoinColumn(name="CITAS_id",nullable=false)
 	private Cita citaId;
 	
 	
@@ -37,8 +37,9 @@ public class OrdenExamen implements Serializable{
 	public OrdenExamen() {
 		super();
 	}
-
 	
+	
+
 
 
 	public OrdenExamen(Cita citaId, Examen idExamen) {
@@ -46,6 +47,7 @@ public class OrdenExamen implements Serializable{
 		this.citaId = citaId;
 		this.idExamen = idExamen;
 	}
+
 
 
 

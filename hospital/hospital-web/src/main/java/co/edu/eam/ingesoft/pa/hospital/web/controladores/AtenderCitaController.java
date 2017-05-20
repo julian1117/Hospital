@@ -136,6 +136,31 @@ public class AtenderCitaController implements Serializable {
 		textoDesPatologia = patolo.getDescripcion();
 	}
 
+
+	public void generarExamen() {
+		try {
+			
+			TipoExamen tipoExam = generalEJB.buscarTipoExamen(tipoExamen.getIdTipoExamenes());
+			Examen ex = new Examen(tipoExam, descripcionExamen);
+			procedimientosEJB.crearExamen(ex);
+
+			Examen idExa = generalEJB.buscarIdExamen(ex.getIdExamen());
+			Integer exa = idExa.getIdExamen();
+			//
+			Cita citaa = generalEJB.buscarIdCita(cita.getIdCita());
+			Integer cit = cita.getIdCita();
+			
+			OrdenExamen ordenema= new OrdenExamen(citaa, idExa);
+			procedimientosEJB.crearOrdenExamen(ordenema);
+			Messages.addFlashGlobalInfo("Examen generado!");
+			
+		} catch (Exception e) {
+
+		}
+
+	}
+	
+
 	public void generarCirugia() {
 		try {
 			TipoCirugia tipoC = generalEJB.buscarTipoCirugia(tipoCirugia.getIdTipoCirugia());
@@ -406,31 +431,9 @@ public class AtenderCitaController implements Serializable {
 		this.listarQuirofanos = listarQuirofanos;
 	}
 	
-	public void generarExamen() {
-		try {
-			
-			TipoExamen tipoExam = generalEJB.buscarTipoExamen(tipoExamen.getIdTipoExamenes());
-			Examen ex = new Examen(tipoExam, descripcionExamen);
-			procedimientosEJB.crearExamen(ex);
-
-			Examen idExa = generalEJB.buscarIdExamen(ex.getIdExamen());
-			Integer exa = idExa.getIdExamen();
-			//
-			//Cita citaa = generalEJB.buscarIdCita(cita.getIdCita());
-			//Integer cit = cita.getIdCita();
-			
-			OrdenExamen ordenema= new OrdenExamen();
-			ordenema.setCitaId(cita.getCita());
-			ordenema.setIdExamen(ex);
-			procedimientosEJB.crearOrdenExamen(ordenema);
-			
-			Messages.addFlashGlobalInfo("Examen generado!");
-			
-		} catch (Exception e) {
-
-		}
-
-	}
+	
+	
+	
 	
 	
 }
