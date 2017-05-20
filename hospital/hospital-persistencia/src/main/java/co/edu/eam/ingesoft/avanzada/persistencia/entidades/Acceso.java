@@ -1,17 +1,20 @@
 package co.edu.eam.ingesoft.avanzada.persistencia.entidades;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="ACCESOS")
 @NamedQuery(name=Acceso.LISTA_ACCESO,query="SELECT a FROM Acceso a WHERE a.roll.id=?1")
-public class Acceso {
+public class Acceso implements Serializable{
 	
 	public static final String LISTA_ACCESO = "Acceso.listaAcc";
 	
@@ -29,23 +32,24 @@ public class Acceso {
 	@Column(name="nombre")
 	private String nombre;
 
+	@ManyToOne
+	@JoinColumn(name="sub_accesos")
+	private SubAccesos subAccesos;
 	
 	
 	public Acceso() {
 		super();
 	}
+	
 
-	public Acceso(Integer id, Roll roll, String links, String nombre) {
+	public Acceso(Integer id, Roll roll, String links, String nombre, SubAccesos subAccesos) {
 		super();
 		this.id = id;
 		this.roll = roll;
 		this.links = links;
 		this.nombre = nombre;
+		this.subAccesos = subAccesos;
 	}
-
-
-
-
 
 
 
@@ -53,33 +57,63 @@ public class Acceso {
 		return id;
 	}
 
+
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
+
 
 	public Roll getRoll() {
 		return roll;
 	}
 
+
+
 	public void setRoll(Roll roll) {
 		this.roll = roll;
 	}
+
+
 
 	public String getLinks() {
 		return links;
 	}
 
+
+
 	public void setLinks(String links) {
 		this.links = links;
 	}
+
+
 
 	public String getNombre() {
 		return nombre;
 	}
 
+
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+
+
+	public SubAccesos getSubAccesos() {
+		return subAccesos;
+	}
+
+
+
+	public void setSubAccesos(SubAccesos subAccesos) {
+		this.subAccesos = subAccesos;
+	}
+
+
+
+
 
 	@Override
 	public int hashCode() {

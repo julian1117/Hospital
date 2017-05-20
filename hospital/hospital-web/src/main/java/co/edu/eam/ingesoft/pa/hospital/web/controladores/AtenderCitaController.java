@@ -32,7 +32,7 @@ public class AtenderCitaController implements Serializable {
 
 	private String textoDesPatologia;
 	
-	private Cita cita;
+	private static Cita cita;
 
 	private Patologia patologia;
 
@@ -89,6 +89,7 @@ public class AtenderCitaController implements Serializable {
 		textoDesPatologia = patolo.getDescripcion();
 	}
 
+	
 
 
 	public String getCedulaPaciente() {
