@@ -136,18 +136,6 @@ public class AtenderCitaController implements Serializable {
 		textoDesPatologia = patolo.getDescripcion();
 	}
 
-	// public void generarOrdenExamen(){
-	// Integer ci = cita.getIdCita();
-	// Integer idExa = proceControler.getExamen().getIdExamen();
-	//
-	// Messages.addFlashGlobalInfo("Registro Creado Con
-	// Exito!!"+ci+"---"+idExa);
-	// }
-
-
-
-
-
 	public void generarCirugia() {
 		try {
 			TipoCirugia tipoC = generalEJB.buscarTipoCirugia(tipoCirugia.getIdTipoCirugia());
