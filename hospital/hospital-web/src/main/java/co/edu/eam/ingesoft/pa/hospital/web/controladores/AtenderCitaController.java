@@ -167,17 +167,24 @@ public class AtenderCitaController implements Serializable {
 			TipoCirugia tipoC = generalEJB.buscarTipoCirugia(tipoCirugia.getIdTipoCirugia());
 			Quirofano qui = quirofanoEJB.buscarQuirofano(quirofano.getId());
 
-			Cirugia ciru = new Cirugia(tipoC, descripcionInicio, descripcionFinal, qui);
-			procedimientosEJB.crearCirugia(ciru);
+			if(qui.isOcupado()== false){
+				Cirugia ciru = new Cirugia(tipoC, descripcionInicio, descripcionFinal, qui);
+				procedimientosEJB.crearCirugia(ciru);
+				
+				Cirugia busCiru = generalEJB.buscarCirugia(ciru.getId());
+				Cita citaa = generalEJB.buscarIdCita(cita.getIdCita());
+				Messages.addFlashGlobalError(busCiru.getId()+"");
+				OrdenCirugia ordenCiru = new OrdenCirugia(citaa, busCiru);	
+				
+				procedimientosEJB.crearOrdenCirugia(ordenCiru);
+				
+				qui.setOcupado(true);
+				quirofanoEJB.editarQuierofano(qui);
+				Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
+			}else{
+				Messages.addFlashGlobalInfo("El quirofano a disponer de la cirugia se encuentra ocupado");
+			}
 			
-			Cirugia busCiru = generalEJB.buscarCirugia(ciru.getId());
-			Cita citaa = generalEJB.buscarIdCita(cita.getIdCita());
-			Messages.addFlashGlobalError(busCiru.getId()+"");
-			OrdenCirugia ordenCiru = new OrdenCirugia(citaa, busCiru);	
-			
-			procedimientosEJB.crearOrdenCirugia(ordenCiru);
-			
-			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
 
 		} catch (Exception e) {
 			Messages.addFlashGlobalError(e.getMessage());
