@@ -19,6 +19,7 @@ import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cita;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Examen;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Hospitalizacion;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenCirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenExamen;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Patologia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Quirofano;
@@ -145,10 +146,10 @@ public class AtenderCitaController implements Serializable {
 			procedimientosEJB.crearExamen(ex);
 
 			Examen idExa = generalEJB.buscarIdExamen(ex.getIdExamen());
-			Integer exa = idExa.getIdExamen();
+		//	Integer exa = idExa.getIdExamen();
 			//
 			Cita citaa = generalEJB.buscarIdCita(cita.getIdCita());
-			Integer cit = cita.getIdCita();
+			//Integer cit = cita.getIdCita();
 			
 			OrdenExamen ordenema= new OrdenExamen(citaa, idExa);
 			procedimientosEJB.crearOrdenExamen(ordenema);
@@ -168,6 +169,14 @@ public class AtenderCitaController implements Serializable {
 
 			Cirugia ciru = new Cirugia(tipoC, descripcionInicio, descripcionFinal, qui);
 			procedimientosEJB.crearCirugia(ciru);
+			
+			Cirugia busCiru = generalEJB.buscarCirugia(ciru.getId());
+			Cita citaa = generalEJB.buscarIdCita(cita.getIdCita());
+			Messages.addFlashGlobalError(busCiru.getId()+"");
+			OrdenCirugia ordenCiru = new OrdenCirugia(citaa, busCiru);	
+			
+			procedimientosEJB.crearOrdenCirugia(ordenCiru);
+			
 			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
 
 		} catch (Exception e) {

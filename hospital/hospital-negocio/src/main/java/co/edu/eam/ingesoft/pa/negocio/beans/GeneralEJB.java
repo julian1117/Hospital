@@ -9,12 +9,14 @@ import javax.persistence.PersistenceContext;
 
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cama;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Causa;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cita;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Ciudad;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Eps;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Especializacione;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Examen;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.HoraCita;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Hospitalizacion;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Patologia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Roll;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Sintoma;
@@ -232,5 +234,13 @@ public class GeneralEJB {
 	
 	public Cita buscarIdCita(Integer id){
 		return em.find(Cita.class, id);
+	}
+	
+	public Cirugia buscarCirugia(Integer idCiru){
+		return em.find(Cirugia.class, idCiru);
+	}
+	
+	public Hospitalizacion buscarHopitalizacion(Integer idHosp){
+		return em.find(Hospitalizacion.class, idHosp);
 	}
 }
