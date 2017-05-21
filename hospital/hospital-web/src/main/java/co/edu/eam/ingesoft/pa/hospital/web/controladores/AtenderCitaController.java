@@ -21,6 +21,7 @@ import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Examen;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Hospitalizacion;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenCirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenExamen;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenHospitalizacion;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Patologia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Quirofano;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Sintoma;
@@ -199,6 +200,13 @@ public class AtenderCitaController implements Serializable {
 
 			Hospitalizacion hos = new Hospitalizacion(detalleHospi, motivo, ca);
 			procedimientosEJB.crearHospitalizacion(hos);
+			
+			Cita citaa = generalEJB.buscarIdCita(cita.getIdCita());
+			Hospitalizacion buscarHos = generalEJB.buscarHopitalizacion(hos.getId());
+			
+			OrdenHospitalizacion ordenHos = new OrdenHospitalizacion(citaa, buscarHos);
+			procedimientosEJB.crearOrdenHopitalizacion(ordenHos);
+			
 			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
 
 		} catch (Exception e) {
