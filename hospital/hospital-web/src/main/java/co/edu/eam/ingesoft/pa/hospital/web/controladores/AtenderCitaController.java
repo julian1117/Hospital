@@ -21,6 +21,7 @@ import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Examen;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Hospitalizacion;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenCirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenExamen;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenHospitalizacion;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Patologia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Quirofano;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Sintoma;
@@ -146,10 +147,10 @@ public class AtenderCitaController implements Serializable {
 			procedimientosEJB.crearExamen(ex);
 
 			Examen idExa = generalEJB.buscarIdExamen(ex.getIdExamen());
-			Integer exa = idExa.getIdExamen();
+		//	Integer exa = idExa.getIdExamen();
 			//
 			Cita citaa = generalEJB.buscarIdCita(cita.getIdCita());
-			Integer cit = cita.getIdCita();
+			//Integer cit = cita.getIdCita();
 			
 			OrdenExamen ordenema= new OrdenExamen(citaa, idExa);
 			procedimientosEJB.crearOrdenExamen(ordenema);
@@ -167,16 +168,25 @@ public class AtenderCitaController implements Serializable {
 			TipoCirugia tipoC = generalEJB.buscarTipoCirugia(tipoCirugia.getIdTipoCirugia());
 			Quirofano qui = quirofanoEJB.buscarQuirofano(quirofano.getId());
 
-			Cirugia ciru = new Cirugia(tipoC, descripcionInicio, descripcionFinal, qui);
-			procedimientosEJB.crearCirugia(ciru);
-			
-			Cirugia buscarCirugia = generalEJB.buscarCi(ciru.getId());
-			Cita citaa = generalEJB.buscarIdCita(cita.getIdCita());
 
-			OrdenCirugia orden = new OrdenCirugia(citaa, buscarCirugia);
-			procedimientosEJB.crearOrdenCirugi(orden);
+			if(qui.isOcupado()== false){
+				Cirugia ciru = new Cirugia(tipoC, descripcionInicio, descripcionFinal, qui);
+				procedimientosEJB.crearCirugia(ciru);
+				
+				Cirugia busCiru = generalEJB.buscarCirugia(ciru.getId());
+				Cita citaa = generalEJB.buscarIdCita(cita.getIdCita());
+				Messages.addFlashGlobalError(busCiru.getId()+"");
+				OrdenCirugia ordenCiru = new OrdenCirugia(citaa, busCiru);	
+				
+				procedimientosEJB.crearOrdenCirugia(ordenCiru);
+				
+				qui.setOcupado(true);
+				quirofanoEJB.editarQuierofano(qui);
+				Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
+			}else{
+				Messages.addFlashGlobalInfo("El quirofano a disponer de la cirugia se encuentra ocupado");
+			}
 			
-			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
 
 		} catch (Exception e) {
 			Messages.addFlashGlobalError(e.getMessage());
@@ -191,6 +201,13 @@ public class AtenderCitaController implements Serializable {
 
 			Hospitalizacion hos = new Hospitalizacion(detalleHospi, motivo, ca);
 			procedimientosEJB.crearHospitalizacion(hos);
+			
+			Cita citaa = generalEJB.buscarIdCita(cita.getIdCita());
+			Hospitalizacion buscarHos = generalEJB.buscarHopitalizacion(hos.getId());
+			
+			OrdenHospitalizacion ordenHos = new OrdenHospitalizacion(citaa, buscarHos);
+			procedimientosEJB.crearOrdenHopitalizacion(ordenHos);
+			
 			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
 
 		} catch (Exception e) {

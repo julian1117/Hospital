@@ -6,9 +6,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cirugia;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cita;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Examen;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Hospitalizacion;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenCirugia;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenCirugiaPK;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenExamen;
 import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
@@ -84,10 +86,26 @@ public class ProcedmientosEJB {
 	public OrdenExamen buscarOrdenExamen(Integer idOrdenExam){
 		return em.find(OrdenExamen.class, idOrdenExam);
 	}
+	
+	public void crearOrdenCirugia(OrdenCirugia ordenCiru){
+		//OrdenCirugia buscarOr = buscarOrdenCirugia(ordenCiru.getIdCita(), ordenCiru.getIdCirugia());
+		//if(buscarOr == null){
+		em.persist(ordenCiru);
+		//}else{
+			//throw new ExcepcionNegocio("Ya esta registrada esta orden");
+		//}
+	}
+	
+	public OrdenCirugia buscarOrdenCirugia(Cita idCita, Cirugia idCirugia){
+		OrdenCirugiaPK ordenPk = new OrdenCirugiaPK(idCita.getIdCita(), idCirugia.getId());
+		OrdenCirugia ord = em.find(OrdenCirugia.class, ordenPk);
+		return ord;
+	}
 
 	public void crearOrdenCirugi(OrdenCirugia id){
 		em.persist(id);
 	}
+	
 	
 
 }

@@ -17,6 +17,7 @@ import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Especializacione;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Examen;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.HoraCita;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenCirugia;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Hospitalizacion;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Patologia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Roll;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Sintoma;
@@ -238,5 +239,13 @@ public class GeneralEJB {
 	
 	public Cirugia buscarCi(Integer id){
 		return em.find(Cirugia.class, id);
+	}
+	
+	public Cirugia buscarCirugia(Integer idCiru){
+		return em.find(Cirugia.class, idCiru);
+	}
+	
+	public Hospitalizacion buscarHopitalizacion(Integer idHosp){
+		return em.find(Hospitalizacion.class, idHosp);
 	}
 }
