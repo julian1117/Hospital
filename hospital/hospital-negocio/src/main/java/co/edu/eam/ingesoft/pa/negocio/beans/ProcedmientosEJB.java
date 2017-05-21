@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Examen;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Hospitalizacion;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenCirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenExamen;
 import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
@@ -84,7 +85,9 @@ public class ProcedmientosEJB {
 		return em.find(OrdenExamen.class, idOrdenExam);
 	}
 
-	
+	public void crearOrdenCirugi(OrdenCirugia id){
+		em.persist(id);
+	}
 	
 
 }

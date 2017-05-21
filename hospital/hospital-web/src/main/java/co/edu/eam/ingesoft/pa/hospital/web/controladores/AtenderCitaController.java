@@ -19,6 +19,7 @@ import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cita;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Examen;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Hospitalizacion;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenCirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenExamen;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Patologia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Quirofano;
@@ -168,6 +169,13 @@ public class AtenderCitaController implements Serializable {
 
 			Cirugia ciru = new Cirugia(tipoC, descripcionInicio, descripcionFinal, qui);
 			procedimientosEJB.crearCirugia(ciru);
+			
+			Cirugia buscarCirugia = generalEJB.buscarCi(ciru.getId());
+			Cita citaa = generalEJB.buscarIdCita(cita.getIdCita());
+
+			OrdenCirugia orden = new OrdenCirugia(citaa, buscarCirugia);
+			procedimientosEJB.crearOrdenCirugi(orden);
+			
 			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
 
 		} catch (Exception e) {

@@ -36,7 +36,7 @@ public class Cirugia  implements Serializable {
 	private String descripcionPacienteFinal;
 	
 	@ManyToOne
-	@JoinColumn(name="QUIROFANOS_Id",nullable=false,unique=true)
+	@JoinColumn(name="QUIROFANOS_Id",nullable=false)
 	private Quirofano quirofano;
 	
 	
