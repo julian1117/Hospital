@@ -3,7 +3,7 @@ package co.edu.eam.ingesoft.pa.negocio.beans;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;import org.hibernate.sql.ordering.antlr.OrderByFragmentRenderer;
+import javax.persistence.PersistenceContext;
 
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cita;
@@ -12,7 +12,6 @@ import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Hospitalizacion;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenCirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenCirugiaPK;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenExamen;
-import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenHospitalizacion;
 import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
 @Stateless
@@ -103,7 +102,7 @@ public class ProcedmientosEJB {
 		return ord;
 	}
 
-	public void crearOrdenHopitalizacion(OrdenHospitalizacion id){
+	public void crearOrdenCirugi(OrdenCirugia id){
 		em.persist(id);
 	}
 	

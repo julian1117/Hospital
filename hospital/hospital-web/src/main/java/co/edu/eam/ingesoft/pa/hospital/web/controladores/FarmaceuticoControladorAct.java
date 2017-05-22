@@ -1,7 +1,6 @@
 package co.edu.eam.ingesoft.pa.hospital.web.controladores;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -18,32 +17,26 @@ import org.hibernate.validator.constraints.Length;
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Messages;
 
-import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cita;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Ciudad;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Eps;
-import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Paciente;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Persona;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Roll;
-import co.edu.eam.ingesoft.avanzada.persistencia.enumeraciones.TipoUsuario;
-import co.edu.eam.ingesoft.pa.negocio.beans.CitaEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.GeneralEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.PacienteEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.PersonaEJB;
 
-@Named("pacienteControler")
+@Named("farmaceuticoControlerAct")
 @ViewScoped
-public class PacienteControlador implements Serializable {
+public class FarmaceuticoControladorAct implements Serializable {
 
-	@Pattern(regexp = "[0-9]*", message = "El numero de  identificacion solo puede llevar caracteres numericos")
-	@Length(min = 4, max = 10, message = "longitud entre 5 y 10")
 	private String idPersona;
 
-	@Pattern(regexp = "[A-Za-z ]*", message = "nomre solo permites caracteres alfabetico")
-	@Length(min = 4, max = 10, message = "longitud entre 5 y 50")
+	@Pattern(regexp = "[A-Za-z ]*", message = "solo Letras")
+	@Length(min = 5, max = 50, message = "longitud entre 5 y 50")
 	private String nombre;
 
 	@Pattern(regexp = "[A-Za-z ]*", message = "solo Letras")
-	@Length(min = 4, max = 10, message = "longitud entre 5 y 50")
+	@Length(min = 5, max = 50, message = "longitud entre 5 y 50")
 	private String apellido;
 
 	private Date fechaNacimiento;
@@ -56,12 +49,8 @@ public class PacienteControlador implements Serializable {
 
 	private String tipoUsu;
 
-	private Roll roles;
-
 	@Email
 	private String email;
-
-	private List<String> listaEmail;
 
 	private String sexo;
 
@@ -75,10 +64,7 @@ public class PacienteControlador implements Serializable {
 
 	private List<Eps> listaEps;
 
-	private List<Cita> listaCitas;
-
-	@Inject
-	private SessionController usuarioSesion;
+	private Roll roll;
 
 	@EJB
 	private GeneralEJB generalEJB;
@@ -88,9 +74,10 @@ public class PacienteControlador implements Serializable {
 
 	@EJB
 	private PacienteEJB pacienteEJB;
-	
-	@EJB
-	private CitaEJB citaEJB;
+
+	@Inject
+	private SessionController usuarioSesion;
+
 
 
 	public String getIdPersona() {
@@ -149,28 +136,12 @@ public class PacienteControlador implements Serializable {
 		this.tipoUsu = tipoUsu;
 	}
 
-	public Roll getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Roll roles) {
-		this.roles = roles;
-	}
-
 	public String getEmail() {
 		return email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public List<String> getListaEmail() {
-		return listaEmail;
-	}
-
-	public void setListaEmail(List<String> listaEmail) {
-		this.listaEmail = listaEmail;
 	}
 
 	public String getSexo() {
@@ -245,12 +216,12 @@ public class PacienteControlador implements Serializable {
 		this.pacienteEJB = pacienteEJB;
 	}
 
-	public List<Cita> getListaCitas() {
-		return listaCitas;
+	public Roll getRoll() {
+		return roll;
 	}
 
-	public void setListaCitas(List<Cita> listaCitas) {
-		this.listaCitas = listaCitas;
+	public void setRoll(Roll roll) {
+		this.roll = roll;
 	}
 	
 	
@@ -258,123 +229,69 @@ public class PacienteControlador implements Serializable {
 	public void inicializar() {
 		nombreCiudad = generalEJB.listarCiudad();
 		listaEps = generalEJB.listarEps();
-		listaCitas=pacienteEJB.listaCitasPaciente(usuarioSesion.getUse().getIdPersona().getIdPersona());
+		idPersona=String.valueOf(usuarioSesion.getUse().getIdPersona().getIdPersona());
+		buscar(Long.parseLong(idPersona));
 	}
 	
-	public void cancelarCita(Cita cita){
-		try {
-			citaEJB.eliminarCitaPaciente(cita);
-			listaCitas=pacienteEJB.listaCitasPaciente(usuarioSesion.getUse().getIdPersona().getIdPersona());
-
-			Messages.addFlashGlobalInfo("La cita fue eliminada con exito");
-		} catch (Exception e) {
-			Messages.addFlashGlobalError(e.getMessage());
-		}
-	}
-	
-
-	public void crearPersona() {
+	/**
+	 * busca un famaceutico
+	 * @param cedeula
+	 */
+	public void buscar(Long cedeula) {
 
 		try {
-			Ciudad ciu = generalEJB.buscarCiudad(ciudad.getIdCiuad());
-			// fechaNacimiento = new
-			// SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
-			Roll roll = generalEJB.buscarRol(2);
+			Persona persona = personaEJB.buscarPersona(cedeula);
+			if (persona != null) {
+				nombre = persona.getNombre();
+				apellido = persona.getApellido();
+				fechaNacimiento = persona.getFechaNacimiento();
+				telefono = persona.getTelefono();
+				direccion = persona.getDireccion();
+				email = persona.getEmail();
+				sexo = persona.getSexo();
+				ciudad = persona.getCiudad();
 
-			// listaEmail = personaEJB.emailPersona();
-			//
-			// for (int i = 0; i < listaEmail.size(); i++) {
-			// if(listaEmail.get(i).equals(email)){
-			// Messages.addFlashGlobalInfo("El email ya existe en el
-			// sistema!!");
-			// }else{
-			Eps epsB = generalEJB.buscarEps(eps.getIdEps());
-
-			Paciente paciente = new Paciente(Long.parseLong(idPersona), nombre, apellido, fechaNacimiento, telefono,
-					direccion, roll, email, sexo, ciu, eps);
-			pacienteEJB.crearPaciente(paciente);
-			idPersona = null;
-			nombre = "";
-			apellido = "";
-			fechaNacimiento = null;
-			telefono = "";
-			tipoUsu = "";
-			email = "";
-			sexo = "";
-			ciudad = null;
-			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
-			// }
-
-			// }
-
+			} else {
+				Messages.addFlashGlobalInfo("El Farmaceutico no se encuentra registardo");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), null));
+
 		}
 
-	}
-
-	public void buscar() {
-
-		Paciente persona = pacienteEJB.buscarPaciente(Long.parseLong(idPersona));
-		if (persona != null) {
-			nombre = persona.getNombre();
-			apellido = persona.getApellido();
-			fechaNacimiento = persona.getFechaNacimiento();
-			telefono = persona.getTelefono();
-			direccion = persona.getDireccion();
-			// tipoUsu=persona.getTipoUsuario();
-			email = persona.getEmail();
-			sexo = persona.getSexo();
-			eps = persona.getEps();
-			ciudad = persona.getCiudad();
-		} else {
-			Messages.addFlashGlobalInfo("El paciente no se encuentra registardo");
-		}
 	}
 
 	public void editar() {
 		try {
-
-			Paciente paciente = pacienteEJB.buscarPaciente(Long.parseLong(idPersona));
-			Ciudad ciud = generalEJB.buscarCiudad(ciudad.getIdCiuad());
+			Persona persona = personaEJB.buscarPersona(Long.parseLong(idPersona));
+			Ciudad ciu = generalEJB.buscarCiudad(ciudad.getIdCiuad());
 			// fechaNacimiento = new
 			// SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
-			Roll roll = generalEJB.buscarRol(2);
+			Roll roll = generalEJB.buscarRol(4);
 
-			if (paciente != null) {
-				Paciente pa = new Paciente(Long.parseLong(idPersona), nombre, apellido, fechaNacimiento, telefono,
-						direccion, roll, email, sexo, ciud, eps);
-				pacienteEJB.editarPaciente(pa);
+			if (persona != null) {
+				Persona per = new Persona(Long.parseLong(idPersona), nombre, apellido, fechaNacimiento, telefono,
+						direccion, roll, email, sexo, ciu);
+				personaEJB.editar(per);
+				Messages.addFlashGlobalInfo("Editado con exito!!");
 
 				idPersona = null;
 				nombre = "";
 				apellido = "";
 				fechaNacimiento = null;
 				telefono = "";
-				tipoUsu = null;
 				email = "";
 				sexo = "";
 				ciudad = null;
-				eps = null;
-
-				Messages.addFlashGlobalInfo("Editado con exito!!");
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), null));
 
 		}
-
-	}
-
-	public void eliminar() {
-		Persona per = personaEJB.buscarPersona(Long.parseLong(idPersona));
-		personaEJB.eliminar(per);
-		Messages.addFlashGlobalInfo("eliminado con exito!!");
 	}
 
 }

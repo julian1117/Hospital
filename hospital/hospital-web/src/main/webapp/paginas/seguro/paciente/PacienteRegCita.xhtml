@@ -1,0 +1,84 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+
+	<ui:define name="cuerpo">
+		<h:form prependId="false">
+			<p:panel header="Agendar cita medica" id="panelTab">
+
+				<h:panelGrid id="datosPanelB" columns="3">
+
+					<h:outputLabel for="cbEspeciali" id="lbEspeciali"
+						value="#{msj['cita.especialidadMedico']}" />
+					<h:selectOneMenu id="cbEspeciali"
+						value="#{citaControllerPaciente.especializacion}"
+						converter="EspecializacionesConver">
+						<f:selectItems value="#{citaControllerPaciente.listaEspecializacion}"
+							var="doc" itemValue="#{doc}" itemLabel="#{doc.nombre}" />
+
+						<f:ajax event="change" execute="@this" render="cbDoctor"
+							listener="#{citaControllerPaciente.medicoEspe}" />
+					</h:selectOneMenu>
+					<br />
+
+					<h:outputLabel for="cbDoctor" id="lbDoctor"
+						value="#{msj['cita.selctMedico']}" />
+					<h:selectOneMenu id="cbDoctor" value="#{citaControllerPaciente.medico}"
+						converter="MedicoConver" class="form-control">
+						<f:selectItems value="#{citaControllerPaciente.listaMedicos}" var="doc"
+							itemValue="#{doc}" itemLabel="#{doc.nombre} #{doc.apellido}" />
+
+						<f:ajax event="change" execute="@this" render="cbFechaDoctor"
+							listener="#{citaControllerPaciente.agendaMedico}" />
+					</h:selectOneMenu>
+					<br />
+
+					<h:outputLabel for="cbFechaDoctor" id="lbFechaDoctor"
+						value="#{msj['cita.horarioMedico']}" />
+					<h:selectOneMenu id="cbFechaDoctor"
+						value="#{citaControllerPaciente.agenda}" converter="agendaConver"
+						class="form-control">
+						<f:selectItems value="#{citaControllerPaciente.listaAgenda}" var="doc"
+							itemValue="#{doc}"
+							itemLabel="#{doc.fecha} | #{doc.horaInicio} - #{doc.horaFinal}" />
+					</h:selectOneMenu>
+
+					<br />
+
+					<h:outputLabel for="cbHora" id="lbHoraCita"
+						value="#{msj['cita.horaC']}" />
+					<h:selectOneMenu id="cbHora" value="#{citaControllerPaciente.horaCita}"
+						converter="horasConverter" class="form-control">
+						<p align="right">
+							<f:selectItems value="#{citaControllerPaciente.listaHorasAgenda}"
+								var="doc" itemValue="#{doc}" itemLabel="#{doc.hora}" />
+						</p>
+					</h:selectOneMenu>
+					<br />
+					<h:outputLabel for="cbTipoCita" id="lbTipoCita"
+						value="#{msj['cita.tipoCi']}" />
+					<h:selectOneMenu id="cbTipoCita" value="#{citaControllerPaciente.tipoCita}"
+						converter="tipoCitaConver" class="form-control">
+						<p align="right">
+							<f:selectItems value="#{citaControllerPaciente.listTipoCita}" var="doc"
+								itemValue="#{doc}" itemLabel="#{doc.nombre}" />
+						</p>
+					</h:selectOneMenu>
+					<br />
+				</h:panelGrid>
+
+				<h:panelGrid id="botonesPanel" columns="1">
+					<p:commandButton id="btnAsignarCita" value="#{msj['cita.asigNar']}"
+						action="#{citaControllerPaciente.asignarCita}" process="@this datosPanelB" update=""
+						icon="ui-icon-save" />
+				</h:panelGrid>
+			</p:panel>
+
+
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -12,21 +12,25 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="ITEM_MEDICAMENTOS")
-@IdClass(ItemMedicamentoPK.class)
 public class ItemMedicamento implements Serializable{
 
+	
+	
 	@Id
+	@Column(name="id")
+	private Integer id;
+	
 	@ManyToOne
 	@JoinColumn(name="CITAS_Id",nullable=false)
-	private Cita ordenMedicina;
+	private Cita idCita;
 	
 	
 	@ManyToOne
-	@JoinColumn(name="INVENTARIOS_Id",nullable=false)
-	private Inventario inventario;
+	@JoinColumn(name="tipo_medicamento_id",nullable=false)
+	private TipoMedicamento tipoMedicamento;
 	
-	@Column(name="cantidad_Resetada",nullable=false)
-	private String cantidadResetada;
+	@Column(name="cantidad_resetada",nullable=false)
+	private Integer cantidadResetada;
 	
 	@Column(name="formula",nullable=false)
 	private String formula;
@@ -35,35 +39,45 @@ public class ItemMedicamento implements Serializable{
 		super();
 	}
 
-	public ItemMedicamento(Cita ordenMedicina, Inventario inventario, String cantidadResetada, String formula) {
+	public ItemMedicamento(Integer id, Cita idCita, TipoMedicamento tipoMedicamento, Integer cantidadResetada,
+			String formula) {
 		super();
-		this.ordenMedicina = ordenMedicina;
-		this.inventario = inventario;
+		this.id = id;
+		this.idCita = idCita;
+		this.tipoMedicamento = tipoMedicamento;
 		this.cantidadResetada = cantidadResetada;
 		this.formula = formula;
 	}
 
-	public Cita getOrdenMedicina() {
-		return ordenMedicina;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setOrdenMedicina(Cita ordenMedicina) {
-		this.ordenMedicina = ordenMedicina;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public Inventario getInventario() {
-		return inventario;
+	public Cita getIdCita() {
+		return idCita;
 	}
 
-	public void setInventario(Inventario inventario) {
-		this.inventario = inventario;
+	public void setIdCita(Cita idCita) {
+		this.idCita = idCita;
 	}
 
-	public String getCantidadResetada() {
+	public TipoMedicamento getTipoMedicamento() {
+		return tipoMedicamento;
+	}
+
+	public void setTipoMedicamento(TipoMedicamento tipoMedicamento) {
+		this.tipoMedicamento = tipoMedicamento;
+	}
+
+	public Integer  getCantidadResetada() {
 		return cantidadResetada;
 	}
 
-	public void setCantidadResetada(String cantidadResetada) {
+	public void setCantidadResetada(Integer cantidadResetada) {
 		this.cantidadResetada = cantidadResetada;
 	}
 
@@ -73,6 +87,31 @@ public class ItemMedicamento implements Serializable{
 
 	public void setFormula(String formula) {
 		this.formula = formula;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ItemMedicamento other = (ItemMedicamento) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 
 	

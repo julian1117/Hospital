@@ -168,7 +168,12 @@ public class AtenderCitaController implements Serializable {
 			TipoCirugia tipoC = generalEJB.buscarTipoCirugia(tipoCirugia.getIdTipoCirugia());
 			Quirofano qui = quirofanoEJB.buscarQuirofano(quirofano.getId());
 
+<<<<<<< HEAD
 			if(qui.isOcupado()== true){
+=======
+
+			if(qui.isOcupado()== false){
+>>>>>>> refs/remotes/origin/master
 				Cirugia ciru = new Cirugia(tipoC, descripcionInicio, descripcionFinal, qui);
 				procedimientosEJB.crearCirugia(ciru);
 				
