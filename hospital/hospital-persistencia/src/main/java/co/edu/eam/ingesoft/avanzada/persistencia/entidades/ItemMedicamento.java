@@ -30,7 +30,7 @@ public class ItemMedicamento implements Serializable{
 	private TipoMedicamento tipoMedicamento;
 	
 	@Column(name="cantidad_resetada",nullable=false)
-	private String cantidadResetada;
+	private Integer cantidadResetada;
 	
 	@Column(name="formula",nullable=false)
 	private String formula;
@@ -39,7 +39,7 @@ public class ItemMedicamento implements Serializable{
 		super();
 	}
 
-	public ItemMedicamento(Integer id, Cita idCita, TipoMedicamento tipoMedicamento, String cantidadResetada,
+	public ItemMedicamento(Integer id, Cita idCita, TipoMedicamento tipoMedicamento, Integer cantidadResetada,
 			String formula) {
 		super();
 		this.id = id;
@@ -73,11 +73,11 @@ public class ItemMedicamento implements Serializable{
 		this.tipoMedicamento = tipoMedicamento;
 	}
 
-	public String getCantidadResetada() {
+	public Integer  getCantidadResetada() {
 		return cantidadResetada;
 	}
 
-	public void setCantidadResetada(String cantidadResetada) {
+	public void setCantidadResetada(Integer cantidadResetada) {
 		this.cantidadResetada = cantidadResetada;
 	}
 

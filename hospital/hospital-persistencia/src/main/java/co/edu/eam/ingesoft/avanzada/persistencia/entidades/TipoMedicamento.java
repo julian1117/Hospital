@@ -19,31 +19,31 @@ public class TipoMedicamento implements Serializable{
 	private String tipoMedicamento;
 	
 	
+	@Column(name="presentacion_med")
+	private String presentacion;
+	
 
 	public TipoMedicamento() {
 		super();
 	}
 
 
-
-	public TipoMedicamento(int idTipoMedicamento, String tipoMedicamento) {
+	public TipoMedicamento(Integer idTipoMedicamento, String tipoMedicamento, String presentacion) {
 		super();
 		this.idTipoMedicamento = idTipoMedicamento;
 		this.tipoMedicamento = tipoMedicamento;
+		this.presentacion = presentacion;
 	}
 
 
-
-	public int getIdTipoMedicamento() {
+	public Integer getIdTipoMedicamento() {
 		return idTipoMedicamento;
 	}
 
 
-
-	public void setIdTipoMedicamento(int idTipoMedicamento) {
+	public void setIdTipoMedicamento(Integer idTipoMedicamento) {
 		this.idTipoMedicamento = idTipoMedicamento;
 	}
-
 
 
 	public String getTipoMedicamento() {
@@ -51,11 +51,18 @@ public class TipoMedicamento implements Serializable{
 	}
 
 
-
 	public void setTipoMedicamento(String tipoMedicamento) {
 		this.tipoMedicamento = tipoMedicamento;
 	}
-	
-	
+
+
+	public String getPresentacion() {
+		return presentacion;
+	}
+
+
+	public void setPresentacion(String presentacion) {
+		this.presentacion = presentacion;
+	}
 		
 }
