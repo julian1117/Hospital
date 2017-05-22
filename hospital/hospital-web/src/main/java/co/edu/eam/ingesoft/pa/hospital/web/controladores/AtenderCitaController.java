@@ -206,7 +206,7 @@ public class AtenderCitaController implements Serializable {
 			Hospitalizacion buscarHos = generalEJB.buscarHopitalizacion(hos.getId());
 			
 			OrdenHospitalizacion ordenHos = new OrdenHospitalizacion(citaa, buscarHos);
-			procedimientosEJB.crearOrdenHopitalizacion(ordenHos);
+		//	procedimientosEJB.crearOrdenHopitalizacion(ordenHos);
 			
 			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
 

@@ -115,10 +115,10 @@ public class SessionController implements Serializable {
 					roles = seguridadEjb.listaRoles(useBuscar.getIdPersona().getRoll().getId());
 					accesos = seguridadEjb.listaAcc(useBuscar.getIdPersona().getRoll().getId());
 
-					return "/paginas/seguro/Farmaceuta/#.xhtml?faces-redirect=true";
+					return "/paginas/seguro/Farmaceuta/EntregaMedicamentos.xhtml?faces-redirect=true";
 				}
 			} else {
-				Messages.addGlobalError("contrasena incorrecta");
+				Messages.addGlobalError("Usuario o contrasena incorrecta");
 			}
 
 		} else {

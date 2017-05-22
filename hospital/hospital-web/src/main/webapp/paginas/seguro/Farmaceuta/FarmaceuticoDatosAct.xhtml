@@ -1,0 +1,82 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+
+
+	<ui:define name="cuerpo">
+
+		<h:form prependId="false">
+			<p:panel id="paneldatosPBuscar" header="Actualizar datos personales">
+				<h:panelGrid id="paneldatosBuscar" columns="2">
+
+
+					<h:outputLabel for="tftNombreBuscar" id="lblNombreBuscar"
+						value="#{msj['persona.nombre']}:"></h:outputLabel>
+					<h:inputText id="tftNombreBuscar"
+						value="#{farmaceuticoControlerAct.nombre}"></h:inputText>
+
+					<h:outputLabel for="tftApellidoBuscar" id="lblApellidoBuscar"
+						value="#{msj['persona.apellido']}:"></h:outputLabel>
+					<h:inputText id="tftApellidoBuscar"
+						value="#{farmaceuticoControlerAct.apellido}"></h:inputText>
+
+					<p:outputLabel for="tftFechaBuscar" value="Fecha" />
+					<h:inputText id="tftFechaBuscar"
+						value="#{farmaceuticoControlerAct.fechaNacimiento}" mode="inline"
+						a:placeholder="dia-mes-anio">
+						<f:convertDateTime pattern="dd-MM-yyyy" />
+
+					</h:inputText>
+
+					<h:outputLabel for="tftTelefonoBuscar" id="lblTelefonoBuscar"
+						value="#{msj['persona.telefono']}:"></h:outputLabel>
+					<h:inputText id="tftTelefonoBuscar"
+						value="#{farmaceuticoControlerAct.telefono}"></h:inputText>
+
+					<h:outputLabel for="tftDireccionBuscar" id="lblDireccionBuscar"
+						value="#{msj['persona.direccion']}:"></h:outputLabel>
+					<h:inputText id="tftDireccionBuscar"
+						value="#{farmaceuticoControlerAct.direccion}"></h:inputText>
+
+
+					<h:outputLabel for="tftEmailBuscar" id="lblEmailBuscar"
+						value="#{msj['persona.email']}:"></h:outputLabel>
+					<h:inputText id="tftEmailBuscar"
+						value="#{farmaceuticoControlerAct.email}"></h:inputText>
+
+					<h:outputLabel for="tftSexoBuscar" id="lblSexoBuscar"
+						value="#{msj['persona.sexo']}:"></h:outputLabel>
+					<h:selectOneMenu id="tftSexoBuscar"
+						value="#{farmaceuticoControlerAct.sexo}" class="form-control">
+						<f:selectItem itemValue="F" itemLabel="Femenino" />
+						<f:selectItem itemValue="M" itemLabel="Masculino" />
+					</h:selectOneMenu>
+
+
+					<h:outputLabel for="tftCiudadBuscar" id="lblCiudadBuscar"
+						value="Ciudad" />
+					<h:selectOneMenu id="tftCiudadBuscar"
+						value="#{farmaceuticoControlerAct.ciudad}" converter="ciudadConver"
+						class="form-control">
+
+						<f:selectItems value="#{farmaceuticoControlerAct.nombreCiudad}"
+							var="doc" itemValue="#{doc}" itemLabel="#{doc.nombre}" />
+					</h:selectOneMenu>
+
+					<h:panelGrid id="panelbtns" columns="2">
+						<p:commandButton id="btnEditar" value="#{msj['persona.editar']}"
+							action="#{farmaceuticoControlerAct.editar}" icon="ui-icon-refresh"
+							process="@this paneldatosPBuscar" />
+					</h:panelGrid>
+
+				</h:panelGrid>
+			</p:panel>
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>

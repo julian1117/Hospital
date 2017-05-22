@@ -1,0 +1,63 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+
+
+	<ui:define name="cuerpo">
+
+		<h:form prependId="false">
+
+			<p:panel header="Entrega de medicamentos">
+
+				<h:panelGrid id="panelBuscar" columns="3">
+					<h:outputLabel for="tftCedulaBuscar" id="lblCedulaBuscar"
+						value="#{msj['persona.cedula']}:"></h:outputLabel>
+					<h:inputText id="tftCedulaBuscar"
+						value="#{entregaMed.cedulaPacienteLis}"></h:inputText>
+
+					<p:commandButton id="btnBuscar" value="#{msj['persona.buscar']}"
+						action="#{entregaMed.buscarMedicamentosPac}" icon="ui-icon-search"
+						process="@this tftCedulaBuscar" update="panelTablas" />
+				</h:panelGrid>
+				
+				
+				<p:panel header="Medicamentos del paciente" id="panelTab">
+					<p:dataTable id="panelTablas" value="#{entregaMed.listaItemMedicamentos}"
+						var="doc" border="1" class="table table-striped">
+						<p:column headerText="Orden medica">
+							<h:outputLabel value="#{doc.idCita.idCita}" />
+						</p:column>
+						<p:column headerText="Nombre Medicamento">
+							<h:outputLabel
+								value="#{doc.tipoMedicamento.tipoMedicamento}" />
+						</p:column>
+						<p:column headerText="Cantidad">
+							<h:outputLabel
+								value="#{doc.cantidadResetada}" />
+						</p:column>
+						<p:column headerText="Formula">
+							<h:outputLabel value="#{doc.formula}" />
+						</p:column>
+						<p:column headerText="Nombre del paciente">
+							<h:outputLabel value="#{doc.idCita.persona.nombre} #{doc.idCita.persona.apellido}" />
+						</p:column>
+						<p:column headerText="Opciones">
+							<p:commandButton action="#{citaController.eliminarCita(doc)}"
+								styleClass="ui-priority-primary" process="@this panelTablas"
+								value="Entregar medicamento" update="panelTablas growl" />
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+				
+				
+
+			</p:panel>
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>
