@@ -168,7 +168,7 @@ public class AtenderCitaController implements Serializable {
 			TipoCirugia tipoC = generalEJB.buscarTipoCirugia(tipoCirugia.getIdTipoCirugia());
 			Quirofano qui = quirofanoEJB.buscarQuirofano(quirofano.getId());
 
-			if(qui.isOcupado()== false){
+			if(qui.isOcupado()== true){
 				Cirugia ciru = new Cirugia(tipoC, descripcionInicio, descripcionFinal, qui);
 				procedimientosEJB.crearCirugia(ciru);
 				
@@ -179,7 +179,7 @@ public class AtenderCitaController implements Serializable {
 				
 				procedimientosEJB.crearOrdenCirugia(ordenCiru);
 				
-				qui.setOcupado(true);
+				qui.setOcupado(false);
 				quirofanoEJB.editarQuierofano(qui);
 				Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
 			}else{
@@ -197,6 +197,8 @@ public class AtenderCitaController implements Serializable {
 		try {
 
 			Cama ca = generalEJB.buscarCama(cama.getIdCama());
+			
+			if(ca.isDisponibilidad()==true){
 
 			Hospitalizacion hos = new Hospitalizacion(detalleHospi, motivo, ca);
 			procedimientosEJB.crearHospitalizacion(hos);
@@ -207,8 +209,13 @@ public class AtenderCitaController implements Serializable {
 			OrdenHospitalizacion ordenHos = new OrdenHospitalizacion(citaa, buscarHos);
 			procedimientosEJB.crearOrdenHopitalizacion(ordenHos);
 			
+			ca.setDisponibilidad(false);
+			quirofanoEJB.editarCamas(ca);
+			
 			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
-
+			}else{
+				Messages.addFlashGlobalInfo("La cama a disponer de la hospitalizacion se encuentra ocupada");
+			}
 		} catch (Exception e) {
 			Messages.addFlashGlobalError(e.getMessage());
 

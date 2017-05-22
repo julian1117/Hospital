@@ -81,4 +81,14 @@ public class QuirofanoEJB {
 	public Cama buscarCama(Integer id){
 		return em.find(Cama.class, id);
 	}
+	
+	public void editarCamas(Cama cama){
+		Cama ca = buscarCama(cama.getIdCama());
+		if(ca!=null){
+			em.merge(cama);
+		}else{
+			throw new ExcepcionNegocio("La cama no se encuentra en el sistema");
+
+		}
+	}
 }

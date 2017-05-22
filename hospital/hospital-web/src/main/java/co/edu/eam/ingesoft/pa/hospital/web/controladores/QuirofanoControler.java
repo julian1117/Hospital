@@ -135,7 +135,7 @@ public class QuirofanoControler implements Serializable {
 		try {
 			// fechastr="01-01-2000";
 			// fechaOcupado=new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
-			Quirofano quirofano = new Quirofano(Integer.parseInt(idQuirofano), detalleImplementos, nombreQui, false);
+			Quirofano quirofano = new Quirofano(Integer.parseInt(idQuirofano), detalleImplementos, nombreQui, true);
 			// Quirofano quirofano = new
 			// Quirofano(Integer.parseInt(idQuirofano), detalleImplementos,
 			// nombreQui, false, "ninguno", fechaOcupado );

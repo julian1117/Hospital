@@ -32,9 +32,9 @@ public class Acceso implements Serializable{
 	@Column(name="nombre")
 	private String nombre;
 
-	@ManyToOne
-	@JoinColumn(name="sub_accesos")
-	private SubAccesos subAccesos;
+	//@ManyToOne
+	//@JoinColumn(name="sub_accesos")
+//	private SubAccesos subAccesos;
 	
 	
 	public Acceso() {
@@ -42,13 +42,13 @@ public class Acceso implements Serializable{
 	}
 	
 
-	public Acceso(Integer id, Roll roll, String links, String nombre, SubAccesos subAccesos) {
+	public Acceso(Integer id, Roll roll, String links, String nombre ) {
 		super();
 		this.id = id;
 		this.roll = roll;
 		this.links = links;
 		this.nombre = nombre;
-		this.subAccesos = subAccesos;
+	//	this.subAccesos = subAccesos;
 	}
 
 
@@ -101,15 +101,15 @@ public class Acceso implements Serializable{
 
 
 
-	public SubAccesos getSubAccesos() {
-		return subAccesos;
-	}
+	//public SubAccesos getSubAccesos() {
+		//return subAccesos;
+	//}
 
 
 
-	public void setSubAccesos(SubAccesos subAccesos) {
-		this.subAccesos = subAccesos;
-	}
+//	public void setSubAccesos(SubAccesos subAccesos) {
+	//	this.subAccesos = subAccesos;
+	//}
 
 
 
