@@ -12,6 +12,7 @@ import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Hospitalizacion;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenCirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenCirugiaPK;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenExamen;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenHospitalizacion;
 import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
 @Stateless
@@ -104,6 +105,10 @@ public class ProcedmientosEJB {
 
 	public void crearOrdenCirugi(OrdenCirugia id){
 		em.persist(id);
+	}
+	
+	public void crearOrdenHopitalizacion(OrdenHospitalizacion orden){
+		em.persist(orden);
 	}
 	
 	
