@@ -12,6 +12,7 @@ import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Causa;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cita;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Ciudad;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Consultorio;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Eps;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Especializacione;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Examen;
@@ -247,5 +248,22 @@ public class GeneralEJB {
 	
 	public Hospitalizacion buscarHopitalizacion(Integer idHosp){
 		return em.find(Hospitalizacion.class, idHosp);
+	}
+
+	/**
+	 * Lista de consultorios
+	 * @return lista consultorios
+	 */
+	public List<Consultorio> listaConsultorios(){
+		return em.createNamedQuery(Consultorio.LISTA_CONSULTORIOS).getResultList();
+	}
+	
+	/**
+	 * Busca consultorio por id
+	 * @param id del consultorio
+	 * @return consultorio
+	 */
+	public Consultorio buscarConsultorio(Integer id){
+		return em.find(Consultorio.class, id);
 	}
 }

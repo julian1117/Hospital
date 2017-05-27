@@ -55,6 +55,12 @@ public class MedicoEJB {
 		 
 	}
 	
+	public List<Medico> listaMedicosCompleta(){
+		return em.createNativeQuery(
+				"SELECT * FROM MEDICOS M JOIN ESPECIALIZACIONES E ON E.ID = M.ESPECIALIZACIONES_ID JOIN PERSONAS P ON P.PERSONAS_ID = M.PERSONAS_ID"
+				,Medico.class).getResultList();
+	}
+	
 	/**
 	 * list medico por especialidad
 	 * @param idEsp
