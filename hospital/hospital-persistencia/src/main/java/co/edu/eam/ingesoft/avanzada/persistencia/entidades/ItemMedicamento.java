@@ -34,60 +34,86 @@ public class ItemMedicamento implements Serializable{
 	
 	@Column(name="formula",nullable=false)
 	private String formula;
+	
+	@Column(name="estado")
+	private boolean estado;
 
 	public ItemMedicamento() {
 		super();
 	}
 
+	
 	public ItemMedicamento(Integer id, Cita idCita, TipoMedicamento tipoMedicamento, Integer cantidadResetada,
-			String formula) {
+			String formula, boolean estado) {
 		super();
 		this.id = id;
 		this.idCita = idCita;
 		this.tipoMedicamento = tipoMedicamento;
 		this.cantidadResetada = cantidadResetada;
 		this.formula = formula;
+		this.estado = estado;
 	}
+
 
 	public Integer getId() {
 		return id;
 	}
 
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 
 	public Cita getIdCita() {
 		return idCita;
 	}
 
+
 	public void setIdCita(Cita idCita) {
 		this.idCita = idCita;
 	}
+
 
 	public TipoMedicamento getTipoMedicamento() {
 		return tipoMedicamento;
 	}
 
+
 	public void setTipoMedicamento(TipoMedicamento tipoMedicamento) {
 		this.tipoMedicamento = tipoMedicamento;
 	}
 
-	public Integer  getCantidadResetada() {
+
+	public Integer getCantidadResetada() {
 		return cantidadResetada;
 	}
+
 
 	public void setCantidadResetada(Integer cantidadResetada) {
 		this.cantidadResetada = cantidadResetada;
 	}
 
+
 	public String getFormula() {
 		return formula;
 	}
 
+
 	public void setFormula(String formula) {
 		this.formula = formula;
 	}
+
+
+	public boolean isEstado() {
+		return estado;
+	}
+
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
+
 
 	@Override
 	public int hashCode() {

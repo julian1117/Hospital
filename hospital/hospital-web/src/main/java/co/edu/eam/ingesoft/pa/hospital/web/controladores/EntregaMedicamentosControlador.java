@@ -39,6 +39,18 @@ public class EntregaMedicamentosControlador implements Serializable{
 	}
 		
 	
+	public void entregaMed(ItemMedicamento itMed){
+		
+		entregaMedEJB.entregaMedicamentos(itMed);
+		listaItemMedicamentos=entregaMedEJB.listaMedPac(Long.parseLong(cedulaPacienteLis));	
+		
+	}
+	
+	
+	
+	
+	
+	
 	public String getCedulaPacienteLis() {
 		return cedulaPacienteLis;
 	}

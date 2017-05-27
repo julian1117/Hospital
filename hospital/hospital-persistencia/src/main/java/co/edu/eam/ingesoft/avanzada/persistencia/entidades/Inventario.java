@@ -25,9 +25,7 @@ public class Inventario implements Serializable {
 	@Column(name="Cantidad_disponible",nullable=false)
 	private Integer cantidadDisponible;
 	
-	@Column(name="Nombre_medicamento",nullable=false,length=40)
-	private String nombreMedicamento;
-	
+
 	@ManyToOne
 	@JoinColumn(name="TIPO_MEDICAMENTO_Id",nullable=false)
 	private TipoMedicamento tipoMedicamento;
@@ -35,12 +33,11 @@ public class Inventario implements Serializable {
 	@Column(name="precio")
 	private Double precioMedicamento;
 	
-	public Inventario(int idInventario, int cantidadDisponible, String nombreMedicamento,
+	public Inventario(int idInventario, int cantidadDisponible,
 			TipoMedicamento tipoMedicamento, double precioMedicamento) {
 		super();
 		this.idInventario = idInventario;
 		this.cantidadDisponible = cantidadDisponible;
-		this.nombreMedicamento = nombreMedicamento;
 		this.tipoMedicamento = tipoMedicamento;
 		this.precioMedicamento = precioMedicamento;
 	}
@@ -63,14 +60,6 @@ public class Inventario implements Serializable {
 
 	public void setCantidadDisponible(int cantidadDisponible) {
 		this.cantidadDisponible = cantidadDisponible;
-	}
-
-	public String getNombreMedicamento() {
-		return nombreMedicamento;
-	}
-
-	public void setNombreMedicamento(String nombreMedicamento) {
-		this.nombreMedicamento = nombreMedicamento;
 	}
 
 	public TipoMedicamento getTipoMedicamento() {

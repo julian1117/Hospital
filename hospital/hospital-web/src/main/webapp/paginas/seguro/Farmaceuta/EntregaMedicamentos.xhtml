@@ -39,16 +39,20 @@
 							<h:outputLabel
 								value="#{doc.cantidadResetada}" />
 						</p:column>
+						<p:column headerText="Presentación medicamento">
+							<h:outputLabel
+								value="#{doc.tipoMedicamento.presentacion}" />
+						</p:column>
 						<p:column headerText="Formula">
 							<h:outputLabel value="#{doc.formula}" />
 						</p:column>
 						<p:column headerText="Nombre del paciente">
 							<h:outputLabel value="#{doc.idCita.persona.nombre} #{doc.idCita.persona.apellido}" />
 						</p:column>
-						<p:column headerText="Opciones">
-							<p:commandButton action="#{citaController.eliminarCita(doc)}"
+						<p:column headerText="Opciones medicamentos">
+							<p:commandButton action="#{entregaMed.entregaMed(doc)}"
 								styleClass="ui-priority-primary" process="@this panelTablas"
-								value="Entregar medicamento" update="panelTablas growl" />
+								value="Entregar" update="panelTablas growl" icon="ui-icon-check" />
 						</p:column>
 					</p:dataTable>
 				</p:panel>
