@@ -3,7 +3,9 @@ package co.edu.eam.ingesoft.pa.hospital.web.controladores;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -13,6 +15,9 @@ import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Messages;
 
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cama;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cirugia;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cita;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenHospitalizacion;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Quirofano;
 import co.edu.eam.ingesoft.pa.negocio.beans.QuirofanoEJB;
 
@@ -39,9 +44,44 @@ public class QuirofanoControler implements Serializable {
 	private String disponibilidad;
 
 	private String detalleCama;
+	
+	private List<Quirofano> listaQuirofano;
+	
+	private Cirugia quirofano;
+	
+	private String estadoQuirofano;
+	
+	private List<OrdenHospitalizacion> listarCamas;
 
 	@EJB
 	private QuirofanoEJB quirofanoEJB;
+	
+	
+	
+
+	public List<OrdenHospitalizacion> getListarCamas() {
+		return listarCamas;
+	}
+
+	public void setListarCamas(List<OrdenHospitalizacion> listarCamas) {
+		this.listarCamas = listarCamas;
+	}
+
+	public List<Quirofano> getListaQuirofano() {
+		return listaQuirofano;
+	}
+
+	public void setListaQuirofano(List<Quirofano> listaQuirofano) {
+		this.listaQuirofano = listaQuirofano;
+	}
+
+	public Cirugia getQuirofano() {
+		return quirofano;
+	}
+
+	public void setQuirofano(Cirugia quirofano) {
+		this.quirofano = quirofano;
+	}
 
 	public String getDetalleCama() {
 		return detalleCama;
@@ -95,6 +135,14 @@ public class QuirofanoControler implements Serializable {
 		return detalleImplementos;
 	}
 
+	public String getEstadoQuirofano() {
+		return estadoQuirofano;
+	}
+
+	public void setEstadoQuirofano(String estadoQuirofano) {
+		this.estadoQuirofano = estadoQuirofano;
+	}
+
 	public void setDetalleImplementos(String detalleImplementos) {
 		this.detalleImplementos = detalleImplementos;
 	}
@@ -131,6 +179,14 @@ public class QuirofanoControler implements Serializable {
 		this.fechaOcupado = fechaOcupado;
 	}
 
+	@PostConstruct
+	public void inicializar(){
+		listaQuirofano = quirofanoEJB.listarQuirofano();
+		listarCamas = quirofanoEJB.listarCamas();
+		}
+	//}
+	
+	
 	public void crearQuirofano() {
 		try {
 			// fechastr="01-01-2000";
