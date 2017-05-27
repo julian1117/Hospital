@@ -195,6 +195,14 @@
 											value="#{atenderCitaController.descripcionFinal}" rows="10"
 											cols="250" completeMethod="#" queryDelay="450"
 											minQueryLength="6"></p:inputTextarea>
+											
+											<h:outputLabel for="motivoOcupa" id="lbmotivoOcupa"
+											value="#{msj['procedimientos.detalleOcupacion']}"></h:outputLabel>
+											
+											<p:inputTextarea id="motivoOcupa"
+											value="#{atenderCitaController.motivo}" rows="10"
+											cols="250" completeMethod="#" queryDelay="450"
+											minQueryLength="6"></p:inputTextarea>
 
 										<p:commandButton id="btnCrearCirugia"
 											value="#{msj['procedimiento.generaCirugia']}"

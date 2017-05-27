@@ -67,32 +67,31 @@
 								value="#{quirofanoControler.detalleImplementos}" rows="10"
 								cols="250" completeMethod="#" queryDelay="450"
 								minQueryLength="6"></p:inputTextarea>
-								
-								<p:commandButton id="btnEditar" value="#{msj['persona.editar']}"
-							action="#{quirofanoControler.editar}" class="btn"
-							process="@this paneldatosPBuscar" />
-								
-								
+
+							<p:commandButton id="btnEditar" value="#{msj['persona.editar']}"
+								action="#{quirofanoControler.editar}" class="btn"
+								process="@this paneldatosPBuscar" />
+
+
 						</h:panelGrid>
 					</p:panel>
 				</p:tab>
-				
+
 				<p:tab title="Gestion Crear Camas">
 					<p:panel id="datosPanelPrincipalCamas" header="Registro Camas">
 						<h:panelGrid id="paneldatosCamas" columns="2">
 
 							<h:outputLabel for="tftIdCamas" id="lblIdCamas"
 								value="#{msj['quiromafo.idCamas']}:"></h:outputLabel>
-							<h:inputText id="tftIdCamas" value="#{quirofanoControler.idCamas}"></h:inputText>
+							<h:inputText id="tftIdCamas"
+								value="#{quirofanoControler.idCamas}"></h:inputText>
 
-							<h:outputLabel for="descripcionCamas"
-								id="lbdescripcioncamas"
+							<h:outputLabel for="descripcionCamas" id="lbdescripcioncamas"
 								value="#{msj['quiromafo.detalleCama']}"></h:outputLabel>
 
 							<p:inputTextarea id="descripcionCamas"
-								value="#{quirofanoControler.detalleCama}" rows="10"
-								cols="250" completeMethod="#" queryDelay="450"
-								minQueryLength="6"></p:inputTextarea>
+								value="#{quirofanoControler.detalleCama}" rows="10" cols="250"
+								completeMethod="#" queryDelay="450" minQueryLength="6"></p:inputTextarea>
 
 							<p:commandButton id="btnCrearCama"
 								value="#{msj['persona.crear']}"
@@ -104,16 +103,18 @@
 						</h:panelGrid>
 					</p:panel>
 				</p:tab>
-				
-					<p:tab title="Buscar-Editar(Camas)">
-					<h:panelGrid id="panelBuscarCamas" columns="3">
-								<h:outputLabel for="tftIdCamasBuscar" id="lblIdCamasBuscar"
-								value="#{msj['quiromafo.idCamas']}:"></h:outputLabel>
-							<h:inputText id="tftIdCamasBuscar" value="#{quirofanoControler.idCamas}"></h:inputText>
 
-						<p:commandButton id="btnBuscarCamas" value="#{msj['persona.buscar']}"
+				<p:tab title="Buscar-Editar(Camas)">
+					<h:panelGrid id="panelBuscarCamas" columns="3">
+						<h:outputLabel for="tftIdCamasBuscar" id="lblIdCamasBuscar"
+							value="#{msj['quiromafo.idCamas']}:"></h:outputLabel>
+						<h:inputText id="tftIdCamasBuscar"
+							value="#{quirofanoControler.idCamas}"></h:inputText>
+
+						<p:commandButton id="btnBuscarCamas"
+							value="#{msj['persona.buscar']}"
 							action="#{quirofanoControler.buscarCamas}" class="btn"
-							process="@this tftIdCamasBuscar" update="panelBuscarCamas " />
+							process="@this tftIdCamasBuscar" update="paneldatosPBuscarCamas " />
 
 					</h:panelGrid>
 
@@ -124,18 +125,82 @@
 								value="#{msj['quiromafo.detalleCama']}"></h:outputLabel>
 
 							<p:inputTextarea id="descripcionCamasBuscar"
-								value="#{quirofanoControler.detalleCama}" rows="10"
-								cols="250" completeMethod="#" queryDelay="450"
-								minQueryLength="6"></p:inputTextarea>
-								
-								<p:commandButton id="btnEditarCamas" value="#{msj['persona.editar']}"
-							action="#{quirofanoControler.editarCamas}" class="btn"
-							process="@this paneldatosPBuscarCamas" />
-								
-								
+								value="#{quirofanoControler.detalleCama}" rows="10" cols="250"
+								completeMethod="#" queryDelay="450" minQueryLength="6"></p:inputTextarea>
+
+							<p:commandButton id="btnEditarCamas"
+								value="#{msj['persona.editar']}"
+								action="#{quirofanoControler.editarCamas}" class="btn"
+								process="@this paneldatosPBuscarCamas" />
+
+
 						</h:panelGrid>
 					</p:panel>
+
 				</p:tab>
+
+				<p:tab title="Sistema de información">
+
+
+
+					<p:panel header="Lista De Quirofanos" id="panelTab">
+						<p:dataTable id="panelTablas"
+							value="#{quirofanoControler.listaQuirofano}" var="doc" border="1"
+							class="table table-striped">
+							<p:column headerText="Numero">
+								<h:outputLabel value="#{doc.id}" />
+							</p:column>
+							<p:column headerText="Nombre">
+								<h:outputLabel value="#{doc.nombreQuirofano}" />
+							</p:column>
+							<p:column headerText="Fecha de Ocupacion">
+								<h:outputLabel value="#{doc.fechaOcupado}" />
+								<h:outputLabel value="Ninguna"
+									rendered="#{doc.fechaOcupado == null}" />
+							</p:column>
+							<p:column headerText="Estado">
+								<h:outputLabel value="No Disponible"
+									rendered="#{doc.ocupado == false}" />
+								<h:outputLabel value="Disponible"
+									rendered="#{doc.ocupado == true}" />
+							</p:column>
+
+							<p:column headerText="Motivo Ocupacion">
+								<h:outputLabel value="#{doc.detalleOcupacion}" />
+								<h:outputLabel value="Ninguna"
+									rendered="#{doc.detalleOcupacion == null}" />
+							</p:column>
+
+						</p:dataTable>
+					</p:panel>
+
+					<p:panel header="Lista De Camas" id="panelTabCamas">
+						<p:dataTable id="panelTablasCamas"
+							value="#{quirofanoControler.listarCamas}" var="ca" border="1"
+							class="table table-striped">
+							<p:column headerText="Numero">
+								<h:outputLabel value="#{ca.idHospitalizacion.camaId.idCama}" />
+							</p:column>
+							
+							<p:column headerText="Disponibilidad">
+								<h:outputLabel value="No Disponible"
+									rendered="#{ca.idHospitalizacion.camaId.disponibilidad == false}" />
+								<h:outputLabel value="Disponible"
+									rendered="#{ca.idHospitalizacion.camaId.disponibilidad == true}" />
+							</p:column>
+
+							<p:column headerText="Persona">
+								<h:outputLabel value="#{ca.idCita.persona.nombre}" />
+								<h:outputLabel value="Ninguna"
+									rendered="#{doc.detalleOcupacion == null}" />
+							</p:column>
+
+						</p:dataTable>
+					</p:panel>
+
+
+				</p:tab>
+
 			</p:tabView>
 		</h:form>
 	</ui:define>

@@ -8,6 +8,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cama;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cirugia;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cita;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenHospitalizacion;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenHospitalizacionPK;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Quirofano;
 import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
@@ -62,6 +66,11 @@ public class QuirofanoEJB {
 	public List<Quirofano> listarQuirofano(){
 		return em.createNamedQuery(Quirofano.LISTAR_QUIROFANO).getResultList();
 	}
+	
+	public List<OrdenHospitalizacion> listarCamas(){
+		return em.createNativeQuery("SELECT * FROM PERSONAS pers inner join PACIENTES pa on pers.PERSONAS_ID = pa.PERSONAS_ID inner join CITAS ci on ci.PACIENTES_PERSONA_ID = pa.PERSONAS_ID inner join ORDEN_HOSPITALIZACION orho on orho.CITAS_ID = ci.ID inner join HOSPITALIZACIONES hos on hos.ID_HOSPITALIZACION= orho.HOSPITALIZACIONES_ID RIGHT join CAMAS ca on ca.ID= hos.CAMAS_ID",OrdenHospitalizacion.class).getResultList();
+	}
+	
 
 	public void crearCama(Cama cama){
 		Cama ca = buscarCama(cama.getIdCama());
@@ -91,4 +100,10 @@ public class QuirofanoEJB {
 
 		}
 	}
+	
+	public List<Cirugia> listarQuiromanos(){
+		return em.createNativeQuery("SELECT * FROM QUIROFANOS",Cirugia.class).getResultList();
+	}
+	
+	
 }

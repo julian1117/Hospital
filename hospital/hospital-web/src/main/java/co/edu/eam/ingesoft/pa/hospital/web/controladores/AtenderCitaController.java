@@ -1,6 +1,7 @@
 package co.edu.eam.ingesoft.pa.hospital.web.controladores;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -154,6 +155,8 @@ public class AtenderCitaController implements Serializable {
 			
 			OrdenExamen ordenema= new OrdenExamen(citaa, idExa);
 			procedimientosEJB.crearOrdenExamen(ordenema);
+			
+			
 			Messages.addFlashGlobalInfo("Examen generado!");
 			
 		} catch (Exception e) {
@@ -181,7 +184,11 @@ public class AtenderCitaController implements Serializable {
 				
 				procedimientosEJB.crearOrdenCirugia(ordenCiru);
 				
+				Date fecha = new Date();
+				
+				qui.setFechaOcupado(fecha);
 				qui.setOcupado(false);
+				qui.setDetalleOcupacion(motivo);
 				quirofanoEJB.editarQuierofano(qui);
 				Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
 			}else{
