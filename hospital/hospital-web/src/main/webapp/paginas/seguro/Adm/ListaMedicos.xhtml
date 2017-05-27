@@ -1,0 +1,40 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+	<ui:define name="cuerpo">
+		<h:form prependId="false">
+
+			<h:panelGrid>
+		
+		<p:panel header="Agenda de Citas" id="panelTab">
+				<p:dataTable id="panelTablas" value="#{agendaMedicoControler.listaMedicos}"
+					var="doc" border="1" class="table table-striped">
+					<p:column headerText="Documento">
+						<h:outputLabel value="#{doc.idPersona}" />
+					</p:column>
+					<p:column headerText="Nombre">
+						<h:outputLabel
+							value="#{doc.nombre} #{doc.apellido}" />
+					</p:column>
+					<p:column headerText="Especialidad">
+						<h:outputLabel 
+						value="#{doc.especializaciones.nombre}" />
+					</p:column>
+					
+					<p:column headerText="Opciones">
+						<p:commandButton action="#{agendaMedicoControler.AgendaMedico(doc)}"
+							styleClass="ui-priority-primary" process="@this panelTablas"
+							value="Ir a agenda" update="panelTablas growl" />
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+		
+		</h:panelGrid>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

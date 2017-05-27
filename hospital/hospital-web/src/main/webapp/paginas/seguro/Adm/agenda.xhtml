@@ -1,0 +1,84 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+	<ui:define name="cuerpo">
+		<h:form prependId="false">
+			<p:panel header="Agenda de medicos" id="panelTab">
+				<h:panelGrid id="datosPanelB" columns="3">
+
+					<p:outputLabel for="tftFecha" value="FechaAgenda" />
+					<h:inputText id="tftFecha"
+						value="#{agendaMedicoControler.fechaAgenda}" mode="inline"
+						a:placeholder="dia-mes-anio" />
+					<p:message for="tftFecha" />
+
+
+					<p:outputLabel for="horaInicio" value="Hora de inicio" />
+					<h:selectOneMenu id="horaInicio"
+						value="#{agendaMedicoControler.horaInicio}" class="form-control">
+						<f:selectItem itemValue="07:00" itemLabel="07:00" />
+						<f:selectItem itemValue="08:00" itemLabel="08:00" />
+						<f:selectItem itemValue="09:00" itemLabel="09:00" />
+						<f:selectItem itemValue="10:00" itemLabel="10:00" />
+						<f:selectItem itemValue="11:00" itemLabel="11:00" />
+						<f:selectItem itemValue="12:00" itemLabel="12:00" />
+						<f:selectItem itemValue="13:00" itemLabel="13:00" />
+						<f:selectItem itemValue="14:00" itemLabel="14:00" />
+						<f:selectItem itemValue="15:00" itemLabel="15:00" />
+						<f:selectItem itemValue="16:00" itemLabel="16:00" />
+						<f:selectItem itemValue="17:00" itemLabel="17:00" />
+						<f:selectItem itemValue="18:00" itemLabel="18:00" />
+						<f:selectItem itemValue="19:00" itemLabel="19:00" />
+						<f:selectItem itemValue="20:00" itemLabel="20:00" />
+					</h:selectOneMenu>
+					<br />
+
+					<p:outputLabel for="horaFinal" value="Hora final" />
+					<h:selectOneMenu id="horaFinal"
+						value="#{agendaMedicoControler.horaFinal}" class="form-control">
+						<f:selectItem itemValue="07:00" itemLabel="07:00" />
+						<f:selectItem itemValue="08:00" itemLabel="08:00" />
+						<f:selectItem itemValue="09:00" itemLabel="09:00" />
+						<f:selectItem itemValue="10:00" itemLabel="10:00" />
+						<f:selectItem itemValue="11:00" itemLabel="11:00" />
+						<f:selectItem itemValue="12:00" itemLabel="12:00" />
+						<f:selectItem itemValue="13:00" itemLabel="13:00" />
+						<f:selectItem itemValue="14:00" itemLabel="14:00" />
+						<f:selectItem itemValue="15:00" itemLabel="15:00" />
+						<f:selectItem itemValue="16:00" itemLabel="16:00" />
+						<f:selectItem itemValue="17:00" itemLabel="17:00" />
+						<f:selectItem itemValue="18:00" itemLabel="18:00" />
+						<f:selectItem itemValue="19:00" itemLabel="19:00" />
+						<f:selectItem itemValue="20:00" itemLabel="20:00" />
+					</h:selectOneMenu>
+					<br />
+
+					<h:outputLabel for="cbConsultio" id="lbConsultorio"
+						value="#{msj['agenda.consultorio']}" />
+					<h:selectOneMenu id="cbDoctor"
+						value="#{agendaMedicoControler.consultorio}"
+						converter="consultorioConver">
+						<f:selectItems value="#{agendaMedicoControler.listaConsultio}"
+							var="doc" itemValue="#{doc}" itemLabel="#{doc.ubicacion}" />
+
+					</h:selectOneMenu>
+					<br />
+					
+					<h:panelGrid id="botonesPanel" columns="1">
+								<p:commandButton id="btnAsignarAgenda"
+									value="#{msj['agenda.asiganarAgenda']}"
+									action="#{agendaMedicoControler.asignarAgenda}"
+									process="@this panelTab" update="panelTab datosPanelB"
+									icon="ui-icon-disk" />
+							</h:panelGrid>
+
+				</h:panelGrid>
+			</p:panel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
