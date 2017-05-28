@@ -1,6 +1,9 @@
 package co.edu.eam.ingesoft.pa.hospital.web.controladores;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -10,7 +13,9 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 import org.omnifaces.cdi.ViewScoped;
+import org.omnifaces.util.Messages;
 
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Agenda;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Consultorio;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Medico;
 import co.edu.eam.ingesoft.pa.negocio.beans.GeneralEJB;
@@ -105,6 +110,26 @@ public class AgendaMedicoControlador implements Serializable {
 
 	public void asignarAgenda(){
 		
+		Date fec;
+		try {
+			fec = new SimpleDateFormat("dd-MM-yyyy").parse(fechaAgenda);
+			
+			Agenda agenda = new Agenda();
+			agenda.setConsultorio(consultorio);
+			agenda.setFecha(fec);
+			agenda.setHoraFinal(horaFinal);
+			agenda.setHoraInicio(horaInicio);
+			agenda.setMedico(medico);
+			
+			medicoEJB.crearAgendaMedico(agenda);
+			
+			Messages.addFlashGlobalInfo("Agenda regsitrada con éxito");
+			
+			
+		} catch (Exception e) {
+			Messages.addFlashGlobalError(e.getMessage());
+		}
+
 	}
 	
 	
