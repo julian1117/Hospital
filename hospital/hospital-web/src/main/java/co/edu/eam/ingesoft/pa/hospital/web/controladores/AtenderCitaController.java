@@ -232,6 +232,9 @@ public class AtenderCitaController implements Serializable {
 			
 			Diagnostico dig = new Diagnostico(citaa, pato, descripcionMedico);
 			procedimientosEJB.crearDiagnostico(dig);
+			
+			citaa.setEstado(true);
+			citaEJB.editarCita(citaa);
 			Messages.addFlashGlobalInfo("Diagnostico generado!");
 
 		} catch (Exception e) {
