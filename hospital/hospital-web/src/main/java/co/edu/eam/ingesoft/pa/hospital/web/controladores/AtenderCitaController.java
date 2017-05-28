@@ -16,15 +16,21 @@ import org.omnifaces.util.Messages;
 
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cama;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Causa;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.CausaPatologia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cita;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Diagnostico;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Examen;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Hospitalizacion;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenCirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenExamen;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenHospitalizacion;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Paciente;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Patologia;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.PatologiaSintoma;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.PatologiaTratamiento;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Quirofano;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.ResultadoExamen;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Sintoma;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoCirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoExamen;
@@ -32,6 +38,7 @@ import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Tratamiento;
 import co.edu.eam.ingesoft.pa.negocio.beans.CitaEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.GeneralEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.GestionMedicoEJB;
+import co.edu.eam.ingesoft.pa.negocio.beans.PacienteEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.ProcedmientosEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.QuirofanoEJB;
 
@@ -69,6 +76,8 @@ public class AtenderCitaController implements Serializable {
 	private TipoExamen tipoExamen;
 
 	private Examen examen;
+	
+	private String detalleExam;
 
 	private List<TipoExamen> listarExamen;
 
@@ -91,10 +100,16 @@ public class AtenderCitaController implements Serializable {
 	private Cama cama;
 
 	private List<Cama> listaCamas;
+	
+	private List<OrdenExamen> listaExamenCar;
 
 	private String motivo;
 
 	private String detalleHospi;
+	
+	private OrdenExamen orden;
+	
+	private String descripcionMedico;
 
 	@EJB
 	private ProcedmientosEJB procedimientosEJB;
@@ -113,6 +128,9 @@ public class AtenderCitaController implements Serializable {
 
 	@EJB
 	private GeneralEJB generalEJB;
+	
+	@EJB
+	private PacienteEJB pacienteEJB;
 
 	@PostConstruct
 	public void inicializar() {
@@ -131,6 +149,12 @@ public class AtenderCitaController implements Serializable {
 		cita = doc;
 		return "/paginas/seguro/Medico/AtenderCita.xhtml?faces-redirect=true";
 	}
+	
+	public void cargarExamenes(){
+		//Paciente persona = pacienteEJB.buscarPaciente(Long.parseLong(cedulaPaciente));
+		listaExamenCar = procedimientosEJB.listarExamenes(Long.parseLong(cedulaPaciente));
+	
+	}
 
 	public void descPatologia() {
 
@@ -138,63 +162,134 @@ public class AtenderCitaController implements Serializable {
 
 		textoDesPatologia = patolo.getDescripcion();
 	}
+	
+	
+	public void generarResultadoExamen(){
+		try {
+			OrdenExamen ordenExam = procedimientosEJB.buscarOrdenExamen(orden.getIdOrdenExamen());
+			Date fecha = new Date();
+			ResultadoExamen resultado = new ResultadoExamen(detalleExam, fecha, ordenExam);
+			
+			procedimientosEJB.crearResultadoExamen(resultado);
+			Messages.addFlashGlobalInfo("Resultado generado!");
+		} catch (Exception e) {
+			Messages.addFlashGlobalError(e.getMessage());
+		}
+	}
 
+	public void generarSintoma() {
+		try {
+			Sintoma sin = generalEJB.buscarSintoma(sintoma.getIdSintoma());
+			Patologia pato = generalEJB.buscarPatologia(patologia.getIdPatologia());
+			
+			PatologiaSintoma ptSin = new PatologiaSintoma(pato, sin);
+			procedimientosEJB.crearPatologiaSintoma(ptSin);
+			
+			Messages.addFlashGlobalInfo("Sintoma generado!");
+			
+
+		} catch (Exception e) {
+			Messages.addFlashGlobalError(e.getMessage());
+		}
+	}
+
+	public void generarCausa() {
+		try {
+			
+
+			Causa ca = generalEJB.buscarCausa(causa.getIdCausasPa());
+			Patologia pato = generalEJB.buscarPatologia(patologia.getIdPatologia());
+			
+			CausaPatologia causaPa = new CausaPatologia(ca, pato);
+			procedimientosEJB.crearPatologiaCausa(causaPa);
+			
+			Messages.addFlashGlobalInfo("Causa generado!");
+
+		} catch (Exception e) {
+			Messages.addFlashGlobalError(e.getMessage());
+		}
+	}
+
+	public void generarTratamiento() {
+		try {
+
+			Tratamiento trata = generalEJB.buscarTratamiento(tratamiento.getIdTratamiento());
+			Patologia pato = generalEJB.buscarPatologia(patologia.getIdPatologia());
+			
+			PatologiaTratamiento patoloTrata = new PatologiaTratamiento(pato, trata);
+			procedimientosEJB.crearPatologiaTratamiento(patoloTrata);
+			
+			Messages.addFlashGlobalInfo("Tratamiento generado!");
+		} catch (Exception e) {
+			Messages.addFlashGlobalError(e.getMessage());
+		}
+	}
+
+	public void generarDiagnostico() {
+		try {
+			Patologia pato = generalEJB.buscarPatologia(patologia.getIdPatologia());
+			Cita citaa = generalEJB.buscarIdCita(cita.getIdCita());
+			
+			Diagnostico dig = new Diagnostico(citaa, pato, descripcionMedico);
+			procedimientosEJB.crearDiagnostico(dig);
+			Messages.addFlashGlobalInfo("Diagnostico generado!");
+
+		} catch (Exception e) {
+			Messages.addFlashGlobalError(e.getMessage());
+		}
+	}
 
 	public void generarExamen() {
 		try {
-			
+
 			TipoExamen tipoExam = generalEJB.buscarTipoExamen(tipoExamen.getIdTipoExamenes());
 			Examen ex = new Examen(tipoExam, descripcionExamen);
 			procedimientosEJB.crearExamen(ex);
 
 			Examen idExa = generalEJB.buscarIdExamen(ex.getIdExamen());
-		//	Integer exa = idExa.getIdExamen();
+			// Integer exa = idExa.getIdExamen();
 			//
 			Cita citaa = generalEJB.buscarIdCita(cita.getIdCita());
-			//Integer cit = cita.getIdCita();
-			
-			OrdenExamen ordenema= new OrdenExamen(citaa, idExa);
+			// Integer cit = cita.getIdCita();
+
+			OrdenExamen ordenema = new OrdenExamen(citaa, idExa);
 			procedimientosEJB.crearOrdenExamen(ordenema);
-			
-			
+
 			Messages.addFlashGlobalInfo("Examen generado!");
-			
+
 		} catch (Exception e) {
 
 		}
 
 	}
-	
 
 	public void generarCirugia() {
 		try {
 			TipoCirugia tipoC = generalEJB.buscarTipoCirugia(tipoCirugia.getIdTipoCirugia());
 			Quirofano qui = quirofanoEJB.buscarQuirofano(quirofano.getId());
 
-
-			if(qui.isOcupado()== true){
+			if (qui.isOcupado() == true) {
 
 				Cirugia ciru = new Cirugia(tipoC, descripcionInicio, descripcionFinal, qui);
 				procedimientosEJB.crearCirugia(ciru);
-				
+
 				Cirugia busCiru = generalEJB.buscarCirugia(ciru.getId());
 				Cita citaa = generalEJB.buscarIdCita(cita.getIdCita());
-				Messages.addFlashGlobalError(busCiru.getId()+"");
-				OrdenCirugia ordenCiru = new OrdenCirugia(citaa, busCiru);	
-				
+				Messages.addFlashGlobalError(busCiru.getId() + "");
+				OrdenCirugia ordenCiru = new OrdenCirugia(citaa, busCiru);
+
 				procedimientosEJB.crearOrdenCirugia(ordenCiru);
-				
+
 				Date fecha = new Date();
-				
+
 				qui.setFechaOcupado(fecha);
 				qui.setOcupado(false);
 				qui.setDetalleOcupacion(motivo);
 				quirofanoEJB.editarQuierofano(qui);
 				Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
-			}else{
+			} else {
 				Messages.addFlashGlobalInfo("El quirofano a disponer de la cirugia se encuentra ocupado");
 			}
-			
 
 		} catch (Exception e) {
 			Messages.addFlashGlobalError(e.getMessage());
@@ -206,23 +301,23 @@ public class AtenderCitaController implements Serializable {
 		try {
 
 			Cama ca = generalEJB.buscarCama(cama.getIdCama());
-			
-			if(ca.isDisponibilidad()==true){
 
-			Hospitalizacion hos = new Hospitalizacion(detalleHospi, motivo, ca);
-			procedimientosEJB.crearHospitalizacion(hos);
-			
-			Cita citaa = generalEJB.buscarIdCita(cita.getIdCita());
-			Hospitalizacion buscarHos = generalEJB.buscarHopitalizacion(hos.getId());
-			
-			OrdenHospitalizacion ordenHos = new OrdenHospitalizacion(citaa, buscarHos);
-			procedimientosEJB.crearOrdenHopitalizacion(ordenHos);
-			
-			ca.setDisponibilidad(false);
-			quirofanoEJB.editarCamas(ca);
-			
-			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
-			}else{
+			if (ca.isDisponibilidad() == true) {
+
+				Hospitalizacion hos = new Hospitalizacion(detalleHospi, motivo, ca);
+				procedimientosEJB.crearHospitalizacion(hos);
+
+				Cita citaa = generalEJB.buscarIdCita(cita.getIdCita());
+				Hospitalizacion buscarHos = generalEJB.buscarHopitalizacion(hos.getId());
+
+				OrdenHospitalizacion ordenHos = new OrdenHospitalizacion(citaa, buscarHos);
+				procedimientosEJB.crearOrdenHopitalizacion(ordenHos);
+
+				ca.setDisponibilidad(false);
+				quirofanoEJB.editarCamas(ca);
+
+				Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
+			} else {
 				Messages.addFlashGlobalInfo("La cama a disponer de la hospitalizacion se encuentra ocupada");
 			}
 		} catch (Exception e) {
@@ -277,6 +372,16 @@ public class AtenderCitaController implements Serializable {
 
 	public void setTratamiento(Tratamiento tratamiento) {
 		this.tratamiento = tratamiento;
+	}
+	
+	
+
+	public List<OrdenExamen> getListaExamenCar() {
+		return listaExamenCar;
+	}
+
+	public void setListaExamenCar(List<OrdenExamen> listaExamenCar) {
+		this.listaExamenCar = listaExamenCar;
 	}
 
 	public List<Patologia> getListaPatolgia() {
@@ -369,6 +474,40 @@ public class AtenderCitaController implements Serializable {
 
 	public String getDescripcionFinal() {
 		return descripcionFinal;
+	}
+	
+	
+
+	public String getDescripcionMedico() {
+		return descripcionMedico;
+	}
+
+	public void setDescripcionMedico(String descripcionMedico) {
+		this.descripcionMedico = descripcionMedico;
+	}
+
+	public SessionController getUsuarioSesion() {
+		return usuarioSesion;
+	}
+
+	public void setUsuarioSesion(SessionController usuarioSesion) {
+		this.usuarioSesion = usuarioSesion;
+	}
+
+	public GestionMedicoEJB getMedicoGestionEJB() {
+		return medicoGestionEJB;
+	}
+
+	public void setMedicoGestionEJB(GestionMedicoEJB medicoGestionEJB) {
+		this.medicoGestionEJB = medicoGestionEJB;
+	}
+
+	public CitaEJB getCitaEJB() {
+		return citaEJB;
+	}
+
+	public void setCitaEJB(CitaEJB citaEJB) {
+		this.citaEJB = citaEJB;
 	}
 
 	public void setDescripcionFinal(String descripcionFinal) {
@@ -470,10 +609,32 @@ public class AtenderCitaController implements Serializable {
 	public void setListarQuirofanos(List<Quirofano> listarQuirofanos) {
 		this.listarQuirofanos = listarQuirofanos;
 	}
+
+	public String getDetalleExam() {
+		return detalleExam;
+	}
+
+	public void setDetalleExam(String detalleExam) {
+		this.detalleExam = detalleExam;
+	}
+
+	public PacienteEJB getPacienteEJB() {
+		return pacienteEJB;
+	}
+
+	public void setPacienteEJB(PacienteEJB pacienteEJB) {
+		this.pacienteEJB = pacienteEJB;
+	}
+
+	public OrdenExamen getOrden() {
+		return orden;
+	}
+
+	public void setOrden(OrdenExamen orden) {
+		this.orden = orden;
+	}
 	
 	
 	
-	
-	
-	
+
 }

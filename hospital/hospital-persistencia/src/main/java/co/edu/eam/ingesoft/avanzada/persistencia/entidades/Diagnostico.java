@@ -32,11 +32,28 @@ public class Diagnostico implements Serializable{
 		super();
 	}
 
-	public Diagnostico(Cita idCita, Patologia patologiaId) {
+	
+
+	public Diagnostico(Cita idCita, Patologia patologiaId, String diagnostico) {
 		super();
 		this.idCita = idCita;
 		this.patologiaId = patologiaId;
+		this.diagnostico = diagnostico;
 	}
+
+	
+
+	public String getDiagnostico() {
+		return diagnostico;
+	}
+
+
+
+	public void setDiagnostico(String diagnostico) {
+		this.diagnostico = diagnostico;
+	}
+
+
 
 	public Cita getIdCita() {
 		return idCita;

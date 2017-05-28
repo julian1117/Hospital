@@ -35,17 +35,30 @@ public class ResultadoExamen implements Serializable{
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
 	
+	@ManyToOne
+	@JoinColumn(name="ORDEN_EXAMENES_ID_CITA")
+	private OrdenExamen ordenExam;
+	
 
 	public ResultadoExamen() {
 		super();
 	}
 
 
-	public ResultadoExamen(Integer idResultado, String detalle, Date fecha) {
+	public ResultadoExamen(Integer idResultado, String detalle, Date fecha, OrdenExamen ordenExam) {
 		super();
 		this.idResultado = idResultado;
 		this.detalle = detalle;
 		this.fecha = fecha;
+		this.ordenExam = ordenExam;
+	}
+
+
+	public ResultadoExamen(String detalle, Date fecha, OrdenExamen ordenExam) {
+		super();
+		this.detalle = detalle;
+		this.fecha = fecha;
+		this.ordenExam = ordenExam;
 	}
 
 
@@ -78,7 +91,17 @@ public class ResultadoExamen implements Serializable{
 		this.fecha = fecha;
 	}
 
-	
+
+	public OrdenExamen getOrdenExam() {
+		return ordenExam;
+	}
+
+
+	public void setOrdenExam(OrdenExamen ordenExam) {
+		this.ordenExam = ordenExam;
+	}
+
+
 	
 	
 }

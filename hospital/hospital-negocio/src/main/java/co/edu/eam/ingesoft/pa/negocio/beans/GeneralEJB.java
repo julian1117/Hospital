@@ -266,4 +266,7 @@ public class GeneralEJB {
 	public Consultorio buscarConsultorio(Integer id){
 		return em.find(Consultorio.class, id);
 	}
+	
+	
+	
 }

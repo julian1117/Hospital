@@ -4,10 +4,13 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -15,7 +18,9 @@ import javax.persistence.Table;
 public class PatologiaSintoma implements Serializable{
 	
 	@Id
-	@Column(name="id",nullable=false)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PATOLOGIA_SINTOMA_SEQ")
+    @SequenceGenerator(sequenceName = "PATOLOGIA_SINTOMAS_SEQ", allocationSize = 1, name = "PATOLOGIA_SINTOMA_SEQ")
+	@Column(name="ID",nullable=false)
 	private Integer id;
 	
 	@ManyToOne
@@ -30,6 +35,16 @@ public class PatologiaSintoma implements Serializable{
 	public PatologiaSintoma() {
 		super();
 	}
+	
+	
+
+	public PatologiaSintoma(Patologia patologia, Sintoma sintoma) {
+		super();
+		this.patologia = patologia;
+		this.sintoma = sintoma;
+	}
+
+
 
 	public PatologiaSintoma(Integer id, Patologia patologia, Sintoma sintoma) {
 		super();
