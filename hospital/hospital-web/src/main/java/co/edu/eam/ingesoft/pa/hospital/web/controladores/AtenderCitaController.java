@@ -101,7 +101,7 @@ public class AtenderCitaController implements Serializable {
 
 	private List<Cama> listaCamas;
 	
-	private List<OrdenExamen> listaExamenCar;
+	private static List<OrdenExamen> listaExamenCar;
 
 	private String motivo;
 
@@ -143,16 +143,23 @@ public class AtenderCitaController implements Serializable {
 		listarTipoCirugias = generalEJB.listarTipoCirugias();
 		listarQuirofanos = quirofanoEJB.listarQuirofano();
 		listaCamas = generalEJB.listarCama();
+		
+		
+		
 	}
 
 	public String AtenderCita(Cita doc) {
 		cita = doc;
+		cargarExamenes(doc.getPersona().getIdPersona());
 		return "/paginas/seguro/Medico/AtenderCita.xhtml?faces-redirect=true";
+		
 	}
 	
-	public void cargarExamenes(){
+	public void cargarExamenes(Long ced){
 		//Paciente persona = pacienteEJB.buscarPaciente(Long.parseLong(cedulaPaciente));
-		listaExamenCar = procedimientosEJB.listarExamenes(Long.parseLong(cedulaPaciente));
+		//Cita citaa = generalEJB.buscarIdCita(cita.getIdCita());
+	
+		listaExamenCar = procedimientosEJB.listarExamenes(ced);
 	
 	}
 

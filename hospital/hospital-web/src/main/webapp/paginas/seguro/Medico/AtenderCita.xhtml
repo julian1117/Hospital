@@ -258,16 +258,7 @@
 
 					<p:tab title="Gestionar Resultados Examenes">
 
-						<h:panelGrid id="panelBuscar" columns="3">
-							<h:outputLabel for="tftCedulaBuscar" id="lblCedulaBuscar"
-								value="#{msj['persona.cedula']}:"></h:outputLabel>
-							<h:inputText id="tftCedulaBuscar"
-								value="#{atenderCitaController.cedulaPaciente}"></h:inputText>
-
-							<p:commandButton id="btnBuscar" value="#{msj['persona.buscar']}"
-								action="#{atenderCitaController.cargarExamenes}" class="btn"
-								process="@this tftCedulaBuscar" update="panelBuscarp" />
-						</h:panelGrid>
+						
 
 						<h:panelGrid id="panelBuscarp" columns="1">
 							<p:accordionPanel>
