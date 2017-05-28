@@ -84,6 +84,8 @@ public class CitaControlador implements Serializable {
 		listTipoCita = citaEJB.listaTipoCita();
 		listaHorasAgenda = generalEJB.listaHora();
 		listaEspecializacion = generalEJB.listarEspecializacione();
+		listaMedicos = medicoEJB.listaMedicosEspe(1);
+		listaAgenda = citaEJB.listaAgendaMedico(listaMedicos.get(0).getIdPersona());
 	}
 
 	/**

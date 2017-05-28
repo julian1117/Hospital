@@ -77,59 +77,22 @@ public class MedicoEJB {
 		em.merge(medico);
 	}
 
+	/**
+	 * Permite crear una agenda a un medico
+	 * @param agenda
+	 */
 	public void crearAgendaMedico(Agenda agenda) {
 
 		String[] horaInicio = agenda.getHoraInicio().split(":");
 		String[] horaFinal = agenda.getHoraFinal().split(":");
 
-		List<Agenda> listaMedicoAgenda = em.createNativeQuery(
-				"SELECT * FROM MEDICOS M JOIN AGENDAS A ON M.PERSONAS_ID = A.MEDICOS_PERSONAS_ID WHERE M.PERSONAS_ID=?1",
-				Agenda.class).setParameter(1, agenda.getMedico().getIdPersona()).getResultList();
-
-		String dd = "";
-		if (agenda.getFecha().getDate() == 1 || agenda.getFecha().getDate() == 2 || agenda.getFecha().getDate() == 3
-				|| agenda.getFecha().getDate() == 4 || agenda.getFecha().getDate() == 5
-				|| agenda.getFecha().getDate() == 6 || agenda.getFecha().getDate() == 7
-				|| agenda.getFecha().getDate() == 8 || agenda.getFecha().getDate() == 9) {
-			dd = 0 + String.valueOf(agenda.getFecha().getDate());
-		} else {
-			dd = String.valueOf(agenda.getFecha().getDate());
-		}
-
-		String mm = "";
-		if (agenda.getFecha().getMonth() + 1 == 1 || agenda.getFecha().getMonth() + 1 == 2
-				|| agenda.getFecha().getMonth() + 1 == 3 || agenda.getFecha().getMonth() + 1 == 4
-				|| agenda.getFecha().getMonth() + 1 == 5 || agenda.getFecha().getMonth() + 1 == 6
-				|| agenda.getFecha().getMonth() + 1 == 7 || agenda.getFecha().getMonth() + 1 == 8
-				|| agenda.getFecha().getMonth() + 1 == 9) {
-			mm = 0 + String.valueOf(agenda.getFecha().getMonth() + 1);
-		} else {
-			mm = String.valueOf(agenda.getFecha().getMonth() + 1);
-		}
-
-		int yy = agenda.getFecha().getYear() + 1900;
-
-		String fechaE = String.valueOf(+yy + "-" + mm + "-" + dd);
-		boolean ban = true;
-		String msj = "";
+		List<Agenda> listaMedicoAgenda = em
+				.createNativeQuery(
+						"SELECT * FROM MEDICOS M JOIN AGENDAS A ON M.PERSONAS_ID = A.MEDICOS_PERSONAS_ID WHERE M.PERSONAS_ID=?1 AND A.FECHA=?2",
+						Agenda.class)
+				.setParameter(1, agenda.getMedico().getIdPersona()).setParameter(2, agenda.getFecha()).getResultList();
 		
-		for (int j = 0; j < listaMedicoAgenda.size(); j++) {
-
-			String fechaLista = String.valueOf(listaMedicoAgenda.get(j).getFecha());
-
-			System.out.println(
-					"(((((((((((((((((((((((((((((" + listaMedicoAgenda.size() + " -- " + fechaLista + " / " + fechaE);
-
-			if (fechaLista.equals(fechaE)) {
-				ban = true;
-			} else {
-				ban = false;
-			}
-
-		}
-
-		if (ban == false) {
-
+		if (listaMedicoAgenda.size() == 0) {
 			for (int i = 0; i < horaInicio.length; i++) {
 
 				int horaIni = Integer.parseInt(horaInicio[0]);
@@ -141,7 +104,6 @@ public class MedicoEJB {
 					throw new ExcepcionNegocio("Ingrese una hora valida");
 				}
 			}
-
 		} else {
 			throw new ExcepcionNegocio("Ya existe un registro para este medico con la fecha ingresada");
 		}

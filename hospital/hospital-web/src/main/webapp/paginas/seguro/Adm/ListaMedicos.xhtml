@@ -7,9 +7,6 @@
 
 	<ui:define name="cuerpo">
 		<h:form prependId="false">
-
-			<h:panelGrid>
-		
 		<p:panel header="Agenda de Citas" id="panelTab">
 				<p:dataTable id="panelTablas" value="#{agendaMedicoControler.listaMedicos}"
 					var="doc" border="1" class="table table-striped">
@@ -32,9 +29,6 @@
 					</p:column>
 				</p:dataTable>
 			</p:panel>
-		
-		</h:panelGrid>
-
 		</h:form>
 	</ui:define>
 </ui:composition>

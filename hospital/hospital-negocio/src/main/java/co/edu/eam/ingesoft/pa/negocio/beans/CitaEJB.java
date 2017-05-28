@@ -114,13 +114,13 @@ public class CitaEJB {
 	}
 
 	/**
-	 * Lista de agendas de un medico
-	 * 
+	 * Lista de agendas de un medico con la fechas
+	 * mayores a la actual
 	 * @param cedula
 	 * @return
 	 */
 	public List<Agenda> listaAgendaMedico(long cedula) {
-		return em.createNativeQuery("SELECT * FROM AGENDAS WHERE MEDICOS_PERSONAS_ID=?1", Agenda.class)
+		return em.createNativeQuery("SELECT * FROM AGENDAS A WHERE A.MEDICOS_PERSONAS_ID=?1 AND current_date<A.FECHA", Agenda.class)
 				.setParameter(1, cedula).getResultList();
 	}
 
