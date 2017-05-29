@@ -76,7 +76,7 @@ public class AtenderCitaController implements Serializable {
 	private TipoExamen tipoExamen;
 
 	private Examen examen;
-	
+
 	private String detalleExam;
 
 	private List<TipoExamen> listarExamen;
@@ -100,15 +100,15 @@ public class AtenderCitaController implements Serializable {
 	private Cama cama;
 
 	private List<Cama> listaCamas;
-	
+
 	private static List<OrdenExamen> listaExamenCar;
 
 	private String motivo;
 
 	private String detalleHospi;
-	
-	private OrdenExamen orden;
-	
+
+	private static OrdenExamen orden;
+
 	private String descripcionMedico;
 
 	@EJB
@@ -128,7 +128,7 @@ public class AtenderCitaController implements Serializable {
 
 	@EJB
 	private GeneralEJB generalEJB;
-	
+
 	@EJB
 	private PacienteEJB pacienteEJB;
 
@@ -143,24 +143,27 @@ public class AtenderCitaController implements Serializable {
 		listarTipoCirugias = generalEJB.listarTipoCirugias();
 		listarQuirofanos = quirofanoEJB.listarQuirofano();
 		listaCamas = generalEJB.listarCama();
-		
-		
-		
+
 	}
 
 	public String AtenderCita(Cita doc) {
 		cita = doc;
 		cargarExamenes(doc.getPersona().getIdPersona());
 		return "/paginas/seguro/Medico/AtenderCita.xhtml?faces-redirect=true";
-		
+
 	}
-	
-	public void cargarExamenes(Long ced){
-		//Paciente persona = pacienteEJB.buscarPaciente(Long.parseLong(cedulaPaciente));
-		//Cita citaa = generalEJB.buscarIdCita(cita.getIdCita());
-	
+
+	public void obtenerOrden(OrdenExamen or) {
+		orden = or;
+	}
+
+	public void cargarExamenes(Long ced) {
+		// Paciente persona =
+		// pacienteEJB.buscarPaciente(Long.parseLong(cedulaPaciente));
+		// Cita citaa = generalEJB.buscarIdCita(cita.getIdCita());
+
 		listaExamenCar = procedimientosEJB.listarExamenes(ced);
-	
+
 	}
 
 	public void descPatologia() {
@@ -169,31 +172,36 @@ public class AtenderCitaController implements Serializable {
 
 		textoDesPatologia = patolo.getDescripcion();
 	}
-	
-	
-	public void generarResultadoExamen(){
-		try {
-			OrdenExamen ordenExam = procedimientosEJB.buscarOrdenExamen(orden.getIdOrdenExamen());
+
+
+
+	public void generarResultadoExamen() {
+		
+		if (orden != null) {
+		OrdenExamen ordenExam = procedimientosEJB.buscarOrdenExamen(orden.getIdOrdenExamen());
+		
 			Date fecha = new Date();
 			ResultadoExamen resultado = new ResultadoExamen(detalleExam, fecha, ordenExam);
-			
-			procedimientosEJB.crearResultadoExamen(resultado);
+
+			procedimientosEJB.crearResultadoExamen(resultado);			
+			//quirofanoEJB.eliminarOrden(ordenExam);
 			Messages.addFlashGlobalInfo("Resultado generado!");
-		} catch (Exception e) {
-			Messages.addFlashGlobalError(e.getMessage());
+			
+		} else {
+			Messages.addFlashGlobalError("Por favor seleccione el examen a dar resultado");
 		}
+
 	}
 
 	public void generarSintoma() {
 		try {
 			Sintoma sin = generalEJB.buscarSintoma(sintoma.getIdSintoma());
 			Patologia pato = generalEJB.buscarPatologia(patologia.getIdPatologia());
-			
+
 			PatologiaSintoma ptSin = new PatologiaSintoma(pato, sin);
 			procedimientosEJB.crearPatologiaSintoma(ptSin);
-			
+
 			Messages.addFlashGlobalInfo("Sintoma generado!");
-			
 
 		} catch (Exception e) {
 			Messages.addFlashGlobalError(e.getMessage());
@@ -202,14 +210,13 @@ public class AtenderCitaController implements Serializable {
 
 	public void generarCausa() {
 		try {
-			
 
 			Causa ca = generalEJB.buscarCausa(causa.getIdCausasPa());
 			Patologia pato = generalEJB.buscarPatologia(patologia.getIdPatologia());
-			
+
 			CausaPatologia causaPa = new CausaPatologia(ca, pato);
 			procedimientosEJB.crearPatologiaCausa(causaPa);
-			
+
 			Messages.addFlashGlobalInfo("Causa generado!");
 
 		} catch (Exception e) {
@@ -222,10 +229,10 @@ public class AtenderCitaController implements Serializable {
 
 			Tratamiento trata = generalEJB.buscarTratamiento(tratamiento.getIdTratamiento());
 			Patologia pato = generalEJB.buscarPatologia(patologia.getIdPatologia());
-			
+
 			PatologiaTratamiento patoloTrata = new PatologiaTratamiento(pato, trata);
 			procedimientosEJB.crearPatologiaTratamiento(patoloTrata);
-			
+
 			Messages.addFlashGlobalInfo("Tratamiento generado!");
 		} catch (Exception e) {
 			Messages.addFlashGlobalError(e.getMessage());
@@ -236,10 +243,10 @@ public class AtenderCitaController implements Serializable {
 		try {
 			Patologia pato = generalEJB.buscarPatologia(patologia.getIdPatologia());
 			Cita citaa = generalEJB.buscarIdCita(cita.getIdCita());
-			
+
 			Diagnostico dig = new Diagnostico(citaa, pato, descripcionMedico);
 			procedimientosEJB.crearDiagnostico(dig);
-			
+
 			citaa.setEstado(true);
 			citaEJB.editarCita(citaa);
 			Messages.addFlashGlobalInfo("Diagnostico generado!");
@@ -383,8 +390,6 @@ public class AtenderCitaController implements Serializable {
 	public void setTratamiento(Tratamiento tratamiento) {
 		this.tratamiento = tratamiento;
 	}
-	
-	
 
 	public List<OrdenExamen> getListaExamenCar() {
 		return listaExamenCar;
@@ -485,8 +490,6 @@ public class AtenderCitaController implements Serializable {
 	public String getDescripcionFinal() {
 		return descripcionFinal;
 	}
-	
-	
 
 	public String getDescripcionMedico() {
 		return descripcionMedico;
@@ -643,8 +646,5 @@ public class AtenderCitaController implements Serializable {
 	public void setOrden(OrdenExamen orden) {
 		this.orden = orden;
 	}
-	
-	
-	
 
 }

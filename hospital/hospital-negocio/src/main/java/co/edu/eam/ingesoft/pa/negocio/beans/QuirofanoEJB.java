@@ -10,8 +10,10 @@ import javax.persistence.PersistenceContext;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cama;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cita;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenExamen;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenHospitalizacion;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenHospitalizacionPK;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Paciente;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Quirofano;
 import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
@@ -67,8 +69,13 @@ public class QuirofanoEJB {
 		return em.createNamedQuery(Quirofano.LISTAR_QUIROFANO).getResultList();
 	}
 	
-	public List<OrdenHospitalizacion> listarCamas(){
-		return em.createNativeQuery("SELECT * FROM PERSONAS pers inner join PACIENTES pa on pers.PERSONAS_ID = pa.PERSONAS_ID inner join CITAS ci on ci.PACIENTES_PERSONA_ID = pa.PERSONAS_ID inner join ORDEN_HOSPITALIZACION orho on orho.CITAS_ID = ci.ID inner join HOSPITALIZACIONES hos on hos.ID_HOSPITALIZACION= orho.HOSPITALIZACIONES_ID RIGHT join CAMAS ca on ca.ID= hos.CAMAS_ID",OrdenHospitalizacion.class).getResultList();
+	public List<Cama> listarCamas(){
+		return em.createNamedQuery(Cama.LISTAR_CAMA).getResultList();
+	}
+	
+	public List<Paciente> verCama(Integer idcama){
+			return em.createNativeQuery("SELECT * FROM PERSONAS pers inner join PACIENTES pa on pers.PERSONAS_ID = pa.PERSONAS_ID inner join CITAS ci on ci.PACIENTES_PERSONA_ID = pa.PERSONAS_ID inner join ORDEN_HOSPITALIZACION orho on orho.CITAS_ID = ci.ID inner join HOSPITALIZACIONES hos on hos.ID_HOSPITALIZACION= orho.HOSPITALIZACIONES_ID RIGHT join CAMAS ca on ca.ID= hos.CAMAS_ID  where ca.ID=?1",Paciente.class).setParameter(1, idcama).getResultList();
+
 	}
 	
 
@@ -103,6 +110,10 @@ public class QuirofanoEJB {
 	
 	public List<Cirugia> listarQuiromanos(){
 		return em.createNativeQuery("SELECT * FROM QUIROFANOS",Cirugia.class).getResultList();
+	}
+	
+	public void eliminarOrden(OrdenExamen or){
+		em.remove(or);
 	}
 	
 	

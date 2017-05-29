@@ -280,9 +280,12 @@
 										</p:column>
 
 										<p:column headerText="Opciones">
-											<p:commandButton action="#" styleClass="ui-priority-primary"
-												process="@this " value="Dar Resultado" update="" />
+											<p:commandButton action="#{atenderCitaController.obtenerOrden(doc)}"
+											 styleClass="ui-priority-primary"
+												process="@this panelTablas" value="Dar Resultado" update="panelTablas" />
 										</p:column>
+										
+						
 									</p:dataTable>
 
 								
@@ -300,7 +303,10 @@
 										<p:commandButton id="btnGenerarRe"
 											value="#{msj['procedimiento.resu']}"
 											action="#{atenderCitaController.generarResultadoExamen}"
-											class="btn" process="@this tftdetalleExam" />
+											class="btn" process="@this tftdetalleExam"  update="panelTablas"/>
+											
+											
+											
 
 									</h:panelGrid>
 							</p:tab>

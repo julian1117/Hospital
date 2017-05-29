@@ -18,6 +18,7 @@ import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cama;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cita;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenHospitalizacion;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Paciente;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Quirofano;
 import co.edu.eam.ingesoft.pa.negocio.beans.QuirofanoEJB;
 
@@ -51,19 +52,39 @@ public class QuirofanoControler implements Serializable {
 	
 	private String estadoQuirofano;
 	
-	private List<OrdenHospitalizacion> listarCamas;
+	private List<Cama> listarCamas;
 
+	private List<Paciente> verCama;
+	
+	private static  Cama ocupacionPor;
+	
 	@EJB
 	private QuirofanoEJB quirofanoEJB;
 	
 	
 	
 
-	public List<OrdenHospitalizacion> getListarCamas() {
+	public static Cama getOcupacionPor() {
+		return ocupacionPor;
+	}
+
+	public static void setOcupacionPor(Cama ocupacionPor) {
+		QuirofanoControler.ocupacionPor = ocupacionPor;
+	}
+
+	public List<Paciente> getVerCama() {
+		return verCama;
+	}
+
+	public void setVerCama(List<Paciente> verCama) {
+		this.verCama = verCama;
+	}
+
+	public List<Cama> getListarCamas() {
 		return listarCamas;
 	}
 
-	public void setListarCamas(List<OrdenHospitalizacion> listarCamas) {
+	public void setListarCamas(List<Cama> listarCamas) {
 		this.listarCamas = listarCamas;
 	}
 
@@ -185,6 +206,19 @@ public class QuirofanoControler implements Serializable {
 		listarCamas = quirofanoEJB.listarCamas();
 		}
 	//}
+	
+	public void verOcupacion(Cama ca){
+		ocupacionPor = ca;
+		//Cama camaa = quirofanoEJB.buscarCama(ocupacionPor.getIdCama());
+		//Messages.addFlashGlobalInfo("Registro Creado Con Exito!!"+camaa);
+	    verCama = quirofanoEJB.verCama(ca.getIdCama());
+	  
+	    Messages.addFlashGlobalInfo(verCama.get(0).getNombre());
+			
+		
+	    
+		//verCama.get(0).getIdCita().getPersona().getNombre();
+	}
 	
 	
 	public void crearQuirofano() {
