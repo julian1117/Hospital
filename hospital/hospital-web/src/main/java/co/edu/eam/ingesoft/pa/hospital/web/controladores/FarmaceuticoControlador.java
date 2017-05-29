@@ -12,6 +12,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Messages;
@@ -28,28 +29,29 @@ import co.edu.eam.ingesoft.pa.negocio.beans.PersonaEJB;
 @ViewScoped
 public class FarmaceuticoControlador implements Serializable{
 	
-	 @Pattern(regexp="[0-9]*",message="solo numeros")
-		 @Length(min=4,max=10,message="longitud entre 5 y 10")
+	 @Pattern(regexp="[0-9]*",message="El numero de  identificacion solo puede llevar caracteres numericos")
+		 @Length(min=4,max=10,message="Cedula - longitud entre 4 y 10")
 		private String idPersona;
 
-		 @Pattern(regexp="[A-Za-z ]*",message="solo Letras")
-		 @Length(min=4,max=10,message="longitud entre 5 y 50")
+		 @Pattern(regexp="[A-Za-z ]*",message="nombre solo permites caracteres alfabetico")
+		 @Length(min=3,max=20,message="Nombre - longitud entre 3 y 20")
 		private String nombre;
 
-		 @Pattern(regexp="[A-Za-z ]*",message="solo Letras")
-		 @Length(min=4,max=10,message="longitud entre 5 y 50")
+		 @Pattern(regexp="[A-Za-z ]*",message="Apellido solo permites caracteres alfabetico")
+		 @Length(min=3,max=50,message="Apellido - longitud entre 5 y 50")
 		private String apellido;
 
 		private Date fechaNacimiento;
 
-		 @Pattern(regexp="[0-9]*",message="solo numeros")
-		 @Length(min=10,max=10,message="longitud entre 10 y 15")
+		 @Pattern(regexp="[0-9]*",message="telefono solo puede llevar caracteres numericos")
+		 @Length(min=7,max=10,message="longitud entre 7 y 10")
 		private String telefono;
 
 		private String direccion;
 
 		private String tipoUsu;
 
+		@Email
 		private String email;
 
 		private String sexo;
