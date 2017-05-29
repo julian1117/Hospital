@@ -26,7 +26,14 @@ public class PersonaEJB {
 		Persona buscar = buscarPersona(persona.getIdPersona());
 		
 		if(buscar == null){
-			em.persist(persona);
+		//	List<Persona> listaEmail = em.createNativeQuery("SELECT * FROM PERSONAS PER WHERE PER.EMAIL=?1",Persona.class).setParameter(1, buscar.getEmail()).getResultList();
+			//if(listaEmail.size()==0){
+				em.persist(persona);
+			//}else{
+				//throw new ExcepcionNegocio("El correo ingresado ya se encuentra en el sistema");
+
+			//}
+			
 		}else{
 			throw new ExcepcionNegocio("La persona ya se encuentra en el sistema");
 		}
