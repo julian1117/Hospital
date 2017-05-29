@@ -34,6 +34,7 @@ import co.edu.eam.ingesoft.avanzada.persistencia.entidades.ResultadoExamen;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Sintoma;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoCirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoExamen;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoMedicamento;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Tratamiento;
 import co.edu.eam.ingesoft.pa.negocio.beans.CitaEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.GeneralEJB;
@@ -110,6 +111,12 @@ public class AtenderCitaController implements Serializable {
 	private static OrdenExamen orden;
 
 	private String descripcionMedico;
+	
+	private List<TipoMedicamento> listaMed;
+	
+	private TipoMedicamento tipoMedicamento;
+	
+	
 
 	@EJB
 	private ProcedmientosEJB procedimientosEJB;
@@ -131,6 +138,8 @@ public class AtenderCitaController implements Serializable {
 
 	@EJB
 	private PacienteEJB pacienteEJB;
+	
+	
 
 	@PostConstruct
 	public void inicializar() {
@@ -143,6 +152,7 @@ public class AtenderCitaController implements Serializable {
 		listarTipoCirugias = generalEJB.listarTipoCirugias();
 		listarQuirofanos = quirofanoEJB.listarQuirofano();
 		listaCamas = generalEJB.listarCama();
+		//listaMed = generalEJB.listaMedicamento();
 
 	}
 
@@ -507,22 +517,6 @@ public class AtenderCitaController implements Serializable {
 		this.usuarioSesion = usuarioSesion;
 	}
 
-	public GestionMedicoEJB getMedicoGestionEJB() {
-		return medicoGestionEJB;
-	}
-
-	public void setMedicoGestionEJB(GestionMedicoEJB medicoGestionEJB) {
-		this.medicoGestionEJB = medicoGestionEJB;
-	}
-
-	public CitaEJB getCitaEJB() {
-		return citaEJB;
-	}
-
-	public void setCitaEJB(CitaEJB citaEJB) {
-		this.citaEJB = citaEJB;
-	}
-
 	public void setDescripcionFinal(String descripcionFinal) {
 		this.descripcionFinal = descripcionFinal;
 	}
@@ -559,21 +553,6 @@ public class AtenderCitaController implements Serializable {
 		this.quirofano = quirofano;
 	}
 
-	public GeneralEJB getGeneralEJB() {
-		return generalEJB;
-	}
-
-	public void setGeneralEJB(GeneralEJB generalEJB) {
-		this.generalEJB = generalEJB;
-	}
-
-	public ProcedmientosEJB getProcedimientosEJB() {
-		return procedimientosEJB;
-	}
-
-	public void setProcedimientosEJB(ProcedmientosEJB procedimientosEJB) {
-		this.procedimientosEJB = procedimientosEJB;
-	}
 
 	public String getMotivo() {
 		return motivo;
@@ -607,14 +586,6 @@ public class AtenderCitaController implements Serializable {
 		this.listaCamas = listaCamas;
 	}
 
-	public QuirofanoEJB getQuirofanoEJB() {
-		return quirofanoEJB;
-	}
-
-	public void setQuirofanoEJB(QuirofanoEJB quirofanoEJB) {
-		this.quirofanoEJB = quirofanoEJB;
-	}
-
 	public List<Quirofano> getListarQuirofanos() {
 		return listarQuirofanos;
 	}
@@ -631,14 +602,6 @@ public class AtenderCitaController implements Serializable {
 		this.detalleExam = detalleExam;
 	}
 
-	public PacienteEJB getPacienteEJB() {
-		return pacienteEJB;
-	}
-
-	public void setPacienteEJB(PacienteEJB pacienteEJB) {
-		this.pacienteEJB = pacienteEJB;
-	}
-
 	public OrdenExamen getOrden() {
 		return orden;
 	}
@@ -646,5 +609,23 @@ public class AtenderCitaController implements Serializable {
 	public void setOrden(OrdenExamen orden) {
 		this.orden = orden;
 	}
+
+	public List<TipoMedicamento> getListaMed() {
+		return listaMed;
+	}
+
+	public void setListaMed(List<TipoMedicamento> listaMed) {
+		this.listaMed = listaMed;
+	}
+
+	public TipoMedicamento getTipoMedicamento() {
+		return tipoMedicamento;
+	}
+
+	public void setTipoMedicamento(TipoMedicamento tipoMedicamento) {
+		this.tipoMedicamento = tipoMedicamento;
+	}
+	
+	
 
 }

@@ -24,6 +24,7 @@ import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Roll;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Sintoma;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoCirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoExamen;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoMedicamento;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Tratamiento;
 
 @Stateless
@@ -265,6 +266,23 @@ public class GeneralEJB {
 	 */
 	public Consultorio buscarConsultorio(Integer id){
 		return em.find(Consultorio.class, id);
+	}
+	
+	/**
+	 * lista medicamentos
+	 * @return lista de medicamentos
+	 */
+	public List<TipoMedicamento> listaMedicamento (){
+		return em.createNamedQuery(TipoMedicamento.LISTA_MEDICAMENTOS).getResultList();
+	}
+	
+	/**
+	 * Busca un tipo de medicamento
+	 * @param id del medicamento
+	 * @return medicamento buscado
+	 */
+	public TipoMedicamento buscarMedicamento(Integer id){
+		return em.find(TipoMedicamento.class,id);
 	}
 	
 	

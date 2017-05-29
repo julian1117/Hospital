@@ -112,8 +112,20 @@
 
 
 							</p:tab>
+							<p:tab title="ORDEN PARA MEDICAMENTOS">
+								<h:outputLabel for="cbMedicamento" id="lbMedicamento"
+									value="Tipo medicamento" />
+								<h:selectOneMenu id="cbMedicamento"
+									value="#{atenderCitaController.tipoMedicamento}"
+									converter="medConverter">
+									<f:selectItems value="#{atenderCitaController.listaMed}"
+										var="doc" itemValue="#{doc}"
+										itemLabel="#{doc.tipoMedicamento}" />
+								</h:selectOneMenu>
+								<p:tab/>
 						</p:accordionPanel>
 					</p:tab>
+
 
 					<p:tab title="Procedimeintos">
 
@@ -258,7 +270,7 @@
 
 					<p:tab title="Gestionar Resultados Examenes">
 
-						
+
 
 						<h:panelGrid id="panelBuscarp" columns="1">
 							<p:accordionPanel>
@@ -280,17 +292,18 @@
 										</p:column>
 
 										<p:column headerText="Opciones">
-											<p:commandButton action="#{atenderCitaController.obtenerOrden(doc)}"
-											 styleClass="ui-priority-primary"
-												process="@this panelTablas" value="Dar Resultado" update="panelTablas" />
+											<p:commandButton
+												action="#{atenderCitaController.obtenerOrden(doc)}"
+												styleClass="ui-priority-primary" process="@this panelTablas"
+												value="Dar Resultado" update="panelTablas" />
 										</p:column>
-										
-						
+
+
 									</p:dataTable>
 
-								
 
-						
+
+
 									<h:panelGrid columns="2">
 										<h:outputLabel for="tftdetalleExam" id="lbdetalleExam"
 											value="#{msj['procedimiento.detalleExam']}"></h:outputLabel>
@@ -304,12 +317,12 @@
 											value="#{msj['procedimiento.resu']}"
 											action="#{atenderCitaController.generarResultadoExamen}"
 											class="btn" process="@this tftdetalleExam" />
-											
-											
-											
+
+
+
 
 									</h:panelGrid>
-							</p:tab>
+								</p:tab>
 							</p:accordionPanel>
 						</h:panelGrid>
 					</p:tab>
