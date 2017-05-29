@@ -152,7 +152,7 @@ public class AtenderCitaController implements Serializable {
 		listarTipoCirugias = generalEJB.listarTipoCirugias();
 		listarQuirofanos = quirofanoEJB.listarQuirofano();
 		listaCamas = generalEJB.listarCama();
-		//listaMed = generalEJB.listaMedicamento();
+		listaMed = generalEJB.listaMedicamento();
 
 	}
 
