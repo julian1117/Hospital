@@ -289,8 +289,8 @@
 										</p:column>
 
 										<p:column headerText="Opciones">
-											<p:commandButton action="#" 
-												process="@this tab2" value="Dar Resultado" update="" />
+											<p:commandButton action="#{}" 
+												process="@this " value="Dar Resultado" update="" />
 										</p:column>
 									</p:dataTable>
 
@@ -309,7 +309,7 @@
 										<p:commandButton id="btnGenerarRe"
 											value="#{msj['procedimiento.resu']}"
 											action="#{atenderCitaController.generarResultadoExamen}"
-											class="btn" process="@this tftdetalleExam" />
+											 process="@this tftdetalleExam" />
 
 									</h:panelGrid>
 								</p:tab>
