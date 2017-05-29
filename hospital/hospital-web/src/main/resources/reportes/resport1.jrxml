@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-05-28T21:51:13 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="resport1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="44d8d5e3-4c89-4e0d-907d-da12e3fb818e">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Hospital.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<queryString>
+		<![CDATA[SELECT ORD.CITAS_ID ,PAC.PERSONAS_ID,PER.NOMBRE,PER.APELLIDO FROM PACIENTES PAC JOIN CITAS C 
+ON PAC.PERSONAS_ID= C.PACIENTES_PERSONA_ID JOIN ORDEN_CIRUGIAS ORD
+ON ORD.CITAS_ID = C.ID JOIN CIRUGIAS CIR 
+ON ORD.CIRUGIAS_ID_CIRUGIA = CIR.ID_CIRUGIA JOIN TIPO_CIRUGIAS TC
+ON CIR.TIPO_CIRUGIAS_ID = TC.ID
+JOIN PERSONAS PER ON PAC.PERSONAS_ID= PER.PERSONAS_ID
+MINUS
+SELECT OH.CITAS_ID , PAC.PERSONAS_ID,PER.NOMBRE,PER.APELLIDO FROM PACIENTES PAC JOIN CITAS C 
+ON PAC.PERSONAS_ID= C.PACIENTES_PERSONA_ID JOIN ORDEN_HOSPITALIZACION OH
+ON OH.CITAS_ID = C.ID JOIN HOSPITALIZACIONES H
+ON OH.HOSPITALIZACIONES_ID = H.ID_HOSPITALIZACION
+JOIN PERSONAS PER ON PAC.PERSONAS_ID= PER.PERSONAS_ID]]>
+	</queryString>
+	<field name="CITAS_ID" class="java.math.BigDecimal"/>
+	<field name="PERSONAS_ID" class="java.math.BigDecimal"/>
+	<field name="NOMBRE" class="java.lang.String"/>
+	<field name="APELLIDO" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="63" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="0" width="100" height="30" uuid="ea12d83f-667a-4e92-8843-dc43cf5e1278"/>
+				<text><![CDATA[CITAS_ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="4" width="100" height="30" uuid="d9bc185d-5072-4d34-b562-6c3617af2f62"/>
+				<text><![CDATA[PERSONAS_ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="0" width="100" height="30" uuid="e728896b-7a9e-4783-9647-49ab59e1fbf5"/>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="20" y="39" width="100" height="30" uuid="bd7b5409-22a4-4138-a8fa-59fa399e4824"/>
+				<textFieldExpression><![CDATA[$F{CITAS_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="40" width="100" height="30" uuid="99133ac3-105c-4911-8d3a-1c640333c076"/>
+				<textFieldExpression><![CDATA[$F{PERSONAS_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="39" width="100" height="30" uuid="46547524-f3ee-4d38-a32e-3ee57f70b0b8"/>
+				<textFieldExpression><![CDATA[$F{NOMBRE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

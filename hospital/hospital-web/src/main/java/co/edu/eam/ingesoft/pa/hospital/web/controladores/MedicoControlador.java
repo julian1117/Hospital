@@ -29,21 +29,21 @@ import co.edu.eam.ingesoft.pa.negocio.beans.PersonaEJB;
 public class MedicoControlador implements Serializable {
 
 	@Pattern(regexp = "[0-9]*", message = "El numero de  identificacion solo puede llevar caracteres numericos")
-	@Length(min = 4, max = 10, message = "longitud entre 5 y 10")
+	@Length(min = 4, max = 10, message = "Cedula - longitud entre 5 y 10")
 	private String idPersona;
 	
     @Pattern(regexp = "[A-Za-z ]*", message = "nomre solo permites caracteres alfabetico")
-	@Length(min = 4, max = 10, message = "longitud entre 5 y 50")
+	@Length(min = 5, max = 50, message = "Nombre - longitud entre 5 y 50")
 	private String nombre;
 	
 	@Pattern(regexp="[A-Za-z ]*",message="solo Letras")
-	@Length(min=4,max=10,message="longitud entre 5 y 50")
+	@Length(min=5,max=50,message="Apellido - longitud entre 5 y 50")
 	private String apellido;
 	
 	private Date fechaNacimiento;
 	
 	@Pattern(regexp="[0-9]*",message="solo numeros")
-	@Length(min=10,max=10,message="longitud entre 10 y 15")
+	@Length(min=7,max=10,message="Telefono - longitud entre 7 y 10")
 	private String telefono;
 	
 	

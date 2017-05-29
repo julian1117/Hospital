@@ -258,7 +258,7 @@
 
 					<p:tab title="Gestionar Resultados Examenes">
 
-						
+
 
 						<h:panelGrid id="panelBuscarp" columns="1">
 							<p:accordionPanel>
@@ -280,20 +280,13 @@
 										</p:column>
 
 										<p:column headerText="Opciones">
-											<p:commandButton action="#{}" 
-												process="@this " value="Dar Resultado" update="" />
+											<p:commandButton action="#{}" process="@this "
+												value="Dar Resultado" update="" />
 										</p:column>
 									</p:dataTable>
-
-<<<<<<< HEAD
 								</p:tab>
-							
-								<p:tab title="Dar Detalle" id="tab2">
-=======
-								
 
-						
->>>>>>> branch 'master' of https://github.com/julian1117/Hospital.git
+								<p:tab title="Dar Detalle">
 									<h:panelGrid columns="2">
 										<h:outputLabel for="tftdetalleExam" id="lbdetalleExam"
 											value="#{msj['procedimiento.detalleExam']}"></h:outputLabel>
@@ -306,10 +299,10 @@
 										<p:commandButton id="btnGenerarRe"
 											value="#{msj['procedimiento.resu']}"
 											action="#{atenderCitaController.generarResultadoExamen}"
-											 process="@this tftdetalleExam" />
+											process="@this tftdetalleExam" />
 
 									</h:panelGrid>
-							</p:tab>
+								</p:tab>
 							</p:accordionPanel>
 						</h:panelGrid>
 					</p:tab>
