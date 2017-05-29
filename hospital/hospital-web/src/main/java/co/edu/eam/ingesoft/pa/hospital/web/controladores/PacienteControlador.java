@@ -39,11 +39,11 @@ public class PacienteControlador implements Serializable {
 	private String idPersona;
 
 	@Pattern(regexp = "[A-Za-z ]*", message = "nombre solo permites caracteres alfabetico")
-	@Length(min = 5, max = 50, message = "longitud entre 5 y 50")
+	@Length(min = 5, max = 50, message = "Nombre - longitud entre 5 y 50")
 	private String nombre;
 
-	@Pattern(regexp = "[A-Za-z ]*", message = "solo Letras")
-	@Length(min = 5, max = 50, message = "longitud entre 5 y 50")
+	@Pattern(regexp = "[A-Za-z ]*", message = "Apellido solo permites caracteres alfabetico")
+	@Length(min = 5, max = 50, message = "Apellido - longitud entre 5 y 50")
 	private String apellido;
 
 	private Date fechaNacimiento;
