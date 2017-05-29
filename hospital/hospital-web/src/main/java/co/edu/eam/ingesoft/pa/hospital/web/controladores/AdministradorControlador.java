@@ -240,7 +240,10 @@ public class AdministradorControlador implements Serializable {
 //		<	fechaNacimiento = new SimpleDateFormat("dd-MM-yyyy").parse(fechastr);
 			Roll roll = generalEJB.buscarRol(1);
 			Persona persona = new Persona(Long.parseLong(idPersona), nombre, apellido, fechaNacimiento, telefono, direccion, roll, email, sexo, ciu);
-			personaEJB.crearPersona(persona);
+			Persona buscarEmail = personaEJB.buscarPersona(Long.parseLong(idPersona));
+			
+				personaEJB.crearPersona(persona);
+			
 			Messages.addFlashGlobalInfo("Registro Creado Con Exito!!");
 			idPersona = null;
 			nombre = "";
