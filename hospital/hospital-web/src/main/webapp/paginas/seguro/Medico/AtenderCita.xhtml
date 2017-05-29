@@ -289,16 +289,14 @@
 										</p:column>
 
 										<p:column headerText="Opciones">
-											<p:commandButton action="#" styleClass="ui-priority-primary"
-												process="@this " value="Dar Resultado" update="" />
+											<p:commandButton action="#" 
+												process="@this tab2" value="Dar Resultado" update="" />
 										</p:column>
 									</p:dataTable>
 
 								</p:tab>
-							</p:accordionPanel>
-
-							<p:accordionPanel>
-								<p:tab title="Dar Detalle">
+							
+								<p:tab title="Dar Detalle" id="tab2">
 									<h:panelGrid columns="2">
 										<h:outputLabel for="tftdetalleExam" id="lbdetalleExam"
 											value="#{msj['procedimiento.detalleExam']}"></h:outputLabel>
