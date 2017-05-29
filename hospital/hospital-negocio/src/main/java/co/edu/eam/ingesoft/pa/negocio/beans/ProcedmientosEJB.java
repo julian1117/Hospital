@@ -135,7 +135,8 @@ public class ProcedmientosEJB {
 	}
 	
 	public List<OrdenExamen> listarExamenes(Long cedula){
-		return em.createNativeQuery("SELECT * FROM ORDEN_EXAMENES oe inner join CITAS ci on ci.ID= oe.CITAS_ID inner join PACIENTES pa on ci.PACIENTES_PERSONA_ID= pa.PERSONAS_ID inner join PERSONAS per on per.PERSONAS_ID= pa.PERSONAS_ID where pa.PERSONAS_ID=?1",
+		return em.createNativeQuery(
+				"SELECT * FROM ORDEN_EXAMENES oe inner join CITAS ci on ci.ID= oe.CITAS_ID inner join PACIENTES pa on ci.PACIENTES_PERSONA_ID= pa.PERSONAS_ID inner join PERSONAS per on per.PERSONAS_ID= pa.PERSONAS_ID where pa.PERSONAS_ID=?1",
 				OrdenExamen.class).setParameter(1, cedula).getResultList();
 	}
 	
