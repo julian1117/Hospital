@@ -19,6 +19,7 @@ import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Examen;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.HoraCita;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenCirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Hospitalizacion;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.ItemMedicamento;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Patologia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Roll;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Sintoma;
@@ -283,6 +284,10 @@ public class GeneralEJB {
 	 */
 	public TipoMedicamento buscarMedicamento(Integer id){
 		return em.find(TipoMedicamento.class,id);
+	}
+	
+	public void agregarMed(ItemMedicamento im){
+		em.persist(im);
 	}
 	
 	

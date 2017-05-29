@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="TIPO_MEDICAMENTO")
-@NamedQuery(name=TipoMedicamento.LISTA_MEDICAMENTOS,query="SELECT T FROM TipoMedicamento T")
+@NamedQuery(name=TipoMedicamento.LISTA_MEDICAMENTOS,query="SELECT t FROM TipoMedicamento t")
 public class TipoMedicamento implements Serializable{
 	
 	public static final String LISTA_MEDICAMENTOS = "TipoMedicamento.tipoMed";
@@ -23,7 +23,7 @@ public class TipoMedicamento implements Serializable{
 	private String tipoMedicamento;
 	
 	
-	@Column(name="presentacion_med")
+	@Column(name="presentacion")
 	private String presentacion;
 	
 

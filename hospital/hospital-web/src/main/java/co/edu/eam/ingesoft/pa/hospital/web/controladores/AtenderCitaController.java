@@ -22,6 +22,7 @@ import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cita;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Diagnostico;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Examen;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Hospitalizacion;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.ItemMedicamento;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenCirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenExamen;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenHospitalizacion;
@@ -116,7 +117,9 @@ public class AtenderCitaController implements Serializable {
 	
 	private TipoMedicamento tipoMedicamento;
 	
+	private String cantidad;
 	
+	private String formula;
 
 	@EJB
 	private ProcedmientosEJB procedimientosEJB;
@@ -352,6 +355,24 @@ public class AtenderCitaController implements Serializable {
 
 		}
 	}
+	
+	
+	public void agregarMedicamento(){
+		
+		ItemMedicamento tipoM = new ItemMedicamento();
+		tipoM.setIdCita(cita);
+		tipoM.setCantidadResetada(Integer.parseInt(cantidad));
+		tipoM.setEstado(true);
+		tipoM.setFormula(formula);
+		tipoM.setTipoMedicamento(tipoMedicamento);
+		
+		generalEJB.agregarMed(tipoM);
+		
+		Messages.addFlashGlobalInfo("Medicamento agregado con exito");
+
+		
+	}
+	
 
 	public String getCedulaPaciente() {
 		return cedulaPaciente;
@@ -624,6 +645,22 @@ public class AtenderCitaController implements Serializable {
 
 	public void setTipoMedicamento(TipoMedicamento tipoMedicamento) {
 		this.tipoMedicamento = tipoMedicamento;
+	}
+
+	public String getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(String cantidad) {
+		this.cantidad = cantidad;
+	}
+
+	public String getFormula() {
+		return formula;
+	}
+
+	public void setFormula(String formula) {
+		this.formula = formula;
 	}
 	
 	

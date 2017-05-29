@@ -113,15 +113,37 @@
 
 							</p:tab>
 							<p:tab title="ORDEN PARA MEDICAMENTOS">
-								<h:outputLabel for="cbMedicamento" id="lbMedicamento"
-									value="Tipo medicamento" />
-								<h:selectOneMenu id="cbMedicamento"
-									value="#{atenderCitaController.tipoMedicamento}"
-									converter="medConverter">
-									<f:selectItems value="#{atenderCitaController.listaMed}"
-										var="doc" itemValue="#{doc}"
-										itemLabel="#{doc.tipoMedicamento}" />
-								</h:selectOneMenu>
+								<p:panel id="datosMed" border="0">
+									<h:panelGrid columns="2">
+
+
+										<h:outputLabel for="cantidadRes" id="lbCantidaRes"
+											value="Cantidad a mandar" />
+										<p:inputText id="cantidadRes"
+											value="#{atenderCitaController.cantidad}" />
+
+
+										<h:outputLabel for="cbMedicamento" id="lbMedicamento"
+											value="Tipo medicamento" />
+										<h:selectOneMenu id="cbMedicamento"
+											value="#{atenderCitaController.tipoMedicamento}"
+											converter="medConverter">
+											<f:selectItems value="#{atenderCitaController.listaMed}"
+												var="doc" itemValue="#{doc}"
+												itemLabel="#{doc.tipoMedicamento}" />
+										</h:selectOneMenu>
+
+										<h:outputLabel for="formulaMed" id="lbformula" value="Formula" />
+										<p:inputText id="formulaMed"
+											value="#{atenderCitaController.formula}" />
+
+										<p:commandButton id="btnGuardarMed"
+											value="Agregar Medicamento"
+											action="#{atenderCitaController.agregarMedicamento}"
+											process="@this datosMed" update="growl" icon="ui-icon-disk" />
+
+									</p:panelGrid>
+								</p:panel>
 							</p:tab>
 						</p:accordionPanel>
 					</p:tab>
