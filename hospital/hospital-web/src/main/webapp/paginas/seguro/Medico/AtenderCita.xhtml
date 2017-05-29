@@ -258,7 +258,7 @@
 
 					<p:tab title="Gestionar Resultados Examenes">
 
-
+						
 
 						<h:panelGrid id="panelBuscarp" columns="1">
 							<p:accordionPanel>
@@ -280,13 +280,17 @@
 										</p:column>
 
 										<p:column headerText="Opciones">
-											<p:commandButton action="#{}" process="@this "
-												value="Dar Resultado" update="" />
+											<p:commandButton action="#{atenderCitaController.obtenerOrden(doc)}"
+											 styleClass="ui-priority-primary"
+												process="@this panelTablas" value="Dar Resultado" update="panelTablas" />
 										</p:column>
+										
+						
 									</p:dataTable>
-								</p:tab>
 
-								<p:tab title="Dar Detalle">
+								
+
+						
 									<h:panelGrid columns="2">
 										<h:outputLabel for="tftdetalleExam" id="lbdetalleExam"
 											value="#{msj['procedimiento.detalleExam']}"></h:outputLabel>
@@ -299,10 +303,13 @@
 										<p:commandButton id="btnGenerarRe"
 											value="#{msj['procedimiento.resu']}"
 											action="#{atenderCitaController.generarResultadoExamen}"
-											process="@this tftdetalleExam" />
+											class="btn" process="@this tftdetalleExam" />
+											
+											
+											
 
 									</h:panelGrid>
-								</p:tab>
+							</p:tab>
 							</p:accordionPanel>
 						</h:panelGrid>
 					</p:tab>

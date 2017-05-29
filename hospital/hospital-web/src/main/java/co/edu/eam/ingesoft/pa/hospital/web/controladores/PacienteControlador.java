@@ -38,7 +38,7 @@ public class PacienteControlador implements Serializable {
 	@Length(min = 4, max = 10, message = "longitud entre 5 y 10")
 	private String idPersona;
 
-	@Pattern(regexp = "[A-Za-z ]*", message = "nomre solo permites caracteres alfabetico")
+	@Pattern(regexp = "[A-Za-z ]*", message = "nombre solo permites caracteres alfabetico")
 	@Length(min = 5, max = 50, message = "longitud entre 5 y 50")
 	private String nombre;
 
@@ -48,8 +48,8 @@ public class PacienteControlador implements Serializable {
 
 	private Date fechaNacimiento;
 
-	@Pattern(regexp = "[0-9]*", message = "solo numeros")
-	@Length(min = 10, max = 10, message = "longitud entre 10 y 15")
+	@Pattern(regexp = "[0-9]*", message = "telefono solo puede llevar caracteres numericos")
+	@Length(min = 7, max = 10, message = "telefono - longitud entre 7 y 10")
 	private String telefono;
 
 	private String direccion;

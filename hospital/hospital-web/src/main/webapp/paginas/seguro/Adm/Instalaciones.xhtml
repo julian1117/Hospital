@@ -181,24 +181,26 @@
 									value="#{quirofanoControler.listarCamas}" var="ca" border="1"
 									class="table table-striped">
 									<p:column headerText="Numero">
-										<h:outputLabel value="#{ca.idHospitalizacion.camaId.idCama}" />
+										<h:outputLabel value="#{ca.idCama}" />
 										<!-- esto hay que organizarlo-->
 									</p:column>
 
 									<p:column headerText="Disponibilidad">
 										<h:outputLabel value="No Disponible"
-											rendered="#{ca.idHospitalizacion.camaId.disponibilidad == false}" />
+											rendered="#{ca.disponibilidad == false}" />
 										<h:outputLabel value="Disponible"
-											rendered="#{ca.idHospitalizacion.camaId.disponibilidad == true}" />
+											rendered="#{ca.disponibilidad == true}" />
 									</p:column>
 
-									<p:column headerText="Persona">
-										<h:outputLabel value="#{ca.idCita.persona.nombre}" />
-										<h:outputLabel value="Ninguna"
-											rendered="#{doc.detalleOcupacion == null}" />
-									</p:column>
+									<p:column headerText="Ver">
+											<p:commandButton action="#{quirofanoControler.verOcupacion(ca)}"
+											 styleClass="ui-priority-primary"
+												process="@this panelTablasCamas" value="Ver" />
+										</p:column>
 
 								</p:dataTable>
+								
+								
 							</p:panel>
 
 						</p:tab>

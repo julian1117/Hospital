@@ -95,6 +95,39 @@ public class OrdenExamen implements Serializable{
 		this.idExamen = idExamen;
 	}
 
+
+
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((citaId == null) ? 0 : citaId.hashCode());
+		return result;
+	}
+
+
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		OrdenExamen other = (OrdenExamen) obj;
+		if (citaId == null) {
+			if (other.citaId != null)
+				return false;
+		} else if (!citaId.equals(other.citaId))
+			return false;
+		return true;
+	}
+
 	
 	
 	
