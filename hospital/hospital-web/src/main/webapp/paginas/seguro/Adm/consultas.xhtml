@@ -6,10 +6,30 @@
 
 	<ui:define name="cuerpo">
 		<h:form prependId="false">
-			<p:panel id="datosPanelPrincipal" header="CONSULTAS Y REPORTES">
-			
-			
-			</p:panel>
+			<p:tabView>
+				<p:tab title="Primer Reporte">
+					<p:panel id="datosPanelPrincipal" header="CONSULTAS Y REPORTES">
+
+						<p:dataTable id="panelTablas"
+							value="#{consultaController.listarPaciente}" var="pa" border="1"
+							class="table table-striped">
+							<p:column headerText="Numero Identificacion">
+								<h:outputLabel value="#{pa.idPersona}" />
+							</p:column>
+							<p:column headerText="Nombre">
+								<h:outputLabel value="#{pa.nombre}" />
+							</p:column>
+							<p:column headerText="Apellido">
+								<h:outputLabel value="#{pa.apellido}" />
+							</p:column>
+							
+
+						</p:dataTable>
+
+					</p:panel>
+				</p:tab>
+				</p:tabView>
 		</h:form>
+		
 	</ui:define>
 </ui:composition>

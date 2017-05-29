@@ -7,7 +7,6 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Named;
 
-import co.edu.eam.ingesoft.avanzada.persistencia.entidades.HoraCita;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoMedicamento;
 import co.edu.eam.ingesoft.pa.negocio.beans.GeneralEJB;
 
