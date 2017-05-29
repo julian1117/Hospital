@@ -139,4 +139,8 @@ public class CitaEJB {
 		}
 	}
 
+	
+	public void editarCita(Cita id){
+		em.merge(id);
+	}
 }

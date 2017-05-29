@@ -100,14 +100,14 @@
 									id="lbdescripcionMedicoPatoligia"
 									value="#{msj['clieAT.descripMedico']}" />
 								<p:inputTextarea id="descripcionMedPatoligia"
-									value="#{atenderCitaController.textoDesPatologia}" rows="10"
+									value="#{atenderCitaController.descripcionMedico}" rows="10"
 									cols="100" completeMethod="#" />
 								<br />
 								<br />
 								<p:commandButton id="btnGuardar"
 									value="#{msj['citaAT.guardar']}"
 									action="#{atenderCitaController.generarDiagnostico}"
-									process="@this datosPatologia " update="growl"
+									process="@this descripcionMedPatoligia " update="growl"
 									icon="ui-icon-disk" />
 
 
@@ -258,16 +258,7 @@
 
 					<p:tab title="Gestionar Resultados Examenes">
 
-						<h:panelGrid id="panelBuscar" columns="3">
-							<h:outputLabel for="tftCedulaBuscar" id="lblCedulaBuscar"
-								value="#{msj['persona.cedula']}:"></h:outputLabel>
-							<h:inputText id="tftCedulaBuscar"
-								value="#{atenderCitaController.cedulaPaciente}"></h:inputText>
-
-							<p:commandButton id="btnBuscar" value="#{msj['persona.buscar']}"
-								action="#{atenderCitaController.cargarExamenes}" class="btn"
-								process="@this tftCedulaBuscar" update="panelBuscarp" />
-						</h:panelGrid>
+						
 
 						<h:panelGrid id="panelBuscarp" columns="1">
 							<p:accordionPanel>
@@ -294,9 +285,15 @@
 										</p:column>
 									</p:dataTable>
 
+<<<<<<< HEAD
 								</p:tab>
 							
 								<p:tab title="Dar Detalle" id="tab2">
+=======
+								
+
+						
+>>>>>>> branch 'master' of https://github.com/julian1117/Hospital.git
 									<h:panelGrid columns="2">
 										<h:outputLabel for="tftdetalleExam" id="lbdetalleExam"
 											value="#{msj['procedimiento.detalleExam']}"></h:outputLabel>
@@ -312,7 +309,7 @@
 											 process="@this tftdetalleExam" />
 
 									</h:panelGrid>
-								</p:tab>
+							</p:tab>
 							</p:accordionPanel>
 						</h:panelGrid>
 					</p:tab>
