@@ -149,5 +149,9 @@ public class SessionController implements Serializable {
 	public boolean isSesion() {
 		return use != null;
 	}
+	
+	public String registrar(){
+		return "/paginas/publico/crearUsuario.xhtml?faces-redirect=true";
+	}
 
 }

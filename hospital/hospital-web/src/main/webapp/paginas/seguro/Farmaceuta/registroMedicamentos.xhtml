@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+
+
+	<ui:define name="cuerpo">
+
+		<h:form prependId="false">
+
+			<p:panel header="Registro de medicamentos">
+
+				<h:panelGrid id="panelBuscar" columns="3">
+
+
+
+
+
+					<h:outputLabel for="cbMedicamento" id="lbMedicamento"
+						value="Tipo medicamento" />
+					<h:selectOneMenu id="cbMedicamento"
+						value="#{atenderCitaController.tipoMedicamento}"
+						converter="medConverter">
+						<f:selectItems value="#{atenderCitaController.listaMed}" var="doc"
+							itemValue="#{doc}" itemLabel="#{doc.tipoMedicamento}" />
+					</h:selectOneMenu>
+
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

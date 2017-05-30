@@ -21,12 +21,15 @@ import co.edu.eam.ingesoft.avanzada.persistencia.entidades.OrdenCirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Hospitalizacion;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.ItemMedicamento;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Patologia;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Persona;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Roll;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Sintoma;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoCirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoExamen;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoMedicamento;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Tratamiento;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Usuario;
+import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
 @Stateless
 @LocalBean
@@ -290,6 +293,26 @@ public class GeneralEJB {
 		em.persist(im);
 	}
 	
+	/**
+	 * Crea un usuario
+	 * @param us
+	 */
+	public void crearUsu(Usuario us){
+		Usuario u = buscarUsu(us.getNombreUsuario());
+		if(u==null){
+		em.persist(us);
+		}else{
+			throw new ExcepcionNegocio("El usuario ya existe");
+		}
+	}
+	
+	public Usuario buscarUsu(String id){
+		return em.find(Usuario.class, id);
+	}
+	
+	public Persona buscarPersona(Long id){
+		return em.find(Persona.class, id);
+	}
 	
 	
 }
