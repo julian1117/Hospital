@@ -25,20 +25,28 @@ public class CitaEJB {
 	 */
 	public void crearCita(Cita cita) {
 
-		List<Cita> listaCitas = em.createNamedQuery(Cita.LISTA_CITA).setParameter(1, cita.getPersona().getIdPersona())
+		List<Cita> listaCitas = em
+				.createNativeQuery(
+						"SELECT * FROM CITAS c JOIN PERSONAS pac ON c.PACIENTES_PERSONA_ID = pac.PERSONAS_ID JOIN TIPOS_CITAS tp ON tp.ID = c.TIPOS_CITAS_ID JOIN AGENDAS a on c.AGENDAS_ID = a.ID  JOIN CONSULTORIOS con on con.ID = a.CONSULTORIOS_ID JOIN PERSONAS pm on pm.PERSONAS_ID = a.MEDICOS_PERSONAS_ID JOIN HORAS_CITAS hr on c.HORAS_CITAS_ID=hr.ID WHERE c.PACIENTES_PERSONA_ID=?1 AND a.FECHA=?2 AND c.ESTEADO=0 AND hr.HORA=?3",Cita.class)
+				.setParameter(1, cita.getPersona().getIdPersona()).setParameter(2, cita.getAgenda().getFecha())
+				.setParameter(3, cita.getHoraCita().getHora()).getResultList();
+
+		List<Cita> listaCitaMed = em
+				.createNativeQuery(
+						"SELECT * FROM CITAS c JOIN PERSONAS pac ON c.PACIENTES_PERSONA_ID = pac.PERSONAS_ID JOIN TIPOS_CITAS tp ON tp.ID = c.TIPOS_CITAS_ID JOIN AGENDAS a on c.AGENDAS_ID = a.ID  JOIN CONSULTORIOS con on con.ID = a.CONSULTORIOS_ID JOIN PERSONAS pm on pm.PERSONAS_ID = a.MEDICOS_PERSONAS_ID JOIN HORAS_CITAS hr on c.HORAS_CITAS_ID=hr.ID WHERE a.MEDICOS_PERSONAS_ID=?1 AND a.FECHA=?2 AND c.ESTEADO=0 AND hr.HORA=?3",Cita.class)
+				.setParameter(1, cita.getAgenda().getMedico().getIdPersona())
+				.setParameter(2, cita.getAgenda().getFecha()).setParameter(3, cita.getHoraCita().getHora())
 				.getResultList();
 
-		for (int i = 0; i < listaCitas.size(); i++) {
-			if (listaCitas.get(i).getAgenda().getFecha() != cita.getAgenda().getFecha()
-					&& listaCitas.get(i).getHoraCita().getId() != cita.getHoraCita().getId()) {
-				em.persist(cita);
-			} else {
-				throw new ExcepcionNegocio("Ya existe un registro similar");
-			}
+		if (listaCitas.size() == 0 && listaCitaMed.size() == 0) {
+			em.persist(cita);
+		} else {
+			throw new ExcepcionNegocio("Ya existe un registro similar");
 		}
+
 	}
 
-		/**
+	/**
 	 * Buscar una cita por su id
 	 * 
 	 * @param id
@@ -114,14 +122,14 @@ public class CitaEJB {
 	}
 
 	/**
-	 * Lista de agendas de un medico con la fechas
-	 * mayores a la actual
+	 * Lista de agendas de un medico con la fechas mayores a la actual
+	 * 
 	 * @param cedula
 	 * @return
 	 */
 	public List<Agenda> listaAgendaMedico(long cedula) {
-		return em.createNativeQuery("SELECT * FROM AGENDAS A WHERE A.MEDICOS_PERSONAS_ID=?1 AND current_date<A.FECHA", Agenda.class)
-				.setParameter(1, cedula).getResultList();
+		return em.createNativeQuery("SELECT * FROM AGENDAS A WHERE A.MEDICOS_PERSONAS_ID=?1 AND current_date<A.FECHA",
+				Agenda.class).setParameter(1, cedula).getResultList();
 	}
 
 	/**
@@ -139,8 +147,7 @@ public class CitaEJB {
 		}
 	}
 
-	
-	public void editarCita(Cita id){
+	public void editarCita(Cita id) {
 		em.merge(id);
 	}
 }

@@ -305,7 +305,6 @@ public class AtenderCitaController implements Serializable {
 
 				Cirugia busCiru = generalEJB.buscarCirugia(ciru.getId());
 				Cita citaa = generalEJB.buscarIdCita(cita.getIdCita());
-				Messages.addFlashGlobalError(busCiru.getId() + "");
 				OrdenCirugia ordenCiru = new OrdenCirugia(citaa, busCiru);
 
 				procedimientosEJB.crearOrdenCirugia(ordenCiru);

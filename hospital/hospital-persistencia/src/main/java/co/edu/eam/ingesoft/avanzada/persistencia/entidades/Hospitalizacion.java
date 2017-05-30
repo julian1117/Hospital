@@ -27,7 +27,7 @@ public class Hospitalizacion  implements Serializable{
 	@Column(name="Detalle_hospitalizacion",length=2000)
 	private String detalleHospi;
 	
-	@Column(name="Motivo",length=50)
+	@Column(name="Motivo",length=500)
 	private String motivo;
 	
 	@ManyToOne
