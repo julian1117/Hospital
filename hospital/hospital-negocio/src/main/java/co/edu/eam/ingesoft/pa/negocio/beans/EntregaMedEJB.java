@@ -27,7 +27,7 @@ public class EntregaMedEJB {
 	 */
 	public List<ItemMedicamento> listaMedPac(Long cedeula) {
 		return em.createNativeQuery(
-				"SELECT * FROM ITEM_MEDICAMENTOS im JOIN CITAS c on im.ID = c.ID where c.PACIENTES_PERSONA_ID=?1 AND im.ESTADO=0",
+				"SELECT * FROM ITEM_MEDICAMENTOS im JOIN CITAS c on im.ID = c.ID where c.PACIENTES_PERSONA_ID=?1 AND im.ESTADO=1",
 				ItemMedicamento.class).setParameter(1, cedeula).getResultList();
 	}
 
@@ -46,7 +46,7 @@ public class EntregaMedEJB {
 
 		inventario.setCantidadDisponible(cant - itMed.getCantidadResetada());
 
-		itMed.setEstado(true);
+		itMed.setEstado(false);
 
 		if (cant >= itMed.getCantidadResetada()) {
 			em.merge(itMed);
